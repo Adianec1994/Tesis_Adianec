@@ -16,6 +16,10 @@ export const mutations = {
   UPDATE_PROVEEDOR: (state, proveedor) => {
     const proveedorIndex = state.proveedores.findIndex(pr => pr.id === proveedor.id)
     state.proveedores.splice(proveedorIndex, 1, proveedor)
+  },
+  DELETE_PROVEEDOR: (state, proveedor) => {
+    const proveedorIndex = state.proveedores.findIndex(pr => pr.id === proveedor.id)
+    state.proveedores.splice(proveedorIndex, 1)
   }
 }
 
@@ -44,9 +48,18 @@ export const actions = {
       commit('UPDATE_PROVEEDOR', response.data.data)
       return response.data
     })
+  },
+  DESTROY_PROVEEDOR: ({
+    commit
+  }, proveedor) => {
+    return axios.delete(`/api/proveedor/${proveedor.id}`).then(response => {
+      commit('DELETE_PROVEEDOR', proveedor)
+      return response.data
+    })
   }
 }
 
+// getters
 export const getters = {
   getProveedores: state => {
     return state.proveedores

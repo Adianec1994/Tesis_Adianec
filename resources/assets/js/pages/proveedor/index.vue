@@ -46,15 +46,15 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
+              color="primary"
+              dark
+              @click="saveUpdatedItem"
+            >Guardar</v-btn>
+            <v-btn
               color="blue darken-1"
               flat
               @click="close"
             >Cancelar</v-btn>
-            <v-btn
-              color="blue darken-1"
-              flat
-              @click="saveUpdatedItem"
-            >Guardar</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -78,11 +78,35 @@
           </v-icon>
           <v-icon
             small
-            @click="deleteItem(props.item)"
+            @click="$set(deleteDialog,props.item.id,true)"
           >
             delete
           </v-icon>
         </td>
+        <v-dialog
+          v-model="deleteDialog[props.item.id]"
+          :key="props.item.id"
+          persistent
+          max-width="290"
+        >
+          <v-card>
+            <v-card-title><b>Eliminar</b></v-card-title>
+            <v-card-text>{{`¿Seguro que desea eliminar el proveedor ${props.item.marca}`}}</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="primary"
+                dark
+                @click.stop="deleteItem(props.item)"
+              >Eliminar</v-btn>
+              <v-btn
+                color="blue darken-1"
+                flat
+                @click.stop="$set(deleteDialog,props.item.id,false)"
+              >Cancelar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </template>
       <template v-slot:no-data>
         <v-btn color="primary">Reset</v-btn>
@@ -104,6 +128,7 @@ export default {
       { text: 'Pais', value: 'pais', align: 'center' },
       { text: 'Acciones', value: 'marca', sortable: false, align: 'center' }
     ],
+    deleteDialog: {},
     proveedores: [],
     editedItem: {},
     options: {
@@ -156,7 +181,7 @@ export default {
     this.$store.dispatch('GET_PROVEEDORES').then((result) => {
       this.proveedores = this.$store.getters.getProveedores
       this.$store.dispatch('responseMessage', {
-        type: 'success',
+        type: result.success ? 'success' : 'error',
         text: result.message
       })
     }).catch((err) => {
@@ -182,7 +207,7 @@ export default {
     saveUpdatedItem () {
       this.$store.dispatch('EDIT_PROVEEDOR', this.editedItem).then((result) => {
         this.$store.dispatch('responseMessage', {
-          type: 'success',
+          type: result.success ? 'success' : 'error',
           text: result.message
         })
       }).catch((err) => {
@@ -196,12 +221,21 @@ export default {
 
     formIsValid (isValid, errors) {
       // return isValid
-      console.log('Results ', isValid, ', Errors ', errors)
+      // console.log('Results ', isValid, ', Errors ', errors)
     },
 
     deleteItem (item) {
-      const index = this.proveedores.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+      this.$store.dispatch('DESTROY_PROVEEDOR', item).then((result) => {
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
     },
 
     close () {
