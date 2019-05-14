@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const apiUrl = process.env.APP_URL
-
 // state
 export const state = {
   proveedores: []
@@ -14,6 +12,10 @@ export const mutations = {
   },
   ADD_PROVEEDOR: (state, proveedor) => {
     state.proveedor.push(proveedor)
+  },
+  UPDATE_PROVEEDOR: (state, proveedor) => {
+    const proveedorIndex = state.proveedores.findIndex(pr => pr.id === proveedor.id)
+    state.proveedores.splice(proveedorIndex, 1, proveedor)
   }
 }
 
@@ -24,13 +26,23 @@ export const actions = {
   }) => {
     return axios.get(`/api/proveedor`).then(response => {
       commit('FETCH_PROVEEDORES', response.data.data)
+      return response.data
     })
   },
   SAVE_PROVEEDOR: ({
     commit
   }, proveedor) => {
-    axios.post(`${apiUrl}/proveedor/create`, proveedor).then(response => {
+    return axios.post(`/api/proveedor`, proveedor).then(response => {
       commit('ADD_PROVEEDOR', proveedor)
+      return response.data
+    })
+  },
+  EDIT_PROVEEDOR: ({
+    commit
+  }, proveedor) => {
+    return axios.put(`/api/proveedor/${proveedor.id}`, proveedor).then(response => {
+      commit('UPDATE_PROVEEDOR', response.data.data)
+      return response.data
     })
   }
 }

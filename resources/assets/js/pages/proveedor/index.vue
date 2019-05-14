@@ -43,19 +43,19 @@
             </v-container>
           </v-card-text>
 
-          <!-- <v-card-actions>
+          <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
               color="blue darken-1"
               flat
               @click="close"
-            >Cancel</v-btn>
+            >Cancelar</v-btn>
             <v-btn
               color="blue darken-1"
               flat
-              @click="save"
-            >Save</v-btn>
-          </v-card-actions> -->
+              @click="saveUpdatedItem"
+            >Guardar</v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
     </v-toolbar>
@@ -93,6 +93,7 @@
 
 <script>
 import Form from '../../components/form/Form'
+import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -126,7 +127,7 @@ export default {
         {
           type: 'select',
           label: 'Pais',
-          model: 'pais',
+          model: 'paiss_id',
           values: [
             { name: 'Cuba', id: '1', group: 'MotoGP' },
             { name: 'Francia', id: '2', group: 'Formula 1' }
@@ -139,7 +140,10 @@ export default {
   computed: {
     formTitle () {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
-    }
+    },
+    ...mapGetters({
+      proveedores: 'getProveedores'
+    })
   },
 
   watch: {
@@ -148,12 +152,19 @@ export default {
     }
   },
 
-  created () {
-    this.$store.dispatch('GET_PROVEEDORES')
-  },
-
   mounted () {
-    this.proveedores = this.$store.getters.getProveedores
+    this.$store.dispatch('GET_PROVEEDORES').then((result) => {
+      this.proveedores = this.$store.getters.getProveedores
+      this.$store.dispatch('responseMessage', {
+        type: 'success',
+        text: result.message
+      })
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
   },
 
   methods: {
@@ -164,8 +175,23 @@ export default {
     },
 
     updateItem (newVal, property) {
-      this.formIsValid()
-      console.log(newVal + '---' + property)
+      // this.formIsValid()
+      this.editedItem[property] = newVal
+    },
+
+    saveUpdatedItem () {
+      this.$store.dispatch('EDIT_PROVEEDOR', this.editedItem).then((result) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'success',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+      this.close()
     },
 
     formIsValid (isValid, errors) {
@@ -181,7 +207,7 @@ export default {
     close () {
       this.dialog = false
       setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
     },
