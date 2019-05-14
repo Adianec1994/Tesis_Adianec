@@ -21,6 +21,7 @@
             dark
             class="mb-2"
             v-on="on"
+            v-on:click="isNewModel=true"
           >Nuevo</v-btn>
         </template>
         <v-card>
@@ -35,6 +36,7 @@
                   :schema="schema"
                   :model="editedItem"
                   :options="options"
+                  :isNewModel="isNewModel"
                   @model-updated="updateItem"
                   @validated="formIsValid"
                 >
@@ -48,7 +50,7 @@
             <v-btn
               color="primary"
               dark
-              @click="saveUpdatedItem"
+              @click="saveItem"
             >Guardar</v-btn>
             <v-btn
               color="blue darken-1"
@@ -131,6 +133,8 @@ export default {
     deleteDialog: {},
     proveedores: [],
     editedItem: {},
+    editedIndex: -1,
+    isNewModel: false,
     options: {
       validateAfterChanged: true,
       validateAfterLoad: true
@@ -204,19 +208,21 @@ export default {
       this.editedItem[property] = newVal
     },
 
-    saveUpdatedItem () {
-      this.$store.dispatch('EDIT_PROVEEDOR', this.editedItem).then((result) => {
+    saveItem () {
+      let response
+      if (this.editedIndex === -1) {
+        response = this.$store.dispatch('SAVE_PROVEEDOR', this.editedItem)
+      } else {
+        response = this.$store.dispatch('EDIT_PROVEEDOR', this.editedItem)
+      }
+
+      response.then(result => {
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
         })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+        this.close()
       })
-      this.close()
     },
 
     formIsValid (isValid, errors) {
@@ -240,19 +246,11 @@ export default {
 
     close () {
       this.dialog = false
+      this.isNewModel = false
       setTimeout(() => {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
-    },
-
-    save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
-      } else {
-        this.desserts.push(this.editedItem)
-      }
-      this.close()
     }
   },
   components: {

@@ -11,7 +11,7 @@ export const mutations = {
     state.proveedores = proveedores
   },
   ADD_PROVEEDOR: (state, proveedor) => {
-    state.proveedor.push(proveedor)
+    state.proveedores.push(proveedor)
   },
   UPDATE_PROVEEDOR: (state, proveedor) => {
     const proveedorIndex = state.proveedores.findIndex(pr => pr.id === proveedor.id)
