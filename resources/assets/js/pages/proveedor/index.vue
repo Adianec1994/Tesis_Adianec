@@ -145,21 +145,26 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Marca',
-          model: 'marca'
+          model: 'marca',
+          validator: 'alpha'
         },
         {
-          type: 'input',
-          inputType: 'text',
+          type: 'select',
           label: 'Serie',
-          model: 'serie'
+          model: 'serie',
+          values: [
+            { name: '0', id: '0' },
+            { name: '2000', id: '2000' },
+            { name: '4000', id: '4000' }
+          ]
         },
         {
           type: 'select',
           label: 'Pais',
           model: 'paiss_id',
           values: [
-            { name: 'Cuba', id: '1', group: 'MotoGP' },
-            { name: 'Francia', id: '2', group: 'Formula 1' }
+            { name: 'Cuba', id: '1' },
+            { name: 'Francia', id: '2' }
           ]
         }
       ]

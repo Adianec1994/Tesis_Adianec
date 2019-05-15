@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
                 $table->string('cargo');
                 $table->string('username')->unique();
                 $table->string('email')->unique();
-                $table->timestamp('email_verified_at')->nullable();
                 $table->string('password');
 
                 $table->integer('rol_users_id')->unsigned();
@@ -31,21 +30,21 @@ class CreateUsersTable extends Migration
                 $table->rememberToken();
                 $table->timestamps();
 
-                $table->index(["img_users_id"], 'fk_users_img_users1_idx');
+                // $table->index(["img_users_id"], 'fk_users_img_users1_idx');
 
-                $table->index(["rol_users_id"], 'fk_users_rol_users1_idx');
+                // $table->index(["rol_users_id"], 'fk_users_rol_users1_idx');
 
-                $table->index(["entidads_id"], 'fk_users_entidads1_idx');
+                // $table->index(["entidads_id"], 'fk_users_entidads1_idx');
 
 
-                $table->foreign('rol_users_id', 'fk_users_rol_users1_idx')
-                    ->references('id')->on('rol_users');
+                // $table->foreign('rol_users_id', 'fk_users_rol_users1_idx')
+                    // ->references('id')->on('rol_users');
 
-                $table->foreign('entidads_id', 'fk_users_entidads1_idx')
-                    ->references('id')->on('entidads');
+                // $table->foreign('entidads_id', 'fk_users_entidads1_idx')
+                    // ->references('id')->on('entidads');
 
-                $table->foreign('img_users_id', 'fk_users_img_users1_idx')
-                    ->references('id')->on('img_users');
+                // $table->foreign('img_users_id', 'fk_users_img_users1_idx')
+                    // ->references('id')->on('img_users');
             });
         }
     }

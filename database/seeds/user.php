@@ -13,7 +13,8 @@ class UsersTableSeeder extends Seeder
     {
         $password=bcrypt('Admin2019*');
         DB::table('users')->insert(['name'=>'Admin',
-            'email'=>'admin@spd.cu','password'=>$password]);
+            'email'=>'admin@spd.cu','password'=>$password, 'cargo'=>'admin',
+            'username'=>'admin', 'rol_users_id'=>1, 'entidads_id'=>1, 'img_users_id'=>1]);
 
     }
 }

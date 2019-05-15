@@ -25,7 +25,7 @@ class CreateProveedorsTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->string('marca', 8)->nullable();
-                $table->string('serie', 5)->nullable();
+                $table->integer('serie');
                 $table->integer('paiss_id')->unsigned();
                 $table->softDeletes();
                 $table->timestamps();
