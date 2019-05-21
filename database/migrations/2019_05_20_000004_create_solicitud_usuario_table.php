@@ -29,6 +29,8 @@ class CreateSolicitudUsuarioTable extends Migration
             $table->string('solicitud_usuariocol', 45)->nullable();
             $table->string('email', 45)->nullable();
             $table->string('password', 45)->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

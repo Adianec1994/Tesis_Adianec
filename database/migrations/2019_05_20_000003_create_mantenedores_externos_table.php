@@ -27,6 +27,8 @@ class CreateMantenedoresExternosTable extends Migration
             $table->integer('numeroContrato')->nullable();
             $table->date('fechaInicio')->nullable();
             $table->date('fechaFin')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

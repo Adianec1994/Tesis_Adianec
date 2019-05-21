@@ -29,6 +29,8 @@ class CreateGeneracionsTable extends Migration
             $table->text('reportadoPor')->nullable();
             $table->time('tiempoOperacion')->nullable();
             $table->integer('grupos_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["grupos_id"], 'fk_generacions_grupos1_idx');
 

@@ -27,6 +27,8 @@ class CreateDisponibilidadsTable extends Migration
             $table->double('potInstaladaReal')->nullable();
             $table->double('potDisponibleReal')->nullable();
             $table->integer('entidads_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["entidads_id"], 'fk_disponibilidads_entidads1_idx');
 

@@ -24,6 +24,8 @@ class CreateGruposMantenimientosTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('grupos_id');
             $table->integer('mantenimientos_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["grupos_id"], 'fk_grupos_mantenimientos_grupos1_idx');
 

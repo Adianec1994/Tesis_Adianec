@@ -27,6 +27,8 @@ class CreateEntidadsTable extends Migration
             $table->double('potInstalada')->nullable();
             $table->string('ip', 45)->nullable();
             $table->integer('provincias_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["provincias_id"], 'fk_entidads_provincias1_idx');
 

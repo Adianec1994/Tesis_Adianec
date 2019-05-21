@@ -69,7 +69,7 @@
       <template v-slot:items="props">
         <td>{{ props.item.marca }}</td>
         <td class="text-xs-center">{{ props.item.serie }}</td>
-        <td class="text-xs-center">{{ props.item.paiss_id }}</td>
+        <td class="text-xs-center">{{ props.item.pais }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -111,7 +111,7 @@
         </v-dialog>
       </template>
       <template v-slot:no-data>
-        <v-btn color="primary">Reset</v-btn>
+        <h4>Sin datos para mostrar</h4>
       </template>
     </v-data-table>
   </div>
@@ -159,13 +159,11 @@ export default {
           ]
         },
         {
-          type: 'select',
+          type: 'input',
+          inputType: 'text',
           label: 'Pais',
-          model: 'paiss_id',
-          values: [
-            { name: 'Cuba', id: '1' },
-            { name: 'Francia', id: '2' }
-          ]
+          model: 'pais',
+          validator: 'alpha'
         }
       ]
     }

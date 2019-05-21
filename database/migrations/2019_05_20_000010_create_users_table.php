@@ -27,9 +27,11 @@ class CreateUsersTable extends Migration
             $table->string('cargo', 45)->nullable();
             $table->string('username', 45)->nullable();
             $table->string('email', 45)->nullable();
-            $table->string('password', 45)->nullable();
+            $table->string('password')->nullable();
             $table->string('imagen', 45)->nullable();
             $table->integer('entidads_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["entidads_id"], 'fk_users_entidads1_idx');
 

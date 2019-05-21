@@ -43,11 +43,8 @@ trait MakeProveedorTrait
 
         return array_merge([
             'marca' => $fake->word,
-            'serie' => $fake->word,
-            'paiss_id' => $fake->randomDigitNotNull,
-            'deleted_at' => $fake->date('Y-m-d H:i:s'),
-            'created_at' => $fake->date('Y-m-d H:i:s'),
-            'updated_at' => $fake->date('Y-m-d H:i:s')
+            'serie' => $fake->randomDigitNotNull,
+            'pais' => $fake->word
         ], $proveedorFields);
     }
 }

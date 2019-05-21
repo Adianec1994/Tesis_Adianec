@@ -25,6 +25,8 @@ class CreateBrigadasTable extends Migration
             $table->increments('id');
             $table->integer('numero')->nullable();
             $table->integer('cantidadTrabajadores')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

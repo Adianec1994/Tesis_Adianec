@@ -8,7 +8,7 @@ use InfyOm\Generator\Common\BaseRepository;
 /**
  * Class ProveedorRepository
  * @package App\Repositories
- * @version May 8, 2019, 6:15 am UTC
+ * @version May 21, 2019, 3:57 pm UTC
  *
  * @method Proveedor findWithoutFail($id, $columns = ['*'])
  * @method Proveedor find($id, $columns = ['*'])
@@ -22,7 +22,7 @@ class ProveedorRepository extends BaseRepository
     protected $fieldSearchable = [
         'marca',
         'serie',
-        'paiss_id'
+        'pais'
     ];
 
     /**

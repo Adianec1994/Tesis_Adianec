@@ -30,6 +30,8 @@ class CreatePailasTable extends Migration
             $table->text('acciones')->nullable();
             $table->integer('central_electricas_id')->unsigned();
             $table->integer('operadors_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["operadors_id"], 'fk_pailas_operadors1_idx');
 

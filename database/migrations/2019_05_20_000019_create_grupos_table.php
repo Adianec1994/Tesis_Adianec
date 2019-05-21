@@ -27,6 +27,8 @@ class CreateGruposTable extends Migration
             $table->double('potInstalada')->nullable();
             $table->integer('baterias_id')->unsigned();
             $table->integer('proveedors_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["proveedors_id"], 'fk_grupos_proveedors1_idx');
 

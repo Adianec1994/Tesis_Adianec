@@ -26,6 +26,8 @@ class CreateOperadorsTable extends Migration
             $table->string('nombre', 45)->nullable();
             $table->bigInteger('cidentidad')->nullable();
             $table->string('ocupacion', 45)->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

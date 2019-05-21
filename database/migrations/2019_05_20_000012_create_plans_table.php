@@ -28,6 +28,8 @@ class CreatePlansTable extends Migration
             $table->decimal('indiceConsumoCombustible')->nullable();
             $table->decimal('compromiso')->nullable();
             $table->integer('entidads_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["entidads_id"], 'fk_planGeneracions_entidads1_idx');
 

@@ -33,6 +33,8 @@ class CreateCoberturaCombustiblesTable extends Migration
             $table->double('capacVacio')->nullable();
             $table->double('existTotalDiaAnterior')->nullable();
             $table->integer('central_electricas_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["central_electricas_id"], 'fk_coberturas_central_electricas1_idx');
 

@@ -26,6 +26,8 @@ class CreateBateriasTable extends Migration
             $table->integer('numero')->nullable();
             $table->double('potInstalada')->nullable();
             $table->integer('central_electricas_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["central_electricas_id"], 'fk_baterias_central_electricas1_idx');
 

@@ -31,6 +31,8 @@ class CreateMantenimientosTable extends Migration
             $table->text('resultado')->nullable();
             $table->integer('mantenedores_externos_id')->unsigned();
             $table->integer('brigadas_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["mantenedores_externos_id"], 'fk_mantenimientos_mantenedores_externos1_idx');
 

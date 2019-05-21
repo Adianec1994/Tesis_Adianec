@@ -31,6 +31,8 @@ class CreateHechosExtraordinariosTable extends Migration
             $table->string('nombreImplicado', 45)->nullable();
             $table->string('nombreInforma', 45)->nullable();
             $table->integer('entidads_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["entidads_id"], 'fk_hechos_Extraordinarios_entidads1_idx');
 

@@ -36,3 +36,6 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 });
 
+
+
+Route::resource('provincias', 'ProvinciaAPIController');

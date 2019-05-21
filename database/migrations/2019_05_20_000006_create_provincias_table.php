@@ -24,6 +24,8 @@ class CreateProvinciasTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('nombre', 45)->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

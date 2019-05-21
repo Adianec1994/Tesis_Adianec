@@ -28,6 +28,8 @@ class CreateTrazasTable extends Migration
             $table->string('accion', 45)->nullable();
             $table->string('ip', 45)->nullable();
             $table->integer('users_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["users_id"], 'fk_trazas_users1_idx');
 

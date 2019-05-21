@@ -26,6 +26,8 @@ class CreateProveedorsTable extends Migration
             $table->string('marca', 8)->nullable();
             $table->integer('serie')->nullable();
             $table->string('pais', 45)->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

@@ -6,23 +6,22 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Proveedor
+ * Class Provincia
  * @package App\Models
- * @version May 21, 2019, 3:57 pm UTC
+ * @version May 21, 2019, 5:45 pm UTC
  *
- * @property \Illuminate\Database\Eloquent\Collection grupos
+ * @property \Illuminate\Database\Eloquent\Collection entidads
  * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection
- * @property string marca
- * @property integer serie
- * @property string pais
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property string nombre
  */
-class Proveedor extends Model
+class Provincia extends Model
 {
     use SoftDeletes;
 
-    public $table = 'proveedors';
+    public $table = 'provincias';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -32,9 +31,7 @@ class Proveedor extends Model
 
 
     public $fillable = [
-        'marca',
-        'serie',
-        'pais'
+        'nombre'
     ];
 
     /**
@@ -44,9 +41,7 @@ class Proveedor extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'marca' => 'string',
-        'serie' => 'integer',
-        'pais' => 'string'
+        'nombre' => 'string'
     ];
 
     /**
@@ -61,8 +56,8 @@ class Proveedor extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function grupos()
+    public function entidads()
     {
-        return $this->hasMany(\App\Models\Grupo::class);
+        return $this->hasMany(\App\Models\Entidad::class);
     }
 }

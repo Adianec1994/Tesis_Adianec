@@ -39,6 +39,8 @@ class CreateEventosDiariosTable extends Migration
             $table->string('responsable', 45)->nullable();
             $table->string('insertadoPor', 45)->nullable();
             $table->integer('grupos_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
 
             $table->index(["grupos_id"], 'fk_eventosDiarios_grupos1_idx');
 
