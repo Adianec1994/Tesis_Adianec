@@ -7,6 +7,12 @@ use Illuminate\Database\Migrations\Migration;
 class CreateProvinciasTable extends Migration
 {
     /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $tableName = 'provincias';
+
+    /**
      * Run the migrations.
      * @table provincias
      *
@@ -14,15 +20,11 @@ class CreateProvinciasTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('provincias')) {
-            Schema::create('provincias', function (Blueprint $table) {
-                $table->engine = 'InnoDB';
-                $table->increments('id');
-                $table->string('nombre', 45)->nullable();
-                $table->softDeletes();
-                $table->timestamps();
-            });
-        }
+        Schema::create($this->tableName, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->string('nombre', 45)->nullable();
+        });
     }
 
     /**
@@ -32,6 +34,6 @@ class CreateProvinciasTable extends Migration
      */
      public function down()
      {
-       Schema::dropIfExists('provincias');
+       Schema::dropIfExists($this->tableName);
      }
 }
