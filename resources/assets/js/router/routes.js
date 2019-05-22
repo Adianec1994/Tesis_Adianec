@@ -12,7 +12,8 @@ export default ({ authGuard, guestGuard }) => [
       { path: 'password', name: 'settings.password', component: require('~/pages/settings/password.vue') }
       ] },
     { path: '/proveedor', name: 'proveedor', component: require('~/pages/proveedor/index.vue') },
-    { path: '/provincia', name: 'provincia', component: require('~/pages/provincia/index.vue') }
+    { path: '/provincia', name: 'provincia', component: require('~/pages/provincia/index.vue') },
+    { path: '/disponibilidad', name: 'disponibilidad', component: require('~/pages/disponibilidad/index.vue') }
 
   ]),
 

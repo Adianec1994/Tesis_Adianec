@@ -25,7 +25,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::apiResources([
         'proveedor' => 'API\ProveedorAPIController',
-        'provincia' => 'API\ProvinciaAPIController'
+        'provincia' => 'API\ProvinciaAPIController',
+        'disponibilidad' => 'API\DisponibilidadAPIController'
     ]);
 });
 
