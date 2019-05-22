@@ -37,7 +37,7 @@ export const actions = {
     commit
   }, proveedor) => {
     return axios.post(`/api/proveedor`, proveedor).then(response => {
-      commit('ADD_PROVEEDOR', proveedor)
+      commit('ADD_PROVEEDOR', response.data.data)
       return response.data
     })
   },
@@ -53,7 +53,7 @@ export const actions = {
     commit
   }, proveedor) => {
     return axios.delete(`/api/proveedor/${proveedor.id}`).then(response => {
-      commit('DELETE_PROVEEDOR', proveedor)
+      commit('DELETE_PROVEEDOR', response.data.data)
       return response.data
     })
   }

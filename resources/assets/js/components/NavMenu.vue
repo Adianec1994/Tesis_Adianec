@@ -36,7 +36,8 @@ export default {
       items: [
         { title: 'Dashboard', icon: 'dashboard', route: { name: 'home' }},
         { title: 'Account', icon: 'account_box', route: { name: 'settings.profile' }},
-        { title: 'Proveedor', icon: 'account_box', route: { name: 'proveedor' }}
+        { title: 'Proveedor', icon: 'account_box', route: { name: 'proveedor' }},
+        { title: 'Provincia', icon: 'account_box', route: { name: 'provincia' }}
       ]
     }
   }

@@ -24,7 +24,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/password', 'Settings\UpdatePassword');
 
     Route::apiResources([
-        'proveedor' => 'API\ProveedorAPIController'
+        'proveedor' => 'API\ProveedorAPIController',
+        'provincia' => 'API\ProvinciaAPIController'
     ]);
 });
 
@@ -35,7 +36,3 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 });
-
-
-
-Route::resource('provincias', 'ProvinciaAPIController');
