@@ -24,9 +24,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/password', 'Settings\UpdatePassword');
 
     Route::apiResources([
-        'proveedor' => 'API\ProveedorAPIController',
-        'provincia' => 'API\ProvinciaAPIController',
-        'disponibilidad' => 'API\DisponibilidadAPIController'
+        'proveedores' => 'API\ProveedorAPIController',
+        'provincias' => 'API\ProvinciaAPIController',
+        'disponibilidades' => 'API\DisponibilidadAPIController'
     ]);
 });
 

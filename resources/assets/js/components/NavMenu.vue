@@ -36,9 +36,9 @@ export default {
       items: [
         { title: 'Dashboard', icon: 'dashboard', route: { name: 'home' }},
         { title: 'Account', icon: 'account_box', route: { name: 'settings.profile' }},
-        { title: 'Proveedor', icon: 'account_box', route: { name: 'proveedor' }},
-        { title: 'Provincia', icon: 'account_box', route: { name: 'provincia' }},
-        { title: 'Disponbilidad', icon: 'account_box', route: { name: 'disponibilidad' }}
+        { title: 'Proveedores', icon: 'account_box', route: { name: 'proveedores' }},
+        { title: 'Provincias', icon: 'account_box', route: { name: 'provincias' }},
+        { title: 'Disponbilidades', icon: 'account_box', route: { name: 'disponibilidades' }}
       ]
     }
   }

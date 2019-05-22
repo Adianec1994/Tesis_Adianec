@@ -182,9 +182,12 @@ export default {
   },
 
   mounted () {
-    if (this.$store.getters.getDisponibilidades.length === 0) {
-      this.$store.dispatch('GET_DISPONIBILIDADES').then((result) => {
-        this.disponibilidades = this.$store.getters.getDisponibilidades
+    this.disponibilidades = this.$store.getters.get('disponibilidades')
+    console.log(this.disponibilidades)
+
+    if (this.disponibilidades.length === 0) {
+      this.$store.dispatch('GET', 'disponibilidades').then((result) => {
+        this.disponibilidades = this.$store.getters.get('disponibilidades')
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
@@ -195,8 +198,6 @@ export default {
           text: err
         })
       })
-    } else {
-      this.disponibilidades = this.$store.getters.getDisponibilidades
     }
   },
 

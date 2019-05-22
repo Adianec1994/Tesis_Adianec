@@ -4,7 +4,7 @@
       flat
       color="white"
     >
-      <v-toolbar-title>Proveedores</v-toolbar-title>
+      <v-toolbar-title>Provincias</v-toolbar-title>
       <v-divider
         class="mx-2"
         inset
@@ -63,13 +63,11 @@
     </v-toolbar>
     <v-data-table
       :headers="headers"
-      :items="proveedores"
+      :items="provincias"
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.marca }}</td>
-        <td class="text-xs-center">{{ props.item.serie }}</td>
-        <td class="text-xs-center">{{ props.item.pais }}</td>
+        <td>{{ props.item.nombre }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -93,7 +91,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{`¿Seguro que desea eliminar el proveedor ${props.item.marca}`}}</v-card-text>
+            <v-card-text>{{`¿Seguro que desea eliminar la provincia ${props.item.nombre}`}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -125,13 +123,11 @@ export default {
   data: () => ({
     dialog: false,
     headers: [
-      { text: 'Marca', value: 'marca' },
-      { text: 'Serie', value: 'serie', align: 'center' },
-      { text: 'Pais', value: 'pais', align: 'center' },
+      { text: 'Nombre', value: 'nombre' },
       { text: 'Acciones', value: 'marca', sortable: false, align: 'center' }
     ],
     deleteDialog: {},
-    proveedores: [],
+    provincias: [],
     editedItem: {},
     editedIndex: -1,
     isNewModel: false,
@@ -144,25 +140,8 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Marca',
-          model: 'marca',
-          validator: 'alpha'
-        },
-        {
-          type: 'select',
-          label: 'Serie',
-          model: 'serie',
-          values: [
-            { name: '0', id: '0' },
-            { name: '2000', id: '2000' },
-            { name: '4000', id: '4000' }
-          ]
-        },
-        {
-          type: 'input',
-          inputType: 'text',
-          label: 'Pais',
-          model: 'pais'
+          label: 'Nombre de la provincia',
+          model: 'nombre'
         }
       ]
     }
@@ -173,7 +152,7 @@ export default {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
     },
     ...mapGetters({
-      proveedores: 'getProveedores'
+      provincias: `get('provincias')`
     })
   },
 
@@ -184,9 +163,10 @@ export default {
   },
 
   mounted () {
-    if (this.$store.getters.getProveedores.length === 0) {
-      this.$store.dispatch('GET_PROVEEDORES').then((result) => {
-        this.proveedores = this.$store.getters.getProveedores
+    if (this.$store.getters.get('provincias').length === 0) {
+      this.$store.dispatch('GET', 'provincias').then((result) => {
+        this.provincias = this.$store.getters.get('provincias')
+        console.log('provincias ' + this.provincias)
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
@@ -198,13 +178,13 @@ export default {
         })
       })
     } else {
-      this.proveedores = this.$store.getters.getProveedores
+      this.provincias = this.$store.getters.get('provincias')
     }
   },
 
   methods: {
     editItem (item) {
-      this.editedIndex = this.proveedores.indexOf(item)
+      this.editedIndex = this.provincias.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
@@ -217,9 +197,9 @@ export default {
     saveItem () {
       let response
       if (this.editedIndex === -1) {
-        response = this.$store.dispatch('SAVE_PROVEEDOR', this.editedItem)
+        response = this.$store.dispatch('SAVE', { payload: this.editedItem, moduleName: 'provincias' })
       } else {
-        response = this.$store.dispatch('EDIT_PROVEEDOR', this.editedItem)
+        response = this.$store.dispatch('EDIT', { payload: this.editedItem, moduleName: 'provincias' })
       }
 
       response.then(result => {
@@ -237,7 +217,7 @@ export default {
     },
 
     deleteItem (item) {
-      this.$store.dispatch('DESTROY_PROVEEDOR', item).then((result) => {
+      this.$store.dispatch('DESTROY', { payload: item, moduleName: 'provincias' }).then((result) => {
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
