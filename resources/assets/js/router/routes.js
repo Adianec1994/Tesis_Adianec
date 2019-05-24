@@ -17,7 +17,8 @@ export default ({ authGuard, guestGuard }) => [
     { path: '/disponibilidades', name: 'disponibilidades', component: require('~/pages/nomenclators/disponibilidades.vue') },
 
       // rutas de entities
-    { path: '/entidades', name: 'entidades', component: require('~/pages/entities/entidades.vue') }
+    { path: '/entidades', name: 'entidades', component: require('~/pages/entities/entidades.vue') },
+    { path: '/hechos_extraordinarios', name: 'hechos_extraordinarios', component: require('~/pages/entities/hechos_extraordinarios.vue') }
 
   ]),
 

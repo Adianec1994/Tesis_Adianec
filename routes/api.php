@@ -27,7 +27,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         'proveedores' => 'API\ProveedorAPIController',
         'provincias' => 'API\ProvinciaAPIController',
         'disponibilidades' => 'API\DisponibilidadAPIController',
-        'entidades' => 'API\EntidadAPIController'
+        'entidades' => 'API\EntidadAPIController',
+        'hechos_extraordinarios' => 'API\HechosExtraordinariosAPIController'
     ]);
 });
 

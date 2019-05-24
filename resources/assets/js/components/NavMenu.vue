@@ -39,7 +39,8 @@ export default {
         { title: 'Proveedores', icon: 'account_box', route: { name: 'proveedores' }},
         { title: 'Provincias', icon: 'account_box', route: { name: 'provincias' }},
         { title: 'Disponbilidades', icon: 'account_box', route: { name: 'disponibilidades' }},
-        { title: 'Entidades', icon: 'account_box', route: { name: 'entidades' }}
+        { title: 'Entidades', icon: 'account_box', route: { name: 'entidades' }},
+        { title: 'Hechos extraordinarios', icon: 'account_box', route: { name: 'hechos_extraordinarios' }}
       ]
     }
   }
