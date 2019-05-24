@@ -97,7 +97,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{'¿Seguro que desea eliminar el hecho extraordinario'}}</v-card-text>
+            <v-card-text>{{'¿Seguro que desea eliminar el hecho extraordinario?'}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn

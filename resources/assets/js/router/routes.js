@@ -18,7 +18,8 @@ export default ({ authGuard, guestGuard }) => [
 
       // rutas de entities
     { path: '/entidades', name: 'entidades', component: require('~/pages/entities/entidades.vue') },
-    { path: '/hechos_extraordinarios', name: 'hechos_extraordinarios', component: require('~/pages/entities/hechos_extraordinarios.vue') }
+    { path: '/hechos_extraordinarios', name: 'hechos_extraordinarios', component: require('~/pages/entities/hechos_extraordinarios.vue') },
+    { path: '/planes', name: 'planes', component: require('~/pages/entities/planes.vue') }
 
   ]),
 

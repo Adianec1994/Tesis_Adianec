@@ -68,9 +68,10 @@
     >
       <template v-slot:items="props">
         <td>{{ entidadName(props.item.entidads_id) }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.potInstaladaReal }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.potDisponibleReal }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.created_at }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.mes }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.generacion }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.indiceConsumoCombustible }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.compromiso }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -94,7 +95,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{'¿Seguro que desea eliminar la disponibilidad?'}}</v-card-text>
+            <v-card-text>{{'¿Seguro que desea eliminar el plan?'}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -127,12 +128,13 @@ export default {
     editedItem: {},
     editedIndex: -1,
     isNewModel: false,
-    moduleName: 'Disponibilidades',
+    moduleName: 'Planes',
     headers: [
       { text: 'Entidad', value: 'entidads_id' },
-      { text: 'Potencia Instalada Real', value: 'potInstaladaReal', align: 'center' },
-      { text: 'Potencia Disponible Real', value: 'potDisponibleReal', align: 'center' },
-      { text: 'Fecha', value: 'created_at', align: 'center' },
+      { text: 'Mes', value: 'mes', align: 'center' },
+      { text: 'Generación', value: 'generacion', align: 'center' },
+      { text: 'Índice de consumo de combustible', value: 'indiceConsumoCombustible', align: 'center' },
+      { text: 'Compromiso', value: 'compromiso', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     items: [],
@@ -155,16 +157,31 @@ export default {
           }
         },
         {
-          type: 'input',
-          inputType: 'number',
-          label: 'Potencia Instalada Real',
-          model: 'potInstaladaReal'
+          type: 'select',
+          label: 'Mes',
+          model: 'mes',
+          values: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+          selectOptions: {
+            noneSelectedText: 'Seleccione un mes'
+          }
         },
         {
           type: 'input',
           inputType: 'number',
-          label: 'Potencia Disponible Real',
-          model: 'potDisponibleReal'
+          label: 'Generación',
+          model: 'generacion'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Índice de consumo de combustible',
+          model: 'indiceConsumoCombustible'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Compromiso',
+          model: 'compromiso'
         }
       ]
     }

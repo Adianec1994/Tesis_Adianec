@@ -28,7 +28,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         'provincias' => 'API\ProvinciaAPIController',
         'disponibilidades' => 'API\DisponibilidadAPIController',
         'entidades' => 'API\EntidadAPIController',
-        'hechos_extraordinarios' => 'API\HechosExtraordinariosAPIController'
+        'hechos_extraordinarios' => 'API\HechosExtraordinariosAPIController',
+        'planes' => 'API\PlanesAPIController'
     ]);
 });
 

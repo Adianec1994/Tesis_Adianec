@@ -6,7 +6,8 @@ export const state = {
   proveedores: [],
   provincias: [],
   entidades: [],
-  hechos_extraordinarios: []
+  hechos_extraordinarios: [],
+  planes: []
 }
 
 // mutations
