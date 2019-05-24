@@ -67,7 +67,9 @@
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.nombre }}</td>
+        <td>{{ props.item.marca }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.serie }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.pais }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -112,7 +114,6 @@
         <h4>Sin datos para mostrar</h4>
       </template>
     </v-data-table>
-    {{items}}
   </div>
 </template>
 
@@ -124,16 +125,50 @@ export default {
     deleteDialog: {},
     editedItem: {},
     editedIndex: -1,
-    isNewModel: false
+    isNewModel: false,
+    moduleName: 'Proveedores',
+    headers: [
+      { text: 'Marca', value: 'marca' },
+      { text: 'Serie', value: 'serie', align: 'center' },
+      { text: 'Pais', value: 'pais', align: 'center' },
+      { text: 'Acciones', value: 'marca', sortable: false, align: 'center' }
+    ],
+    items: [],
+    options: {
+      validateAfterChanged: true,
+      validateAfterLoad: true
+    },
+    schema: {
+      fields: [
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Marca',
+          model: 'marca',
+          validator: 'alpha'
+        },
+        {
+          type: 'select',
+          label: 'Serie',
+          model: 'serie',
+          values: [
+            { name: '0', id: '0' },
+            { name: '2000', id: '2000' },
+            { name: '4000', id: '4000' }
+          ],
+          selectOptions: {
+            noneSelectedText: 'Seleccione una serie'
+          }
+        },
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Pais',
+          model: 'pais'
+        }
+      ]
+    }
   }),
-
-  props: {
-    items: Array,
-    headers: Array,
-    schema: Object,
-    options: Object,
-    moduleName: String
-  },
 
   computed: {
     formTitle () {
@@ -147,6 +182,25 @@ export default {
   watch: {
     dialog (val) {
       val || this.close()
+    }
+  },
+
+  mounted () {
+    if (this.$store.getters.get(this.lowerModuleName).length === 0) {
+      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+        this.items = this.$store.getters.get(this.lowerModuleName)
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+    } else {
+      this.items = this.$store.getters.get(this.lowerModuleName)
     }
   },
 

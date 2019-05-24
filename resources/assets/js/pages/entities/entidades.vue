@@ -68,6 +68,9 @@
     >
       <template v-slot:items="props">
         <td>{{ props.item.nombre }}</td>
+        <td class="text-xs-center justify-center">{{ provinciaName(props.item.provincias_id) }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.potInstalada }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.ip }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -91,7 +94,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{`¿Seguro que desea eliminar la provincia ${props.item.nombre}`}}</v-card-text>
+            <v-card-text>{{`¿Seguro que desea eliminar la entidad ${props.item.nombre}`}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -112,7 +115,6 @@
         <h4>Sin datos para mostrar</h4>
       </template>
     </v-data-table>
-    {{items}}
   </div>
 </template>
 
@@ -124,16 +126,55 @@ export default {
     deleteDialog: {},
     editedItem: {},
     editedIndex: -1,
-    isNewModel: false
+    isNewModel: false,
+    moduleName: 'Entidades',
+    headers: [
+      { text: 'Nombre', value: 'nombre' },
+      { text: 'Provincia', value: 'provincias_id', align: 'center' },
+      { text: 'Potencia Instalada', value: 'potInstalada', align: 'center' },
+      { text: 'Dirección IP', value: 'ip', align: 'center' },
+      { text: 'Acciones', value: 'marca', sortable: false, align: 'center' }
+    ],
+    items: [],
+    provincias: [],
+    options: {
+      validateAfterChanged: true,
+      validateAfterLoad: true
+    },
+    schema: {
+      fields: [
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Nombre de la provincias',
+          model: 'nombre'
+        },
+        {
+          type: 'select',
+          label: 'Provincia',
+          model: 'provincias_id',
+          values: [], // array de  provinciases
+          selectOptions: {
+            noneSelectedText: 'Seleccione una provincia',
+            name: 'nombre',
+            value: 'id'
+          }
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Potencia Instalada',
+          model: 'potInstalada'
+        },
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Dirección IP',
+          model: 'ip'
+        }
+      ]
+    }
   }),
-
-  props: {
-    items: Array,
-    headers: Array,
-    schema: Object,
-    options: Object,
-    moduleName: String
-  },
 
   computed: {
     formTitle () {
@@ -148,6 +189,44 @@ export default {
     dialog (val) {
       val || this.close()
     }
+  },
+
+  mounted () {
+    this.provincias = this.$store.getters.get('provincias')
+    this.items = this.$store.getters.get(this.lowerModuleName)
+
+    if (this.provincias.length === 0) {
+      this.$store.dispatch('GET', 'provincias').then((result) => {
+        this.provincias = this.$store.getters.get('provincias')
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+    }
+
+    if (this.items.length === 0) {
+      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+        this.items = this.$store.getters.get(this.lowerModuleName)
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+    }
+
+    var field = this.$data.schema.fields.find(field => field.model === 'provincias_id')
+    field.values = this.provincias
   },
 
   methods: {
@@ -205,6 +284,11 @@ export default {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
+    },
+
+    provinciaName (id) {
+      const provincia = this.provincias.find(p => p.id === id)
+      return provincia.nombre
     }
   }
 }

@@ -67,7 +67,10 @@
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.nombre }}</td>
+        <td>{{ entidadName(props.item.entidads_id) }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.potInstaladaReal }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.potDisponibleReal }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.created_at }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -91,7 +94,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{`¿Seguro que desea eliminar la provincia ${props.item.nombre}`}}</v-card-text>
+            <v-card-text>{{'¿Seguro que desea eliminar la disponibilidad'}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -112,7 +115,6 @@
         <h4>Sin datos para mostrar</h4>
       </template>
     </v-data-table>
-    {{items}}
   </div>
 </template>
 
@@ -124,16 +126,49 @@ export default {
     deleteDialog: {},
     editedItem: {},
     editedIndex: -1,
-    isNewModel: false
+    isNewModel: false,
+    moduleName: 'Disponibilidades',
+    headers: [
+      { text: 'Entidad', value: 'entidads_id' },
+      { text: 'Potencia Instalada Real', value: 'potInstaladaReal', align: 'center' },
+      { text: 'Potencia Disponible Real', value: 'potDisponibleReal', align: 'center' },
+      { text: 'Fecha', value: 'created_at', align: 'center' },
+      { text: 'Acciones', sortable: false, align: 'center' }
+    ],
+    items: [],
+    entidades: [],
+    options: {
+      validateAfterChanged: true,
+      validateAfterLoad: true
+    },
+    schema: {
+      fields: [
+        {
+          type: 'select',
+          label: 'Entidad',
+          model: 'entidads_id',
+          values: [], // array de  entidades
+          selectOptions: {
+            noneSelectedText: 'Seleccione una entidad',
+            name: 'nombre',
+            value: 'id'
+          }
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Potencia Instalada Real',
+          model: 'potInstaladaReal'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Potencia Disponible Real',
+          model: 'potDisponibleReal'
+        }
+      ]
+    }
   }),
-
-  props: {
-    items: Array,
-    headers: Array,
-    schema: Object,
-    options: Object,
-    moduleName: String
-  },
 
   computed: {
     formTitle () {
@@ -142,12 +177,51 @@ export default {
     lowerModuleName () {
       return this.moduleName.toLowerCase()
     }
+
   },
 
   watch: {
     dialog (val) {
       val || this.close()
     }
+  },
+
+  mounted () {
+    this.entidades = this.$store.getters.get('entidades')
+    this.items = this.$store.getters.get(this.lowerModuleName)
+
+    if (this.entidades.length === 0) {
+      this.$store.dispatch('GET', 'entidades').then((result) => {
+        this.entidades = this.$store.getters.get('entidades')
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+    }
+
+    if (this.items.length === 0) {
+      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+        this.items = this.$store.getters.get(this.lowerModuleName)
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+    }
+
+    var field = this.$data.schema.fields.find(field => field.model === 'entidads_id')
+    field.values = this.entidades
   },
 
   methods: {
@@ -205,6 +279,11 @@ export default {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
+    },
+
+    entidadName (id) {
+      const entidad = this.entidades.find(e => e.id === id)
+      return entidad.nombre
     }
   }
 }

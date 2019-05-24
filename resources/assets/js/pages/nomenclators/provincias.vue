@@ -112,7 +112,6 @@
         <h4>Sin datos para mostrar</h4>
       </template>
     </v-data-table>
-    {{items}}
   </div>
 </template>
 
@@ -124,16 +123,28 @@ export default {
     deleteDialog: {},
     editedItem: {},
     editedIndex: -1,
-    isNewModel: false
+    isNewModel: false,
+    moduleName: 'Provincias',
+    headers: [
+      { text: 'Nombre', value: 'nombre' },
+      { text: 'Acciones', sortable: false, align: 'center' }
+    ],
+    items: [],
+    options: {
+      validateAfterChanged: true,
+      validateAfterLoad: true
+    },
+    schema: {
+      fields: [
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Nombre de la provincia',
+          model: 'nombre'
+        }
+      ]
+    }
   }),
-
-  props: {
-    items: Array,
-    headers: Array,
-    schema: Object,
-    options: Object,
-    moduleName: String
-  },
 
   computed: {
     formTitle () {
@@ -147,6 +158,25 @@ export default {
   watch: {
     dialog (val) {
       val || this.close()
+    }
+  },
+
+  mounted () {
+    if (this.$store.getters.get(this.lowerModuleName).length === 0) {
+      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+        this.items = this.$store.getters.get(this.lowerModuleName)
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+    } else {
+      this.items = this.$store.getters.get(this.lowerModuleName)
     }
   },
 

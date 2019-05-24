@@ -4,7 +4,8 @@ import axios from 'axios'
 export const state = {
   disponibilidades: [],
   proveedores: [],
-  provincias: []
+  provincias: [],
+  entidades: []
 }
 
 // mutations

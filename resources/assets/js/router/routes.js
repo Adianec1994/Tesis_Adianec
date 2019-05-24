@@ -11,10 +11,13 @@ export default ({ authGuard, guestGuard }) => [
       { path: 'profile', name: 'settings.profile', component: require('~/pages/settings/profile.vue') },
       { path: 'password', name: 'settings.password', component: require('~/pages/settings/password.vue') }
       ] },
-      // rutas de nomencladores
-    { path: '/proveedores', name: 'proveedores', component: require('~/pages/nomencladores/proveedores.vue') },
-    { path: '/provincias', name: 'provincias', component: require('~/pages/nomencladores/provincias.vue') },
-    { path: '/disponibilidades', name: 'disponibilidades', component: require('~/pages/nomencladores/disponibilidades.vue') }
+      // rutas de nomenclators
+    { path: '/proveedores', name: 'proveedores', component: require('~/pages/nomenclators/proveedores.vue') },
+    { path: '/provincias', name: 'provincias', component: require('~/pages/nomenclators/provincias.vue') },
+    { path: '/disponibilidades', name: 'disponibilidades', component: require('~/pages/nomenclators/disponibilidades.vue') },
+
+      // rutas de entities
+    { path: '/entidades', name: 'entidades', component: require('~/pages/entities/entidades.vue') }
 
   ]),
 
