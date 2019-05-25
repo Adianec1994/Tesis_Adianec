@@ -20,7 +20,8 @@ export default ({ authGuard, guestGuard }) => [
     { path: '/entidades', name: 'entidades', component: require('~/pages/entities/entidades.vue') },
     { path: '/hechos_extraordinarios', name: 'hechos_extraordinarios', component: require('~/pages/entities/hechos_extraordinarios.vue') },
     { path: '/planes', name: 'planes', component: require('~/pages/entities/planes.vue') },
-    { path: '/centrales_electricas', name: 'centrales_electricas', component: require('~/pages/entities/centrales_electricas.vue') }
+    { path: '/centrales_electricas', name: 'centrales_electricas', component: require('~/pages/entities/centrales_electricas.vue') },
+    { path: '/baterias', name: 'baterias', component: require('~/pages/entities/baterias.vue') }
 
   ]),
 

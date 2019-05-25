@@ -30,7 +30,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         'entidades' => 'API\EntidadAPIController',
         'hechos_extraordinarios' => 'API\HechosExtraordinariosAPIController',
         'planes' => 'API\PlanesAPIController',
-        'centrales_electricas' => 'API\CentralElectricaAPIController'
+        'centrales_electricas' => 'API\CentralElectricaAPIController',
+        'baterias' => 'API\BateriasAPIController'
     ]);
 });
 
