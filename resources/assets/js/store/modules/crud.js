@@ -9,7 +9,8 @@ export const state = {
   hechos_extraordinarios: [],
   planes: [],
   centrales_electricas: [],
-  baterias: []
+  baterias: [],
+  coberturas_combustibles: []
 }
 
 // mutations

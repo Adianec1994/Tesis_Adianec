@@ -31,7 +31,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         'hechos_extraordinarios' => 'API\HechosExtraordinariosAPIController',
         'planes' => 'API\PlanesAPIController',
         'centrales_electricas' => 'API\CentralElectricaAPIController',
-        'baterias' => 'API\BateriasAPIController'
+        'baterias' => 'API\BateriasAPIController',
+        'coberturas_combustibles' => 'API\CoberturaCombustibleAPIController'
     ]);
 });
 

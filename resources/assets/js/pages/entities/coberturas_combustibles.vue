@@ -68,8 +68,15 @@
     >
       <template v-slot:items="props">
         <td>{{ centralesElectricasName(props.item.central_electricas_id) }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.numero }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.potInstalada }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.planReserva }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.fondaje }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.existOperativa }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.coberturaHoras }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.consumo }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.suminCupet }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.capacTotalAlmac }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.capacVacio }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.existTotalDiaAnterior }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -93,7 +100,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{`¿Seguro que desea eliminar la batería ${props.item.numero}?`}}</v-card-text>
+            <v-card-text>{{'¿Seguro que desea eliminar el hecho extraordinario?'}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -126,11 +133,18 @@ export default {
     editedItem: {},
     editedIndex: -1,
     isNewModel: false,
-    moduleName: 'Baterías',
+    moduleName: 'Coberturas combustibles',
     headers: [
       { text: 'Central Eléctrica', value: 'central_electricas_id' },
-      { text: 'Número', value: 'numero', align: 'center' },
-      { text: 'Potencia instalada', value: 'potInstalada', align: 'center' },
+      { text: 'Plan de reserva', value: 'planReserva', align: 'center' },
+      { text: 'Fondaje', value: 'fondaje', align: 'center' },
+      { text: 'Existencia operativa', value: 'existOperativa', align: 'center' },
+      { text: 'Cobertura x horas', value: 'coberturaHoras', align: 'center' },
+      { text: 'Consumo', value: 'consumo', align: 'center' },
+      { text: 'Suministro CUPET', value: 'suminCupet', align: 'center' },
+      { text: 'Cap. Total Almacenda', value: 'capacTotalAlmac', align: 'center' },
+      { text: 'Capacidad vacío', value: 'capacVacio', align: 'center' },
+      { text: 'Existencia día anterior', value: 'existTotalDiaAnterior', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     items: [],
@@ -154,15 +168,57 @@ export default {
         },
         {
           type: 'input',
-          inputType: 'text',
-          label: 'Número',
-          model: 'numero'
+          inputType: 'number',
+          label: 'Plan de reserva',
+          model: 'planReserva'
         },
         {
           type: 'input',
-          inputType: 'text',
-          label: 'Potencia instalada',
-          model: 'potInstalada'
+          inputType: 'number',
+          label: 'Fondaje',
+          model: 'fondaje'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Existencia operativa',
+          model: 'existOperativa'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Cobertura x horas',
+          model: 'coberturaHoras'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Consumo',
+          model: 'consumo'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Suministro CUPET',
+          model: 'suminCupet'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Cap. Total Almacenda',
+          model: 'capacTotalAlmac'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Capacidad vacío',
+          model: 'capacVacio'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Existencia día anterior',
+          model: 'existTotalDiaAnterior'
         }
       ]
     }
@@ -173,7 +229,7 @@ export default {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
     },
     lowerModuleName () {
-      return this.moduleName.toLowerCase().replace('í', 'i')
+      return this.moduleName.split(' ').join('_').toLowerCase()
     }
 
   },

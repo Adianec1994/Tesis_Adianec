@@ -43,7 +43,8 @@ export default {
         { title: 'Hechos extraordinarios', icon: 'account_box', route: { name: 'hechos_extraordinarios' }},
         { title: 'Planes', icon: 'account_box', route: { name: 'planes' }},
         { title: 'Centrales eléctricas', icon: 'account_box', route: { name: 'centrales_electricas' }},
-        { title: 'Baterías', icon: 'account_box', route: { name: 'baterias' }}
+        { title: 'Baterías', icon: 'account_box', route: { name: 'baterias' }},
+        { title: 'Coberturas combustibles', icon: 'account_box', route: { name: 'coberturas_combustibles' }}
       ]
     }
   }
