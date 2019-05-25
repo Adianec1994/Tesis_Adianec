@@ -68,12 +68,8 @@
     >
       <template v-slot:items="props">
         <td>{{ entidadName(props.item.entidads_id) }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.tipo }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.created_at }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.descripcion }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.medidas }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.nombreImplicado }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.nombreInforma }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.nombre }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.potInstalada }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -97,7 +93,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{'¿Seguro que desea eliminar el hecho extraordinario?'}}</v-card-text>
+            <v-card-text>{{`¿Seguro que desea eliminar la central eléctrica ${props.item.nombre}?`}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -130,15 +126,11 @@ export default {
     editedItem: {},
     editedIndex: -1,
     isNewModel: false,
-    moduleName: 'Hechos extraordinarios',
+    moduleName: 'Centrales eléctricas',
     headers: [
       { text: 'Entidad', value: 'entidads_id' },
-      { text: 'Tipo de hecho', value: 'tipo', align: 'center' },
-      { text: 'Fecha', value: 'created_at', align: 'center' },
-      { text: 'Descripción', value: 'descripcion', align: 'center' },
-      { text: 'Medidas', value: 'medidas', align: 'center' },
-      { text: 'Implicados', value: 'nombreImplicados', align: 'center' },
-      { text: 'Informa', value: 'nombreInforma', align: 'center' },
+      { text: 'Nombre de la central', value: 'nombre', align: 'center' },
+      { text: 'Potencia instalada', value: 'potInstalada', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     items: [],
@@ -163,34 +155,14 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Tipo de hecho',
-          model: 'tipo'
-        },
-        {
-          type: 'textArea',
-          label: 'Descripción',
-          model: 'descripcion',
-          placeholder: 'Detalle brevemente el hecho...',
-          rows: 3
-        },
-        {
-          type: 'textArea',
-          label: 'Medidas',
-          model: 'medidas',
-          placeholder: 'Detalle brevemente las medidas tomadas...',
-          rows: 3
+          label: 'Nombre de la central',
+          model: 'nombre'
         },
         {
           type: 'input',
           inputType: 'text',
-          label: 'Nombre de los implicados',
-          model: 'nombreImplicado'
-        },
-        {
-          type: 'input',
-          inputType: 'text',
-          label: 'Nombre del que informa',
-          model: 'nombreInforma'
+          label: 'Potencia instalada',
+          model: 'potInstalada'
         }
       ]
     }
@@ -201,7 +173,7 @@ export default {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
     },
     lowerModuleName () {
-      return this.moduleName.split(' ').join('_').toLowerCase()
+      return this.moduleName.split(' ').join('_').toLowerCase().replace('é', 'e')
     }
 
   },

@@ -41,7 +41,8 @@ export default {
         { title: 'Disponbilidades', icon: 'account_box', route: { name: 'disponibilidades' }},
         { title: 'Entidades', icon: 'account_box', route: { name: 'entidades' }},
         { title: 'Hechos extraordinarios', icon: 'account_box', route: { name: 'hechos_extraordinarios' }},
-        { title: 'Planes', icon: 'account_box', route: { name: 'planes' }}
+        { title: 'Planes', icon: 'account_box', route: { name: 'planes' }},
+        { title: 'Centrales eléctricas', icon: 'account_box', route: { name: 'centrales_electricas' }}
       ]
     }
   }

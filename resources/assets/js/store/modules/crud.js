@@ -7,7 +7,8 @@ export const state = {
   provincias: [],
   entidades: [],
   hechos_extraordinarios: [],
-  planes: []
+  planes: [],
+  centrales_electricas: []
 }
 
 // mutations
