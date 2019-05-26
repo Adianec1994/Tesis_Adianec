@@ -32,7 +32,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         'planes' => 'API\PlanesAPIController',
         'centrales_electricas' => 'API\CentralElectricaAPIController',
         'baterias' => 'API\BateriasAPIController',
-        'coberturas_combustibles' => 'API\CoberturaCombustibleAPIController'
+        'coberturas_combustibles' => 'API\CoberturaCombustibleAPIController',
+        'datos_generales' => 'API\DatosGeneralesAPIController',
+        'operadores' => 'API\OperadorAPIController'
     ]);
 });
 

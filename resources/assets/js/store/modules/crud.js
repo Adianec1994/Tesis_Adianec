@@ -10,7 +10,9 @@ export const state = {
   planes: [],
   centrales_electricas: [],
   baterias: [],
-  coberturas_combustibles: []
+  coberturas_combustibles: [],
+  datos_generales: [],
+  operadores: []
 }
 
 // mutations

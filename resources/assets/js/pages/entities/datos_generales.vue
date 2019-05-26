@@ -68,8 +68,28 @@
     >
       <template v-slot:items="props">
         <td>{{ centralesElectricasName(props.item.central_electricas_id) }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.numero }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.potInstalada }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.genBruta }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.insumos }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.recibido }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.volumenRecibido }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.consumoGeneracion }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.densidadPonderada }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.temperatura }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.densidadCorreccion }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.valorCalorico }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.existencia }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.cobertura }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.indiceConsumo }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.lubricteRecibido }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.lubricteCsmoReposicion }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.lubricteCsmoCambio }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.lubricteCsmoTotal }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.lubricteExistencia }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.lubricteCobertura }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.lubricteIndiceCsmo }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.refrigteRecibido }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.refrigteConsumo }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.refrigteExistencia }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -93,7 +113,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{`¿Seguro que desea eliminar la batería ${props.item.numero}?`}}</v-card-text>
+            <v-card-text>{{`¿Seguro que desea eliminar la entrada?`}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -126,11 +146,31 @@ export default {
     editedItem: {},
     editedIndex: -1,
     isNewModel: false,
-    moduleName: 'Baterías',
+    moduleName: 'Datos generales',
     headers: [
       { text: 'Central Eléctrica', value: 'central_electricas_id' },
-      { text: 'Número', value: 'numero', align: 'center' },
-      { text: 'Potencia instalada', value: 'potInstalada', align: 'center' },
+      { text: 'Generación bruta', value: 'genBruta', align: 'center' },
+      { text: 'Insumos', value: 'insumos', align: 'center' },
+      { text: 'Recibido', value: 'recibido', align: 'center' },
+      { text: 'Volumen recibido', value: 'volumenRecibido', align: 'center' },
+      { text: 'Consumo generación', value: 'consumoGeneracion', align: 'center' },
+      { text: 'Densidad ponderada', value: 'densidadPonderada', align: 'center' },
+      { text: 'Temperatura', value: 'temperatura', align: 'center' },
+      { text: 'Densidad corrección', value: 'densidadCorreccion', align: 'center' },
+      { text: 'Valor calórico', value: 'valorCalorico', align: 'center' },
+      { text: 'Existencia', value: 'existencia', align: 'center' },
+      { text: 'Cobertura', value: 'cobertura', align: 'center' },
+      { text: 'Índice de consumo', value: 'indiceConsumo', align: 'center' },
+      { text: 'Lubricante recibido', value: 'lubricteRecibido', align: 'center' },
+      { text: 'Lubricante consumo reposición', value: 'lubricteCsmoReposicion', align: 'center' },
+      { text: 'Lubricante consumo cambio', value: 'lubricteCsmoCambio', align: 'center' },
+      { text: 'Lubricante consumo total', value: 'lubricteCsmoTotal', align: 'center' },
+      { text: 'Lubricante existencia', value: 'lubricteExistencia', align: 'center' },
+      { text: 'Lubricante cobertura', value: 'lubricteCobertura', align: 'center' },
+      { text: 'Lubricante índice consumo', value: 'lubricteIndiceCsmo', align: 'center' },
+      { text: 'Refrigerante recibido', value: 'refrigteRecibido', align: 'center' },
+      { text: 'Refrigerante consumo', value: 'refrigteConsumo', align: 'center' },
+      { text: 'Refrigerante existencia', value: 'refrigteExistencia', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     items: [],
@@ -155,14 +195,134 @@ export default {
         {
           type: 'input',
           inputType: 'number',
-          label: 'Número',
-          model: 'numero'
+          label: 'Generación bruta',
+          model: 'genBruta'
         },
         {
           type: 'input',
           inputType: 'number',
-          label: 'Potencia instalada',
-          model: 'potInstalada'
+          label: 'Insumos',
+          model: 'insumos'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Recibido',
+          model: 'recibido'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Volumen recibido',
+          model: 'volumenRecibido'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Consumo generación',
+          model: 'consumoGeneracion'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Densidad ponderada',
+          model: 'densidadPonderada'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Temperatura',
+          model: 'temperatura'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Densidad corrección',
+          model: 'densidadCorreccion'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Valor calórico',
+          model: 'valorCalorico'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Existencia',
+          model: 'existencia'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Cobertura',
+          model: 'cobertura'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Índice de consumo',
+          model: 'indiceConsumo'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Lubricante recibido',
+          model: 'lubricteRecibido'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Lubricante consumo reposición',
+          model: 'lubricteCsmoReposicion'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Lubricante consumo cambio',
+          model: 'lubricteCsmoCambio'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Lubricante consumo total',
+          model: 'lubricteCsmoTotal'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Lubricante existencia',
+          model: 'lubricteExistencia'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Lubricante cobertura',
+          model: 'lubricteCobertura'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Lubricante índice consumo',
+          model: 'lubricteIndiceCsmo'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Refrigerante recibido',
+          model: 'refrigteRecibido'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Refrigerante consumo',
+          model: 'refrigteConsumo'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Refrigerante existencia',
+          model: 'refrigteExistencia'
         }
       ]
     }
@@ -173,7 +333,7 @@ export default {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
     },
     lowerModuleName () {
-      return this.moduleName.toLowerCase().replace('í', 'i')
+      return this.moduleName.split(' ').join('_').toLowerCase()
     }
 
   },

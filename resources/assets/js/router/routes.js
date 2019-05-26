@@ -15,6 +15,7 @@ export default ({ authGuard, guestGuard }) => [
     { path: '/proveedores', name: 'proveedores', component: require('~/pages/nomenclators/proveedores.vue') },
     { path: '/provincias', name: 'provincias', component: require('~/pages/nomenclators/provincias.vue') },
     { path: '/disponibilidades', name: 'disponibilidades', component: require('~/pages/nomenclators/disponibilidades.vue') },
+    { path: '/operadores', name: 'operadores', component: require('~/pages/nomenclators/operadores.vue') },
 
       // rutas de entities
     { path: '/entidades', name: 'entidades', component: require('~/pages/entities/entidades.vue') },
@@ -22,8 +23,8 @@ export default ({ authGuard, guestGuard }) => [
     { path: '/planes', name: 'planes', component: require('~/pages/entities/planes.vue') },
     { path: '/centrales_electricas', name: 'centrales_electricas', component: require('~/pages/entities/centrales_electricas.vue') },
     { path: '/baterias', name: 'baterias', component: require('~/pages/entities/baterias.vue') },
-    { path: '/coberturas_combustibles', name: 'coberturas_combustibles', component: require('~/pages/entities/coberturas_combustibles.vue') }
-
+    { path: '/coberturas_combustibles', name: 'coberturas_combustibles', component: require('~/pages/entities/coberturas_combustibles.vue') },
+    { path: '/datos_generales', name: 'datos_generales', component: require('~/pages/entities/datos_generales.vue') }
   ]),
 
   // Guest routes.

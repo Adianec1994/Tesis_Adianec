@@ -44,7 +44,9 @@ export default {
         { title: 'Planes', icon: 'account_box', route: { name: 'planes' }},
         { title: 'Centrales eléctricas', icon: 'account_box', route: { name: 'centrales_electricas' }},
         { title: 'Baterías', icon: 'account_box', route: { name: 'baterias' }},
-        { title: 'Coberturas combustibles', icon: 'account_box', route: { name: 'coberturas_combustibles' }}
+        { title: 'Coberturas combustibles', icon: 'account_box', route: { name: 'coberturas_combustibles' }},
+        { title: 'Datos generales', icon: 'account_box', route: { name: 'datos_generales' }},
+        { title: 'Operadores', icon: 'account_box', route: { name: 'operadores' }}
       ]
     }
   }

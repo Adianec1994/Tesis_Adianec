@@ -68,9 +68,8 @@
     >
       <template v-slot:items="props">
         <td>{{ props.item.nombre }}</td>
-        <td class="text-xs-center justify-center">{{ provinciaName(props.item.provincias_id) }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.potInstalada }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.ip }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.cidentidad }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.ocupacion }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -94,7 +93,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{`¿Seguro que desea eliminar la entidad ${props.item.nombre}`}}</v-card-text>
+            <v-card-text>{{`¿Seguro que desea eliminar la provincia ${props.item.nombre}`}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -127,16 +126,14 @@ export default {
     editedItem: {},
     editedIndex: -1,
     isNewModel: false,
-    moduleName: 'Entidades',
+    moduleName: 'Operadores',
     headers: [
       { text: 'Nombre', value: 'nombre' },
-      { text: 'Provincia', value: 'provincias_id', align: 'center' },
-      { text: 'Potencia Instalada', value: 'potInstalada', align: 'center' },
-      { text: 'Dirección IP', value: 'ip', align: 'center' },
+      { text: 'Carnet de identidad', value: 'cidentidad', align: 'center' },
+      { text: 'Ocupación', value: 'ocupacion', align: 'center' },
       { text: 'Acciones', value: 'marca', sortable: false, align: 'center' }
     ],
     items: [],
-    provincias: [],
     options: {
       validateAfterChanged: true,
       validateAfterLoad: true
@@ -146,31 +143,28 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Nombre de la entidad',
-          model: 'nombre'
-        },
-        {
-          type: 'select',
-          label: 'Provincia',
-          model: 'provincias_id',
-          values: [], // array de  provinciases
-          selectOptions: {
-            noneSelectedText: 'Seleccione una provincia',
-            name: 'nombre',
-            value: 'id'
-          }
+          label: 'Nombre',
+          model: 'nombre',
+          validator: 'alpha'
         },
         {
           type: 'input',
           inputType: 'number',
-          label: 'Potencia Instalada',
-          model: 'potInstalada'
+          label: 'Carnet de identidad',
+          model: 'cidentidad'
         },
         {
-          type: 'input',
-          inputType: 'text',
-          label: 'Dirección IP',
-          model: 'ip'
+          type: 'select',
+          label: 'Ocupación',
+          model: 'ocupacion',
+          values: [
+            'Operador',
+            'Chofer',
+            'Acompañante'
+          ],
+          selectOptions: {
+            noneSelectedText: 'Seleccione una ocupación'
+          }
         }
       ]
     }
@@ -192,25 +186,7 @@ export default {
   },
 
   mounted () {
-    this.provincias = this.$store.getters.get('provincias')
-    this.items = this.$store.getters.get(this.lowerModuleName)
-
-    if (this.provincias.length === 0) {
-      this.$store.dispatch('GET', 'provincias').then((result) => {
-        this.provincias = this.$store.getters.get('provincias')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
-      })
-    }
-
-    if (this.items.length === 0) {
+    if (this.$store.getters.get(this.lowerModuleName).length === 0) {
       this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
         this.items = this.$store.getters.get(this.lowerModuleName)
         this.$store.dispatch('responseMessage', {
@@ -223,10 +199,9 @@ export default {
           text: err
         })
       })
+    } else {
+      this.items = this.$store.getters.get(this.lowerModuleName)
     }
-
-    var field = this.$data.schema.fields.find(field => field.model === 'provincias_id')
-    field.values = this.provincias
   },
 
   methods: {
@@ -284,11 +259,6 @@ export default {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
-    },
-
-    provinciaName (id) {
-      const provincia = this.provincias.find(p => p.id === id)
-      return provincia.nombre
     }
   }
 }
