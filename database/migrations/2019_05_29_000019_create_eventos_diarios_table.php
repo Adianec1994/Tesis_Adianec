@@ -38,7 +38,7 @@ class CreateEventosDiariosTable extends Migration
             $table->text('diagnostico')->nullable();
             $table->string('responsable', 45)->nullable();
             $table->string('insertadoPor', 45)->nullable();
-            $table->integer('grupos_id')->unsigned();
+            $table->unsignedInteger('grupos_id');
             $table->softDeletes();
             $table->timestamps();
 

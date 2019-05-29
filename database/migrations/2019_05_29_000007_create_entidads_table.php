@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTrazasTable extends Migration
+class CreateEntidadsTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'trazas';
+    public $tableName = 'entidads';
 
     /**
      * Run the migrations.
-     * @table trazas
+     * @table entidads
      *
      * @return void
      */
@@ -23,19 +23,18 @@ class CreateTrazasTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->date('fecha')->nullable();
-            $table->time('hora')->nullable();
-            $table->string('accion', 45)->nullable();
+            $table->string('nombre', 45)->nullable();
+            $table->double('potInstalada')->nullable();
             $table->string('ip', 45)->nullable();
-            $table->integer('users_id')->unsigned();
+            $table->unsignedInteger('provincias_id');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index(["users_id"], 'fk_trazas_users1_idx');
+            $table->index(["provincias_id"], 'fk_entidads_provincias1_idx');
 
 
-            $table->foreign('users_id', 'fk_trazas_users1_idx')
-                ->references('id')->on('users')
+            $table->foreign('provincias_id', 'fk_entidads_provincias1_idx')
+                ->references('id')->on('provincias')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

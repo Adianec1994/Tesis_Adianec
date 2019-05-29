@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBateriasTable extends Migration
+class CreatePlansTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'baterias';
+    public $tableName = 'plans';
 
     /**
      * Run the migrations.
-     * @table baterias
+     * @table plans
      *
      * @return void
      */
@@ -23,17 +23,19 @@ class CreateBateriasTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('numero')->nullable();
-            $table->double('potInstalada')->nullable();
-            $table->integer('central_electricas_id')->unsigned();
+            $table->string('mes', 45)->nullable();
+            $table->decimal('generacion')->nullable();
+            $table->decimal('indiceConsumoCombustible')->nullable();
+            $table->decimal('compromiso')->nullable();
+            $table->unsignedInteger('entidads_id');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index(["central_electricas_id"], 'fk_baterias_central_electricas1_idx');
+            $table->index(["entidads_id"], 'fk_planGeneracions_entidads1_idx');
 
 
-            $table->foreign('central_electricas_id', 'fk_baterias_central_electricas1_idx')
-                ->references('id')->on('central_electricas')
+            $table->foreign('entidads_id', 'fk_planGeneracions_entidads1_idx')
+                ->references('id')->on('entidads')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

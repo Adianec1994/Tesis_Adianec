@@ -45,7 +45,7 @@ class CreateDatosGeneralesTable extends Migration
             $table->double('refrigteRecibido')->nullable();
             $table->double('refrigteConsumo')->nullable();
             $table->double('refrigteExistencia')->nullable();
-            $table->integer('central_electricas_id')->unsigned();
+            $table->unsignedInteger('central_electricas_id');
             $table->softDeletes();
             $table->timestamps();
 

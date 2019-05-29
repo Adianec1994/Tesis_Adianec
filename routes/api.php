@@ -34,7 +34,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         'baterias' => 'API\BateriasAPIController',
         'coberturas_combustibles' => 'API\CoberturaCombustibleAPIController',
         'datos_generales' => 'API\DatosGeneralesAPIController',
-        'operadores' => 'API\OperadorAPIController'
+        'operadores' => 'API\OperadorAPIController',
+        'pailas' => 'API\PailasAPIController'
     ]);
 });
 

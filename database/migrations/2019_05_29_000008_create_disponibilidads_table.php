@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlansTable extends Migration
+class CreateDisponibilidadsTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'plans';
+    public $tableName = 'disponibilidads';
 
     /**
      * Run the migrations.
-     * @table plans
+     * @table disponibilidads
      *
      * @return void
      */
@@ -23,18 +23,17 @@ class CreatePlansTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('mes', 45)->nullable();
-            $table->decimal('generacion')->nullable();
-            $table->decimal('indiceConsumoCombustible')->nullable();
-            $table->decimal('compromiso')->nullable();
-            $table->integer('entidads_id')->unsigned();
+            $table->date('fecha')->nullable();
+            $table->double('potInstaladaReal')->nullable();
+            $table->double('potDisponibleReal')->nullable();
+            $table->unsignedInteger('entidads_id');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index(["entidads_id"], 'fk_planGeneracions_entidads1_idx');
+            $table->index(["entidads_id"], 'fk_disponibilidads_entidads1_idx');
 
 
-            $table->foreign('entidads_id', 'fk_planGeneracions_entidads1_idx')
+            $table->foreign('entidads_id', 'fk_disponibilidads_entidads1_idx')
                 ->references('id')->on('entidads')
                 ->onDelete('no action')
                 ->onUpdate('no action');

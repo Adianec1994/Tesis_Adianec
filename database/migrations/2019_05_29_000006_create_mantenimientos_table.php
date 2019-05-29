@@ -29,8 +29,8 @@ class CreateMantenimientosTable extends Migration
             $table->time('horaSalida')->nullable();
             $table->string('informa', 45)->nullable();
             $table->text('resultado')->nullable();
-            $table->integer('mantenedores_externos_id')->unsigned();
-            $table->integer('brigadas_id')->unsigned();
+            $table->unsignedInteger('mantenedores_externos_id');
+            $table->unsignedInteger('brigadas_id');
             $table->softDeletes();
             $table->timestamps();
 

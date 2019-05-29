@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateGruposTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'users';
+    public $tableName = 'grupos';
 
     /**
      * Run the migrations.
-     * @table users
+     * @table grupos
      *
      * @return void
      */
@@ -23,25 +23,25 @@ class CreateUsersTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', 45)->nullable();
-            $table->string('cargo', 45)->nullable();
-            $table->string('username', 45)->nullable();
-            $table->string('email', 45)->nullable();
-            $table->string('password')->nullable();
-            $table->string('imagen', 45)->nullable();
-            $table->integer('entidads_id')->unsigned();
+            $table->integer('numero')->nullable();
+            $table->double('potInstalada')->nullable();
+            $table->unsignedInteger('baterias_id');
+            $table->unsignedInteger('proveedors_id');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index(["entidads_id"], 'fk_users_entidads1_idx');
+            $table->index(["proveedors_id"], 'fk_grupos_proveedors1_idx');
 
-            $table->unique(["username"], 'username_UNIQUE');
-
-            $table->unique(["email"], 'email_UNIQUE');
+            $table->index(["baterias_id"], 'fk_grupos_baterias1_idx');
 
 
-            $table->foreign('entidads_id', 'fk_users_entidads1_idx')
-                ->references('id')->on('entidads')
+            $table->foreign('baterias_id', 'fk_grupos_baterias1_idx')
+                ->references('id')->on('baterias')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
+            $table->foreign('proveedors_id', 'fk_grupos_proveedors1_idx')
+                ->references('id')->on('proveedors')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEntidadsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'entidads';
+    public $tableName = 'users';
 
     /**
      * Run the migrations.
-     * @table entidads
+     * @table users
      *
      * @return void
      */
@@ -23,18 +23,25 @@ class CreateEntidadsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('nombre', 45)->nullable();
-            $table->double('potInstalada')->nullable();
-            $table->string('ip', 45)->nullable();
-            $table->integer('provincias_id')->unsigned();
+            $table->string('name', 45)->nullable();
+            $table->string('cargo', 45)->nullable();
+            $table->string('username', 45)->nullable();
+            $table->string('email', 45)->nullable();
+            $table->mediumText('password')->nullable();
+            $table->string('imagen', 45)->nullable();
+            $table->unsignedInteger('entidads_id');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index(["provincias_id"], 'fk_entidads_provincias1_idx');
+            $table->index(["entidads_id"], 'fk_users_entidads1_idx');
+
+            $table->unique(["username"], 'username_UNIQUE');
+
+            $table->unique(["email"], 'email_UNIQUE');
 
 
-            $table->foreign('provincias_id', 'fk_entidads_provincias1_idx')
-                ->references('id')->on('provincias')
+            $table->foreign('entidads_id', 'fk_users_entidads1_idx')
+                ->references('id')->on('entidads')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

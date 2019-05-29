@@ -46,7 +46,8 @@ export default {
         { title: 'Baterías', icon: 'account_box', route: { name: 'baterias' }},
         { title: 'Coberturas combustibles', icon: 'account_box', route: { name: 'coberturas_combustibles' }},
         { title: 'Datos generales', icon: 'account_box', route: { name: 'datos_generales' }},
-        { title: 'Operadores', icon: 'account_box', route: { name: 'operadores' }}
+        { title: 'Operadores', icon: 'account_box', route: { name: 'operadores' }},
+        { title: 'Pailas', icon: 'account_box', route: { name: 'pailas' }}
       ]
     }
   }

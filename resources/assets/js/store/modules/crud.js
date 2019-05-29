@@ -12,7 +12,8 @@ export const state = {
   baterias: [],
   coberturas_combustibles: [],
   datos_generales: [],
-  operadores: []
+  operadores: [],
+  pailas: []
 }
 
 // mutations

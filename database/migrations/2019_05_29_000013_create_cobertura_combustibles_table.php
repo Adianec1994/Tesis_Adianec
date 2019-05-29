@@ -32,7 +32,7 @@ class CreateCoberturaCombustiblesTable extends Migration
             $table->double('capacTotalAlmac')->nullable();
             $table->double('capacVacio')->nullable();
             $table->double('existTotalDiaAnterior')->nullable();
-            $table->integer('central_electricas_id')->unsigned();
+            $table->unsignedInteger('central_electricas_id');
             $table->softDeletes();
             $table->timestamps();
 

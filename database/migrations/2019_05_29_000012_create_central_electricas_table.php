@@ -25,7 +25,7 @@ class CreateCentralElectricasTable extends Migration
             $table->increments('id');
             $table->string('nombre', 45)->nullable();
             $table->double('potInstalada')->nullable();
-            $table->integer('entidads_id')->unsigned();
+            $table->unsignedInteger('entidads_id');
             $table->softDeletes();
             $table->timestamps();
 

@@ -28,14 +28,20 @@ class CreatePailasTable extends Migration
             $table->double('combustibleFactura')->nullable();
             $table->double('combustibleMedicion')->nullable();
             $table->text('acciones')->nullable();
-            $table->integer('central_electricas_id')->unsigned();
-            $table->integer('operadors_id')->unsigned();
+            $table->unsignedInteger('central_electricas_id');
+            $table->unsignedInteger('operadors_id');
+            $table->unsignedInteger('chofer_id');
+            $table->unsignedInteger('acompanante_id');
             $table->softDeletes();
             $table->timestamps();
 
             $table->index(["operadors_id"], 'fk_pailas_operadors1_idx');
 
+            $table->index(["chofer_id"], 'fk_pailas_chofer1_idx');
+
             $table->index(["central_electricas_id"], 'fk_pailas_central_electricas1_idx');
+
+            $table->index(["acompanante_id"], 'fk_pailas_acompanante1_idx');
 
 
             $table->foreign('central_electricas_id', 'fk_pailas_central_electricas1_idx')
@@ -44,6 +50,16 @@ class CreatePailasTable extends Migration
                 ->onUpdate('no action');
 
             $table->foreign('operadors_id', 'fk_pailas_operadors1_idx')
+                ->references('id')->on('operadors')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
+            $table->foreign('chofer_id', 'fk_pailas_chofer1_idx')
+                ->references('id')->on('operadors')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
+            $table->foreign('acompanante_id', 'fk_pailas_acompanante1_idx')
                 ->references('id')->on('operadors')
                 ->onDelete('no action')
                 ->onUpdate('no action');
