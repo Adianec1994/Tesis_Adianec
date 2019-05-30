@@ -47,7 +47,9 @@ export default {
         { title: 'Coberturas combustibles', icon: 'account_box', route: { name: 'coberturas_combustibles' }},
         { title: 'Datos generales', icon: 'account_box', route: { name: 'datos_generales' }},
         { title: 'Operadores', icon: 'account_box', route: { name: 'operadores' }},
-        { title: 'Pailas', icon: 'account_box', route: { name: 'pailas' }}
+        { title: 'Pailas', icon: 'account_box', route: { name: 'pailas' }},
+        { title: 'Grupos', icon: 'account_box', route: { name: 'grupos' }},
+        { title: 'Eventos Diarios', icon: 'account_box', route: { name: 'eventos_diarios' }}
       ]
     }
   }

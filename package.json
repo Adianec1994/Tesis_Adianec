@@ -12,8 +12,11 @@
     "lint": "standard --plugin html resources/assets/js/**/* --fix"
   },
   "dependencies": {
+    "@enrian/vue-pikaday": "^1.0.3",
     "axios": "^0.17.1",
     "js-cookie": "^2.2.0",
+    "moment": "^2.24.0",
+    "pikaday": "^1.8.0",
     "vee-validate": "^2.0.9",
     "vform": "^1.0.0",
     "vue": "^2.5.18",

@@ -35,7 +35,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         'coberturas_combustibles' => 'API\CoberturaCombustibleAPIController',
         'datos_generales' => 'API\DatosGeneralesAPIController',
         'operadores' => 'API\OperadorAPIController',
-        'pailas' => 'API\PailasAPIController'
+        'pailas' => 'API\PailasAPIController',
+        'grupos' => 'API\GruposAPIController',
+        'eventos_diarios' => 'API\EventoDiarioAPIController'
     ]);
 });
 
@@ -46,3 +48,6 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 });
+
+
+Route::resource('mantenedor_externos', 'MantenedorExternoAPIController');

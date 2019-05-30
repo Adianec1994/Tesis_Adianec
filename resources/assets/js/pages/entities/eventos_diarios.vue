@@ -67,9 +67,23 @@
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ centralesElectricasName(props.item.central_electricas_id) }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.numero }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.potInstalada }}</td>
+        <td>{{ centralesElectricasName(props.item.grupo_id) }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.grupo_id }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.grupo_id }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.estado }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.fechaEvento }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.fechaPosibleSolucion }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.fechaReporte }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.fechaDiagnostico }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.horas }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.sistema }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.subSistema }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.parte }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.fallo }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.diagnosticoPreliminar }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.diagnostico }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.responsable }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.insertadoPor }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -93,7 +107,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{`¿Seguro que desea eliminar la batería ${props.item.numero}?`}}</v-card-text>
+            <v-card-text>{{`¿Seguro que desea eliminar la entrada?`}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -126,15 +140,29 @@ export default {
     editedItem: {},
     editedIndex: -1,
     isNewModel: false,
-    moduleName: 'Baterías',
+    moduleName: 'Eventos diarios',
     headers: [
-      { text: 'Central Eléctrica', value: 'central_electricas_id' },
-      { text: 'Número', value: 'numero', align: 'center' },
-      { text: 'Potencia instalada', value: 'potInstalada', align: 'center' },
+      { text: 'Central Eléctrica', value: '' },
+      { text: 'Batería', value: '' },
+      { text: 'Grupo', value: 'grupo_id' },
+      { text: 'Estado', value: 'estado' },
+      { text: 'Fecha del evento', value: 'fechaEvento' },
+      { text: 'Fecha posible solución', value: 'fechaPosibleSolucion' },
+      { text: 'Fecha del reporte', value: 'fechaReporte' },
+      { text: 'Fecha del diagnóstico', value: 'fechaDiagnostico' },
+      { text: 'Horas', value: 'horas' },
+      { text: 'Sistema', value: 'sistema' },
+      { text: 'Subsistema', value: 'subSistema' },
+      { text: 'Parte', value: 'parte' },
+      { text: 'Fallo', value: 'fallo' },
+      { text: 'Diagnóstico preliminar', value: 'diagnosticoPreliminar' },
+      { text: 'Diagnóstico', value: 'diagnostico' },
+      { text: 'Responsable', value: 'responsable' },
+      { text: 'Insertado por', value: 'insertadoPor' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     items: [],
-    centrales_electricas: [],
+    entidades: [],
     options: {
       validateAfterChanged: true,
       validateAfterLoad: true
@@ -153,16 +181,120 @@ export default {
           }
         },
         {
+          type: 'select',
+          label: 'Batería',
+          model: 'central_electricas_id',
+          values: [],
+          selectOptions: {
+            noneSelectedText: 'Seleccione una central eléctrica',
+            name: 'nombre',
+            value: 'id'
+          }
+        },
+        {
+          type: 'select',
+          label: 'Grupo',
+          model: 'central_electricas_id',
+          values: [],
+          selectOptions: {
+            noneSelectedText: 'Seleccione una central eléctrica',
+            name: 'nombre',
+            value: 'id'
+          }
+        },
+        {
+          type: 'select',
+          label: 'Estado',
+          model: 'estado',
+          values: ['Mantenimiento', 'Avería', 'Asimilación'],
+          selectOptions: {
+            noneSelectedText: 'Seleccione un estado'
+          }
+        },
+        {
           type: 'input',
-          inputType: 'number',
-          label: 'Número',
-          model: 'numero'
+          inputType: 'date',
+          label: 'Fecha del evento',
+          model: 'fechaEvento'
+        },
+        {
+          type: 'input',
+          inputType: 'date',
+          label: 'Fecha posible solución',
+          model: 'fechaPosibleSolucion'
+        },
+        {
+          type: 'input',
+          inputType: 'date',
+          label: 'Fecha del reporte',
+          model: 'fechaReporte'
+        },
+        {
+          type: 'input',
+          inputType: 'date',
+          label: 'Fecha del diagnóstico',
+          model: 'fechaDiagnostico'
         },
         {
           type: 'input',
           inputType: 'number',
-          label: 'Potencia instalada',
-          model: 'potInstalada'
+          label: 'Horas de trabajo',
+          model: 'horas'
+        },
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Sistema',
+          model: 'sistema'
+        },
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Subsistema',
+          model: 'subSistema'
+        },
+        {
+          type: 'textArea',
+          label: 'Parte',
+          model: 'parte',
+          placeholder: 'Parte diario...',
+          rows: 3
+        },
+        {
+          type: 'textArea',
+          label: 'Fallo',
+          model: 'fallo',
+          placeholder: 'Descripción del fallo...',
+          rows: 3
+        },
+        {
+          type: 'textArea',
+          label: 'Diagnóstico preliminar',
+          model: 'diagnosticoPreliminar',
+          rows: 3
+        },
+        {
+          type: 'textArea',
+          label: 'Diagnóstico',
+          model: 'diagnostico',
+          rows: 3
+        },
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Responsable',
+          model: 'responsable'
+        },
+        {
+          type: 'input',
+          inputType: 'number',
+          label: 'Índice de consumo',
+          model: 'indiceConsumo'
+        },
+        {
+          type: 'label',
+          label: 'Insertado por',
+          model: 'insertadoPor'
         }
       ]
     }
@@ -173,7 +305,7 @@ export default {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
     },
     lowerModuleName () {
-      return this.moduleName.toLowerCase().replace('í', 'i')
+      return this.moduleName.split(' ').join('_').toLowerCase()
     }
 
   },

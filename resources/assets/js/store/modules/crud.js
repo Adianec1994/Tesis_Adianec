@@ -13,7 +13,9 @@ export const state = {
   coberturas_combustibles: [],
   datos_generales: [],
   operadores: [],
-  pailas: []
+  pailas: [],
+  grupos: [],
+  eventos_diarios: []
 }
 
 // mutations

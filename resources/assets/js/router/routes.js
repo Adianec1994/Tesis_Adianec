@@ -25,7 +25,9 @@ export default ({ authGuard, guestGuard }) => [
     { path: '/centrales_electricas', name: 'centrales_electricas', component: require('~/pages/entities/centrales_electricas.vue') },
     { path: '/baterias', name: 'baterias', component: require('~/pages/entities/baterias.vue') },
     { path: '/coberturas_combustibles', name: 'coberturas_combustibles', component: require('~/pages/entities/coberturas_combustibles.vue') },
-    { path: '/datos_generales', name: 'datos_generales', component: require('~/pages/entities/datos_generales.vue') }
+    { path: '/datos_generales', name: 'datos_generales', component: require('~/pages/entities/datos_generales.vue') },
+    { path: '/grupos', name: 'grupos', component: require('~/pages/entities/grupos.vue') },
+    { path: '/eventos_diarios', name: 'eventos_diarios', component: require('~/pages/entities/eventos_diarios.vue') }
   ]),
 
   // Guest routes.
