@@ -68,8 +68,8 @@
     >
       <template v-slot:items="props">
         <td>{{ centralElectricaName(props.item.baterias_id) }}</td>
-        <td>{{ bateriasName(props.item.baterias_id) }}</td>
-        <td>{{ proveedoresName(props.item.proveedors_id) }}</td>
+        <td class="text-xs-center justify-center">{{ bateriasName(props.item.baterias_id) }}</td>
+        <td class="text-xs-center justify-center">{{ proveedoresName(props.item.proveedors_id) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.numero }}</td>
         <td class="text-xs-center justify-center">{{ props.item.potInstalada }}</td>
         <td class="text-xs-center justify-center">
@@ -131,13 +131,14 @@ export default {
     moduleName: 'Grupos',
     headers: [
       { text: 'Central Eléctrica' },
-      { text: 'Batería', value: 'baterias_id' },
-      { text: 'Proveedor', value: 'proveedors_id' },
+      { text: 'Batería', value: 'baterias_id', align: 'center' },
+      { text: 'Proveedor', value: 'proveedors_id', align: 'center' },
       { text: 'Número', value: 'numero', align: 'center' },
       { text: 'Potencia instalada', value: 'potInstalada', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     items: [],
+    centralesElectricas: [],
     baterias: [],
     proveedores: [],
     options: {
@@ -148,13 +149,32 @@ export default {
       fields: [
         {
           type: 'select',
-          label: 'Batería',
-          model: 'baterias_id',
+          label: 'Central Eléctrica',
+          model: 'central_electrica_id',
+          id: 'central',
           values: [],
           selectOptions: {
-            noneSelectedText: 'Seleccione una batería',
+            hideNoneSelectedText: true,
+            name: 'nombre',
+            value: 'id'
+          },
+          visible: function () {
+            return this.isNewModel
+          }
+        },
+        {
+          type: 'select',
+          label: 'Batería',
+          model: 'baterias_id',
+          id: 'baterias',
+          values: [],
+          selectOptions: {
+            hideNoneSelectedText: true,
             name: 'numero',
             value: 'id'
+          },
+          visible: function () {
+            return this.isNewModel
           }
         },
         {
@@ -163,7 +183,7 @@ export default {
           model: 'proveedors_id',
           values: [],
           selectOptions: {
-            noneSelectedText: 'Seleccione un proveedor',
+            hideNoneSelectedText: true,
             name: 'marca',
             value: 'id'
           }
@@ -201,13 +221,15 @@ export default {
   },
 
   mounted () {
+    this.centralesElectricas = this.$store.getters.get('centrales_electricas')
     this.baterias = this.$store.getters.get('baterias')
     this.proveedores = this.$store.getters.get('proveedores')
     this.items = this.$store.getters.get(this.lowerModuleName)
+    const promises = []
 
-    if (this.baterias.length === 0) {
-      this.$store.dispatch('GET', 'baterias').then((result) => {
-        this.centrales_electricas = this.$store.getters.get('baterias')
+    if (this.centralesElectricas.length === 0) {
+      promises.push(this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
+        this.centralesElectricas = this.$store.getters.get('centrales_electricas')
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
@@ -218,11 +240,28 @@ export default {
           text: err
         })
       })
+      )
+    }
+
+    if (this.baterias.length === 0) {
+      promises.push(this.$store.dispatch('GET', 'baterias').then((result) => {
+        this.baterias = this.$store.getters.get('baterias')
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+      )
     }
 
     if (this.proveedores.length === 0) {
-      this.$store.dispatch('GET', 'proveedores').then((result) => {
-        this.centrales_electricas = this.$store.getters.get('proveedores')
+      promises.push(this.$store.dispatch('GET', 'proveedores').then((result) => {
+        this.proveedores = this.$store.getters.get('proveedores')
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
@@ -233,10 +272,11 @@ export default {
           text: err
         })
       })
+      )
     }
 
     if (this.items.length === 0) {
-      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+      promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
         this.items = this.$store.getters.get(this.lowerModuleName)
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
@@ -248,13 +288,16 @@ export default {
           text: err
         })
       })
+      )
     }
 
-    var bateriasField = this.$data.schema.fields.find(field => field.model === 'baterias_id')
-    bateriasField.values = this.baterias
+    Promise.all(promises).then(values => {
+      var centralesField = this.$data.schema.fields.find(field => field.model === 'central_electrica_id')
+      centralesField.values = this.centralesElectricas
 
-    var proveedoresField = this.$data.schema.fields.find(field => field.model === 'proveedors_id')
-    proveedoresField.values = this.proveedores
+      var proveedoresField = this.$data.schema.fields.find(field => field.model === 'proveedors_id')
+      proveedoresField.values = this.proveedores
+    })
   },
 
   methods: {
@@ -266,6 +309,9 @@ export default {
 
     updateItem (newVal, property) {
       // this.formIsValid()
+      if (property === 'central_electrica_id') {
+        return this.listadoBaterias(newVal)
+      }
       this.editedItem[property] = newVal
     },
 
@@ -276,6 +322,9 @@ export default {
       } else {
         response = this.$store.dispatch('EDIT', { payload: this.editedItem, moduleName: this.lowerModuleName })
       }
+
+      this.updateCentrales()
+      this.cleanSelectBaterias()
 
       response.then(result => {
         this.$store.dispatch('responseMessage', {
@@ -293,6 +342,7 @@ export default {
 
     deleteItem (item) {
       this.$store.dispatch('DESTROY', { payload: item, moduleName: this.lowerModuleName }).then((result) => {
+        this.updateCentrales()
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
@@ -312,10 +362,12 @@ export default {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
+      // this.cleanSelectBaterias()
     },
 
     bateriasName (id) {
       const bateria = this.baterias.find(b => b.id === id)
+
       return bateria.numero
     },
 
@@ -328,6 +380,39 @@ export default {
     proveedoresName (id) {
       const proveedor = this.proveedores.find(p => p.id === id)
       return proveedor.marca
+    },
+
+    updateCentrales () {
+      this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
+        this.centrales_electricas = this.$store.getters.get('centrales_electricas')
+      })
+    },
+
+    listadoBaterias (idCentral) {
+      this.cleanSelectBaterias()
+
+      const selectBaterias = document.getElementById('baterias')
+
+      const central = this.centralesElectricas.find(ce => ce.id === idCentral)
+
+      central.baterias.forEach(b => {
+        const opt = document.createElement('option')
+        // opt.setAttribute('name', 'bateriaOpt')
+        opt.text = b.numero
+        opt.value = b.id
+        selectBaterias.appendChild(opt)
+      })
+    },
+
+    cleanSelectBaterias () {
+      const selectBaterias = document.getElementById('baterias')
+
+      selectBaterias.options.length = 0
+
+      // const opt = document.createElement('option')
+      // opt.text = 'Seleccione una batería'
+      // selectBaterias.appendChild(opt)
+      // selectBaterias.selectedIndex = '1'
     }
   }
 }

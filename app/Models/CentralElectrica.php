@@ -14,9 +14,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Database\Eloquent\Collection baterias
  * @property \Illuminate\Database\Eloquent\Collection coberturaCombustibles
  * @property \Illuminate\Database\Eloquent\Collection datosGenerales
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection pailas
  * @property string nombre
  * @property float potInstalada
@@ -27,7 +27,7 @@ class CentralElectrica extends Model
     use SoftDeletes;
 
     public $table = 'central_electricas';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -75,7 +75,7 @@ class CentralElectrica extends Model
      **/
     public function baterias()
     {
-        return $this->hasMany(\App\Models\Bateria::class);
+        return $this->hasMany(\App\Models\Baterias::class, 'central_electricas_id');
     }
 
     /**
@@ -91,7 +91,7 @@ class CentralElectrica extends Model
      **/
     public function datosGenerales()
     {
-        return $this->hasMany(\App\Models\DatosGenerale::class);
+        return $this->hasMany(\App\Models\DatosGenerales::class);
     }
 
     /**
@@ -99,6 +99,6 @@ class CentralElectrica extends Model
      **/
     public function pailas()
     {
-        return $this->hasMany(\App\Models\Paila::class);
+        return $this->hasMany(\App\Models\Pailas::class);
     }
 }

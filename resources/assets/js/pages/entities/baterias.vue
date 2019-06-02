@@ -242,6 +242,8 @@ export default {
         response = this.$store.dispatch('EDIT', { payload: this.editedItem, moduleName: this.lowerModuleName })
       }
 
+      this.updateCentrales()
+
       response.then(result => {
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
@@ -258,6 +260,7 @@ export default {
 
     deleteItem (item) {
       this.$store.dispatch('DESTROY', { payload: item, moduleName: this.lowerModuleName }).then((result) => {
+        this.updateCentrales()
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
@@ -282,6 +285,12 @@ export default {
     centralesElectricasName (id) {
       const centralElectrica = this.centrales_electricas.find(ce => ce.id === id)
       return centralElectrica.nombre
+    },
+
+    updateCentrales () {
+      this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
+        this.centrales_electricas = this.$store.getters.get('centrales_electricas')
+      })
     }
   }
 }

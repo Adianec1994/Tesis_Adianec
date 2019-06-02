@@ -38,9 +38,10 @@ class CentralElectricaAPIController extends AppBaseController
     {
         $this->centralElectricaRepository->pushCriteria(new RequestCriteria($request));
         $this->centralElectricaRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $centralElectricas = $this->centralElectricaRepository->all();
+        // $centralElectricas = $this->centralElectricaRepository->all();
 
-        return $this->sendResponse($centralElectricas->toArray(), 'Central Electricas retrieved successfully');
+        $centralElectricas = CentralElectrica::with('Baterias.Grupos')->get();
+        return $this->sendResponse($centralElectricas, 'Central Electricas retrieved successfully');
     }
 
     /**
@@ -56,6 +57,7 @@ class CentralElectricaAPIController extends AppBaseController
         $input = $request->all();
 
         $centralElectrica = $this->centralElectricaRepository->create($input);
+        $centralElectrica->baterias = CentralElectrica::where('id',$centralElectrica.id)->baterias;
 
         return $this->sendResponse($centralElectrica->toArray(), 'Central Electrica saved successfully');
     }

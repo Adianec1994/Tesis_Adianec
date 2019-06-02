@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property \App\Models\CentralElectrica centralElectricas
  * @property \Illuminate\Database\Eloquent\Collection grupos
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property integer numero
  * @property float potInstalada
  * @property integer central_electricas_id
@@ -24,7 +24,7 @@ class Baterias extends Model
     use SoftDeletes;
 
     public $table = 'baterias';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -72,6 +72,6 @@ class Baterias extends Model
      **/
     public function grupos()
     {
-        return $this->hasMany(\App\Models\Grupo::class);
+        return $this->hasMany(\App\Models\Grupos::class);
     }
 }
