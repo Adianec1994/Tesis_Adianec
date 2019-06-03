@@ -24,11 +24,11 @@ class CreateEventosDiariosTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('estado', 45)->nullable();
-            $table->dateTime('fechaEvento')->nullable();
-            $table->dateTime('fechaPosibleSolucion')->nullable();
-            $table->dateTime('fechaReporte')->nullable();
-            $table->dateTime('fechaDiagnostico')->nullable();
-            $table->dateTime('fechaSolucion')->nullable();
+            $table->date('fechaEvento')->nullable();
+            $table->date('fechaPosibleSolucion')->nullable();
+            $table->date('fechaReporte')->nullable();
+            $table->date('fechaDiagnostico')->nullable();
+            $table->date('fechaSolucion')->nullable();
             $table->integer('horas')->nullable();
             $table->text('sistema')->nullable();
             $table->text('subSistema')->nullable();

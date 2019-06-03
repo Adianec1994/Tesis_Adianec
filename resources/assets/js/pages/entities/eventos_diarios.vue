@@ -67,14 +67,14 @@
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ centralesElectricasName(props.item.grupo_id) }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.grupo_id }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.grupo_id }}</td>
+        <td>{{ centralesElectricasName(props.item.grupos_id) }}</td>
+        <td class="text-xs-center justify-center">{{ bateriasName(props.item.grupos_id) }}</td>
+        <td class="text-xs-center justify-center">{{ gruposName(props.item.grupos_id) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.estado }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.fechaEvento }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.fechaPosibleSolucion }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.fechaReporte }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.fechaDiagnostico }}</td>
+        <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaEvento) }}</td>
+        <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaPosibleSolucion) }}</td>
+        <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaReporte) }}</td>
+        <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaDiagnostico) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.horas }}</td>
         <td class="text-xs-center justify-center">{{ props.item.sistema }}</td>
         <td class="text-xs-center justify-center">{{ props.item.subSistema }}</td>
@@ -143,26 +143,28 @@ export default {
     moduleName: 'Eventos diarios',
     headers: [
       { text: 'Central Eléctrica', value: '' },
-      { text: 'Batería', value: '' },
-      { text: 'Grupo', value: 'grupo_id' },
-      { text: 'Estado', value: 'estado' },
-      { text: 'Fecha del evento', value: 'fechaEvento' },
-      { text: 'Fecha posible solución', value: 'fechaPosibleSolucion' },
-      { text: 'Fecha del reporte', value: 'fechaReporte' },
-      { text: 'Fecha del diagnóstico', value: 'fechaDiagnostico' },
-      { text: 'Horas', value: 'horas' },
-      { text: 'Sistema', value: 'sistema' },
-      { text: 'Subsistema', value: 'subSistema' },
-      { text: 'Parte', value: 'parte' },
-      { text: 'Fallo', value: 'fallo' },
-      { text: 'Diagnóstico preliminar', value: 'diagnosticoPreliminar' },
-      { text: 'Diagnóstico', value: 'diagnostico' },
-      { text: 'Responsable', value: 'responsable' },
-      { text: 'Insertado por', value: 'insertadoPor' },
+      { text: 'Batería', value: '', align: 'center' },
+      { text: 'Grupo', value: 'grupo_id', align: 'center' },
+      { text: 'Estado', value: 'estado', align: 'center' },
+      { text: 'Fecha del evento', value: 'fechaEvento', align: 'center' },
+      { text: 'Fecha posible solución', value: 'fechaPosibleSolucion', align: 'center' },
+      { text: 'Fecha del reporte', value: 'fechaReporte', align: 'center' },
+      { text: 'Fecha del diagnóstico', value: 'fechaDiagnostico', align: 'center' },
+      { text: 'Horas', value: 'horas', align: 'center' },
+      { text: 'Sistema', value: 'sistema', align: 'center' },
+      { text: 'Subsistema', value: 'subSistema', align: 'center' },
+      { text: 'Parte', value: 'parte', align: 'center' },
+      { text: 'Fallo', value: 'fallo', align: 'center' },
+      { text: 'Diagnóstico preliminar', value: 'diagnosticoPreliminar', align: 'center' },
+      { text: 'Diagnóstico', value: 'diagnostico', align: 'center' },
+      { text: 'Responsable', value: 'responsable', align: 'center' },
+      { text: 'Insertado por', value: 'insertadoPor', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     items: [],
-    entidades: [],
+    centralesElectricas: [],
+    baterias: [],
+    grupos: [],
     options: {
       validateAfterChanged: true,
       validateAfterLoad: true
@@ -173,33 +175,45 @@ export default {
           type: 'select',
           label: 'Central Eléctrica',
           model: 'central_electricas_id',
+          id: 'central',
           values: [],
           selectOptions: {
-            noneSelectedText: 'Seleccione una central eléctrica',
+            hideNoneSelectedText: true,
             name: 'nombre',
             value: 'id'
+          },
+          visible: function () {
+            return this.isNewModel
           }
         },
         {
           type: 'select',
           label: 'Batería',
-          model: 'central_electricas_id',
+          model: 'baterias_id',
+          id: 'baterias',
           values: [],
           selectOptions: {
-            noneSelectedText: 'Seleccione una central eléctrica',
-            name: 'nombre',
+            hideNoneSelectedText: true,
+            name: 'numero',
             value: 'id'
+          },
+          visible: function () {
+            return this.isNewModel
           }
         },
         {
           type: 'select',
           label: 'Grupo',
-          model: 'central_electricas_id',
+          model: 'grupos_id',
+          id: 'grupos',
           values: [],
           selectOptions: {
-            noneSelectedText: 'Seleccione una central eléctrica',
-            name: 'nombre',
+            hideNoneSelectedText: true,
+            name: 'numero',
             value: 'id'
+          },
+          visible: function () {
+            return this.isNewModel
           }
         },
         {
@@ -208,32 +222,50 @@ export default {
           model: 'estado',
           values: ['Mantenimiento', 'Avería', 'Asimilación'],
           selectOptions: {
-            noneSelectedText: 'Seleccione un estado'
+            hideNoneSelectedText: true
           }
         },
         {
           type: 'input',
           inputType: 'date',
           label: 'Fecha del evento',
-          model: 'fechaEvento'
+          model: 'fechaEvento',
+          format: 'YYYY-MM-DD',
+          visible: function () {
+            return this.isNewModel
+          }
+        },
+        {
+          type: 'label',
+          label: 'Fecha del evento',
+          model: 'fechaEvento',
+          visible: function () {
+            return !this.isNewModel
+          },
+          get: function (model) {
+            return new Date(model.fechaEvento).toLocaleDateString()
+          }
         },
         {
           type: 'input',
           inputType: 'date',
           label: 'Fecha posible solución',
-          model: 'fechaPosibleSolucion'
+          model: 'fechaPosibleSolucion',
+          format: 'YYYY-MM-DD'
         },
         {
           type: 'input',
           inputType: 'date',
           label: 'Fecha del reporte',
-          model: 'fechaReporte'
+          model: 'fechaReporte',
+          format: 'YYYY-MM-DD'
         },
         {
           type: 'input',
           inputType: 'date',
           label: 'Fecha del diagnóstico',
-          model: 'fechaDiagnostico'
+          model: 'fechaDiagnostico',
+          format: 'YYYY-MM-DD'
         },
         {
           type: 'input',
@@ -317,12 +349,15 @@ export default {
   },
 
   mounted () {
-    this.centrales_electricas = this.$store.getters.get('centrales_electricas')
+    this.centralesElectricas = this.$store.getters.get('centrales_electricas')
+    this.baterias = this.$store.getters.get('baterias')
+    this.grupos = this.$store.getters.get('grupos')
     this.items = this.$store.getters.get(this.lowerModuleName)
+    const promises = []
 
-    if (this.centrales_electricas.length === 0) {
-      this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
-        this.centrales_electricas = this.$store.getters.get('centrales_electricas')
+    if (this.centralesElectricas.length === 0) {
+      promises.push(this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
+        this.centralesElectricas = this.$store.getters.get('centrales_electricas')
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
@@ -333,10 +368,43 @@ export default {
           text: err
         })
       })
+      )
+    }
+
+    if (this.baterias.length === 0) {
+      promises.push(this.$store.dispatch('GET', 'baterias').then((result) => {
+        this.baterias = this.$store.getters.get('baterias')
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+      )
+    }
+
+    if (this.grupos.length === 0) {
+      promises.push(this.$store.dispatch('GET', 'grupos').then((result) => {
+        this.grupos = this.$store.getters.get('grupos')
+        this.$store.dispatch('responseMessage', {
+          type: result.success ? 'success' : 'error',
+          text: result.message
+        })
+      }).catch((err) => {
+        this.$store.dispatch('responseMessage', {
+          type: 'error',
+          text: err
+        })
+      })
+      )
     }
 
     if (this.items.length === 0) {
-      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+      promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
         this.items = this.$store.getters.get(this.lowerModuleName)
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
@@ -348,10 +416,13 @@ export default {
           text: err
         })
       })
+      )
     }
 
-    var field = this.$data.schema.fields.find(field => field.model === 'central_electricas_id')
-    field.values = this.centrales_electricas
+    Promise.all(promises).then(values => {
+      var field = this.$data.schema.fields.find(field => field.model === 'central_electricas_id')
+      field.values = this.centralesElectricas
+    })
   },
 
   methods: {
@@ -363,6 +434,12 @@ export default {
 
     updateItem (newVal, property) {
       // this.formIsValid()
+      if (property === 'central_electricas_id') {
+        return this.listadoBaterias(newVal)
+      } else
+        if (property === 'baterias_id') {
+          return this.listadoGrupos(newVal)
+        }
       this.editedItem[property] = newVal
     },
 
@@ -373,6 +450,9 @@ export default {
       } else {
         response = this.$store.dispatch('EDIT', { payload: this.editedItem, moduleName: this.lowerModuleName })
       }
+
+      this.cleanSelectBaterias()
+      this.cleanSelectGrupos()
 
       response.then(result => {
         this.$store.dispatch('responseMessage', {
@@ -409,11 +489,74 @@ export default {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
+      this.cleanSelectBaterias()
+      this.cleanSelectGrupos()
+    },
+
+    gruposName (id) {
+      const grupo = this.grupos.find(g => g.id === id)
+      return grupo.numero
+    },
+
+    bateriasName (id) {
+      const grupos = this.grupos.find(g => g.id === id)
+      const bateria = this.baterias.find(b => b.id === grupos.baterias_id)
+      return bateria.numero
     },
 
     centralesElectricasName (id) {
-      const centralElectrica = this.centrales_electricas.find(ce => ce.id === id)
+      const grupos = this.grupos.find(g => g.id === id)
+      const bateria = this.baterias.find(b => b.id === grupos.baterias_id)
+      const centralElectrica = this.centralesElectricas.find(ce => ce.id === bateria.central_electricas_id)
       return centralElectrica.nombre
+    },
+
+    formatDate (date) {
+      if (date) {
+        return date.split(' ')[0]
+      }
+    },
+
+    cleanSelectBaterias () {
+      document.getElementById('baterias').options.length = 0
+    },
+
+    cleanSelectGrupos () {
+      document.getElementById('grupos').options.length = 0
+    },
+
+    listadoBaterias (idCentral) {
+      this.cleanSelectBaterias()
+
+      const selectBaterias = document.getElementById('baterias')
+
+      const central = this.centralesElectricas.find(ce => ce.id === idCentral)
+
+      central.baterias.forEach(b => {
+        const opt = document.createElement('option')
+        // opt.setAttribute('name', 'bateriaOpt')
+        opt.text = b.numero
+        opt.value = b.id
+        selectBaterias.appendChild(opt)
+      })
+    },
+
+    listadoGrupos (idBateria) {
+      this.cleanSelectGrupos()
+
+      const selectGrupos = document.getElementById('grupos')
+
+      let bateria = this.baterias.find(b => b.id === idBateria)
+
+      bateria = this.centralesElectricas.find(ce => ce.id === bateria.central_electricas_id).baterias.find(b => b.id === bateria.id)
+
+      bateria.grupos.forEach(b => {
+        const opt = document.createElement('option')
+        // opt.setAttribute('name', 'bateriaOpt')
+        opt.text = b.numero
+        opt.value = b.id
+        selectGrupos.appendChild(opt)
+      })
     }
   }
 }

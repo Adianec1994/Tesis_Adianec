@@ -362,7 +362,7 @@ export default {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
-      // this.cleanSelectBaterias()
+      this.cleanSelectBaterias()
     },
 
     bateriasName (id) {
@@ -384,7 +384,7 @@ export default {
 
     updateCentrales () {
       this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
-        this.centrales_electricas = this.$store.getters.get('centrales_electricas')
+        this.centralesElectricas = this.$store.getters.get('centrales_electricas')
       })
     },
 
