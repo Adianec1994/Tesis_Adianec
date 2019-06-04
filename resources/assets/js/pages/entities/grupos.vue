@@ -406,8 +406,7 @@ export default {
 
     cleanSelectBaterias () {
       const selectBaterias = document.getElementById('baterias')
-
-      selectBaterias.options.length = 0
+      selectBaterias ? selectBaterias.options.length = 0 : ''
 
       // const opt = document.createElement('option')
       // opt.text = 'Seleccione una batería'

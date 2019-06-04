@@ -445,6 +445,7 @@ export default {
 
     saveItem () {
       let response
+      this.editedItem.insertadoPor = this.$store.getters.authUser.name
       if (this.editedIndex === -1) {
         response = this.$store.dispatch('SAVE', { payload: this.editedItem, moduleName: this.lowerModuleName })
       } else {
@@ -513,16 +514,19 @@ export default {
 
     formatDate (date) {
       if (date) {
-        return date.split(' ')[0]
+        return new Date(date).toLocaleDateString()
+        // return date.split(' ')[0]
       }
     },
 
     cleanSelectBaterias () {
-      document.getElementById('baterias').options.length = 0
+      const select = document.getElementById('baterias')
+      select ? select.options.length = 0 : ''
     },
 
     cleanSelectGrupos () {
-      document.getElementById('grupos').options.length = 0
+      const select = document.getElementById('grupos')
+      select ? select.options.length = 0 : ''
     },
 
     listadoBaterias (idCentral) {
@@ -546,7 +550,7 @@ export default {
 
       const selectGrupos = document.getElementById('grupos')
 
-      let bateria = this.baterias.find(b => b.id === idBateria)
+      let bateria = this.baterias.find(b => b.id == idBateria) // idBateria es un string
 
       bateria = this.centralesElectricas.find(ce => ce.id === bateria.central_electricas_id).baterias.find(b => b.id === bateria.id)
 
