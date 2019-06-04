@@ -15,7 +15,8 @@ export const state = {
   operadores: [],
   pailas: [],
   grupos: [],
-  eventos_diarios: []
+  eventos_diarios: [],
+  generaciones: []
 }
 
 // mutations

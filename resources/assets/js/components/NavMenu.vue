@@ -49,7 +49,8 @@ export default {
         { title: 'Operadores', icon: 'account_box', route: { name: 'operadores' }},
         { title: 'Pailas', icon: 'account_box', route: { name: 'pailas' }},
         { title: 'Grupos', icon: 'account_box', route: { name: 'grupos' }},
-        { title: 'Eventos Diarios', icon: 'account_box', route: { name: 'eventos_diarios' }}
+        { title: 'Eventos Diarios', icon: 'account_box', route: { name: 'eventos_diarios' }},
+        { title: 'Generaciones', icon: 'account_box', route: { name: 'generaciones' }}
       ]
     }
   }

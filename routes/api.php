@@ -37,7 +37,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         'operadores' => 'API\OperadorAPIController',
         'pailas' => 'API\PailasAPIController',
         'grupos' => 'API\GruposAPIController',
-        'eventos_diarios' => 'API\EventoDiarioAPIController'
+        'eventos_diarios' => 'API\EventoDiarioAPIController',
+        'generaciones' => 'API\GeneracionAPIController',
+        'mantenedores_externos' => 'API\MantenedorExternoAPIController'
     ]);
 });
 
@@ -48,6 +50,3 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 });
-
-
-Route::resource('mantenedor_externos', 'MantenedorExternoAPIController');
