@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ProvinciasTableSeeder extends Seeder
+class ProvinciaTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,5 @@ class ProvinciasTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('provincias')->insert(['nombre'=>'La Habana']);
-    }
+        DB::table('provincias')->insert(['nombre'=>'La Habana']);    }
 }

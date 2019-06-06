@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28b6b9f31da841b79e633686943543dd",
+    "content-hash": "9007b7848d05edf75c11fbaeded9a360",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -49,7 +49,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/doctrine/cache/d768d58baee9a4862ca783840eca1b9add7a7f57",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/d768d58baee9a4862ca783840eca1b9add7a7f57",
                 "reference": "d768d58baee9a4862ca783840eca1b9add7a7f57",
                 "shasum": ""
             },
@@ -123,7 +123,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/doctrine/dbal/22800bd651c1d8d2a9719e2a3dc46d5108ebfcc9",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/22800bd651c1d8d2a9719e2a3dc46d5108ebfcc9",
                 "reference": "22800bd651c1d8d2a9719e2a3dc46d5108ebfcc9",
                 "shasum": ""
             },
@@ -204,7 +204,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/doctrine/event-manager/a520bc093a0170feeb6b14e9d83f3a14452e64b3",
+                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/a520bc093a0170feeb6b14e9d83f3a14452e64b3",
                 "reference": "a520bc093a0170feeb6b14e9d83f3a14452e64b3",
                 "shasum": ""
             },
@@ -398,7 +398,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/dragonmantank/cron-expression/72b6fbf76adb3cf5bc0db68559b33d41219aba27",
+                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/72b6fbf76adb3cf5bc0db68559b33d41219aba27",
                 "reference": "72b6fbf76adb3cf5bc0db68559b33d41219aba27",
                 "shasum": ""
             },
@@ -508,7 +508,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/erusev/parsedown/6d893938171a817f4e9bc9e86f2da1e370b7bcd7",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/6d893938171a817f4e9bc9e86f2da1e370b7bcd7",
                 "reference": "6d893938171a817f4e9bc9e86f2da1e370b7bcd7",
                 "shasum": ""
             },
@@ -790,7 +790,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/InfyOmLabs/laravel-generator/3b52c492e4691b824982145a2ae68b93f6272163",
+                "url": "https://api.github.com/repos/InfyOmLabs/laravel-generator/zipball/3b52c492e4691b824982145a2ae68b93f6272163",
                 "reference": "3b52c492e4691b824982145a2ae68b93f6272163",
                 "shasum": ""
             },
@@ -943,7 +943,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/laracasts/flash/10cd420ab63fd0796bf5e1e5b99f87636d2f4333",
+                "url": "https://api.github.com/repos/laracasts/flash/zipball/10cd420ab63fd0796bf5e1e5b99f87636d2f4333",
                 "reference": "10cd420ab63fd0796bf5e1e5b99f87636d2f4333",
                 "shasum": ""
             },
@@ -996,7 +996,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/laravel/framework/8e69728f1c80a024588adbd24c65c4fcf9aa9192",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8e69728f1c80a024588adbd24c65c4fcf9aa9192",
                 "reference": "8e69728f1c80a024588adbd24c65c4fcf9aa9192",
                 "shasum": ""
             },
@@ -1376,7 +1376,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/thephpleague/flysystem/755ba7bf3fb9031e6581d091db84d78275874396",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/755ba7bf3fb9031e6581d091db84d78275874396",
                 "reference": "755ba7bf3fb9031e6581d091db84d78275874396",
                 "shasum": ""
             },
@@ -1600,7 +1600,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/briannesbitt/Carbon/5be4fdf97076a685b23efdedfc2b73ad0c5eab70",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/5be4fdf97076a685b23efdedfc2b73ad0c5eab70",
                 "reference": "5be4fdf97076a685b23efdedfc2b73ad0c5eab70",
                 "shasum": ""
             },
@@ -1657,7 +1657,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/Nexmo/nexmo-php/f8582d2361382e2b02352b1cb96c69ce2a2c7360",
+                "url": "https://api.github.com/repos/Nexmo/nexmo-php/zipball/f8582d2361382e2b02352b1cb96c69ce2a2c7360",
                 "reference": "f8582d2361382e2b02352b1cb96c69ce2a2c7360",
                 "shasum": ""
             },
@@ -1755,7 +1755,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/opis/closure/09b4389715a7eec100176ea58286649181753508",
+                "url": "https://api.github.com/repos/opis/closure/zipball/09b4389715a7eec100176ea58286649181753508",
                 "reference": "09b4389715a7eec100176ea58286649181753508",
                 "shasum": ""
             },
@@ -2026,7 +2026,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/andersao/l5-repository/f6ebfffee80a38e1d2dcf479e70b1a9ead397c24",
+                "url": "https://api.github.com/repos/andersao/l5-repository/zipball/f6ebfffee80a38e1d2dcf479e70b1a9ead397c24",
                 "reference": "f6ebfffee80a38e1d2dcf479e70b1a9ead397c24",
                 "shasum": ""
             },
@@ -2088,7 +2088,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/andersao/laravel-validator/d9eb401fb3518a890b117e83bd25a4109fcdb704",
+                "url": "https://api.github.com/repos/andersao/laravel-validator/zipball/d9eb401fb3518a890b117e83bd25a4109fcdb704",
                 "reference": "d9eb401fb3518a890b117e83bd25a4109fcdb704",
                 "shasum": ""
             },
@@ -2508,6 +2508,71 @@
             "time": "2018-07-19T23:38:55+00:00"
         },
         {
+            "name": "spatie/laravel-permission",
+            "version": "2.37.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "81dbe9d372d70c255b66a2727a235076509f8d45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/81dbe9d372d70c255b66a2727a235076509f8d45",
+                "reference": "81dbe9d372d70c255b66a2727a235076509f8d45",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/container": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/contracts": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/database": "~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.4.2|~3.5.0|~3.6.0|~3.7.0",
+                "phpunit/phpunit": "^5.7|6.2|^7.0",
+                "predis/predis": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Permission\\PermissionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Permission\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Permission handling for Laravel 5.4 and up",
+            "homepage": "https://github.com/spatie/laravel-permission",
+            "keywords": [
+                "acl",
+                "laravel",
+                "permission",
+                "security",
+                "spatie"
+            ],
+            "time": "2019-04-09T12:45:17+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v6.2.1",
             "source": {
@@ -2517,7 +2582,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/swiftmailer/swiftmailer/5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
                 "reference": "5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
                 "shasum": ""
             },
@@ -2578,7 +2643,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/console/e2840bb38bddad7a0feaf85931e38fdcffdb2f81",
+                "url": "https://api.github.com/repos/symfony/console/zipball/e2840bb38bddad7a0feaf85931e38fdcffdb2f81",
                 "reference": "e2840bb38bddad7a0feaf85931e38fdcffdb2f81",
                 "shasum": ""
             },
@@ -2717,7 +2782,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/css-selector/48eddf66950fa57996e1be4a55916d65c10c604a",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/48eddf66950fa57996e1be4a55916d65c10c604a",
                 "reference": "48eddf66950fa57996e1be4a55916d65c10c604a",
                 "shasum": ""
             },
@@ -2769,7 +2834,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/debug/2d279b6bb1d582dd5740d4d3251ae8c18812ed37",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/2d279b6bb1d582dd5740d4d3251ae8c18812ed37",
                 "reference": "2d279b6bb1d582dd5740d4d3251ae8c18812ed37",
                 "shasum": ""
             },
@@ -2824,7 +2889,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/event-dispatcher/fbce53cd74ac509cbe74b6f227622650ab759b02",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/fbce53cd74ac509cbe74b6f227622650ab759b02",
                 "reference": "fbce53cd74ac509cbe74b6f227622650ab759b02",
                 "shasum": ""
             },
@@ -2887,7 +2952,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/finder/e45135658bd6c14b61850bf131c4f09a55133f69",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/e45135658bd6c14b61850bf131c4f09a55133f69",
                 "reference": "e45135658bd6c14b61850bf131c4f09a55133f69",
                 "shasum": ""
             },
@@ -2935,7 +3000,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/http-foundation/1ea878bd3af18f934dedb8c0de60656a9a31a718",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/1ea878bd3af18f934dedb8c0de60656a9a31a718",
                 "reference": "1ea878bd3af18f934dedb8c0de60656a9a31a718",
                 "shasum": ""
             },
@@ -2988,7 +3053,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/http-kernel/a7713bc522f1a1cdf0b39f809fa4542523fc3114",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/a7713bc522f1a1cdf0b39f809fa4542523fc3114",
                 "reference": "a7713bc522f1a1cdf0b39f809fa4542523fc3114",
                 "shasum": ""
             },
@@ -3076,7 +3141,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/polyfill-ctype/82ebae02209c21113908c229e9883c419720738a",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
                 "reference": "82ebae02209c21113908c229e9883c419720738a",
                 "shasum": ""
             },
@@ -3133,7 +3198,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/polyfill-iconv/f037ea22acfaee983e271dd9c3b8bb4150bd8ad7",
+                "url": "https://api.github.com/repos/symfony/polyfill-iconv/zipball/f037ea22acfaee983e271dd9c3b8bb4150bd8ad7",
                 "reference": "f037ea22acfaee983e271dd9c3b8bb4150bd8ad7",
                 "shasum": ""
             },
@@ -3191,7 +3256,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/polyfill-intl-idn/c766e95bec706cdd89903b1eda8afab7d7a6b7af",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/c766e95bec706cdd89903b1eda8afab7d7a6b7af",
                 "reference": "c766e95bec706cdd89903b1eda8afab7d7a6b7af",
                 "shasum": ""
             },
@@ -3252,7 +3317,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/polyfill-mbstring/fe5e94c604826c35a32fa832f35bd036b6799609",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fe5e94c604826c35a32fa832f35bd036b6799609",
                 "reference": "fe5e94c604826c35a32fa832f35bd036b6799609",
                 "shasum": ""
             },
@@ -3310,7 +3375,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/polyfill-php56/f4dddbc5c3471e1b700a147a20ae17cdb72dbe42",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/f4dddbc5c3471e1b700a147a20ae17cdb72dbe42",
                 "reference": "f4dddbc5c3471e1b700a147a20ae17cdb72dbe42",
                 "shasum": ""
             },
@@ -3365,7 +3430,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/polyfill-php72/ab50dcf166d5f577978419edd37aa2bb8eabce0c",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/ab50dcf166d5f577978419edd37aa2bb8eabce0c",
                 "reference": "ab50dcf166d5f577978419edd37aa2bb8eabce0c",
                 "shasum": ""
             },
@@ -3419,7 +3484,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/polyfill-util/b46c6cae28a3106735323f00a0c38eccf2328897",
+                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/b46c6cae28a3106735323f00a0c38eccf2328897",
                 "reference": "b46c6cae28a3106735323f00a0c38eccf2328897",
                 "shasum": ""
             },
@@ -3470,7 +3535,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/process/8cf39fb4ccff793340c258ee7760fd40bfe745fe",
+                "url": "https://api.github.com/repos/symfony/process/zipball/8cf39fb4ccff793340c258ee7760fd40bfe745fe",
                 "reference": "8cf39fb4ccff793340c258ee7760fd40bfe745fe",
                 "shasum": ""
             },
@@ -3518,7 +3583,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/routing/f4e43bb0dff56f0f62fa056c82d7eadcdb391bab",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/f4e43bb0dff56f0f62fa056c82d7eadcdb391bab",
                 "reference": "f4e43bb0dff56f0f62fa056c82d7eadcdb391bab",
                 "shasum": ""
             },
@@ -3593,7 +3658,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/translation/181a426dd129cb496f12d7e7555f6d0b37a7615b",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/181a426dd129cb496f12d7e7555f6d0b37a7615b",
                 "reference": "181a426dd129cb496f12d7e7555f6d0b37a7615b",
                 "shasum": ""
             },
@@ -3667,7 +3732,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/symfony/var-dumper/3c4084cb1537c0e2ad41aad622bbf55a44a5c9ce",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/3c4084cb1537c0e2ad41aad622bbf55a44a5c9ce",
                 "reference": "3c4084cb1537c0e2ad41aad622bbf55a44a5c9ce",
                 "shasum": ""
             },
@@ -3789,7 +3854,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://repos.prod.uci.cu:80/api/composer/packagist.org/vcs-dists/zip/tymondesigns/jwt-auth/63698d304554e5d0bc3eb481cc260a9fc900e151",
+                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/63698d304554e5d0bc3eb481cc260a9fc900e151",
                 "reference": "63698d304554e5d0bc3eb481cc260a9fc900e151",
                 "shasum": ""
             },
