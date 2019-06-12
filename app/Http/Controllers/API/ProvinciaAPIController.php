@@ -36,6 +36,7 @@ class ProvinciaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\Provincia');
         $this->provinciaRepository->pushCriteria(new RequestCriteria($request));
         $this->provinciaRepository->pushCriteria(new LimitOffsetCriteria($request));
         $provincias = $this->provinciaRepository->all();
@@ -53,6 +54,7 @@ class ProvinciaAPIController extends AppBaseController
      */
     public function store(CreateProvinciaAPIRequest $request)
     {
+        $this->authorize('create', 'App\Provincia');
         $input = $request->all();
 
         $provincia = $this->provinciaRepository->create($input);
@@ -70,6 +72,7 @@ class ProvinciaAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\Provincia');
         /** @var Provincia $provincia */
         $provincia = $this->provinciaRepository->findWithoutFail($id);
 
@@ -91,6 +94,7 @@ class ProvinciaAPIController extends AppBaseController
      */
     public function update($id, UpdateProvinciaAPIRequest $request)
     {
+        $this->authorize('update', 'App\Provincia');
         $input = $request->all();
 
         /** @var Provincia $provincia */
@@ -115,6 +119,7 @@ class ProvinciaAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\Provincia');
         /** @var Provincia $provincia */
         $provincia = $this->provinciaRepository->findWithoutFail($id);
 
