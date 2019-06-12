@@ -36,6 +36,7 @@ class EntidadAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\Entidad');
         $this->entidadRepository->pushCriteria(new RequestCriteria($request));
         $this->entidadRepository->pushCriteria(new LimitOffsetCriteria($request));
         $entidads = $this->entidadRepository->all();
@@ -53,6 +54,7 @@ class EntidadAPIController extends AppBaseController
      */
     public function store(CreateEntidadAPIRequest $request)
     {
+        $this->authorize('create', 'App\Entidad');
         $input = $request->all();
 
         $entidad = $this->entidadRepository->create($input);
@@ -70,6 +72,7 @@ class EntidadAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\Entidad');
         /** @var Entidad $entidad */
         $entidad = $this->entidadRepository->findWithoutFail($id);
 
@@ -91,6 +94,7 @@ class EntidadAPIController extends AppBaseController
      */
     public function update($id, UpdateEntidadAPIRequest $request)
     {
+        $this->authorize('update', 'App\Entidad');
         $input = $request->all();
 
         /** @var Entidad $entidad */
@@ -115,6 +119,7 @@ class EntidadAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\Entidad');
         /** @var Entidad $entidad */
         $entidad = $this->entidadRepository->findWithoutFail($id);
 

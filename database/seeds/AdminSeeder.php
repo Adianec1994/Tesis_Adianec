@@ -17,12 +17,12 @@ class AdminSeeder extends Seeder
         $admin = User::create([
             'name'=>'Admin',
             'email'=>'admin@spd.cu',
-            'password'=>$password, 
+            'password'=>$password,
             'cargo'=>'admin',
-            'username'=>'admin', 
+            'username'=>'admin',
             'entidads_id'=>1
             ]);
 
-            $admin->assignRole(Role::all());
+            $admin->assignRole(Role::whereName('Administrador')->get());
     }
 }

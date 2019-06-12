@@ -35,7 +35,7 @@ export default {
       name: this.$t('nav_menu_title'),
       items: [
         { title: 'Dashboard', icon: 'dashboard', route: { name: 'home' }},
-        { title: 'Account', icon: 'account_box', route: { name: 'settings.profile' }},
+        { title: this.$t('account'), icon: 'account_box', route: { name: 'settings.profile' }},
         { title: 'Proveedores', icon: 'account_box', route: { name: 'proveedores' }},
         { title: 'Provincias', icon: 'account_box', route: { name: 'provincias' }},
         { title: 'Disponbilidades', icon: 'account_box', route: { name: 'disponibilidades' }},
