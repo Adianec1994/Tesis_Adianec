@@ -146,10 +146,10 @@ export default {
   }),
 
   async mounted () {
-    let response = await axios.get('/api/roles')
+    let response = await axios.get('/api/rol')
     this.roles = response.data
 
-    response = await axios.get('/api/entidades')
+    response = await axios.get('/api/entidad')
     this.entidades = response.data
   },
 

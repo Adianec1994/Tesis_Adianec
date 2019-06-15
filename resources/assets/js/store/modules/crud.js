@@ -16,7 +16,8 @@ export const state = {
   pailas: [],
   grupos: [],
   eventos_diarios: [],
-  generaciones: []
+  generaciones: [],
+  usuarios: []
 }
 
 // mutations

@@ -50,7 +50,8 @@ export default {
         { title: 'Pailas', icon: 'account_box', route: { name: 'pailas' }},
         { title: 'Grupos', icon: 'account_box', route: { name: 'grupos' }},
         { title: 'Eventos Diarios', icon: 'account_box', route: { name: 'eventos_diarios' }},
-        { title: 'Generaciones', icon: 'account_box', route: { name: 'generaciones' }}
+        { title: 'Generaciones', icon: 'account_box', route: { name: 'generaciones' }},
+        { title: 'Usuarios', icon: 'account_box', route: { name: 'usuarios' }}
       ]
     }
   }
