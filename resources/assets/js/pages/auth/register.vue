@@ -1,9 +1,18 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm8 offset-sm2 lg4 offset-lg4>
+    <v-flex
+      xs12
+      sm8
+      offset-sm2
+      lg4
+      offset-lg4
+    >
       <v-card>
         <progress-bar :show="form.busy"></progress-bar>
-        <form @submit.prevent="register" @keydown="form.onKeydown($event)">
+        <form
+          @submit.prevent="register"
+          @keydown="form.onKeydown($event)"
+        >
           <v-card-title primary-title>
             <h3 class="headline mb-0">{{ $t('register') }}</h3>
           </v-card-title>
@@ -21,6 +30,18 @@
               v-validate="'required|max:30'"
             ></text-input>
 
+            <!-- Username -->
+            <text-input
+              :form="form"
+              :label="'Usuario'"
+              :v-errors="validationErrors"
+              :value.sync="form.username"
+              browser-autocomplete="username"
+              counter="15"
+              name="username"
+              v-validate="'required|max:15'"
+            ></text-input>
+
             <!-- Email -->
             <email-input
               :form="form"
@@ -30,6 +51,32 @@
               name="email"
               v-validate="'required|email'"
             ></email-input>
+
+            <!-- Entidades -->
+            <select-input
+              :form="form"
+              :items="entidades"
+              :value.sync="form.entidad"
+              :v-errors="validationErrors"
+              :label="'Entidad'"
+              :itemText="'nombre'"
+              :itemValue="'id'"
+              name="entidad"
+              v-validate="'required'"
+            ></select-input>
+
+            <!-- Cargo -->
+            <select-input
+              :form="form"
+              :items="roles"
+              :value.sync="form.cargo"
+              :v-errors="validationErrors"
+              :label="'Cargo'"
+              :itemText="'name'"
+              :itemValue="'name'"
+              name="cargo"
+              v-validate="'required'"
+            ></select-input>
 
             <!-- Password -->
             <password-input
@@ -61,7 +108,10 @@
           </v-card-text>
 
           <v-card-actions>
-            <submit-button :form="form" :label="$t('register')"></submit-button>
+            <submit-button
+              :form="form"
+              :label="$t('register')"
+            ></submit-button>
           </v-card-actions>
         </form>
       </v-card>
@@ -72,6 +122,7 @@
 
 <script>
 import Form from 'vform'
+import axios from 'axios'
 
 export default {
   name: 'register-view',
@@ -82,31 +133,51 @@ export default {
   data: () => ({
     form: new Form({
       name: '',
+      username: '',
       email: '',
+      entidad: '',
+      cargo: '',
       password: '',
       password_confirmation: ''
     }),
+    roles: [],
+    entidades: [],
     eye: true
   }),
+
+  async mounted () {
+    let response = await axios.get('/api/roles')
+    this.roles = response.data
+
+    response = await axios.get('/api/entidades')
+    this.entidades = response.data
+  },
 
   methods: {
     async register () {
       if (await this.formHasErrors()) return
 
       // Register the user.
-      const { data } = await this.form.post('/api/register')
+      await this.form.post('/api/register').then(result => {
+        this.$store.dispatch('responseMessage', {
+          type: result.status === 201 ? 'success' : 'error',
+          text: result.status === 201 ? 'Ahora debe esperar que el administrador apruebe su usuario antes de poder loguearse.' : `Ocurrió un problema en el registro. Por favor, vuelva a intentarlo más tarde.`,
+          title: result.status === 201 ? 'Usuario creado correctamente' : 'Error al registrar usuario',
+          modal: true
+        })
+      })
 
-      // Log in the user.
-      const { data: { token }} = await this.form.post('/api/login')
+      // // Log in the user.
+      // const { data: { token }} = await this.form.post('/api/login')
 
-      // Save the token.
-      this.$store.dispatch('saveToken', { token })
+      // // Save the token.
+      // this.$store.dispatch('saveToken', { token })
 
-      // Update the user.
-      await this.$store.dispatch('updateUser', { user: data })
+      // // Update the user.
+      // await this.$store.dispatch('updateUser', { user: data })
 
-      // Redirect home.
-      this.$router.push({ name: 'home' })
+      // // Redirect home.
+      this.$router.push({ name: 'login' })
     }
   }
 }

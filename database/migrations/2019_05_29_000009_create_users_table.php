@@ -23,13 +23,14 @@ class CreateUsersTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', 45)->nullable();
-            $table->string('cargo', 45)->nullable();
-            $table->string('username', 45)->nullable();
-            $table->string('email', 45)->nullable();
-            $table->mediumText('password')->nullable();
+            $table->string('name', 45);
+            $table->string('cargo', 45);
+            $table->string('username', 45);
+            $table->string('email', 45);
+            $table->mediumText('password');
             $table->string('imagen', 45)->nullable();
-            $table->unsignedInteger('entidads_id');
+            $table->boolean('accepted')->default(false);
+            $table->unsignedInteger('entidads_id')->default(1);
             $table->softDeletes();
             $table->timestamps();
 

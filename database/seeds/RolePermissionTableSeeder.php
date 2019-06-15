@@ -55,5 +55,7 @@ class RolePermissionTableSeeder extends Seeder
         foreach ($adminPermissions as $permission) {
             $adminRole->givePermissionTo(Permission::create(['name' => $permission]));
         }
+
+        // Role::create(['name' => 'Director']);
     }
 }

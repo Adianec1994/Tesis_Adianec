@@ -18,8 +18,9 @@ class AdminSeeder extends Seeder
             'name'=>'Admin',
             'email'=>'admin@spd.cu',
             'password'=>$password,
-            'cargo'=>'admin',
+            'cargo'=>'Administrador',
             'username'=>'admin',
+            'accepted' => true,
             'entidads_id'=>1
             ]);
 
