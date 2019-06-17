@@ -43,7 +43,7 @@ class EntidadPolicy
      * @param  \App\Entidad  $entidad
      * @return mixed
      */
-    public function update(User $user, Entidad $entidad)
+    public function update(User $user)
     {
         $permissions = $user->getAllPermissions();
 
@@ -57,7 +57,7 @@ class EntidadPolicy
      * @param  \App\Entidad  $entidad
      * @return mixed
      */
-    public function delete(User $user, Entidad $entidad)
+    public function delete(User $user)
     {
         $permissions = $user->getAllPermissions();
 
@@ -71,7 +71,7 @@ class EntidadPolicy
      * @param  \App\Entidad  $entidad
      * @return mixed
      */
-    public function restore(User $user, Entidad $entidad)
+    public function restore(User $user)
     {
         return false;
     }
@@ -83,7 +83,7 @@ class EntidadPolicy
      * @param  \App\Entidad  $entidad
      * @return mixed
      */
-    public function forceDelete(User $user, Entidad $entidad)
+    public function forceDelete(User $user)
     {
         return false;
     }

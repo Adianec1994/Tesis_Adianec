@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
+use App\User;
 use InfyOm\Generator\Common\BaseRepository;
 
 /**
@@ -38,7 +38,7 @@ class UserRepository extends BaseRepository
         return User::class;
     }
 
-    public function sinSuperAdmin($id)
+    public function sinAdminActual($id)
     {
         return User::whereNotIn('id', [$id])->get();
     }

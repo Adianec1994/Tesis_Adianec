@@ -86,7 +86,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{`¿Seguro que desea eliminar la provincia ${props.item.nombre}`}}</v-card-text>
+            <v-card-text>{{`¿Seguro que desea eliminar el usuario ${props.item.name}`}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn

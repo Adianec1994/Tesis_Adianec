@@ -47,4 +47,52 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'integer',
+        'name' => 'string',
+        'cargo' => 'string',
+        'username' => 'string',
+        'email' => 'string',
+        'password' => 'string',
+        'imagen' => 'string',
+        'accepted' => 'boolean',
+        'entidads_id' => 'integer'
+    ];
+
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+        'name' => 'required|max:30',
+        'cargo' => 'required',
+        'username' => 'required|max:15',
+        'email' => 'required|email|max:255',
+        'accepted' => 'required',
+        'entidads_id' => 'required'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function entidads()
+    {
+        return $this->belongsTo(\App\Models\Entidad::class, 'entidads_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function trazas()
+    {
+        return $this->hasMany(\App\Models\Traza::class);
+    }
 }

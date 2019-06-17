@@ -44,7 +44,7 @@ class ProvinciaPolicy
      * @param  \App\Provincia  $provincia
      * @return mixed
      */
-    public function update(User $user, Provincia $provincia)
+    public function update(User $user)
     {
         $permissions = $user->getAllPermissions();
 
@@ -58,7 +58,7 @@ class ProvinciaPolicy
      * @param  \App\Provincia  $provincia
      * @return mixed
      */
-    public function delete(User $user, Provincia $provincia)
+    public function delete(User $user)
     {
         $permissions = $user->getAllPermissions();
 
@@ -72,7 +72,7 @@ class ProvinciaPolicy
      * @param  \App\Provincia  $provincia
      * @return mixed
      */
-    public function restore(User $user, Provincia $provincia)
+    public function restore(User $user)
     {
         return false;
     }
@@ -84,7 +84,7 @@ class ProvinciaPolicy
      * @param  \App\Provincia  $provincia
      * @return mixed
      */
-    public function forceDelete(User $user, Provincia $provincia)
+    public function forceDelete(User $user)
     {
         return false;
     }

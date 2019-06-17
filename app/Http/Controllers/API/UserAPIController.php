@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
-use App\Models\User;
+use App\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -38,7 +38,7 @@ class UserAPIController extends AppBaseController
     {
         $this->userRepository->pushCriteria(new RequestCriteria($request));
         $this->userRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $users = $this->userRepository->sinSuperAdmin($request->user()->id);
+        $users = $this->userRepository->sinAdminActual($request->user()->id);
 
         return $this->sendResponse($users->toArray(), 'Users retrieved successfully');
     }
@@ -95,6 +95,8 @@ class UserAPIController extends AppBaseController
         if (empty($user)) {
             return $this->sendError('User not found');
         }
+
+        $user->syncRoles([$input['cargo']]);
 
         $user = $this->userRepository->update($input, $id);
 
