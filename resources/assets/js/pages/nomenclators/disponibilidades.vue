@@ -187,41 +187,40 @@ export default {
   },
 
   mounted () {
-    this.entidades = this.$store.getters.get('entidades')
-    this.items = this.$store.getters.get(this.lowerModuleName)
+    const promises = []
 
-    if (this.entidades.length === 0) {
-      this.$store.dispatch('GET', 'entidades').then((result) => {
-        this.entidades = this.$store.getters.get('entidades')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', 'entidades').then((result) => {
+      this.entidades = this.$store.getters.get('entidades')
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-    }
-
-    if (this.items.length === 0) {
-      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
-        this.items = this.$store.getters.get(this.lowerModuleName)
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
       })
-    }
+    })
+    )
 
-    var field = this.$data.schema.fields.find(field => field.model === 'entidads_id')
-    field.values = this.entidades
+    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+      this.items = this.$store.getters.get(this.lowerModuleName)
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
+      })
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
+
+    Promise.all(promises).then(values => {
+      var field = this.$data.schema.fields.find(field => field.model === 'entidads_id')
+      field.values = this.entidades
+    })
   },
 
   methods: {

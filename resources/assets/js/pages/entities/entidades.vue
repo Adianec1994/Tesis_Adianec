@@ -192,11 +192,9 @@ export default {
   },
 
   mounted () {
-    this.provincias = this.$store.getters.get('provincias')
-    this.items = this.$store.getters.get(this.lowerModuleName)
+    const promises = []
 
-    if (this.provincias.length === 0) {
-      this.$store.dispatch('GET', 'provincias').then((result) => {
+    promises.push(this.$store.dispatch('GET', 'provincias').then((result) => {
         this.provincias = this.$store.getters.get('provincias')
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
@@ -208,10 +206,9 @@ export default {
           text: err
         })
       })
-    }
+      )
 
-    if (this.items.length === 0) {
-      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
         this.items = this.$store.getters.get(this.lowerModuleName)
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
@@ -223,10 +220,12 @@ export default {
           text: err
         })
       })
-    }
+      )
 
-    var field = this.$data.schema.fields.find(field => field.model === 'provincias_id')
-    field.values = this.provincias
+    Promise.all(promises).then(values => {
+      var field = this.$data.schema.fields.find(field => field.model === 'provincias_id')
+      field.values = this.provincias
+    })
   },
 
   methods: {

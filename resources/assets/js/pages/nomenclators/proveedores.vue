@@ -186,22 +186,18 @@ export default {
   },
 
   mounted () {
-    if (this.$store.getters.get(this.lowerModuleName).length === 0) {
-      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
-        this.items = this.$store.getters.get(this.lowerModuleName)
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
-      })
-    } else {
+    this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
       this.items = this.$store.getters.get(this.lowerModuleName)
-    }
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
+      })
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
   },
 
   methods: {

@@ -37,4 +37,9 @@ class UserRepository extends BaseRepository
     {
         return User::class;
     }
+
+    public function sinSuperAdmin($id)
+    {
+        return User::whereNotIn('id', [$id])->get();
+    }
 }

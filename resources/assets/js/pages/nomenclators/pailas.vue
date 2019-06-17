@@ -245,66 +245,63 @@ export default {
   },
 
   mounted () {
-    this.centrales_electricas = this.$store.getters.get('centrales_electricas')
-    this.operadores = this.$store.getters.get('operadores')
-    this.items = this.$store.getters.get(this.lowerModuleName)
+    const promises = []
 
-    if (this.centrales_electricas.length === 0) {
-      this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
-        this.centrales_electricas = this.$store.getters.get('centrales_electricas')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
+      this.centrales_electricas = this.$store.getters.get('centrales_electricas')
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-    }
-
-    if (this.operadores.length === 0) {
-      this.$store.dispatch('GET', 'operadores').then((result) => {
-        this.centrales_electricas = this.$store.getters.get('operadores')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
       })
-    }
+    })
+    )
 
-    if (this.items.length === 0) {
-      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
-        this.items = this.$store.getters.get(this.lowerModuleName)
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', 'operadores').then((result) => {
+      this.centrales_electricas = this.$store.getters.get('operadores')
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-    }
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
-    var field = this.$data.schema.fields.find(field => field.model === 'central_electricas_id')
-    field.values = this.centrales_electricas
+    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+      this.items = this.$store.getters.get(this.lowerModuleName)
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
+      })
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
-    var operadoresField = this.$data.schema.fields.find(field => field.model === 'operadors_id')
-    operadoresField.values = this.operadors
+    Promise.all(promises).then(values => {
+      var field = this.$data.schema.fields.find(field => field.model === 'central_electricas_id')
+      field.values = this.centrales_electricas
 
-    var choferesField = this.$data.schema.fields.find(field => field.model === 'chofer_id')
-    choferesField.values = this.choferes
+      var operadoresField = this.$data.schema.fields.find(field => field.model === 'operadors_id')
+      operadoresField.values = this.operadors
 
-    var acompanantesField = this.$data.schema.fields.find(field => field.model === 'acompanante_id')
-    acompanantesField.values = this.acompanantes
+      var choferesField = this.$data.schema.fields.find(field => field.model === 'chofer_id')
+      choferesField.values = this.choferes
+
+      var acompanantesField = this.$data.schema.fields.find(field => field.model === 'acompanante_id')
+      acompanantesField.values = this.acompanantes
+    })
   },
 
   methods: {

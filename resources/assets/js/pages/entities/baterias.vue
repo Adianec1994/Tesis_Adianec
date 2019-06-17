@@ -185,41 +185,40 @@ export default {
   },
 
   mounted () {
-    this.centrales_electricas = this.$store.getters.get('centrales_electricas')
-    this.items = this.$store.getters.get(this.lowerModuleName)
+    const promises = []
 
-    if (this.centrales_electricas.length === 0) {
-      this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
-        this.centrales_electricas = this.$store.getters.get('centrales_electricas')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
+      this.centrales_electricas = this.$store.getters.get('centrales_electricas')
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-    }
-
-    if (this.items.length === 0) {
-      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
-        this.items = this.$store.getters.get(this.lowerModuleName)
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
       })
-    }
+    })
+    )
 
-    var field = this.$data.schema.fields.find(field => field.model === 'central_electricas_id')
-    field.values = this.centrales_electricas
+    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+      this.items = this.$store.getters.get(this.lowerModuleName)
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
+      })
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
+
+    Promise.all(promises).then(values => {
+      var field = this.$data.schema.fields.find(field => field.model === 'central_electricas_id')
+      field.values = this.centrales_electricas
+    })
   },
 
   methods: {

@@ -57,7 +57,6 @@ class CentralElectricaAPIController extends AppBaseController
         $input = $request->all();
 
         $centralElectrica = $this->centralElectricaRepository->create($input);
-        $centralElectrica->baterias = CentralElectrica::where('id',$centralElectrica.id)->baterias;
 
         return $this->sendResponse($centralElectrica->toArray(), 'Central Electrica saved successfully');
     }

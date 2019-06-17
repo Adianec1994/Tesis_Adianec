@@ -123,7 +123,7 @@ export default {
     moduleName: 'Usuarios',
     headers: [
       { text: 'Nombre', value: 'name' },
-      { text: 'Permitido loguearse', value: 'accepted', align: 'center' },
+      { text: 'Permitido loguearse?', value: 'accepted', align: 'center' },
       { text: 'Cargo', value: 'cargo', align: 'center' },
       { text: 'Usuario', value: 'username', align: 'center' },
       { text: 'email', value: 'email', align: 'center' },
@@ -145,7 +145,7 @@ export default {
         },
         {
           type: 'switch',
-          label: 'Permitido loguearse',
+          label: 'Permitido loguearse?',
           model: 'accepted',
           textOn: 'Si',
           textOff: 'No'
@@ -212,44 +212,40 @@ export default {
   },
 
   mounted () {
-    this.items = this.$store.getters.get(this.lowerModuleName)
-    this.entidades = this.$store.getters.get('entidades')
     const promises = []
     promises.push(axios.get('/api/roles').then((result) => {
       this.roles = result.data.data
     }))
 
-    if (this.items.length === 0) {
-      promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
-        this.items = this.$store.getters.get(this.lowerModuleName)
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+      this.items = this.$store.getters.get(this.lowerModuleName)
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message,
+        modal: false
       })
-      )
-    }
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
-    if (this.entidades.length === 0) {
-      promises.push(this.$store.dispatch('GET', 'entidades').then((result) => {
-        this.entidades = this.$store.getters.get('entidades')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', 'entidades').then((result) => {
+      this.entidades = this.$store.getters.get('entidades')
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message,
+        modal: false
       })
-      )
-    }
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
     Promise.all(promises).then(values => {
       var field = this.$data.schema.fields.find(field => field.model === 'entidads_id')

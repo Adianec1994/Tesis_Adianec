@@ -11,12 +11,7 @@
       v-if="authenticated"
     ></v-toolbar-side-icon>
     <v-toolbar-title>
-      <router-link
-        :to="{ name: 'welcome' }"
-        class="white--text"
-      >
-        {{ appName }}
-      </router-link>
+      <img src="/img/gestion_diesel_logo.png" height="84px" alt="Gestión Diesel Logo" class="mt-3">
     </v-toolbar-title>
     <v-spacer></v-spacer>
 

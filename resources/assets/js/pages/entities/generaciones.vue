@@ -265,75 +265,63 @@ export default {
   },
 
   mounted () {
-    this.centralesElectricas = this.$store.getters.get('centrales_electricas')
-    this.baterias = this.$store.getters.get('baterias')
-    this.grupos = this.$store.getters.get('grupos')
-    this.items = this.$store.getters.get(this.lowerModuleName)
     const promises = []
 
-    if (this.centralesElectricas.length === 0) {
-      promises.push(this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
-        this.centralesElectricas = this.$store.getters.get('centrales_electricas')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
+      this.centralesElectricas = this.$store.getters.get('centrales_electricas')
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-      )
-    }
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
-    if (this.baterias.length === 0) {
-      promises.push(this.$store.dispatch('GET', 'baterias').then((result) => {
-        this.baterias = this.$store.getters.get('baterias')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', 'baterias').then((result) => {
+      this.baterias = this.$store.getters.get('baterias')
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-      )
-    }
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
-    if (this.grupos.length === 0) {
-      promises.push(this.$store.dispatch('GET', 'grupos').then((result) => {
-        this.grupos = this.$store.getters.get('grupos')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', 'grupos').then((result) => {
+      this.grupos = this.$store.getters.get('grupos')
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-      )
-    }
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
-    if (this.items.length === 0) {
-      promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
-        this.items = this.$store.getters.get(this.lowerModuleName)
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+      this.items = this.$store.getters.get(this.lowerModuleName)
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-      )
-    }
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
     Promise.all(promises).then(values => {
       var field = this.$data.schema.fields.find(field => field.model === 'central_electricas_id')
