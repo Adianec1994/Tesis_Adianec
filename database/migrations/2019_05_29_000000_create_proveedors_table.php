@@ -23,9 +23,10 @@ class CreateProveedorsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('marca', 8)->nullable();
-            $table->integer('serie')->nullable();
-            $table->string('pais', 45)->nullable();
+            $table->string('nombre');
+            $table->string('marca', 8);
+            $table->integer('serie');
+            $table->string('pais', 45);
             $table->softDeletes();
             $table->timestamps();
         });

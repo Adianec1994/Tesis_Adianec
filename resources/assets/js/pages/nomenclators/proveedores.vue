@@ -144,8 +144,7 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Marca',
-          model: 'marca',
-          validator: 'alpha'
+          model: 'marca'
         },
         {
           type: 'select',

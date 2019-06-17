@@ -34,7 +34,8 @@ class Proveedor extends Model
     public $fillable = [
         'marca',
         'serie',
-        'pais'
+        'pais',
+        'nombre'
     ];
 
     /**

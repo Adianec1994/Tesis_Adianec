@@ -184,7 +184,7 @@ export default {
           values: [],
           selectOptions: {
             hideNoneSelectedText: true,
-            name: 'marca',
+            name: 'nombre',
             value: 'id'
           }
         },
@@ -367,7 +367,7 @@ export default {
 
     proveedoresName (id) {
       const proveedor = this.proveedores.find(p => p.id === id)
-      return proveedor.marca
+      return proveedor.nombre
     },
 
     updateCentrales () {

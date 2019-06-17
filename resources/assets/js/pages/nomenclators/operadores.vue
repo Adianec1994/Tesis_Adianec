@@ -144,8 +144,7 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Nombre',
-          model: 'nombre',
-          validator: 'alpha'
+          model: 'nombre'
         },
         {
           type: 'input',

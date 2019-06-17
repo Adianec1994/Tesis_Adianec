@@ -55,6 +55,8 @@ class ProveedorAPIController extends AppBaseController
     {
         $input = $request->all();
 
+        $input['nombre'] = $input['marca'] . '-' . $input['serie'];
+
         $proveedor = $this->proveedorRepository->create($input);
 
         return $this->sendResponse($proveedor->toArray(), 'Proveedor saved successfully');
@@ -92,6 +94,8 @@ class ProveedorAPIController extends AppBaseController
     public function update($id, UpdateProveedorAPIRequest $request)
     {
         $input = $request->all();
+
+        $input['nombre'] = $input['marca'] . '-' . $input['serie'];
 
         /** @var Proveedor $proveedor */
         $proveedor = $this->proveedorRepository->findWithoutFail($id);
