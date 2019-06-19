@@ -39,7 +39,8 @@ class UserAPIController extends AppBaseController
         $this->authorize('view', 'App\User');
         $this->userRepository->pushCriteria(new RequestCriteria($request));
         $this->userRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $users = $this->userRepository->sinAdminActual($request->user()->id);
+        // $users = $this->userRepository->sinAdminActual($request->user()->id);
+        $users = $this->userRepository->all();
 
         return $this->sendResponse($users->toArray(), 'Users retrieved successfully');
     }

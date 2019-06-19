@@ -195,32 +195,32 @@ export default {
     const promises = []
 
     promises.push(this.$store.dispatch('GET', 'provincias').then((result) => {
-        this.provincias = this.$store.getters.get('provincias')
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+      this.provincias = this.$store.getters.get('provincias')
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-      )
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
     promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
-        this.items = this.$store.getters.get(this.lowerModuleName)
-        this.$store.dispatch('responseMessage', {
-          type: result.success ? 'success' : 'error',
-          text: result.message
-        })
-      }).catch((err) => {
-        this.$store.dispatch('responseMessage', {
-          type: 'error',
-          text: err
-        })
+      this.items = this.$store.getters.get(this.lowerModuleName)
+      this.$store.dispatch('responseMessage', {
+        type: result.success ? 'success' : 'error',
+        text: result.message
       })
-      )
+    }).catch((err) => {
+      this.$store.dispatch('responseMessage', {
+        type: 'error',
+        text: err
+      })
+    })
+    )
 
     Promise.all(promises).then(values => {
       var field = this.$data.schema.fields.find(field => field.model === 'provincias_id')

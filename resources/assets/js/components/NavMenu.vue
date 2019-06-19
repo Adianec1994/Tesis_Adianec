@@ -51,7 +51,8 @@ export default {
         { title: 'Grupos', icon: 'account_box', route: { name: 'grupos' }},
         { title: 'Eventos Diarios', icon: 'account_box', route: { name: 'eventos_diarios' }},
         { title: 'Generaciones', icon: 'account_box', route: { name: 'generaciones' }},
-        { title: 'Usuarios', icon: 'account_box', route: { name: 'usuarios' }}
+        { title: 'Usuarios', icon: 'account_box', route: { name: 'usuarios' }},
+        { title: 'Trazas', icon: 'account_box', route: { name: 'trazas' }}
       ]
     }
   }

@@ -13,6 +13,7 @@ export default ({ authGuard, guestGuard }) => [
       ] },
 
     // rutas de datos generales
+    { path: '/datos_generales', name: 'datos_generales', component: require('~/pages/entities/datos_generales.vue') },
     { path: '/provincias', name: 'provincias', component: require('~/pages/nomenclators/provincias.vue') },
     { path: '/entidades', name: 'entidades', component: require('~/pages/entities/entidades.vue') },
     { path: '/centrales_electricas', name: 'centrales_electricas', component: require('~/pages/entities/centrales_electricas.vue') },
@@ -31,8 +32,10 @@ export default ({ authGuard, guestGuard }) => [
     { path: '/disponibilidades', name: 'disponibilidades', component: require('~/pages/nomenclators/disponibilidades.vue') },
     { path: '/hechos_extraordinarios', name: 'hechos_extraordinarios', component: require('~/pages/entities/hechos_extraordinarios.vue') },
 
+    // rutas de administración
+    { path: '/trazas', name: 'trazas', component: require('~/pages/nomenclators/trazas.vue') },
+
     { path: '/operadores', name: 'operadores', component: require('~/pages/nomenclators/operadores.vue') },
-    { path: '/datos_generales', name: 'datos_generales', component: require('~/pages/entities/datos_generales.vue') },
     { path: '/eventos_diarios', name: 'eventos_diarios', component: require('~/pages/entities/eventos_diarios.vue') }
   ]),
 
