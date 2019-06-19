@@ -16,7 +16,7 @@ class UpdatePassword extends Controller
     public function __invoke(Request $request)
     {
         $this->validate($request, [
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:8'
         ]);
 
         $request->user()->update([

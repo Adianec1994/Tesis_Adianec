@@ -18,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'cargo', 'username', 'entidads_id'
+        'name', 'email', 'password', 'cargo', 'username', 'entidads_id', 'accepted', 'imagen'
     ];
 
     protected $guard_name = 'api';
@@ -93,6 +93,6 @@ class User extends Authenticatable implements JWTSubject
      **/
     public function trazas()
     {
-        return $this->hasMany(\App\Models\Traza::class);
+        return $this->hasMany(\App\Models\Traza::class, 'users_id');
     }
 }

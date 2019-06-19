@@ -7,8 +7,10 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 use App\Policies\EntidadPolicy;
 use App\Policies\ProvinciaPolicy;
+use App\Policies\UserPolicy;
 use App\Entidad;
 use App\Provincia;
+use App\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
         // Entidad::class => EntidadPolicy::class,
         'App\Entidad' => 'App\Policies\EntidadPolicy',
         'App\Provincia' => 'App\Policies\ProvinciaPolicy',
+        'App\User' => 'App\Policies\UserPolicy',
     ];
 
     /**

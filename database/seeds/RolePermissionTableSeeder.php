@@ -42,7 +42,6 @@ class RolePermissionTableSeeder extends Seeder
           'read_mantenedor_externo',
           'update_mantenedor_externo',
           'delete_mantenedor_externo',
-          'create_usuario',
           'read_usuario',
           'update_usuario',
           'delete_usuario',

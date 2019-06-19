@@ -15,7 +15,7 @@ use App\Models\Entidad;
 |
 */
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => ['auth:api','trazas']], function () {
     Route::post('logout', 'Auth\LoginController@logout');
 
     Route::get('user', function (Request $request) {
@@ -43,12 +43,13 @@ Route::group(['middleware' => 'auth:api'], function () {
         'generaciones' => 'API\GeneracionAPIController',
         'mantenedores_externos' => 'API\MantenedorExternoAPIController',
         'usuarios' => 'API\UserAPIController',
-        'roles' => 'API\RolAPIController'
+        'roles' => 'API\RolAPIController',
+        'trazas' => 'API\TrazaAPIController'
     ]);
 });
 
 
-Route::group(['middleware' => 'guest:api'], function () {
+Route::group(['middleware' => ['guest:api','trazas']], function () {
     Route::post('login', 'Auth\LoginController@login');
     Route::post('register', 'Auth\RegisterController@register');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');

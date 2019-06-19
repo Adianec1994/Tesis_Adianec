@@ -36,6 +36,7 @@ class UserAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\User');
         $this->userRepository->pushCriteria(new RequestCriteria($request));
         $this->userRepository->pushCriteria(new LimitOffsetCriteria($request));
         $users = $this->userRepository->sinAdminActual($request->user()->id);
@@ -91,6 +92,7 @@ class UserAPIController extends AppBaseController
 
         /** @var User $user */
         $user = $this->userRepository->findWithoutFail($id);
+        $this->authorize('update', $user);
 
         if (empty($user)) {
             return $this->sendError('User not found');
@@ -113,6 +115,7 @@ class UserAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\User');
         /** @var User $user */
         $user = $this->userRepository->findWithoutFail($id);
 

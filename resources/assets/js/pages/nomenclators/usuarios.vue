@@ -59,7 +59,7 @@
     >
       <template v-slot:items="props">
         <td>{{ props.item.name }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.accepted }}</td>
+        <td class="text-xs-center justify-center">{{ activoName(props.item.accepted) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.cargo }}</td>
         <td class="text-xs-center justify-center">{{ props.item.username }}</td>
         <td class="text-xs-center justify-center">{{ props.item.email }}</td>
@@ -123,7 +123,7 @@ export default {
     moduleName: 'Usuarios',
     headers: [
       { text: 'Nombre', value: 'name' },
-      { text: 'Permitido loguearse?', value: 'accepted', align: 'center' },
+      { text: 'Activo', value: 'accepted', align: 'center' },
       { text: 'Cargo', value: 'cargo', align: 'center' },
       { text: 'Usuario', value: 'username', align: 'center' },
       { text: 'email', value: 'email', align: 'center' },
@@ -145,7 +145,7 @@ export default {
         },
         {
           type: 'switch',
-          label: 'Permitido loguearse?',
+          label: 'Activo',
           model: 'accepted',
           textOn: 'Si',
           textOff: 'No'
@@ -311,6 +311,11 @@ export default {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
+    },
+
+    activoName (activo) {
+      const res = activo ? 'Sí' : 'No'
+      return res
     }
   }
 }
