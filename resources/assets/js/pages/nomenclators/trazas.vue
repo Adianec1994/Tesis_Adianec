@@ -35,10 +35,10 @@
         <td class="text-xs-center">{{ props.item.url }}</td>
       </template>
       <template v-slot:no-results>
-        <h4>Su búsqueda por "{{ search }}" no encontró resultados.</h4>
+        <h4>Su búsqueda por "{{ search }}" no encontró resultados</h4>
       </template>
       <template v-slot:no-data>
-        <h4>Sin resultados para mostrar.</h4>
+        <h4>Sin resultados para mostrar</h4>
       </template>
     </v-data-table>
   </v-card>
@@ -71,8 +71,8 @@ export default {
   mounted () {
     const promises = []
 
-    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
-      this.items = this.$store.getters.get(this.lowerModuleName)
+    promises.push(this.$store.dispatch('GET', 'usuarios').then((result) => {
+      this.usuarios = this.$store.getters.get('usuarios')
       this.$store.dispatch('responseMessage', {
         type: result.success ? 'success' : 'error',
         text: result.message,
@@ -86,8 +86,8 @@ export default {
     })
     )
 
-    promises.push(this.$store.dispatch('GET', 'usuarios').then((result) => {
-      this.usuarios = this.$store.getters.get('usuarios')
+    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+      this.items = this.$store.getters.get(this.lowerModuleName)
       this.$store.dispatch('responseMessage', {
         type: result.success ? 'success' : 'error',
         text: result.message,
