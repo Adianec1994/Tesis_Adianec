@@ -23,10 +23,10 @@ class CreateMantenedoresExternosTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('nombre', 45)->nullable();
-            $table->integer('numeroContrato')->nullable();
-            $table->date('fechaInicio')->nullable();
-            $table->date('fechaFin')->nullable();
+            $table->string('nombre', 45);
+            $table->integer('numeroContrato');
+            $table->date('fechaInicio');
+            $table->date('fechaFin');
             $table->softDeletes();
             $table->timestamps();
         });

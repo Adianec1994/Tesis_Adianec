@@ -21,6 +21,7 @@ export default ({ authGuard, guestGuard }) => [
     { path: '/grupos', name: 'grupos', component: require('~/pages/entities/grupos.vue') },
     { path: '/proveedores', name: 'proveedores', component: require('~/pages/nomenclators/proveedores.vue') },
     { path: '/usuarios', name: 'usuarios', component: require('~/pages/nomenclators/usuarios.vue') },
+    { path: '/mantenedores_externos', name: 'mantenedores_externos', component: require('~/pages/nomenclators/mantenedores_externos.vue') },
 
     // rutas de combustible
     { path: '/generaciones', name: 'generaciones', component: require('~/pages/entities/generaciones.vue') },

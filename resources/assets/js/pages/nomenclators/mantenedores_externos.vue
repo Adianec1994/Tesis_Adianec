@@ -15,6 +15,15 @@
         v-model="dialog"
         max-width="500px"
       >
+        <template v-slot:activator="{ on }">
+          <v-btn
+            color="primary"
+            dark
+            class="mb-2"
+            v-on="on"
+            v-on:click="isNewModel=true"
+          >Nuevo</v-btn>
+        </template>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -58,11 +67,10 @@
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-center justify-center">{{ activoName(props.item.accepted) }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.cargo }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.username }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.email }}</td>
+        <td>{{ props.item.nombre }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.numeroContrato }}</td>
+        <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaInicio) }}</td>
+        <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaFin) }}</td>
         <td class="text-xs-center justify-center">
           <v-icon
             small
@@ -86,7 +94,7 @@
         >
           <v-card>
             <v-card-title><b>Eliminar</b></v-card-title>
-            <v-card-text>{{`¿Seguro que desea eliminar el usuario ${props.item.name}`}}</v-card-text>
+            <v-card-text>{{`¿Seguro que desea eliminar el mantenedor externo ${props.item.nombre}`}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -111,7 +119,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data: () => ({
@@ -120,17 +127,15 @@ export default {
     editedItem: {},
     editedIndex: -1,
     isNewModel: false,
-    moduleName: 'Usuarios',
+    moduleName: 'Mantenedores externos',
     headers: [
-      { text: 'Nombre', value: 'name' },
-      { text: 'Activo', value: 'accepted', align: 'center' },
-      { text: 'Cargo', value: 'cargo', align: 'center' },
-      { text: 'Usuario', value: 'username', align: 'center' },
-      { text: 'email', value: 'email', align: 'center' },
-      { text: 'Acciones', sortable: false, align: 'center' }
+      { text: 'Nombre', value: 'nombre' },
+      { text: 'Número de contrato', value: 'numeroContrato', align: 'center' },
+      { text: 'Fecha de inicio', value: 'fechaInicio', align: 'center' },
+      { text: 'Fecha de fin', value: 'fechaFin', align: 'center' },
+      { text: 'Acciones', value: 'marca', sortable: false, align: 'center' }
     ],
     items: [],
-    roles: [],
     options: {
       validateAfterChanged: true,
       validateAfterLoad: true
@@ -140,57 +145,28 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Nombre completo',
-          model: 'name'
-        },
-        {
-          type: 'switch',
-          label: 'Activo',
-          model: 'accepted',
-          textOn: 'Si',
-          textOff: 'No'
-        },
-        {
-          type: 'input',
-          inputType: 'password',
-          label: 'Contraseña',
-          model: 'password',
-          hint: 'Mínimo 8 caracteres',
-          min: 8
-        },
-        {
-          type: 'select',
-          label: 'Cargo',
-          model: 'cargo',
-          values: [],
-          selectOptions: {
-            hideNoneSelectedText: true,
-            name: 'name',
-            value: 'name'
-          }
-        },
-        {
-          type: 'select',
-          label: 'Entidad',
-          model: 'entidads_id',
-          values: [],
-          selectOptions: {
-            hideNoneSelectedText: true,
-            name: 'nombre',
-            value: 'id'
-          }
+          label: 'Nombre',
+          model: 'nombre'
         },
         {
           type: 'input',
           inputType: 'text',
-          label: 'Usuario',
-          model: 'username'
+          label: 'Número de contrato',
+          model: 'numeroContrato'
         },
         {
           type: 'input',
-          inputType: 'email',
-          label: 'Email',
-          model: 'email'
+          inputType: 'date',
+          label: 'Fecha de inicio',
+          model: 'fechaInicio',
+          format: 'YYYY-MM-DD'
+        },
+        {
+          type: 'input',
+          inputType: 'date',
+          label: 'Fecha de fin',
+          model: 'fechaFin',
+          format: 'YYYY-MM-DD'
         }
       ]
     }
@@ -201,7 +177,7 @@ export default {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
     },
     lowerModuleName () {
-      return this.moduleName.toLowerCase()
+      return this.moduleName.split(' ').join('_').toLowerCase()
     }
   },
 
@@ -212,47 +188,17 @@ export default {
   },
 
   mounted () {
-    const promises = []
-    promises.push(axios.get('/api/roles').then((result) => {
-      this.roles = result.data.data
-    }))
-
-    promises.push(this.$store.dispatch('GET', 'entidades').then((result) => {
-      this.entidades = this.$store.getters.get('entidades')
-      this.$store.dispatch('responseMessage', {
-        type: result.success ? 'success' : 'error',
-        text: result.message,
-        modal: false
-      })
-    }).catch((err) => {
-      this.$store.dispatch('responseMessage', {
-        type: 'error',
-        text: err
-      })
-    })
-    )
-
-    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+    this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
       this.items = this.$store.getters.get(this.lowerModuleName)
       this.$store.dispatch('responseMessage', {
         type: result.success ? 'success' : 'error',
-        text: result.message,
-        modal: false
+        text: result.message
       })
     }).catch((err) => {
       this.$store.dispatch('responseMessage', {
         type: 'error',
         text: err
       })
-    })
-    )
-
-    Promise.all(promises).then(values => {
-      var field = this.$data.schema.fields.find(field => field.model === 'entidads_id')
-      field.values = this.entidades
-
-      var fieldCargo = this.$data.schema.fields.find(field => field.model === 'cargo')
-      fieldCargo.values = this.roles
     })
   },
 
@@ -313,9 +259,11 @@ export default {
       }, 300)
     },
 
-    activoName (activo) {
-      const res = activo ? 'Sí' : 'No'
-      return res
+    formatDate (date) {
+      if (date) {
+        return new Date(date).toLocaleDateString()
+        // return date.split(' ')[0]
+      }
     }
   }
 }

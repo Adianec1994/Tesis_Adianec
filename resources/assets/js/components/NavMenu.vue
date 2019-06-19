@@ -52,7 +52,8 @@ export default {
         { title: 'Eventos Diarios', icon: 'account_box', route: { name: 'eventos_diarios' }},
         { title: 'Generaciones', icon: 'account_box', route: { name: 'generaciones' }},
         { title: 'Usuarios', icon: 'account_box', route: { name: 'usuarios' }},
-        { title: 'Trazas', icon: 'account_box', route: { name: 'trazas' }}
+        { title: 'Trazas', icon: 'account_box', route: { name: 'trazas' }},
+        { title: 'Mantenedores externos', icon: 'account_box', route: { name: 'mantenedores_externos' }}
       ]
     }
   }
