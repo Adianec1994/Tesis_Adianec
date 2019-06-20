@@ -35,6 +35,7 @@ export default ({ authGuard, guestGuard }) => [
 
     // rutas de administración
     { path: '/trazas', name: 'trazas', component: require('~/pages/nomenclators/trazas.vue') },
+    { path: '/base_datos', name: 'base_datos', component: require('~/pages/nomenclators/base_datos.vue') },
 
     { path: '/operadores', name: 'operadores', component: require('~/pages/nomenclators/operadores.vue') },
     { path: '/eventos_diarios', name: 'eventos_diarios', component: require('~/pages/entities/eventos_diarios.vue') }

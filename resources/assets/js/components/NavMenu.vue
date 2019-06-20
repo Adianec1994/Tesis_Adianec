@@ -40,12 +40,12 @@ export default {
         { title: 'Provincias', icon: 'account_box', route: { name: 'provincias' }},
         { title: 'Disponbilidades', icon: 'account_box', route: { name: 'disponibilidades' }},
         { title: 'Entidades', icon: 'account_box', route: { name: 'entidades' }},
-        { title: 'Hechos extraordinarios', icon: 'account_box', route: { name: 'hechos_extraordinarios' }},
+        { title: 'Hechos Extraordinarios', icon: 'account_box', route: { name: 'hechos_extraordinarios' }},
         { title: 'Planes', icon: 'account_box', route: { name: 'planes' }},
-        { title: 'Centrales eléctricas', icon: 'account_box', route: { name: 'centrales_electricas' }},
+        { title: 'Centrales Eléctricas', icon: 'account_box', route: { name: 'centrales_electricas' }},
         { title: 'Baterías', icon: 'account_box', route: { name: 'baterias' }},
-        { title: 'Coberturas combustibles', icon: 'account_box', route: { name: 'coberturas_combustibles' }},
-        { title: 'Datos generales', icon: 'account_box', route: { name: 'datos_generales' }},
+        { title: 'Coberturas Combustibles', icon: 'account_box', route: { name: 'coberturas_combustibles' }},
+        { title: 'Datos Generales', icon: 'account_box', route: { name: 'datos_generales' }},
         { title: 'Operadores', icon: 'account_box', route: { name: 'operadores' }},
         { title: 'Pailas', icon: 'account_box', route: { name: 'pailas' }},
         { title: 'Grupos', icon: 'account_box', route: { name: 'grupos' }},
@@ -53,7 +53,8 @@ export default {
         { title: 'Generaciones', icon: 'account_box', route: { name: 'generaciones' }},
         { title: 'Usuarios', icon: 'account_box', route: { name: 'usuarios' }},
         { title: 'Trazas', icon: 'account_box', route: { name: 'trazas' }},
-        { title: 'Mantenedores externos', icon: 'account_box', route: { name: 'mantenedores_externos' }}
+        { title: 'Mantenedores Externos', icon: 'account_box', route: { name: 'mantenedores_externos' }},
+        { title: 'Base Datos', icon: 'account_box', route: { name: 'base_datos' }}
       ]
     }
   }

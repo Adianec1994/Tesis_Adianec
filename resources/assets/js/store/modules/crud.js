@@ -18,7 +18,8 @@ export const state = {
   eventos_diarios: [],
   generaciones: [],
   usuarios: [],
-  trazas: []
+  trazas: [],
+  mantenedores_externos: []
 }
 
 // mutations

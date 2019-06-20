@@ -19,6 +19,7 @@
         "infyomlabs/laravel-generator": "5.7.x-dev",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "~1.0",
+        "spatie/laravel-db-snapshots": "^1.2",
         "spatie/laravel-permission": "^2.37",
         "tymon/jwt-auth": "dev-develop"
     },
