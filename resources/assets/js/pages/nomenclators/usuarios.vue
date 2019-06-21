@@ -72,6 +72,7 @@
             edit
           </v-icon>
           <v-icon
+            v-if="props.item.id != idUserAuth"
             small
             @click="$set(deleteDialog,props.item.id,true)"
           >
@@ -199,6 +200,9 @@ export default {
   computed: {
     formTitle () {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
+    },
+    idUserAuth () {
+      return this.$store.getters.authUser.id
     },
     lowerModuleName () {
       return this.moduleName.toLowerCase()
