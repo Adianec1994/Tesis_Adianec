@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth:api','trazas']], function () {
     Route::post('snapshots/{name}', 'API\SnapshotsAPIController@restore');
     Route::post('snapshots', 'API\SnapshotsAPIController@create');
     Route::delete('snapshots/{name}', 'API\SnapshotsAPIController@destroy');
+    Route::get('reportes/8', 'API\ReportesAPIController@existenciaLubricante');
 });
 
 

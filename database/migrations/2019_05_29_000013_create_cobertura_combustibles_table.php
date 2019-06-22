@@ -23,15 +23,15 @@ class CreateCoberturaCombustiblesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->double('planReserva')->nullable();
-            $table->double('fondaje')->nullable();
-            $table->double('existOperativa')->nullable();
-            $table->time('coberturaHoras')->nullable();
-            $table->double('consumo')->nullable();
-            $table->double('suminCupet')->nullable();
-            $table->double('capacTotalAlmac')->nullable();
-            $table->double('capacVacio')->nullable();
-            $table->double('existTotalDiaAnterior')->nullable();
+            $table->double('planReserva');
+            $table->double('fondaje');
+            $table->double('existOperativa');
+            $table->integer('coberturaHoras');
+            $table->double('consumo');
+            $table->double('suminCupet');
+            $table->double('capacTotalAlmac');
+            $table->double('capacVacio');
+            $table->double('existTotalDiaAnterior');
             $table->unsignedInteger('central_electricas_id');
             $table->softDeletes();
             $table->timestamps();
