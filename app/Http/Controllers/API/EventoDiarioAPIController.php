@@ -40,7 +40,7 @@ class EventoDiarioAPIController extends AppBaseController
         $this->eventoDiarioRepository->pushCriteria(new LimitOffsetCriteria($request));
         $eventoDiarios = $this->eventoDiarioRepository->all();
 
-        return $this->sendResponse($eventoDiarios->toArray(), 'Evento Diarios retrieved successfully');
+        return $this->sendResponse($eventoDiarios->toArray(), 'Eventos Diarios recuperado con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class EventoDiarioAPIController extends AppBaseController
 
         $eventoDiario = $this->eventoDiarioRepository->create($input);
 
-        return $this->sendResponse($eventoDiario->toArray(), 'Evento Diario saved successfully');
+        return $this->sendResponse($eventoDiario->toArray(), 'Evento Diario guardado con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class EventoDiarioAPIController extends AppBaseController
         $eventoDiario = $this->eventoDiarioRepository->findWithoutFail($id);
 
         if (empty($eventoDiario)) {
-            return $this->sendError('Evento Diario not found');
+            return $this->sendError('Evento Diario no encontrado');
         }
 
-        return $this->sendResponse($eventoDiario->toArray(), 'Evento Diario retrieved successfully');
+        return $this->sendResponse($eventoDiario->toArray(), 'Evento Diario recuperado con éxito');
     }
 
     /**
@@ -97,12 +97,12 @@ class EventoDiarioAPIController extends AppBaseController
         $eventoDiario = $this->eventoDiarioRepository->findWithoutFail($id);
 
         if (empty($eventoDiario)) {
-            return $this->sendError('Evento Diario not found');
+            return $this->sendError('Evento Diario no encontrado');
         }
 
         $eventoDiario = $this->eventoDiarioRepository->update($input, $id);
 
-        return $this->sendResponse($eventoDiario->toArray(), 'EventoDiario updated successfully');
+        return $this->sendResponse($eventoDiario->toArray(), 'Evento Diario actualizado con éxito');
     }
 
     /**
@@ -119,11 +119,11 @@ class EventoDiarioAPIController extends AppBaseController
         $eventoDiario = $this->eventoDiarioRepository->findWithoutFail($id);
 
         if (empty($eventoDiario)) {
-            return $this->sendError('Evento Diario not found');
+            return $this->sendError('Evento Diario no encontrado');
         }
 
         $eventoDiario->delete();
 
-        return $this->sendResponse($id, 'Evento Diario deleted successfully');
+        return $this->sendResponse($id, 'Evento Diario eliminado con éxito');
     }
 }

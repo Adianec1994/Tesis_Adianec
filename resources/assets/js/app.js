@@ -98,7 +98,7 @@ VueFormGenerator.validators.resources = {
 
   numberTooSmall: 'El número es muy pequeño! Mínimo: {0}',
   numberTooBig: 'El número es muy grande! Máximo: {0}',
-  invalidNumber: 'Número inválido',
+  invalidNumber: 'Solo números',
   invalidInteger: 'El valor no es un entero',
   afterCommaTooBig: 'Solo debe tener {0} número después de la coma',
 

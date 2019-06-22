@@ -64,6 +64,8 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :rows-per-page-text="'Filas por páginas'"
+      :rows-per-page-items="pageitems"
       class="elevation-1"
     >
       <template v-slot:items="props">
@@ -71,19 +73,27 @@
         <td class="text-xs-center justify-center">{{ props.item.nombre }}</td>
         <td class="text-xs-center justify-center">{{ props.item.potInstalada }}</td>
         <td class="text-xs-center justify-center">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="$set(deleteDialog,props.item.id,true)"
-          >
-            delete
-          </v-icon>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem(props.item)"
+              slot="activator"
+            >
+              edit
+            </v-icon>
+            <span>Editar</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              @click="$set(deleteDialog,props.item.id,true)"
+              slot="activator"
+            >
+              delete
+            </v-icon>
+            <span>Eliminar</span>
+          </v-tooltip>
         </td>
         <v-dialog
           v-model="deleteDialog[props.item.id]"
@@ -133,6 +143,10 @@ export default {
       { text: 'Potencia instalada', value: 'potInstalada', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
+    pageitems: [
+      5,10,30,
+      { text: "Todo", value: -1}
+    ],
     items: [],
     entidades: [],
     options: {
@@ -156,13 +170,16 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Nombre de la central',
-          model: 'nombre'
+          model: 'nombre',
+          validator: ['nombre']
         },
         {
           type: 'input',
           inputType: 'text',
           label: 'Potencia instalada',
-          model: 'potInstalada'
+          model: 'potInstalada',
+          validator: ['double'],
+          max: 3
         }
       ]
     }

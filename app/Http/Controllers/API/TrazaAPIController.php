@@ -41,7 +41,7 @@ class TrazaAPIController extends AppBaseController
         $this->trazaRepository->pushCriteria(new LimitOffsetCriteria($request));
         $trazas = $this->trazaRepository->all();
 
-        return $this->sendResponse($trazas->toArray(), 'Trazas retrieved successfully');
+        return $this->sendResponse($trazas->toArray(), 'Trazas recuperadas con éxito');
     }
 
     /**
@@ -72,10 +72,10 @@ class TrazaAPIController extends AppBaseController
         $traza = $this->trazaRepository->findWithoutFail($id);
 
         if (empty($traza)) {
-            return $this->sendError('Traza not found');
+            return $this->sendError('Traza no encontrada');
         }
 
-        return $this->sendResponse($traza->toArray(), 'Traza retrieved successfully');
+        return $this->sendResponse($traza->toArray(), 'Traza recuperada con éxito');
     }
 
     /**

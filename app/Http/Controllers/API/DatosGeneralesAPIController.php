@@ -36,11 +36,13 @@ class DatosGeneralesAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\DatosGenerales');
+
         $this->datosGeneralesRepository->pushCriteria(new RequestCriteria($request));
         $this->datosGeneralesRepository->pushCriteria(new LimitOffsetCriteria($request));
         $datosGenerales = $this->datosGeneralesRepository->all();
 
-        return $this->sendResponse($datosGenerales->toArray(), 'Datos Generales retrieved successfully');
+        return $this->sendResponse($datosGenerales->toArray(), 'Datos Generales recuperado con éxito');
     }
 
     /**
@@ -53,11 +55,13 @@ class DatosGeneralesAPIController extends AppBaseController
      */
     public function store(CreateDatosGeneralesAPIRequest $request)
     {
+        $this->authorize('create', 'App\DatosGenerales');
+
         $input = $request->all();
 
         $datosGenerales = $this->datosGeneralesRepository->create($input);
 
-        return $this->sendResponse($datosGenerales->toArray(), 'Datos Generales saved successfully');
+        return $this->sendResponse($datosGenerales->toArray(), 'Datos Generales guardado con éxito');
     }
 
     /**
@@ -70,14 +74,16 @@ class DatosGeneralesAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\DatosGenerales');
+
         /** @var DatosGenerales $datosGenerales */
         $datosGenerales = $this->datosGeneralesRepository->findWithoutFail($id);
 
         if (empty($datosGenerales)) {
-            return $this->sendError('Datos Generales not found');
+            return $this->sendError('Datos Generales no encontrado');
         }
 
-        return $this->sendResponse($datosGenerales->toArray(), 'Datos Generales retrieved successfully');
+        return $this->sendResponse($datosGenerales->toArray(), 'Datos Generales recuperado con éxito');
     }
 
     /**
@@ -91,18 +97,20 @@ class DatosGeneralesAPIController extends AppBaseController
      */
     public function update($id, UpdateDatosGeneralesAPIRequest $request)
     {
+        $this->authorize('update', 'App\DatosGenerales');
+
         $input = $request->all();
 
         /** @var DatosGenerales $datosGenerales */
         $datosGenerales = $this->datosGeneralesRepository->findWithoutFail($id);
 
         if (empty($datosGenerales)) {
-            return $this->sendError('Datos Generales not found');
+            return $this->sendError('Datos Generales no encontrado');
         }
 
         $datosGenerales = $this->datosGeneralesRepository->update($input, $id);
 
-        return $this->sendResponse($datosGenerales->toArray(), 'DatosGenerales updated successfully');
+        return $this->sendResponse($datosGenerales->toArray(), 'Datos Generales actualizado con éxito');
     }
 
     /**
@@ -115,15 +123,17 @@ class DatosGeneralesAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\DatosGenerales');
+
         /** @var DatosGenerales $datosGenerales */
         $datosGenerales = $this->datosGeneralesRepository->findWithoutFail($id);
 
         if (empty($datosGenerales)) {
-            return $this->sendError('Datos Generales not found');
+            return $this->sendError('Datos Generales no encontrado');
         }
 
         $datosGenerales->delete();
 
-        return $this->sendResponse($id, 'Datos Generales deleted successfully');
+        return $this->sendResponse($id, 'Datos Generales eliminado con éxito');
     }
 }

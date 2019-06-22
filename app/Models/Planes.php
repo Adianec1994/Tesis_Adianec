@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version May 24, 2019, 8:27 pm UTC
  *
  * @property \App\Models\Entidad entidads
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property string mes
  * @property float generacion
  * @property float indiceConsumoCombustible
@@ -26,7 +26,7 @@ class Planes extends Model
     use SoftDeletes;
 
     public $table = 'plans';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -35,6 +35,7 @@ class Planes extends Model
 
 
     public $fillable = [
+        'anno',
         'mes',
         'generacion',
         'indiceConsumoCombustible',
@@ -49,6 +50,7 @@ class Planes extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'anno' => 'year',
         'mes' => 'string',
         'generacion' => 'float',
         'indiceConsumoCombustible' => 'float',

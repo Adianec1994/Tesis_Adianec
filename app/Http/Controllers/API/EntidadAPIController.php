@@ -41,7 +41,7 @@ class EntidadAPIController extends AppBaseController
         $this->entidadRepository->pushCriteria(new LimitOffsetCriteria($request));
         $entidads = $this->entidadRepository->all();
 
-        return $this->sendResponse($entidads->toArray(), 'Entidads retrieved successfully');
+        return $this->sendResponse($entidads->toArray(), 'Entidades recuperado con éxito');
     }
 
     /**
@@ -59,7 +59,7 @@ class EntidadAPIController extends AppBaseController
 
         $entidad = $this->entidadRepository->create($input);
 
-        return $this->sendResponse($entidad->toArray(), 'Entidad saved successfully');
+        return $this->sendResponse($entidad->toArray(), 'Entidad guardado con éxito');
     }
 
     /**
@@ -77,10 +77,10 @@ class EntidadAPIController extends AppBaseController
         $entidad = $this->entidadRepository->findWithoutFail($id);
 
         if (empty($entidad)) {
-            return $this->sendError('Entidad not found');
+            return $this->sendError('Entidad no encontrado');
         }
 
-        return $this->sendResponse($entidad->toArray(), 'Entidad retrieved successfully');
+        return $this->sendResponse($entidad->toArray(), 'Entidad recuperado con éxito');
     }
 
     /**
@@ -101,12 +101,12 @@ class EntidadAPIController extends AppBaseController
         $entidad = $this->entidadRepository->findWithoutFail($id);
 
         if (empty($entidad)) {
-            return $this->sendError('Entidad not found');
+            return $this->sendError('Entidad no encontrado');
         }
 
         $entidad = $this->entidadRepository->update($input, $id);
 
-        return $this->sendResponse($entidad->toArray(), 'Entidad updated successfully');
+        return $this->sendResponse($entidad->toArray(), 'Entidad actualizado con éxito');
     }
 
     /**
@@ -124,11 +124,11 @@ class EntidadAPIController extends AppBaseController
         $entidad = $this->entidadRepository->findWithoutFail($id);
 
         if (empty($entidad)) {
-            return $this->sendError('Entidad not found');
+            return $this->sendError('Entidad no encontrado');
         }
 
         $entidad->delete();
 
-        return $this->sendResponse($id, 'Entidad deleted successfully');
+        return $this->sendResponse($id, 'Entidad eliminado con éxito');
     }
 }

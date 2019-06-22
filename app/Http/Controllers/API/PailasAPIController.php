@@ -40,7 +40,7 @@ class PailasAPIController extends AppBaseController
         $this->pailasRepository->pushCriteria(new LimitOffsetCriteria($request));
         $pailas = $this->pailasRepository->all();
 
-        return $this->sendResponse($pailas->toArray(), 'Pailas retrieved successfully');
+        return $this->sendResponse($pailas->toArray(), 'Pailas recuperadas con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class PailasAPIController extends AppBaseController
 
         $pailas = $this->pailasRepository->create($input);
 
-        return $this->sendResponse($pailas->toArray(), 'Pailas saved successfully');
+        return $this->sendResponse($pailas->toArray(), 'Paila guardada con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class PailasAPIController extends AppBaseController
         $pailas = $this->pailasRepository->findWithoutFail($id);
 
         if (empty($pailas)) {
-            return $this->sendError('Pailas not found');
+            return $this->sendError('Pailas no encontrado');
         }
 
-        return $this->sendResponse($pailas->toArray(), 'Pailas retrieved successfully');
+        return $this->sendResponse($pailas->toArray(), 'Paila recuperada con éxito');
     }
 
     /**
@@ -97,12 +97,12 @@ class PailasAPIController extends AppBaseController
         $pailas = $this->pailasRepository->findWithoutFail($id);
 
         if (empty($pailas)) {
-            return $this->sendError('Pailas not found');
+            return $this->sendError('Pailas no encontrado');
         }
 
         $pailas = $this->pailasRepository->update($input, $id);
 
-        return $this->sendResponse($pailas->toArray(), 'Pailas updated successfully');
+        return $this->sendResponse($pailas->toArray(), 'Paila actualizada con éxito');
     }
 
     /**
@@ -119,11 +119,11 @@ class PailasAPIController extends AppBaseController
         $pailas = $this->pailasRepository->findWithoutFail($id);
 
         if (empty($pailas)) {
-            return $this->sendError('Pailas not found');
+            return $this->sendError('Pailas no encontrado');
         }
 
         $pailas->delete();
 
-        return $this->sendResponse($id, 'Pailas deleted successfully');
+        return $this->sendResponse($id, 'Paila eliminada con éxito');
     }
 }

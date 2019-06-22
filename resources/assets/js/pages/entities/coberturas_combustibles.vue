@@ -64,6 +64,8 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :rows-per-page-text="'Filas por páginas'"
+      :rows-per-page-items="pageitems"
       class="elevation-1"
     >
       <template v-slot:items="props">
@@ -78,19 +80,27 @@
         <td class="text-xs-center justify-center">{{ props.item.capacVacio }}</td>
         <td class="text-xs-center justify-center">{{ props.item.existTotalDiaAnterior }}</td>
         <td class="text-xs-center justify-center">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="$set(deleteDialog,props.item.id,true)"
-          >
-            delete
-          </v-icon>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem(props.item)"
+              slot="activator"
+            >
+              edit
+            </v-icon>
+            <span>Editar</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              @click="$set(deleteDialog,props.item.id,true)"
+              slot="activator"
+            >
+              delete
+            </v-icon>
+            <span>Eliminar</span>
+          </v-tooltip>
         </td>
         <v-dialog
           v-model="deleteDialog[props.item.id]"
@@ -142,10 +152,14 @@ export default {
       { text: 'Cobertura x horas', value: 'coberturaHoras', align: 'center' },
       { text: 'Consumo', value: 'consumo', align: 'center' },
       { text: 'Suministro CUPET', value: 'suminCupet', align: 'center' },
-      { text: 'Cap. Total Almacenda', value: 'capacTotalAlmac', align: 'center' },
+      { text: 'Cap. Total Almacenada', value: 'capacTotalAlmac', align: 'center' },
       { text: 'Capacidad vacío', value: 'capacVacio', align: 'center' },
       { text: 'Existencia día anterior', value: 'existTotalDiaAnterior', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
+    ],
+    pageitems: [
+      5,10,30,
+      { text: "Todo", value: -1}
     ],
     items: [],
     entidades: [],
@@ -168,57 +182,75 @@ export default {
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Plan de reserva',
-          model: 'planReserva'
+          model: 'planReserva',
+          validator: ['double'],
+          max: 3
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Fondaje',
-          model: 'fondaje'
+          model: 'fondaje',
+          validator: ['double'],
+          max: 3
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Existencia operativa',
-          model: 'existOperativa'
+          model: 'existOperativa',
+          validator: ['double'],
+          max: 3
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Cobertura x horas',
-          model: 'coberturaHoras'
+          model: 'coberturaHoras',
+          validator: ['integer'],
+          max: 500
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Consumo',
-          model: 'consumo'
+          model: 'consumo',
+          validator: ['double'],
+          max: 3
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Suministro CUPET',
-          model: 'suminCupet'
+          model: 'suminCupet',
+          validator: ['double'],
+          max: 3
         },
         {
           type: 'input',
-          inputType: 'number',
-          label: 'Cap. Total Almacenda',
-          model: 'capacTotalAlmac'
+          inputType: 'text',
+          label: 'Cap. Total Almacenada',
+          model: 'capacTotalAlmac',
+          validator: ['double'],
+          max: 3
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Capacidad vacío',
-          model: 'capacVacio'
+          model: 'capacVacio',
+          validator: ['double'],
+          max: 3
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Existencia día anterior',
-          model: 'existTotalDiaAnterior'
+          model: 'existTotalDiaAnterior',
+          validator: ['double'],
+          max: 3
         }
       ]
     }

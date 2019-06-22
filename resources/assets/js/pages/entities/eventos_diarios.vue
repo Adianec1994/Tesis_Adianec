@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-toolbar
       flat
@@ -64,6 +64,8 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :rows-per-page-text="'Filas por páginas'"
+      :rows-per-page-items="pageitems"
       class="elevation-1"
     >
       <template v-slot:items="props">
@@ -85,19 +87,27 @@
         <td class="text-xs-center justify-center">{{ props.item.responsable }}</td>
         <td class="text-xs-center justify-center">{{ props.item.insertadoPor }}</td>
         <td class="text-xs-center justify-center">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="$set(deleteDialog,props.item.id,true)"
-          >
-            delete
-          </v-icon>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem(props.item)"
+              slot="activator"
+            >
+              edit
+            </v-icon>
+            <span>Editar</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              @click="$set(deleteDialog,props.item.id,true)"
+              slot="activator"
+            >
+              delete
+            </v-icon>
+            <span>Eliminar</span>
+          </v-tooltip>
         </td>
         <v-dialog
           v-model="deleteDialog[props.item.id]"
@@ -160,6 +170,10 @@ export default {
       { text: 'Responsable', value: 'responsable', align: 'center' },
       { text: 'Insertado por', value: 'insertadoPor', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
+    ],
+    pageitems: [
+      5,10,30,
+      { text: "Todo", value: -1}
     ],
     items: [],
     centralesElectricas: [],
@@ -269,27 +283,31 @@ export default {
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Horas de trabajo',
-          model: 'horas'
+          model: 'horas',
+          validator: ['integer'],
+          max: 20000
         },
         {
           type: 'input',
           inputType: 'text',
           label: 'Sistema',
-          model: 'sistema'
+          model: 'sistema',
+          validator: ['nombre']
         },
         {
           type: 'input',
           inputType: 'text',
           label: 'Subsistema',
-          model: 'subSistema'
+          model: 'subSistema',
+          validator: ['nombre']
         },
         {
           type: 'textArea',
           label: 'Parte',
           model: 'parte',
-          placeholder: 'Parte diario...',
+          placeholder: 'Parte con problema...',
           rows: 3
         },
         {
@@ -315,18 +333,15 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Responsable',
-          model: 'responsable'
+          model: 'responsable',
+          validator: ['nombre']
         },
         {
           type: 'input',
-          inputType: 'number',
-          label: 'Índice de consumo',
-          model: 'indiceConsumo'
-        },
-        {
-          type: 'label',
+          inputType: 'text',
           label: 'Insertado por',
-          model: 'insertadoPor'
+          model: 'insertadoPor',
+          validator: ['nombre']
         }
       ]
     }

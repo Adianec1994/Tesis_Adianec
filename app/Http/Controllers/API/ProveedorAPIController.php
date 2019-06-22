@@ -40,7 +40,7 @@ class ProveedorAPIController extends AppBaseController
         $this->proveedorRepository->pushCriteria(new LimitOffsetCriteria($request));
         $proveedors = $this->proveedorRepository->all();
 
-        return $this->sendResponse($proveedors->toArray(), 'Proveedors retrieved successfully');
+        return $this->sendResponse($proveedors->toArray(), 'Proveedores recuperados con éxito');
     }
 
     /**
@@ -59,7 +59,7 @@ class ProveedorAPIController extends AppBaseController
 
         $proveedor = $this->proveedorRepository->create($input);
 
-        return $this->sendResponse($proveedor->toArray(), 'Proveedor saved successfully');
+        return $this->sendResponse($proveedor->toArray(), 'Proveedor guardado con éxito');
     }
 
     /**
@@ -76,10 +76,10 @@ class ProveedorAPIController extends AppBaseController
         $proveedor = $this->proveedorRepository->findWithoutFail($id);
 
         if (empty($proveedor)) {
-            return $this->sendError('Proveedor not found');
+            return $this->sendError('Proveedor no encontrado');
         }
 
-        return $this->sendResponse($proveedor->toArray(), 'Proveedor retrieved successfully');
+        return $this->sendResponse($proveedor->toArray(), 'Proveedor recuperado con éxito');
     }
 
     /**
@@ -101,12 +101,12 @@ class ProveedorAPIController extends AppBaseController
         $proveedor = $this->proveedorRepository->findWithoutFail($id);
 
         if (empty($proveedor)) {
-            return $this->sendError('Proveedor not found');
+            return $this->sendError('Proveedor no encontrado');
         }
 
         $proveedor = $this->proveedorRepository->update($input, $id);
 
-        return $this->sendResponse($proveedor->toArray(), 'Proveedor updated successfully');
+        return $this->sendResponse($proveedor->toArray(), 'Proveedor actualizado con éxito');
     }
 
     /**
@@ -123,11 +123,11 @@ class ProveedorAPIController extends AppBaseController
         $proveedor = $this->proveedorRepository->findWithoutFail($id);
 
         if (empty($proveedor)) {
-            return $this->sendError('Proveedor not found');
+            return $this->sendError('Proveedor no encontrado');
         }
 
         $proveedor->delete();
 
-        return $this->sendResponse($id, 'Proveedor deleted successfully');
+        return $this->sendResponse($id, 'Proveedor eliminado con éxito');
     }
 }

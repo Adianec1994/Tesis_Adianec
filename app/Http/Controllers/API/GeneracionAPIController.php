@@ -40,7 +40,7 @@ class GeneracionAPIController extends AppBaseController
         $this->generacionRepository->pushCriteria(new LimitOffsetCriteria($request));
         $generacions = $this->generacionRepository->all();
 
-        return $this->sendResponse($generacions->toArray(), 'Generacions retrieved successfully');
+        return $this->sendResponse($generacions->toArray(), 'Generaciones recuperado con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class GeneracionAPIController extends AppBaseController
 
         $generacion = $this->generacionRepository->create($input);
 
-        return $this->sendResponse($generacion->toArray(), 'Generacion saved successfully');
+        return $this->sendResponse($generacion->toArray(), 'Generación guardado con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class GeneracionAPIController extends AppBaseController
         $generacion = $this->generacionRepository->findWithoutFail($id);
 
         if (empty($generacion)) {
-            return $this->sendError('Generacion not found');
+            return $this->sendError('Generación no encontrado');
         }
 
-        return $this->sendResponse($generacion->toArray(), 'Generacion retrieved successfully');
+        return $this->sendResponse($generacion->toArray(), 'Generación recuperado con éxito');
     }
 
     /**
@@ -97,12 +97,12 @@ class GeneracionAPIController extends AppBaseController
         $generacion = $this->generacionRepository->findWithoutFail($id);
 
         if (empty($generacion)) {
-            return $this->sendError('Generacion not found');
+            return $this->sendError('Generación no encontrado');
         }
 
         $generacion = $this->generacionRepository->update($input, $id);
 
-        return $this->sendResponse($generacion->toArray(), 'Generacion updated successfully');
+        return $this->sendResponse($generacion->toArray(), 'Generación actualizado con éxito');
     }
 
     /**
@@ -119,11 +119,11 @@ class GeneracionAPIController extends AppBaseController
         $generacion = $this->generacionRepository->findWithoutFail($id);
 
         if (empty($generacion)) {
-            return $this->sendError('Generacion not found');
+            return $this->sendError('Generación no encontrado');
         }
 
         $generacion->delete();
 
-        return $this->sendResponse($id, 'Generacion deleted successfully');
+        return $this->sendResponse($id, 'Generación eliminado con éxito');
     }
 }

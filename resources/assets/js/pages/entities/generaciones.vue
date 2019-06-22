@@ -64,6 +64,8 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :rows-per-page-text="'Filas por páginas'"
+      :rows-per-page-items="pageitems"
       class="elevation-1"
     >
       <template v-slot:items="props">
@@ -76,19 +78,27 @@
         <td class="text-xs-center justify-center">{{ props.item.tiempoOperacion }}</td>
         <td class="text-xs-center justify-center">{{ props.item.reportadoPor }}</td>
         <td class="text-xs-center justify-center">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="$set(deleteDialog,props.item.id,true)"
-          >
-            delete
-          </v-icon>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem(props.item)"
+              slot="activator"
+            >
+              edit
+            </v-icon>
+            <span>Editar</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              @click="$set(deleteDialog,props.item.id,true)"
+              slot="activator"
+            >
+              delete
+            </v-icon>
+            <span>Eliminar</span>
+          </v-tooltip>
         </td>
         <v-dialog
           v-model="deleteDialog[props.item.id]"
@@ -142,6 +152,10 @@ export default {
       { text: 'Tiempo de operación', value: 'tiempoOperacion', align: 'center' },
       { text: 'Reportado por', value: 'reportadoPor', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
+    ],
+    pageitems: [
+      5,10,30,
+      { text: "Todo", value: -1}
     ],
     items: [],
     centralesElectricas: [],
@@ -234,7 +248,7 @@ export default {
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'time',
           label: 'Tiempo de operación',
           model: 'tiempoOperacion'
         },
@@ -242,7 +256,8 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Reportado por',
-          model: 'reportadoPor'
+          model: 'reportadoPor',
+          validator: ['nombre']
         }
       ]
     }

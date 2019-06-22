@@ -133,6 +133,7 @@ export default {
     schema: Object,
     options: Object,
     moduleName: String
+
   },
 
   computed: {

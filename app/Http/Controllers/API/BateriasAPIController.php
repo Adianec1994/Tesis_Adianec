@@ -36,11 +36,12 @@ class BateriasAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\Baterias');
         $this->bateriasRepository->pushCriteria(new RequestCriteria($request));
         $this->bateriasRepository->pushCriteria(new LimitOffsetCriteria($request));
         $baterias = $this->bateriasRepository->all();
 
-        return $this->sendResponse($baterias->toArray(), 'Baterias retrieved successfully');
+        return $this->sendResponse($baterias->toArray(), 'Baterías recuperado con éxito');
     }
 
     /**
@@ -53,11 +54,12 @@ class BateriasAPIController extends AppBaseController
      */
     public function store(CreateBateriasAPIRequest $request)
     {
+        $this->authorize('create', 'App\Baterias');
         $input = $request->all();
 
         $baterias = $this->bateriasRepository->create($input);
 
-        return $this->sendResponse($baterias->toArray(), 'Baterias saved successfully');
+        return $this->sendResponse($baterias->toArray(), 'Baterías guardado con éxito');
     }
 
     /**
@@ -70,14 +72,16 @@ class BateriasAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\Baterias');
+
         /** @var Baterias $baterias */
         $baterias = $this->bateriasRepository->findWithoutFail($id);
 
         if (empty($baterias)) {
-            return $this->sendError('Baterias not found');
+            return $this->sendError('Baterias no encontrado');
         }
 
-        return $this->sendResponse($baterias->toArray(), 'Baterias retrieved successfully');
+        return $this->sendResponse($baterias->toArray(), 'Baterías recuperado con éxito');
     }
 
     /**
@@ -91,18 +95,20 @@ class BateriasAPIController extends AppBaseController
      */
     public function update($id, UpdateBateriasAPIRequest $request)
     {
+        $this->authorize('update', 'App\Baterias');
+
         $input = $request->all();
 
         /** @var Baterias $baterias */
         $baterias = $this->bateriasRepository->findWithoutFail($id);
 
         if (empty($baterias)) {
-            return $this->sendError('Baterias not found');
+            return $this->sendError('Baterías no encontrado');
         }
 
         $baterias = $this->bateriasRepository->update($input, $id);
 
-        return $this->sendResponse($baterias->toArray(), 'Baterias updated successfully');
+        return $this->sendResponse($baterias->toArray(), 'Baterías actualizado con éxito');
     }
 
     /**
@@ -115,15 +121,17 @@ class BateriasAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\Baterias');
+
         /** @var Baterias $baterias */
         $baterias = $this->bateriasRepository->findWithoutFail($id);
 
         if (empty($baterias)) {
-            return $this->sendError('Baterias not found');
+            return $this->sendError('Baterías no encontrado');
         }
 
         $baterias->delete();
 
-        return $this->sendResponse($id, 'Baterias deleted successfully');
+        return $this->sendResponse($id, 'Baterías eliminado con éxito');
     }
 }

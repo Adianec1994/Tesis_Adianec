@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-card>
     <v-card-title>
       <v-toolbar
@@ -25,6 +25,8 @@
       :headers="headers"
       :items="items"
       :search="search"
+      :rows-per-page-text="'Filas por páginas'"
+      :rows-per-page-items="pageitems"
     >
       <template v-slot:items="props">
         <td>{{ props.item.created_at }}</td>
@@ -57,6 +59,10 @@ export default {
       { text: 'Acción', value: 'accion', align: 'center' },
       { text: 'IP', value: 'ip', align: 'center' },
       { text: 'URL', value: 'url', align: 'center' }
+    ],
+    pageitems: [
+      5,10,30,
+      { text: "Todo", value: -1}
     ],
     items: [],
     usuarios: []

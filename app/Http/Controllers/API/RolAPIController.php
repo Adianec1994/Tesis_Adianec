@@ -40,7 +40,7 @@ class RolAPIController extends AppBaseController
         $this->rolRepository->pushCriteria(new LimitOffsetCriteria($request));
         $rols = $this->rolRepository->all();
 
-        return $this->sendResponse($rols->toArray(), 'Rols retrieved successfully');
+        return $this->sendResponse($rols->toArray(), 'Roles recuperados con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class RolAPIController extends AppBaseController
 
         $rol = $this->rolRepository->create($input);
 
-        return $this->sendResponse($rol->toArray(), 'Rol saved successfully');
+        return $this->sendResponse($rol->toArray(), 'Rol guardado con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class RolAPIController extends AppBaseController
         $rol = $this->rolRepository->findWithoutFail($id);
 
         if (empty($rol)) {
-            return $this->sendError('Rol not found');
+            return $this->sendError('Rol no encontrado');
         }
 
-        return $this->sendResponse($rol->toArray(), 'Rol retrieved successfully');
+        return $this->sendResponse($rol->toArray(), 'Rol recuperado con éxito');
     }
 
     /**
@@ -97,12 +97,12 @@ class RolAPIController extends AppBaseController
         $rol = $this->rolRepository->findWithoutFail($id);
 
         if (empty($rol)) {
-            return $this->sendError('Rol not found');
+            return $this->sendError('Rol no encontrado');
         }
 
         $rol = $this->rolRepository->update($input, $id);
 
-        return $this->sendResponse($rol->toArray(), 'Rol updated successfully');
+        return $this->sendResponse($rol->toArray(), 'Rol actualizado con éxito');
     }
 
     /**
@@ -119,11 +119,11 @@ class RolAPIController extends AppBaseController
         $rol = $this->rolRepository->findWithoutFail($id);
 
         if (empty($rol)) {
-            return $this->sendError('Rol not found');
+            return $this->sendError('Rol no encontrado');
         }
 
         $rol->delete();
 
-        return $this->sendResponse($id, 'Rol deleted successfully');
+        return $this->sendResponse($id, 'Rol eliminado con éxito');
     }
 }

@@ -20,6 +20,7 @@ class PlanesRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
+        'anno',
         'mes',
         'generacion',
         'indiceConsumoCombustible',

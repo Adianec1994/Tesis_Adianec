@@ -46,9 +46,6 @@
               {{ $t('register') }}
             </router-link>
             <v-spacer></v-spacer>
-            <router-link :to="{ name: 'password.request' }">
-              {{ $t('forgot_password') }}
-            </router-link>
           </v-card-actions>
         </form>
       </v-card>

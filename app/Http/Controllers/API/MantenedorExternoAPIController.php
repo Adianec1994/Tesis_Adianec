@@ -40,7 +40,7 @@ class MantenedorExternoAPIController extends AppBaseController
         $this->mantenedorExternoRepository->pushCriteria(new LimitOffsetCriteria($request));
         $mantenedorExternos = $this->mantenedorExternoRepository->all();
 
-        return $this->sendResponse($mantenedorExternos->toArray(), 'Mantenedor Externos retrieved successfully');
+        return $this->sendResponse($mantenedorExternos->toArray(), 'Mantenedores Externos recuperados con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class MantenedorExternoAPIController extends AppBaseController
 
         $mantenedorExterno = $this->mantenedorExternoRepository->create($input);
 
-        return $this->sendResponse($mantenedorExterno->toArray(), 'Mantenedor Externo saved successfully');
+        return $this->sendResponse($mantenedorExterno->toArray(), 'Mantenedor Externo guardado con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class MantenedorExternoAPIController extends AppBaseController
         $mantenedorExterno = $this->mantenedorExternoRepository->findWithoutFail($id);
 
         if (empty($mantenedorExterno)) {
-            return $this->sendError('Mantenedor Externo not found');
+            return $this->sendError('Mantenedor Externo no encontrado');
         }
 
-        return $this->sendResponse($mantenedorExterno->toArray(), 'Mantenedor Externo retrieved successfully');
+        return $this->sendResponse($mantenedorExterno->toArray(), 'Mantenedor Externo recuperado con éxito');
     }
 
     /**
@@ -97,12 +97,12 @@ class MantenedorExternoAPIController extends AppBaseController
         $mantenedorExterno = $this->mantenedorExternoRepository->findWithoutFail($id);
 
         if (empty($mantenedorExterno)) {
-            return $this->sendError('Mantenedor Externo not found');
+            return $this->sendError('Mantenedor Externo no encontrado');
         }
 
         $mantenedorExterno = $this->mantenedorExternoRepository->update($input, $id);
 
-        return $this->sendResponse($mantenedorExterno->toArray(), 'MantenedorExterno updated successfully');
+        return $this->sendResponse($mantenedorExterno->toArray(), 'Mantenedor Externo actualizado con éxito');
     }
 
     /**
@@ -119,11 +119,11 @@ class MantenedorExternoAPIController extends AppBaseController
         $mantenedorExterno = $this->mantenedorExternoRepository->findWithoutFail($id);
 
         if (empty($mantenedorExterno)) {
-            return $this->sendError('Mantenedor Externo not found');
+            return $this->sendError('Mantenedor Externo no encontrado');
         }
 
         $mantenedorExterno->delete();
 
-        return $this->sendResponse($id, 'Mantenedor Externo deleted successfully');
+        return $this->sendResponse($id, 'Mantenedor Externo eliminado con éxito');
     }
 }

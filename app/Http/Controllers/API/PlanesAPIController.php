@@ -40,7 +40,7 @@ class PlanesAPIController extends AppBaseController
         $this->planesRepository->pushCriteria(new LimitOffsetCriteria($request));
         $planes = $this->planesRepository->all();
 
-        return $this->sendResponse($planes->toArray(), 'Planes retrieved successfully');
+        return $this->sendResponse($planes->toArray(), 'Planes recuperados con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class PlanesAPIController extends AppBaseController
 
         $planes = $this->planesRepository->create($input);
 
-        return $this->sendResponse($planes->toArray(), 'Planes saved successfully');
+        return $this->sendResponse($planes->toArray(), 'Planes guardados con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class PlanesAPIController extends AppBaseController
         $planes = $this->planesRepository->findWithoutFail($id);
 
         if (empty($planes)) {
-            return $this->sendError('Planes not found');
+            return $this->sendError('Planes no encontrados');
         }
 
-        return $this->sendResponse($planes->toArray(), 'Planes retrieved successfully');
+        return $this->sendResponse($planes->toArray(), 'Planes recuperados con éxito');
     }
 
     /**
@@ -97,12 +97,12 @@ class PlanesAPIController extends AppBaseController
         $planes = $this->planesRepository->findWithoutFail($id);
 
         if (empty($planes)) {
-            return $this->sendError('Planes not found');
+            return $this->sendError('Planes no encontrados');
         }
 
         $planes = $this->planesRepository->update($input, $id);
 
-        return $this->sendResponse($planes->toArray(), 'Planes updated successfully');
+        return $this->sendResponse($planes->toArray(), 'Planes actualizados con éxito');
     }
 
     /**
@@ -119,11 +119,11 @@ class PlanesAPIController extends AppBaseController
         $planes = $this->planesRepository->findWithoutFail($id);
 
         if (empty($planes)) {
-            return $this->sendError('Planes not found');
+            return $this->sendError('Planes no encontrados');
         }
 
         $planes->delete();
 
-        return $this->sendResponse($id, 'Planes deleted successfully');
+        return $this->sendResponse($id, 'Planes eliminados con éxito');
     }
 }

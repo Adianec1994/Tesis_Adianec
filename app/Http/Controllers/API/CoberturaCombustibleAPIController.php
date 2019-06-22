@@ -36,11 +36,13 @@ class CoberturaCombustibleAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\CoberturaCombustible');
+
         $this->coberturaCombustibleRepository->pushCriteria(new RequestCriteria($request));
         $this->coberturaCombustibleRepository->pushCriteria(new LimitOffsetCriteria($request));
         $coberturaCombustibles = $this->coberturaCombustibleRepository->all();
 
-        return $this->sendResponse($coberturaCombustibles->toArray(), 'Cobertura Combustibles retrieved successfully');
+        return $this->sendResponse($coberturaCombustibles->toArray(), 'Coberturas de Combustibles recuperado con éxito');
     }
 
     /**
@@ -53,11 +55,13 @@ class CoberturaCombustibleAPIController extends AppBaseController
      */
     public function store(CreateCoberturaCombustibleAPIRequest $request)
     {
+        $this->authorize('create', 'App\CoberturaCombustible');
+
         $input = $request->all();
 
         $coberturaCombustible = $this->coberturaCombustibleRepository->create($input);
 
-        return $this->sendResponse($coberturaCombustible->toArray(), 'Cobertura Combustible saved successfully');
+        return $this->sendResponse($coberturaCombustible->toArray(), 'Cobertura de Combustible guardado con éxito');
     }
 
     /**
@@ -70,14 +74,16 @@ class CoberturaCombustibleAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\CoberturaCombustible');
+
         /** @var CoberturaCombustible $coberturaCombustible */
         $coberturaCombustible = $this->coberturaCombustibleRepository->findWithoutFail($id);
 
         if (empty($coberturaCombustible)) {
-            return $this->sendError('Cobertura Combustible not found');
+            return $this->sendError('Cobertura Combustible no encontrado');
         }
 
-        return $this->sendResponse($coberturaCombustible->toArray(), 'Cobertura Combustible retrieved successfully');
+        return $this->sendResponse($coberturaCombustible->toArray(), 'Cobertura de Combustible recuperado con éxito');
     }
 
     /**
@@ -91,18 +97,20 @@ class CoberturaCombustibleAPIController extends AppBaseController
      */
     public function update($id, UpdateCoberturaCombustibleAPIRequest $request)
     {
+        $this->authorize('update', 'App\CoberturaCombustible');
+
         $input = $request->all();
 
         /** @var CoberturaCombustible $coberturaCombustible */
         $coberturaCombustible = $this->coberturaCombustibleRepository->findWithoutFail($id);
 
         if (empty($coberturaCombustible)) {
-            return $this->sendError('Cobertura Combustible not found');
+            return $this->sendError('Cobertura de Combustible no encontrado');
         }
 
         $coberturaCombustible = $this->coberturaCombustibleRepository->update($input, $id);
 
-        return $this->sendResponse($coberturaCombustible->toArray(), 'CoberturaCombustible updated successfully');
+        return $this->sendResponse($coberturaCombustible->toArray(), 'Cobertura de Combustible actualizado con éxito');
     }
 
     /**
@@ -115,15 +123,17 @@ class CoberturaCombustibleAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\CoberturaCombustible');
+
         /** @var CoberturaCombustible $coberturaCombustible */
         $coberturaCombustible = $this->coberturaCombustibleRepository->findWithoutFail($id);
 
         if (empty($coberturaCombustible)) {
-            return $this->sendError('Cobertura Combustible not found');
+            return $this->sendError('Cobertura de Combustible no encontrado');
         }
 
         $coberturaCombustible->delete();
 
-        return $this->sendResponse($id, 'Cobertura Combustible deleted successfully');
+        return $this->sendResponse($id, 'Cobertura de Combustible eliminado con éxito');
     }
 }

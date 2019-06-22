@@ -36,12 +36,14 @@ class CentralElectricaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\CentralElectrica');
+
         $this->centralElectricaRepository->pushCriteria(new RequestCriteria($request));
         $this->centralElectricaRepository->pushCriteria(new LimitOffsetCriteria($request));
         // $centralElectricas = $this->centralElectricaRepository->all();
 
         $centralElectricas = CentralElectrica::with('Baterias.Grupos')->get();
-        return $this->sendResponse($centralElectricas, 'Central Electricas retrieved successfully');
+        return $this->sendResponse($centralElectricas, 'Centrales Eléctricas recuperadas con éxito');
     }
 
     /**
@@ -54,11 +56,13 @@ class CentralElectricaAPIController extends AppBaseController
      */
     public function store(CreateCentralElectricaAPIRequest $request)
     {
+        $this->authorize('create', 'App\CentralElectrica');
+
         $input = $request->all();
 
         $centralElectrica = $this->centralElectricaRepository->create($input);
 
-        return $this->sendResponse($centralElectrica->toArray(), 'Central Electrica saved successfully');
+        return $this->sendResponse($centralElectrica->toArray(), 'Central Eléctrica guardado con éxito');
     }
 
     /**
@@ -71,14 +75,16 @@ class CentralElectricaAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\CentralElectrica');
+
         /** @var CentralElectrica $centralElectrica */
         $centralElectrica = $this->centralElectricaRepository->findWithoutFail($id);
 
         if (empty($centralElectrica)) {
-            return $this->sendError('Central Electrica not found');
+            return $this->sendError('Central Eléctrica no encontrado');
         }
 
-        return $this->sendResponse($centralElectrica->toArray(), 'Central Electrica retrieved successfully');
+        return $this->sendResponse($centralElectrica->toArray(), 'Central Eléctrica recuperado con éxito');
     }
 
     /**
@@ -92,18 +98,20 @@ class CentralElectricaAPIController extends AppBaseController
      */
     public function update($id, UpdateCentralElectricaAPIRequest $request)
     {
+        $this->authorize('update', 'App\CentralElectrica');
+
         $input = $request->all();
 
         /** @var CentralElectrica $centralElectrica */
         $centralElectrica = $this->centralElectricaRepository->findWithoutFail($id);
 
         if (empty($centralElectrica)) {
-            return $this->sendError('Central Electrica not found');
+            return $this->sendError('Central Eléctrica no encontrado');
         }
 
         $centralElectrica = $this->centralElectricaRepository->update($input, $id);
 
-        return $this->sendResponse($centralElectrica->toArray(), 'CentralElectrica updated successfully');
+        return $this->sendResponse($centralElectrica->toArray(), 'Central Eléctrica actualizado con éxito');
     }
 
     /**
@@ -116,15 +124,17 @@ class CentralElectricaAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\CentralElectrica');
+
         /** @var CentralElectrica $centralElectrica */
         $centralElectrica = $this->centralElectricaRepository->findWithoutFail($id);
 
         if (empty($centralElectrica)) {
-            return $this->sendError('Central Electrica not found');
+            return $this->sendError('Central Eléctrica no encontrado');
         }
 
         $centralElectrica->delete();
 
-        return $this->sendResponse($id, 'Central Electrica deleted successfully');
+        return $this->sendResponse($id, 'Central Eléctrica eliminado con éxito');
     }
 }

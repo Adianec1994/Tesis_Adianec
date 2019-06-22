@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-toolbar
       flat
@@ -64,6 +64,8 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :rows-per-page-text="'Filas por páginas'"
+      :rows-per-page-items="pageitems"
       class="elevation-1"
     >
       <template v-slot:items="props">
@@ -91,19 +93,27 @@
         <td class="text-xs-center justify-center">{{ props.item.refrigteConsumo }}</td>
         <td class="text-xs-center justify-center">{{ props.item.refrigteExistencia }}</td>
         <td class="text-xs-center justify-center">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="$set(deleteDialog,props.item.id,true)"
-          >
-            delete
-          </v-icon>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem(props.item)"
+              slot="activator"
+            >
+              edit
+            </v-icon>
+            <span>Editar</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              @click="$set(deleteDialog,props.item.id,true)"
+              slot="activator"
+            >
+              delete
+            </v-icon>
+            <span>Eliminar</span>
+          </v-tooltip>
         </td>
         <v-dialog
           v-model="deleteDialog[props.item.id]"
@@ -173,6 +183,10 @@ export default {
       { text: 'Refrigerante existencia', value: 'refrigteExistencia', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
+    pageitems: [
+      5,10,30,
+      { text: "Todo", value: -1}
+    ],
     items: [],
     entidades: [],
     options: {
@@ -194,135 +208,179 @@ export default {
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Generación bruta',
-          model: 'genBruta'
+          model: 'genBruta',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Insumos',
-          model: 'insumos'
+          model: 'insumos',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Recibido',
-          model: 'recibido'
+          model: 'recibido',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Volumen recibido',
-          model: 'volumenRecibido'
+          model: 'volumenRecibido',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Consumo generación',
-          model: 'consumoGeneracion'
+          model: 'consumoGeneracion',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Densidad ponderada',
-          model: 'densidadPonderada'
+          model: 'densidadPonderada',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Temperatura',
-          model: 'temperatura'
+          model: 'temperatura',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Densidad corrección',
-          model: 'densidadCorreccion'
+          model: 'densidadCorreccion',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Valor calórico',
-          model: 'valorCalorico'
+          model: 'valorCalorico',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Existencia',
-          model: 'existencia'
+          model: 'existencia',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Cobertura',
-          model: 'cobertura'
+          model: 'cobertura',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Índice de consumo',
-          model: 'indiceConsumo'
+          model: 'indiceConsumo',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Lubricante recibido',
-          model: 'lubricteRecibido'
+          model: 'lubricteRecibido',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Lubricante consumo reposición',
-          model: 'lubricteCsmoReposicion'
+          model: 'lubricteCsmoReposicion',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Lubricante consumo cambio',
-          model: 'lubricteCsmoCambio'
+          model: 'lubricteCsmoCambio',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Lubricante consumo total',
-          model: 'lubricteCsmoTotal'
+          model: 'lubricteCsmoTotal',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Lubricante existencia',
-          model: 'lubricteExistencia'
+          model: 'lubricteExistencia',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Lubricante cobertura',
-          model: 'lubricteCobertura'
+          model: 'lubricteCobertura',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Lubricante índice consumo',
-          model: 'lubricteIndiceCsmo'
+          model: 'lubricteIndiceCsmo',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Refrigerante recibido',
-          model: 'refrigteRecibido'
+          model: 'refrigteRecibido',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Refrigerante consumo',
-          model: 'refrigteConsumo'
+          model: 'refrigteConsumo',
+          validator: ['double'],
+          max: 4
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Refrigerante existencia',
-          model: 'refrigteExistencia'
+          model: 'refrigteExistencia',
+          validator: ['double'],
+          max: 4
         }
       ]
     }

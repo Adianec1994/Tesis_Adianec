@@ -42,7 +42,7 @@ class UserAPIController extends AppBaseController
         // $users = $this->userRepository->sinAdminActual($request->user()->id);
         $users = $this->userRepository->all();
 
-        return $this->sendResponse($users->toArray(), 'Users retrieved successfully');
+        return $this->sendResponse($users->toArray(), 'Usuarios recuperados con éxito');
     }
 
     /**
@@ -72,10 +72,10 @@ class UserAPIController extends AppBaseController
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {
-            return $this->sendError('User not found');
+            return $this->sendError('Usuario no encontrado');
         }
 
-        return $this->sendResponse($user->toArray(), 'User retrieved successfully');
+        return $this->sendResponse($user->toArray(), 'Usuario recuperado con éxito');
     }
 
     /**
@@ -96,14 +96,14 @@ class UserAPIController extends AppBaseController
         $this->authorize('update', $user);
 
         if (empty($user)) {
-            return $this->sendError('User not found');
+            return $this->sendError('Usuario no encontrado');
         }
 
         $user->syncRoles([$input['cargo']]);
 
         $user = $this->userRepository->update($input, $id);
 
-        return $this->sendResponse($user->toArray(), 'User updated successfully');
+        return $this->sendResponse($user->toArray(), 'Usuario actualizado con éxito');
     }
 
     /**
@@ -121,11 +121,11 @@ class UserAPIController extends AppBaseController
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {
-            return $this->sendError('User not found');
+            return $this->sendError('Usuario no encontrado');
         }
 
         $user->delete();
 
-        return $this->sendResponse($id, 'User deleted successfully');
+        return $this->sendResponse($id, 'Usuario eliminado con éxito');
     }
 }

@@ -55,6 +55,8 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :rows-per-page-text="'Filas por páginas'"
+      :rows-per-page-items="pageitems"
       class="elevation-1"
     >
       <template v-slot:items="props">
@@ -64,20 +66,28 @@
         <td class="text-xs-center justify-center">{{ props.item.username }}</td>
         <td class="text-xs-center justify-center">{{ props.item.email }}</td>
         <td class="text-xs-center justify-center">
+          <v-tooltip bottom>
           <v-icon
             small
             class="mr-2"
             @click="editItem(props.item)"
+            slot="activator"
           >
             edit
           </v-icon>
+            <span>Editar</span>
+          </v-tooltip>
+          <v-tooltip bottom>
           <v-icon
             v-if="props.item.id != idUserAuth"
             small
             @click="$set(deleteDialog,props.item.id,true)"
+            slot="activator"
           >
             delete
           </v-icon>
+            <span>Eliminar</span>
+          </v-tooltip>
         </td>
         <v-dialog
           v-model="deleteDialog[props.item.id]"
@@ -130,6 +140,10 @@ export default {
       { text: 'email', value: 'email', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
+    pageitems: [
+      5,10,30,
+      { text: "Todo", value: -1}
+    ],
     items: [],
     roles: [],
     options: {
@@ -142,7 +156,8 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Nombre completo',
-          model: 'name'
+          model: 'name',
+          validator: ['nombre']
         },
         {
           type: 'switch',
@@ -191,7 +206,8 @@ export default {
           type: 'input',
           inputType: 'email',
           label: 'Email',
-          model: 'email'
+          model: 'email',
+          validator: ['email']
         }
       ]
     }

@@ -40,7 +40,7 @@ class HechosExtraordinariosAPIController extends AppBaseController
         $this->hechosExtraordinariosRepository->pushCriteria(new LimitOffsetCriteria($request));
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->all();
 
-        return $this->sendResponse($hechosExtraordinarios->toArray(), 'Hechos Extraordinarios retrieved successfully');
+        return $this->sendResponse($hechosExtraordinarios->toArray(), 'Hechos Extraordinarios recuperados con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class HechosExtraordinariosAPIController extends AppBaseController
 
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->create($input);
 
-        return $this->sendResponse($hechosExtraordinarios->toArray(), 'Hechos Extraordinarios saved successfully');
+        return $this->sendResponse($hechosExtraordinarios->toArray(), 'Hecho Extraordinario guardado con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class HechosExtraordinariosAPIController extends AppBaseController
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->findWithoutFail($id);
 
         if (empty($hechosExtraordinarios)) {
-            return $this->sendError('Hechos Extraordinarios not found');
+            return $this->sendError('Hechos Extraordinarios no encontrado');
         }
 
-        return $this->sendResponse($hechosExtraordinarios->toArray(), 'Hechos Extraordinarios retrieved successfully');
+        return $this->sendResponse($hechosExtraordinarios->toArray(), 'Hechos Extraordinarios recuperado con éxito');
     }
 
     /**
@@ -97,12 +97,12 @@ class HechosExtraordinariosAPIController extends AppBaseController
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->findWithoutFail($id);
 
         if (empty($hechosExtraordinarios)) {
-            return $this->sendError('Hechos Extraordinarios not found');
+            return $this->sendError('Hechos Extraordinarios no encontrado');
         }
 
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->update($input, $id);
 
-        return $this->sendResponse($hechosExtraordinarios->toArray(), 'HechosExtraordinarios updated successfully');
+        return $this->sendResponse($hechosExtraordinarios->toArray(), 'Hecho Extraordinario actualizado con éxito');
     }
 
     /**
@@ -119,11 +119,11 @@ class HechosExtraordinariosAPIController extends AppBaseController
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->findWithoutFail($id);
 
         if (empty($hechosExtraordinarios)) {
-            return $this->sendError('Hechos Extraordinarios not found');
+            return $this->sendError('Hechos Extraordinarios no encontrado');
         }
 
         $hechosExtraordinarios->delete();
 
-        return $this->sendResponse($id, 'Hechos Extraordinarios deleted successfully');
+        return $this->sendResponse($id, 'Hecho Extraordinario eliminado con éxito');
     }
 }

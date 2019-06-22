@@ -23,7 +23,8 @@ class CreatePlansTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('mes', 45)->nullable();
+            $table->year('anno')->nullable();
+            $table->string('mes')->nullable();
             $table->decimal('generacion')->nullable();
             $table->decimal('indiceConsumoCombustible')->nullable();
             $table->decimal('compromiso')->nullable();

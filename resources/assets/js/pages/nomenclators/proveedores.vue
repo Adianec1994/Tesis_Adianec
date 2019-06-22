@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-toolbar
       flat
@@ -64,6 +64,8 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :rows-per-page-text="'Filas por páginas'"
+      :rows-per-page-items="pageitems"
       class="elevation-1"
     >
       <template v-slot:items="props">
@@ -71,19 +73,27 @@
         <td class="text-xs-center justify-center">{{ props.item.serie }}</td>
         <td class="text-xs-center justify-center">{{ props.item.pais }}</td>
         <td class="text-xs-center justify-center">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="$set(deleteDialog,props.item.id,true)"
-          >
-            delete
-          </v-icon>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem(props.item)"
+              slot="activator"
+            >
+              edit
+            </v-icon>
+            <span>Editar</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              @click="$set(deleteDialog,props.item.id,true)"
+              slot="activator"
+            >
+              delete
+            </v-icon>
+            <span>Eliminar</span>
+          </v-tooltip>
         </td>
         <v-dialog
           v-model="deleteDialog[props.item.id]"
@@ -133,6 +143,10 @@ export default {
       { text: 'Pais', value: 'pais', align: 'center' },
       { text: 'Acciones', value: 'marca', sortable: false, align: 'center' }
     ],
+    pageitems: [
+      5,10,30,
+      { text: "Todo", value: -1}
+    ],
     items: [],
     options: {
       validateAfterChanged: true,
@@ -144,7 +158,8 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Marca',
-          model: 'marca'
+          model: 'marca',
+          validator: ['nombre']
         },
         {
           type: 'select',
@@ -163,7 +178,8 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Pais',
-          model: 'pais'
+          model: 'pais',
+          validator: ['nombre']
         }
       ]
     }

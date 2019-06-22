@@ -40,7 +40,7 @@ class OperadorAPIController extends AppBaseController
         $this->operadorRepository->pushCriteria(new LimitOffsetCriteria($request));
         $operadors = $this->operadorRepository->all();
 
-        return $this->sendResponse($operadors->toArray(), 'Operadors retrieved successfully');
+        return $this->sendResponse($operadors->toArray(), 'Operadores recuperados con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class OperadorAPIController extends AppBaseController
 
         $operador = $this->operadorRepository->create($input);
 
-        return $this->sendResponse($operador->toArray(), 'Operador saved successfully');
+        return $this->sendResponse($operador->toArray(), 'Operador guardado con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class OperadorAPIController extends AppBaseController
         $operador = $this->operadorRepository->findWithoutFail($id);
 
         if (empty($operador)) {
-            return $this->sendError('Operador not found');
+            return $this->sendError('Operador no encontrado');
         }
 
-        return $this->sendResponse($operador->toArray(), 'Operador retrieved successfully');
+        return $this->sendResponse($operador->toArray(), 'Operador recuperado con éxito');
     }
 
     /**
@@ -97,12 +97,12 @@ class OperadorAPIController extends AppBaseController
         $operador = $this->operadorRepository->findWithoutFail($id);
 
         if (empty($operador)) {
-            return $this->sendError('Operador not found');
+            return $this->sendError('Operador no encontrado');
         }
 
         $operador = $this->operadorRepository->update($input, $id);
 
-        return $this->sendResponse($operador->toArray(), 'Operador updated successfully');
+        return $this->sendResponse($operador->toArray(), 'Operador actualizado con éxito');
     }
 
     /**
@@ -119,11 +119,11 @@ class OperadorAPIController extends AppBaseController
         $operador = $this->operadorRepository->findWithoutFail($id);
 
         if (empty($operador)) {
-            return $this->sendError('Operador not found');
+            return $this->sendError('Operador no encontrado');
         }
 
         $operador->delete();
 
-        return $this->sendResponse($id, 'Operador deleted successfully');
+        return $this->sendResponse($id, 'Operador eliminado con éxito');
     }
 }

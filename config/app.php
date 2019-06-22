@@ -78,9 +78,10 @@ return [
     |
     */
 
-    'locale' => env('APP_LANG', 'en'),
+    'locale' => env('APP_LANG', 'es'),
 
     'locales' => [
+        'es' => 'ES',
         'en' => 'EN',
         'sv' => 'SV',
     ],

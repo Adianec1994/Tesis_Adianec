@@ -41,7 +41,7 @@ class ProvinciaAPIController extends AppBaseController
         $this->provinciaRepository->pushCriteria(new LimitOffsetCriteria($request));
         $provincias = $this->provinciaRepository->all();
 
-        return $this->sendResponse($provincias->toArray(), 'Provincias retrieved successfully');
+        return $this->sendResponse($provincias->toArray(), 'Provincias recuperadas con éxito');
     }
 
     /**
@@ -59,7 +59,7 @@ class ProvinciaAPIController extends AppBaseController
 
         $provincia = $this->provinciaRepository->create($input);
 
-        return $this->sendResponse($provincia->toArray(), 'Provincia saved successfully');
+        return $this->sendResponse($provincia->toArray(), 'Provincia guardada con éxito');
     }
 
     /**
@@ -77,10 +77,10 @@ class ProvinciaAPIController extends AppBaseController
         $provincia = $this->provinciaRepository->findWithoutFail($id);
 
         if (empty($provincia)) {
-            return $this->sendError('Provincia not found');
+            return $this->sendError('Provincia no encontrada');
         }
 
-        return $this->sendResponse($provincia->toArray(), 'Provincia retrieved successfully');
+        return $this->sendResponse($provincia->toArray(), 'Provincia recuperada con éxito');
     }
 
     /**
@@ -101,12 +101,12 @@ class ProvinciaAPIController extends AppBaseController
         $provincia = $this->provinciaRepository->findWithoutFail($id);
 
         if (empty($provincia)) {
-            return $this->sendError('Provincia not found');
+            return $this->sendError('Provincia no encontrada');
         }
 
         $provincia = $this->provinciaRepository->update($input, $id);
 
-        return $this->sendResponse($provincia->toArray(), 'Provincia updated successfully');
+        return $this->sendResponse($provincia->toArray(), 'Provincia actualizada con éxito');
     }
 
     /**
@@ -124,11 +124,11 @@ class ProvinciaAPIController extends AppBaseController
         $provincia = $this->provinciaRepository->findWithoutFail($id);
 
         if (empty($provincia)) {
-            return $this->sendError('Provincia not found');
+            return $this->sendError('Provincia no encontrada');
         }
 
         $provincia->delete();
 
-        return $this->sendResponse($id, 'Provincia deleted successfully');
+        return $this->sendResponse($id, 'Provincia eliminada con éxito');
     }
 }

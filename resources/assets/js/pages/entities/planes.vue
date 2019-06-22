@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-toolbar
       flat
@@ -64,28 +64,39 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :rows-per-page-text="'Filas por páginas'"
+      :rows-per-page-items="pageitems"
       class="elevation-1"
     >
       <template v-slot:items="props">
         <td>{{ entidadName(props.item.entidads_id) }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.anno }}</td>
         <td class="text-xs-center justify-center">{{ props.item.mes }}</td>
         <td class="text-xs-center justify-center">{{ props.item.generacion }}</td>
         <td class="text-xs-center justify-center">{{ props.item.indiceConsumoCombustible }}</td>
         <td class="text-xs-center justify-center">{{ props.item.compromiso }}</td>
         <td class="text-xs-center justify-center">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="$set(deleteDialog,props.item.id,true)"
-          >
-            delete
-          </v-icon>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem(props.item)"
+              slot="activator"
+            >
+              edit
+            </v-icon>
+            <span>Editar</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <v-icon
+              small
+              @click="$set(deleteDialog,props.item.id,true)"
+              slot="activator"
+            >
+              delete
+            </v-icon>
+            <span>Eliminar</span>
+          </v-tooltip>
         </td>
         <v-dialog
           v-model="deleteDialog[props.item.id]"
@@ -131,11 +142,16 @@ export default {
     moduleName: 'Planes',
     headers: [
       { text: 'Entidad', value: 'entidads_id' },
+      { text: 'Año', value: 'anno', align: 'center' },
       { text: 'Mes', value: 'mes', align: 'center' },
       { text: 'Generación', value: 'generacion', align: 'center' },
       { text: 'Índice de consumo de combustible', value: 'indiceConsumoCombustible', align: 'center' },
       { text: 'Compromiso', value: 'compromiso', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
+    ],
+    pageitems: [
+      5,10,30,
+      { text: "Todo", value: -1}
     ],
     items: [],
     entidades: [],
@@ -157,6 +173,15 @@ export default {
           }
         },
         {
+          type: 'dateTimePicker',
+          label: 'Año',
+          model: 'anno',
+          dateTimePickerOptions: {
+            format: 'MM/YYYY',
+            viewMode(months){}
+          },
+        },
+        {
           type: 'select',
           label: 'Mes',
           model: 'mes',
@@ -167,21 +192,27 @@ export default {
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Generación',
-          model: 'generacion'
+          model: 'generacion',
+          validator: ['double'],
+          max: 3
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Índice de consumo de combustible',
-          model: 'indiceConsumoCombustible'
+          model: 'indiceConsumoCombustible',
+          validator: ['double'],
+          max: 3
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Compromiso',
-          model: 'compromiso'
+          model: 'compromiso',
+          validator: ['double'],
+          max: 3
         }
       ]
     }
@@ -295,6 +326,13 @@ export default {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
+    },
+
+    formatDate (date) {
+      if (date) {
+        return new Date(date).toLocaleDateString()
+        // return date.split(' ')[0]
+      }
     },
 
     entidadName (id) {

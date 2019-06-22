@@ -36,11 +36,13 @@ class DisponibilidadAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\Disponibilidad');
+
         $this->disponibilidadRepository->pushCriteria(new RequestCriteria($request));
         $this->disponibilidadRepository->pushCriteria(new LimitOffsetCriteria($request));
         $disponibilidads = $this->disponibilidadRepository->all();
 
-        return $this->sendResponse($disponibilidads->toArray(), 'Disponibilidads retrieved successfully');
+        return $this->sendResponse($disponibilidads->toArray(), 'Disponibilidad recuperado con éxito');
     }
 
     /**
@@ -53,11 +55,13 @@ class DisponibilidadAPIController extends AppBaseController
      */
     public function store(CreateDisponibilidadAPIRequest $request)
     {
+        $this->authorize('create', 'App\Disponibilidad');
+
         $input = $request->all();
 
         $disponibilidad = $this->disponibilidadRepository->create($input);
 
-        return $this->sendResponse($disponibilidad->toArray(), 'Disponibilidad saved successfully');
+        return $this->sendResponse($disponibilidad->toArray(), 'Disponibilidad guardado con éxito');
     }
 
     /**
@@ -70,14 +74,16 @@ class DisponibilidadAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\Disponibilidad');
+
         /** @var Disponibilidad $disponibilidad */
         $disponibilidad = $this->disponibilidadRepository->findWithoutFail($id);
 
         if (empty($disponibilidad)) {
-            return $this->sendError('Disponibilidad not found');
+            return $this->sendError('Disponibilidad no encontrado');
         }
 
-        return $this->sendResponse($disponibilidad->toArray(), 'Disponibilidad retrieved successfully');
+        return $this->sendResponse($disponibilidad->toArray(), 'Disponibilidad recuperado con éxito');
     }
 
     /**
@@ -91,18 +97,20 @@ class DisponibilidadAPIController extends AppBaseController
      */
     public function update($id, UpdateDisponibilidadAPIRequest $request)
     {
+        $this->authorize('update', 'App\Disponibilidad');
+
         $input = $request->all();
 
         /** @var Disponibilidad $disponibilidad */
         $disponibilidad = $this->disponibilidadRepository->findWithoutFail($id);
 
         if (empty($disponibilidad)) {
-            return $this->sendError('Disponibilidad not found');
+            return $this->sendError('Disponibilidad no encontrado');
         }
 
         $disponibilidad = $this->disponibilidadRepository->update($input, $id);
 
-        return $this->sendResponse($disponibilidad->toArray(), 'Disponibilidad updated successfully');
+        return $this->sendResponse($disponibilidad->toArray(), 'Disponibilidad actualizado con éxito');
     }
 
     /**
@@ -115,15 +123,17 @@ class DisponibilidadAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\Disponibilidad');
+
         /** @var Disponibilidad $disponibilidad */
         $disponibilidad = $this->disponibilidadRepository->findWithoutFail($id);
 
         if (empty($disponibilidad)) {
-            return $this->sendError('Disponibilidad not found');
+            return $this->sendError('Disponibilidad no encontrado');
         }
 
         $disponibilidad->delete();
 
-        return $this->sendResponse($id, 'Disponibilidad deleted successfully');
+        return $this->sendResponse($id, 'Disponibilidad eliminado con éxito');
     }
 }

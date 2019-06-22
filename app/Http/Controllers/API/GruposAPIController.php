@@ -40,7 +40,7 @@ class GruposAPIController extends AppBaseController
         $this->gruposRepository->pushCriteria(new LimitOffsetCriteria($request));
         $grupos = $this->gruposRepository->all();
 
-        return $this->sendResponse($grupos->toArray(), 'Grupos retrieved successfully');
+        return $this->sendResponse($grupos->toArray(), 'Grupos recuperados con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class GruposAPIController extends AppBaseController
 
         $grupos = $this->gruposRepository->create($input);
 
-        return $this->sendResponse($grupos->toArray(), 'Grupos saved successfully');
+        return $this->sendResponse($grupos->toArray(), 'Grupo guardado con éxito');
     }
 
     /**
@@ -74,10 +74,10 @@ class GruposAPIController extends AppBaseController
         $grupos = $this->gruposRepository->findWithoutFail($id);
 
         if (empty($grupos)) {
-            return $this->sendError('Grupos not found');
+            return $this->sendError('Grupos no encontrado');
         }
 
-        return $this->sendResponse($grupos->toArray(), 'Grupos retrieved successfully');
+        return $this->sendResponse($grupos->toArray(), 'Grupos recuperado con éxito');
     }
 
     /**
@@ -97,12 +97,12 @@ class GruposAPIController extends AppBaseController
         $grupos = $this->gruposRepository->findWithoutFail($id);
 
         if (empty($grupos)) {
-            return $this->sendError('Grupos not found');
+            return $this->sendError('Grupos no encontrado');
         }
 
         $grupos = $this->gruposRepository->update($input, $id);
 
-        return $this->sendResponse($grupos->toArray(), 'Grupos updated successfully');
+        return $this->sendResponse($grupos->toArray(), 'Grupos actualizado con éxito');
     }
 
     /**
@@ -119,11 +119,11 @@ class GruposAPIController extends AppBaseController
         $grupos = $this->gruposRepository->findWithoutFail($id);
 
         if (empty($grupos)) {
-            return $this->sendError('Grupos not found');
+            return $this->sendError('Grupos no encontrado');
         }
 
         $grupos->delete();
 
-        return $this->sendResponse($id, 'Grupos deleted successfully');
+        return $this->sendResponse($id, 'Grupo eliminado con éxito');
     }
 }
