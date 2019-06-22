@@ -63,7 +63,10 @@
 </template>
 
 <script>
+import Permit from '../common/Permit.js'
+
 export default {
+  mixins: [Permit],
   data () {
     return {
       name: this.$t('nav_menu_title'),
@@ -126,10 +129,9 @@ export default {
           icon: 'business_center',
           active: false,
           items: [
-            { title: 'Existencia de Lubricantes', icon: 'menu', route: { name: '8' }}
-            // { title: 'Planes', icon: 'menu', route: { name: 'planes' }},
-            // { title: 'Disponbilidades', icon: 'menu', route: { name: 'disponibilidades' }},
-            // { title: 'Hechos Extraordinarios', icon: 'menu', route: { name: 'hechos_extraordinarios' }}
+            { title: 'Disponibilidad', icon: 'menu', route: { name: '5' }},
+            { title: 'Existencia de Lubricantes', icon: 'menu', route: { name: '8' }},
+            { title: 'Existencia de Refrigerantes', icon: 'menu', route: { name: '9' }}
           ]
         }
       ]

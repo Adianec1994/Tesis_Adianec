@@ -1,53 +1,15 @@
 <template>
-  <v-layout justify-center>
-    <v-flex
-      xs12
-      sm12
-    >
-      <v-toolbar
-        color="blue"
-        dark
-      >
-        <v-toolbar-title>{{reportName}}</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn
-          dark
-          color="primary"
-          class="mb-2"
-          v-on:click="createBackup()"
-        >
-          <v-icon>save</v-icon>
-          Exportar a PDF
-        </v-btn>
-      </v-toolbar>
-
-      <v-card>
-        <v-data-table
-          id="my-table"
-          :items="items"
-          :headers="headers"
-        >
-          <template v-slot:items="props">
-            <td class="text-xs-center justify-center">{{ props.item.Provincias }}</td>
-            <td class="text-xs-center justify-center">{{ props.item.Existencia }}</td>
-            <td class="text-xs-center justify-center">{{ props.item.Horas }}</td>
-          </template>
-        </v-data-table>
-      </v-card>
-      <v-card>
-        <bar-chart
-        v-if="loaded"
-          :chartdata="chartData"
-          :options="options"
-        />
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-card>
+    <bar-chart
+    v-if="loaded"
+      :chartdata="chartData"
+      :options="options"
+    />
+  </v-card>
 </template>
 
 <script>
 import _ from 'lodash'
-import axios from 'axios'
 import Bar from './chart'
 
 export default {
@@ -55,11 +17,7 @@ export default {
     'bar-chart': Bar
   },
   data: () => ({
-    headers: [
-      { text: 'Provincias', value: 'Provincias', align: 'center' },
-      { text: 'Existencia', value: 'Existencia', align: 'center' },
-      { text: 'Horas', value: 'Horas', align: 'center' }
-    ],
+    loaded: false,
     colors: [
       'red',
       'blue',
@@ -71,8 +29,6 @@ export default {
       'pink',
       'aqua'
     ],
-    items: [],
-    loaded: [],
     chartData: {},
     options: {
       responsive: true,
@@ -88,27 +44,13 @@ export default {
   }),
 
   props: {
-    reportName: String,
-    reportNumber: Number
+    items: Array
   },
 
   mounted () {
     this.loaded = false
-    axios.get(`/api/reportes/${this.reportNumber}`).then((result) => {
-      this.items = result.data.data
-      this.chartData = this.fillData(Object.keys(this.items[0]))
-      // console.log(this.chartData)
-      this.loaded = true
-      this.$store.dispatch('responseMessage', {
-        type: result.data.success ? 'success' : 'error',
-        text: result.data.message
-      })
-    }).catch((err) => {
-      this.$store.dispatch('responseMessage', {
-        type: 'error',
-        text: err
-      })
-    })
+    this.chartData = this.fillData(Object.keys(this.items[0]))
+    this.loaded = true
   },
   methods: {
     fillData (keys, colors) {

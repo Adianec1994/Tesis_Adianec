@@ -22,6 +22,10 @@ Route::group(['middleware' => ['auth:api','trazas']], function () {
         return $request->user();
     });
 
+    Route::get('permissions', function (Request $request) {
+        return $request->user()->getAllPermissions();
+    });
+
     Route::patch('settings/profile', 'Settings\UpdateProfile');
     Route::patch('settings/password', 'Settings\UpdatePassword');
 
@@ -50,7 +54,9 @@ Route::group(['middleware' => ['auth:api','trazas']], function () {
     Route::post('snapshots/{name}', 'API\SnapshotsAPIController@restore');
     Route::post('snapshots', 'API\SnapshotsAPIController@create');
     Route::delete('snapshots/{name}', 'API\SnapshotsAPIController@destroy');
+    Route::get('reportes/5', 'API\ReportesAPIController@disponibilidad');
     Route::get('reportes/8', 'API\ReportesAPIController@existenciaLubricante');
+    Route::get('reportes/9', 'API\ReportesAPIController@existenciaRefrigerante');
 });
 
 

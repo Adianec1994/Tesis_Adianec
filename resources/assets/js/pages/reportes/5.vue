@@ -14,7 +14,7 @@
           dark
           color="primary"
           class="mb-2"
-          v-on:click="createBackup()"
+          v-on:click="pdfExport(items)"
         >
           <v-icon>save</v-icon>
           Exportar a PDF
@@ -23,13 +23,15 @@
 
       <v-card>
         <v-data-table
+          id="my-table"
           :items="items"
           :headers="headers"
         >
           <template v-slot:items="props">
             <td class="text-xs-center justify-center">{{ props.item.Provincias }}</td>
-            <td class="text-xs-center justify-center">{{ props.item.Existencia }}</td>
-            <td class="text-xs-center justify-center">{{ props.item.Horas }}</td>
+            <td class="text-xs-center justify-center">{{ props.item['Potencia Instalada (MW)'] }}</td>
+            <td class="text-xs-center justify-center">{{ props.item['Potencia Disponible (MW)'] }}</td>
+            <td class="text-xs-center justify-center">{{ props.item['Porciento Disponible'] }}</td>
           </template>
         </v-data-table>
       </v-card>
@@ -44,18 +46,21 @@
 <script>
 import axios from 'axios'
 import ReportView from './view'
+import PdfExport from '../../common/PdfExport.js'
 
 export default {
+  mixins: [PdfExport],
   data: () => ({
     loaded: false,
     items: [],
     headers: [
       { text: 'Provincias', value: 'Provincias', align: 'center' },
-      { text: 'Existencia', value: 'Existencia', align: 'center' },
-      { text: 'Horas', value: 'Horas', align: 'center' }
+      { text: 'Potencia Instalada (MW)', value: 'Potencia Instalada (MW)', align: 'center' },
+      { text: 'Potencia Disponible (MW)', value: 'Potencia Disponible (MW)', align: 'center' },
+      { text: 'Porciento Disponible', value: 'Porciento Disponible', align: 'center' }
     ],
-    reportName: 'Existencia de Lubricantes',
-    reportNumber: 8
+    reportName: 'Disponibilidad',
+    reportNumber: 5
   }),
 
   components: {

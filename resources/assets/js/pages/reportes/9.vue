@@ -28,8 +28,8 @@
         >
           <template v-slot:items="props">
             <td class="text-xs-center justify-center">{{ props.item.Provincias }}</td>
-            <td class="text-xs-center justify-center">{{ props.item.Existencia }}</td>
-            <td class="text-xs-center justify-center">{{ props.item.Horas }}</td>
+            <td class="text-xs-center justify-center">{{ props.item.Marca }}</td>
+            <td class="text-xs-center justify-center">{{ props.item.Cantidad }}</td>
           </template>
         </v-data-table>
       </v-card>
@@ -51,11 +51,11 @@ export default {
     items: [],
     headers: [
       { text: 'Provincias', value: 'Provincias', align: 'center' },
-      { text: 'Existencia', value: 'Existencia', align: 'center' },
-      { text: 'Horas', value: 'Horas', align: 'center' }
+      { text: 'Marca', value: 'Marca', align: 'center' },
+      { text: 'Cantidad', value: 'Cantidad', align: 'center' }
     ],
-    reportName: 'Existencia de Lubricantes',
-    reportNumber: 8
+    reportName: 'Existencia de Refrigerantes',
+    reportNumber: 9
   }),
 
   components: {

@@ -39,7 +39,10 @@ export default ({ authGuard, guestGuard }) => [
 
     { path: '/operadores', name: 'operadores', component: require('~/pages/nomenclators/operadores.vue') },
     { path: '/eventos_diarios', name: 'eventos_diarios', component: require('~/pages/entities/eventos_diarios.vue') },
-    { path: '/reportes/8', name: '8', component: require('~/pages/reportes/8.vue') }
+    // rutas de reportes
+    { path: '/reportes/5', name: '5', component: require('~/pages/reportes/5.vue') },
+    { path: '/reportes/8', name: '8', component: require('~/pages/reportes/8.vue') },
+    { path: '/reportes/9', name: '9', component: require('~/pages/reportes/9.vue') }
   ]),
 
   // Guest routes.
