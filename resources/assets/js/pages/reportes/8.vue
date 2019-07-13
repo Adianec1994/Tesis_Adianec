@@ -14,7 +14,7 @@
           dark
           color="primary"
           class="mb-2"
-          v-on:click="createBackup()"
+          v-on:click="pdfExport(items)"
         >
           <v-icon>save</v-icon>
           Exportar a PDF
@@ -36,6 +36,7 @@
       <report-view
         v-if="loaded"
         :items="items"
+        @chart="chart = $event"
       ></report-view>
     </v-flex>
   </v-layout>
@@ -44,8 +45,10 @@
 <script>
 import axios from 'axios'
 import ReportView from './view'
+import PdfExport from '../../common/PdfExport.js'
 
 export default {
+  mixins: [PdfExport],
   data: () => ({
     loaded: false,
     items: [],
