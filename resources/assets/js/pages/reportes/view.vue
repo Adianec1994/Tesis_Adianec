@@ -4,6 +4,7 @@
     v-if="loaded"
       :chartdata="chartData"
       :options="options"
+      v-on:chart="onChartEvent"
     />
   </v-card>
 </template>
@@ -78,6 +79,9 @@ export default {
         backgroundColor: color,
         data: data
       }
+    },
+    onChartEvent (chart) {
+      this.$emit('chart', chart)
     }
   }
 

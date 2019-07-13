@@ -38,6 +38,7 @@
       <report-view
         v-if="loaded"
         :items="items"
+        @chart="chart = $event"
       ></report-view>
     </v-flex>
   </v-layout>
@@ -51,6 +52,7 @@ import PdfExport from '../../common/PdfExport.js'
 export default {
   mixins: [PdfExport],
   data: () => ({
+    chart: {},
     loaded: false,
     items: [],
     headers: [
