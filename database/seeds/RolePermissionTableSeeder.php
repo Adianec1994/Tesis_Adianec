@@ -7,6 +7,31 @@ use Spatie\Permission\Models\Permission;
 class RolePermissionTableSeeder extends Seeder
 {
     /**
+     * Devolver el permiso si ya existe, si no, crearlo
+     * @param {String} $name nombre del permiso
+     * @return {Permission}
+     */
+    private function getPermission(String $name){
+        $permission = Permission::where('name',$name)->first();
+        if (!$permission) {
+            $permission = Permission::create(['name' => $name]);
+        }
+        return $permission;
+    }
+
+    /**
+     * Asignar permisos a un rol
+     * @param {String} $RoleName Nombre del rol
+     * @param {array} $Permissions Permisos asociados al rol
+     */
+    private function assign (String $RoleName, array $Permissions){
+        $Role = Role::create(['name' => $RoleName]);
+
+        foreach ($Permissions as $permission) {
+            $Role->givePermissionTo($this->getPermission($permission));
+        }
+    }
+    /**
      * Run the database seeds.
      *
      * @return void
@@ -55,11 +80,8 @@ class RolePermissionTableSeeder extends Seeder
           'importar_exportar'
         ];
 
-        $adminRole = Role::create(['name' => 'Administrador']);
+        $this->assign('Administrador', $adminPermissions);
 
-        foreach ($adminPermissions as $permission) {
-            $adminRole->givePermissionTo(Permission::create(['name' => $permission]));
-        }
     //permisos especialistaCDN
         $especialistaCDNPermissions = [
            'create_disponibilidad',
@@ -106,11 +128,7 @@ class RolePermissionTableSeeder extends Seeder
            'exportar_parte_diario_nac',
         ];
 
-        $especialistaCDNRole = Role::create(['name' => 'Especialista CDN']);
-
-        foreach ($especialistaCDNPermissions as $permission) {
-            $especialistaCDNRole->givePermissionTo(Permission::create(['name' => $permission]));
-        }
+        $this->assign('Especialista CDN', $especialistaCDNPermissions);
 
         //permisos especialistaUEB
         $especialistaUEBPermissions = [
@@ -150,11 +168,7 @@ class RolePermissionTableSeeder extends Seeder
             'exportar_parte_diario_ueb',
         ];
 
-        $especialistaUEBRole = Role::create(['name' => 'Especialista UEB']);
-
-        foreach ($especialistaUEBPermissions as $permission) {
-            $especialistaUEBRole->givePermissionTo(Permission::create(['name' => $permission]));
-        }
+        $this->assign('Especialista UEB', $especialistaUEBPermissions);
 
         //permisos directorCDN
         $directorCDNPermissions = [
@@ -164,33 +178,21 @@ class RolePermissionTableSeeder extends Seeder
             'read_traza',
         ];
 
-        $directorCDNRole = Role::create(['name' => 'Director CDN']);
-
-        foreach ($directorCDNPermissions as $permission) {
-            $directorCDNRole->givePermissionTo(Permission::create(['name' => $permission]));
-        }
+        $this->assign('Director CDN', $directorCDNPermissions);
 
         //permisos directorUEB
         $directorUEBPermissions = [
             'read_reporte',
         ];
 
-        $directorUEBRole = Role::create(['name' => 'Director UEB']);
-
-        foreach ($directorUEBPermissions as $permission) {
-            $directorUEBRole->givePermissionTo(Permission::create(['name' => $permission]));
-        }
+        $this->assign('Director UEB', $directorUEBPermissions);
 
         //permisos directivo
         $directivoPermissions = [
             'read_reporte',
         ];
 
-        $directivoRole = Role::create(['name' => 'Directivo']);
-
-        foreach ($directivoPermissions as $permission) {
-            $directivoRole->givePermissionTo(Permission::create(['name' => $permission]));
-        }
+        $this->assign('Directivo', $directivoPermissions);
 
     }
 }
