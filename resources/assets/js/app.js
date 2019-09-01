@@ -21,8 +21,8 @@ Vue.use(VueFormGenerator, {
         for (let i = 0; i < arr.length; i++) {
           text = text.replace('{' + (i) + '}', arr[i])
         }
-        return text
       }
+      return text
     },
     checkEmpty: (value, required, messages = VueFormGenerator.validators.resources) => {
       if (_.isNil(value) || value === '') {
