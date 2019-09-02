@@ -11,5 +11,7 @@ class ProvinciaTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('provincias')->insert(['nombre'=>'La Habana']);    }
+        DB::table('provincias')->insert(['nombre'=>'La Habana']);
+        DB::table('provincias')->insert(['nombre'=>'Matanzas']);
+        DB::table('provincias')->insert(['nombre'=>'Villa Clara']);}
 }
