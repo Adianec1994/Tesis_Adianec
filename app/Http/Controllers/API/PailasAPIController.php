@@ -36,6 +36,8 @@ class PailasAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\Pailas');
+
         $this->pailasRepository->pushCriteria(new RequestCriteria($request));
         $this->pailasRepository->pushCriteria(new LimitOffsetCriteria($request));
         $pailas = $this->pailasRepository->all();
@@ -53,6 +55,8 @@ class PailasAPIController extends AppBaseController
      */
     public function store(CreatePailasAPIRequest $request)
     {
+        $this->authorize('create', 'App\Pailas');
+
         $input = $request->all();
 
         $pailas = $this->pailasRepository->create($input);
@@ -70,6 +74,8 @@ class PailasAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\Pailas');
+
         /** @var Pailas $pailas */
         $pailas = $this->pailasRepository->findWithoutFail($id);
 
@@ -91,6 +97,8 @@ class PailasAPIController extends AppBaseController
      */
     public function update($id, UpdatePailasAPIRequest $request)
     {
+        $this->authorize('update', 'App\Pailas');
+
         $input = $request->all();
 
         /** @var Pailas $pailas */
@@ -115,6 +123,8 @@ class PailasAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\Pailas');
+
         /** @var Pailas $pailas */
         $pailas = $this->pailasRepository->findWithoutFail($id);
 

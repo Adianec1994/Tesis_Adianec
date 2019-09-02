@@ -19,6 +19,7 @@ class UserPolicy
     public function view(User $user)
     {
         $permissions = $user->getAllPermissions();
+
         return $permissions->contains('name','read_usuario');
     }
 
@@ -31,6 +32,7 @@ class UserPolicy
     public function create(User $user)
     {
         $permissions = $user->getAllPermissions();
+
         return $permissions->contains('name','create_usuario');
     }
 
@@ -41,17 +43,11 @@ class UserPolicy
      * @param  \App\User  $model
      * @return mixed
      */
-    public function update(User $user, User $model)
+    public function update(User $user)
     {
         $permissions = $user->getAllPermissions();
-        if ($user->id === $model->id) {
-            return true;
-        }
-        if($permissions->contains('name','update_usuario'))
-        {
-            return true;
-        }
-        return false;
+
+        return $permissions->contains('name','update_usuario');
     }
 
     /**
@@ -64,6 +60,7 @@ class UserPolicy
     public function delete(User $user)
     {
         $permissions = $user->getAllPermissions();
+
         return $permissions->contains('name','delete_usuario');
     }
 

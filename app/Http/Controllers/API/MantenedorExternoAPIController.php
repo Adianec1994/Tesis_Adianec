@@ -36,6 +36,8 @@ class MantenedorExternoAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\MantenedorExterno');
+
         $this->mantenedorExternoRepository->pushCriteria(new RequestCriteria($request));
         $this->mantenedorExternoRepository->pushCriteria(new LimitOffsetCriteria($request));
         $mantenedorExternos = $this->mantenedorExternoRepository->all();
@@ -53,6 +55,8 @@ class MantenedorExternoAPIController extends AppBaseController
      */
     public function store(CreateMantenedorExternoAPIRequest $request)
     {
+        $this->authorize('create', 'App\MantenedorExterno');
+
         $input = $request->all();
 
         $mantenedorExterno = $this->mantenedorExternoRepository->create($input);
@@ -70,6 +74,8 @@ class MantenedorExternoAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\MantenedorExterno');
+
         /** @var MantenedorExterno $mantenedorExterno */
         $mantenedorExterno = $this->mantenedorExternoRepository->findWithoutFail($id);
 
@@ -91,6 +97,8 @@ class MantenedorExternoAPIController extends AppBaseController
      */
     public function update($id, UpdateMantenedorExternoAPIRequest $request)
     {
+        $this->authorize('update', 'App\MantenedorExterno');
+
         $input = $request->all();
 
         /** @var MantenedorExterno $mantenedorExterno */
@@ -115,6 +123,8 @@ class MantenedorExternoAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\MantenedorExterno');
+
         /** @var MantenedorExterno $mantenedorExterno */
         $mantenedorExterno = $this->mantenedorExternoRepository->findWithoutFail($id);
 

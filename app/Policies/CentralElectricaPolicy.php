@@ -17,11 +17,11 @@ class CentralElectricaPolicy
      * @param  \App\CentralElectrica  $centralElectrica
      * @return mixed
      */
-    public function view(User $user, CentralElectrica $centralElectrica)
+    public function view(User $user)
     {
         $permissions = $user->getAllPermissions();
 
-        return $permissions->contains('name','view_central');
+        return $permissions->contains('name','read_central');
     }
 
     /**

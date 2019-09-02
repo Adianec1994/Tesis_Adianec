@@ -68,6 +68,7 @@ class UserAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\User');
         /** @var User $user */
         $user = $this->userRepository->findWithoutFail($id);
 

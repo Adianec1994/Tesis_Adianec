@@ -36,6 +36,8 @@ class ProveedorAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\Proveedor');
+
         $this->proveedorRepository->pushCriteria(new RequestCriteria($request));
         $this->proveedorRepository->pushCriteria(new LimitOffsetCriteria($request));
         $proveedors = $this->proveedorRepository->all();
@@ -53,6 +55,8 @@ class ProveedorAPIController extends AppBaseController
      */
     public function store(CreateProveedorAPIRequest $request)
     {
+        $this->authorize('create', 'App\Proveedor');
+
         $input = $request->all();
 
         $input['nombre'] = $input['marca'] . '-' . $input['serie'];
@@ -72,6 +76,8 @@ class ProveedorAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\Proveedor');
+
         /** @var Proveedor $proveedor */
         $proveedor = $this->proveedorRepository->findWithoutFail($id);
 
@@ -93,6 +99,8 @@ class ProveedorAPIController extends AppBaseController
      */
     public function update($id, UpdateProveedorAPIRequest $request)
     {
+        $this->authorize('update', 'App\Proveedor');
+
         $input = $request->all();
 
         $input['nombre'] = $input['marca'] . '-' . $input['serie'];
@@ -119,6 +127,8 @@ class ProveedorAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\Proveedor');
+
         /** @var Proveedor $proveedor */
         $proveedor = $this->proveedorRepository->findWithoutFail($id);
 

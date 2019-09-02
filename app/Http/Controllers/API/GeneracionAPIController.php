@@ -36,6 +36,8 @@ class GeneracionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\Generacion');
+
         $this->generacionRepository->pushCriteria(new RequestCriteria($request));
         $this->generacionRepository->pushCriteria(new LimitOffsetCriteria($request));
         $generacions = $this->generacionRepository->all();
@@ -53,6 +55,8 @@ class GeneracionAPIController extends AppBaseController
      */
     public function store(CreateGeneracionAPIRequest $request)
     {
+        $this->authorize('create', 'App\Generacion');
+
         $input = $request->all();
 
         $generacion = $this->generacionRepository->create($input);
@@ -70,6 +74,8 @@ class GeneracionAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\Generacion');
+
         /** @var Generacion $generacion */
         $generacion = $this->generacionRepository->findWithoutFail($id);
 
@@ -91,6 +97,8 @@ class GeneracionAPIController extends AppBaseController
      */
     public function update($id, UpdateGeneracionAPIRequest $request)
     {
+        $this->authorize('update', 'App\Generacion');
+
         $input = $request->all();
 
         /** @var Generacion $generacion */
@@ -115,6 +123,8 @@ class GeneracionAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\Generacion');
+
         /** @var Generacion $generacion */
         $generacion = $this->generacionRepository->findWithoutFail($id);
 

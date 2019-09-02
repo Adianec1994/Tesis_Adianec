@@ -36,6 +36,8 @@ class HechosExtraordinariosAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\HechosExtraordinarios');
+
         $this->hechosExtraordinariosRepository->pushCriteria(new RequestCriteria($request));
         $this->hechosExtraordinariosRepository->pushCriteria(new LimitOffsetCriteria($request));
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->all();
@@ -53,6 +55,8 @@ class HechosExtraordinariosAPIController extends AppBaseController
      */
     public function store(CreateHechosExtraordinariosAPIRequest $request)
     {
+        $this->authorize('create', 'App\HechosExtraordinarios');
+
         $input = $request->all();
 
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->create($input);
@@ -70,6 +74,8 @@ class HechosExtraordinariosAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\HechosExtraordinarios');
+
         /** @var HechosExtraordinarios $hechosExtraordinarios */
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->findWithoutFail($id);
 
@@ -91,6 +97,8 @@ class HechosExtraordinariosAPIController extends AppBaseController
      */
     public function update($id, UpdateHechosExtraordinariosAPIRequest $request)
     {
+        $this->authorize('update', 'App\HechosExtraordinarios');
+
         $input = $request->all();
 
         /** @var HechosExtraordinarios $hechosExtraordinarios */
@@ -115,6 +123,8 @@ class HechosExtraordinariosAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\HechosExtraordinarios');
+
         /** @var HechosExtraordinarios $hechosExtraordinarios */
         $hechosExtraordinarios = $this->hechosExtraordinariosRepository->findWithoutFail($id);
 

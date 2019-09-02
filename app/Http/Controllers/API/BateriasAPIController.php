@@ -37,6 +37,7 @@ class BateriasAPIController extends AppBaseController
     public function index(Request $request)
     {
         $this->authorize('view', 'App\Baterias');
+
         $this->bateriasRepository->pushCriteria(new RequestCriteria($request));
         $this->bateriasRepository->pushCriteria(new LimitOffsetCriteria($request));
         $baterias = $this->bateriasRepository->all();

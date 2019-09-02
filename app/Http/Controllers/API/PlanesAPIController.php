@@ -36,6 +36,8 @@ class PlanesAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\Planes');
+
         $this->planesRepository->pushCriteria(new RequestCriteria($request));
         $this->planesRepository->pushCriteria(new LimitOffsetCriteria($request));
         $planes = $this->planesRepository->all();
@@ -53,6 +55,8 @@ class PlanesAPIController extends AppBaseController
      */
     public function store(CreatePlanesAPIRequest $request)
     {
+        $this->authorize('create', 'App\Planes');
+
         $input = $request->all();
 
         $planes = $this->planesRepository->create($input);
@@ -70,6 +74,8 @@ class PlanesAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\Planes');
+
         /** @var Planes $planes */
         $planes = $this->planesRepository->findWithoutFail($id);
 
@@ -91,6 +97,8 @@ class PlanesAPIController extends AppBaseController
      */
     public function update($id, UpdatePlanesAPIRequest $request)
     {
+        $this->authorize('update', 'App\Planes');
+
         $input = $request->all();
 
         /** @var Planes $planes */
@@ -115,6 +123,8 @@ class PlanesAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\Planes');
+
         /** @var Planes $planes */
         $planes = $this->planesRepository->findWithoutFail($id);
 

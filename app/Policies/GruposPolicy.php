@@ -74,7 +74,7 @@ class GruposPolicy
      */
     public function restore(User $user)
     {
-        return false;
+       return false;
     }
 
     /**
@@ -86,6 +86,6 @@ class GruposPolicy
      */
     public function forceDelete(User $user)
     {
-        return false;
+       return false;
     }
 }

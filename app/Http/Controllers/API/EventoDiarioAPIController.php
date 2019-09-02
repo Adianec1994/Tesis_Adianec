@@ -36,6 +36,8 @@ class EventoDiarioAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\EventoDiario');
+
         $this->eventoDiarioRepository->pushCriteria(new RequestCriteria($request));
         $this->eventoDiarioRepository->pushCriteria(new LimitOffsetCriteria($request));
         $eventoDiarios = $this->eventoDiarioRepository->all();
@@ -53,6 +55,8 @@ class EventoDiarioAPIController extends AppBaseController
      */
     public function store(CreateEventoDiarioAPIRequest $request)
     {
+        $this->authorize('create', 'App\EventoDiario');
+
         $input = $request->all();
 
         $eventoDiario = $this->eventoDiarioRepository->create($input);
@@ -70,6 +74,8 @@ class EventoDiarioAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\EventoDiario');
+
         /** @var EventoDiario $eventoDiario */
         $eventoDiario = $this->eventoDiarioRepository->findWithoutFail($id);
 
@@ -91,6 +97,8 @@ class EventoDiarioAPIController extends AppBaseController
      */
     public function update($id, UpdateEventoDiarioAPIRequest $request)
     {
+        $this->authorize('update', 'App\EventoDiario');
+
         $input = $request->all();
 
         /** @var EventoDiario $eventoDiario */
@@ -115,6 +123,8 @@ class EventoDiarioAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\EventoDiario');
+
         /** @var EventoDiario $eventoDiario */
         $eventoDiario = $this->eventoDiarioRepository->findWithoutFail($id);
 

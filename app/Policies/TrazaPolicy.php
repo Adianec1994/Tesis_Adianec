@@ -20,6 +20,7 @@ class TrazaPolicy
     public function view(User $user)
     {
         $permissions = $user->getAllPermissions();
+
         return $permissions->contains('name','read_traza');
     }
 

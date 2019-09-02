@@ -36,6 +36,8 @@ class OperadorAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', 'App\Operador');
+
         $this->operadorRepository->pushCriteria(new RequestCriteria($request));
         $this->operadorRepository->pushCriteria(new LimitOffsetCriteria($request));
         $operadors = $this->operadorRepository->all();
@@ -53,6 +55,8 @@ class OperadorAPIController extends AppBaseController
      */
     public function store(CreateOperadorAPIRequest $request)
     {
+        $this->authorize('create', 'App\Operador');
+
         $input = $request->all();
 
         $operador = $this->operadorRepository->create($input);
@@ -70,6 +74,8 @@ class OperadorAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $this->authorize('view', 'App\Operador');
+
         /** @var Operador $operador */
         $operador = $this->operadorRepository->findWithoutFail($id);
 
@@ -91,6 +97,8 @@ class OperadorAPIController extends AppBaseController
      */
     public function update($id, UpdateOperadorAPIRequest $request)
     {
+        $this->authorize('update', 'App\Operador');
+
         $input = $request->all();
 
         /** @var Operador $operador */
@@ -115,6 +123,8 @@ class OperadorAPIController extends AppBaseController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', 'App\Operador');
+
         /** @var Operador $operador */
         $operador = $this->operadorRepository->findWithoutFail($id);
 
