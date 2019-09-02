@@ -71,7 +71,7 @@ Vue.use(VueFormGenerator, {
       const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
       if (res != null) return res
 
-      const re = /^[a-zA-Z][a-zA-Z|\s]*$/
+      const re = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ|\s]*$/
       if (!re.test(value)) {
         return [messages.invalidTextContainNumber]
       }
@@ -85,6 +85,27 @@ Vue.use(VueFormGenerator, {
         return [messages.invalidEmail]
       }
     },
+
+    direccionip (value, field, model, messages = VueFormGenerator.validators.resources) {
+      const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
+      if (res != null) return res
+
+      const re = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){2}(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$/
+      if (!re.test(value)) {
+        return [messages.invalidIP]
+      }
+    },
+
+    carnetid (value, field, model, messages = VueFormGenerator.validators.resources) {
+      const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
+      if (res != null) return res
+
+      const re = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ|\s]*$/
+      if (!re.test(value)) {
+        return [messages.invalidNumberIdentity]
+      }
+    },
+
     fecha (value, field, model, messages = VueFormGenerator.validators.resources) {
       return VueFormGenerator.validators.date(value, field, model, messages)
     }
@@ -101,6 +122,8 @@ VueFormGenerator.validators.resources = {
   invalidNumber: 'Solo números',
   invalidInteger: 'El valor no es un entero',
   afterCommaTooBig: 'Solo debe tener {0} número después de la coma',
+
+  invalidIP: 'La dirección IP no es correcta',
 
   textTooSmall: 'La longitud del texto es muy pequeña! Actual: {0}, Mínimo: {1}',
   textTooBig: 'La longitud del texto es muy grande! Actual: {0}, Máximo: {1}',
@@ -120,6 +143,7 @@ VueFormGenerator.validators.resources = {
 
   invalidCard: 'Formato de tarjeta inválido!',
   invalidCardNumber: 'Número de tarjeta inválido!',
+  invalidNumberIdentity: 'Número de carnet de identidad inválido',
 
   invalidTextContainNumber: 'Texto inválido! No puede contener números o caracteres especiales',
   invalidTextContainSpec: 'Texto inválido! No puede contener caracteres especiales'

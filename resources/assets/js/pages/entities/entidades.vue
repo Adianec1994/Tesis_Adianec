@@ -187,6 +187,7 @@ export default {
           type: 'input',
           inputType: 'text',
           label: 'Dirección IP',
+          validator: ['direccionip'],
           model: 'ip'
         }
       ]
