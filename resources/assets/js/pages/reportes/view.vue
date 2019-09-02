@@ -21,14 +21,14 @@ export default {
     loaded: false,
     colors: [
       'red',
-      'blue',
-      'yellow',
-      'green',
-      'brown',
-      'orange',
-      'black',
-      'pink',
-      'aqua'
+      '#0091ea',
+      '#e65100',
+      '#00c853',
+      '#f57f17',
+      '#01579b',
+      '#b71c1c',
+      '#00695c',
+      '#d84315'
     ],
     chartData: {},
     options: {

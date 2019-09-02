@@ -26,6 +26,7 @@
           id="my-table"
           :items="items"
           :headers="headers"
+          :rows-per-page-text="'Filas por páginas'"
         >
           <template v-slot:items="props">
             <td class="text-xs-center justify-center">{{ props.item.Provincias }}</td>

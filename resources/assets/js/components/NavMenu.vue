@@ -119,7 +119,7 @@ export default {
           items: [
             { title: 'Eventos Diarios', icon: 'menu', route: { name: 'eventos_diarios' }},
             { title: 'Planes', icon: 'menu', route: { name: 'planes' }},
-            { title: 'Disponbilidades', icon: 'menu', route: { name: 'disponibilidades' }},
+            { title: 'Disponibilidades', icon: 'menu', route: { name: 'disponibilidades' }},
             { title: 'Hechos Extraordinarios', icon: 'menu', route: { name: 'hechos_extraordinarios' }}
           ]
         },
