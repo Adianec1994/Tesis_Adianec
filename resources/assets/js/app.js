@@ -145,7 +145,7 @@ VueFormGenerator.validators.resources = {
   invalidCardNumber: 'Número de tarjeta inválido!',
   invalidNumberIdentity: 'Número de carnet de identidad inválido',
 
-  invalidTextContainNumber: 'Texto inválido! No puede contener números o caracteres especiales',
+  invalidTextContainNumber: 'Tamaño máximo! No puede contener números o caracteres especiales',
   invalidTextContainSpec: 'Texto inválido! No puede contener caracteres especiales'
 }
 
