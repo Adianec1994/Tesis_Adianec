@@ -165,7 +165,8 @@ export default {
           type: 'input',
           inputType: 'number',
           label: 'Carnet de identidad',
-          model: 'cidentidad'
+          model: 'cidentidad',
+          validator: ['carnetid']
         },
         {
           type: 'select',

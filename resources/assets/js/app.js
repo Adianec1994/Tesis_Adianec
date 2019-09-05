@@ -71,7 +71,7 @@ Vue.use(VueFormGenerator, {
       const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
       if (res != null) return res
 
-      const re = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ|\s]*$/
+      const re = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ|\s]{0,45}$/
       if (!re.test(value)) {
         return [messages.invalidTextContainNumber]
       }
@@ -100,7 +100,7 @@ Vue.use(VueFormGenerator, {
       const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
       if (res != null) return res
 
-      const re = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ|\s]*$/
+      const re = /^[0-9]{11}$/
       if (!re.test(value)) {
         return [messages.invalidNumberIdentity]
       }
