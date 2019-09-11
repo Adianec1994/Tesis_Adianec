@@ -23,7 +23,7 @@ class CreateTrazasTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('accion', 6);
+            $table->string('accion', 10);
             $table->ipAddress('ip');
             $table->string('url');
             $table->unsignedInteger('users_id')->nullable();
