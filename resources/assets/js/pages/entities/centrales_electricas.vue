@@ -172,14 +172,6 @@ export default {
           label: 'Nombre de la central',
           model: 'nombre',
           validator: ['nombre']
-        },
-        {
-          type: 'input',
-          inputType: 'text',
-          label: 'Potencia instalada',
-          model: 'potInstalada',
-          validator: ['double'],
-          max: 3
         }
       ]
     }

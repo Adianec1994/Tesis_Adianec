@@ -178,14 +178,6 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Potencia Instalada',
-          model: 'potInstalada',
-          validator: ['double'],
-          max: 3
-        },
-        {
-          type: 'input',
-          inputType: 'text',
           label: 'Dirección IP',
           validator: ['direccionip'],
           model: 'ip'

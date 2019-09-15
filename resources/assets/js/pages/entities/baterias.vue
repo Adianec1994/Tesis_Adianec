@@ -173,14 +173,6 @@ export default {
           model: 'numero',
           validator: ['integer'],
           max:8
-        },
-        {
-          type: 'input',
-          inputType: 'text',
-          label: 'Potencia instalada',
-          model: 'potInstalada',
-          validator: ['double'],
-          max: 3
         }
       ]
     }
