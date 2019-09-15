@@ -5,7 +5,7 @@
         <progress-bar :show="busy"></progress-bar>
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
           <v-card-title primary-title>
-            <h3 class="headline mb-0">{{ $t('login') }}</h3>
+            <h3 class="headline mb-0">Iniciar Sesión</h3>
           </v-card-title>
           <v-card-text>
 
@@ -29,21 +29,23 @@
               v-validate="'required|min:8'"
             ></password-input>
 
+            <br><br>
             <!-- Remember Me -->
-            <v-checkbox
+
+            <!--<v-checkbox
               :label="$t('remember_me')"
               color="primary"
               type="checkbox"
               v-model="remember"
               value="true"
-            ></v-checkbox>
+            ></v-checkbox>-->
 
-            <submit-button :block="true" :form="form" :label="$t('login')"></submit-button>
+            <submit-button :block="true" :form="form" :label="$t('entrar')"></submit-button>
 
           </v-card-text>
           <v-card-actions>
             <router-link :to="{ name: 'register' }">
-              {{ $t('register') }}
+             <!-- {{ $t('register') }}-->
             </router-link>
             <v-spacer></v-spacer>
           </v-card-actions>

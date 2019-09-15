@@ -14,7 +14,7 @@
           @keydown="form.onKeydown($event)"
         >
           <v-card-title primary-title>
-            <h3 class="headline mb-0">{{ $t('register') }}</h3>
+            <h3 class="headline mb-0">Registrar nuevo usuario</h3>
           </v-card-title>
           <v-card-text>
 
@@ -110,7 +110,7 @@
           <v-card-actions>
             <submit-button
               :form="form"
-              :label="$t('register')"
+              :label="$t('registrar')"
             ></submit-button>
           </v-card-actions>
         </form>
