@@ -25,7 +25,7 @@ class CreateProveedorsTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('marca', 8);
-            $table->integer('serie');
+            $table->string('serie', 5);
             $table->string('pais', 45);
             $table->softDeletes();
             $table->timestamps();

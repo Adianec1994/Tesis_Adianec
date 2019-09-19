@@ -140,7 +140,7 @@ export default {
     headers: [
       { text: 'Marca', value: 'marca' },
       { text: 'Serie', value: 'serie', align: 'center' },
-      { text: 'Pais', value: 'pais', align: 'center' },
+      { text: 'País', value: 'pais', align: 'center' },
       { text: 'Acciones', value: 'marca', sortable: false, align: 'center' }
     ],
     pageitems: [
@@ -168,7 +168,8 @@ export default {
           values: [
             { name: '0', id: '0' },
             { name: '2000', id: '2000' },
-            { name: '4000', id: '4000' }
+            { name: '4000', id: '4000' },
+            { name: 'g83', id: 'g83'}
           ],
           selectOptions: {
             noneSelectedText: 'Seleccione una serie'
@@ -177,7 +178,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Pais',
+          label: 'País',
           model: 'pais',
           validator: ['nombre']
         }
