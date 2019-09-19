@@ -244,13 +244,15 @@ export default {
           type: 'input',
           inputType: 'time',
           label: 'Hora de salida',
-          model: 'horaSalida'
+          model: 'horaSalida',
+          format: 'HH:MM AM/PM'
         },
         {
           type: 'input',
-          inputType: 'time',
+          inputType: 'text',
           label: 'Tiempo de operación',
-          model: 'tiempoOperacion'
+          model: 'tiempoOperacion',
+          validator: ['integer']
         },
         {
           type: 'input',
