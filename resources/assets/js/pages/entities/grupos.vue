@@ -211,12 +211,21 @@ export default {
           max: 16
         },
         {
-          type: 'input',
-          inputType: 'text',
+          type: 'select',
           label: 'Potencia instalada',
           model: 'potInstalada',
-          validator: ['double'],
-          max: 3
+          values: [
+            { name: '0.34', id: '0.34' },
+            { name: '0.775', id: '0.775' },
+            { name: '0.92', id: '0.92' },
+            { name: '1.8704', id: '1.8704'},
+            { name: '1.888', id: '1.888'},
+            { name: '2.1', id: '2.1'},
+            { name: '20', id: '20'}
+          ],
+          selectOptions: {
+            noneSelectedText: 'Seleccione la potencia instalada'
+          }
         }
       ]
     }
