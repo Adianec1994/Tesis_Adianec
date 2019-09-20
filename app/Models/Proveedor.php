@@ -46,7 +46,7 @@ class Proveedor extends Model
     protected $casts = [
         'id' => 'integer',
         'marca' => 'string',
-        'serie' => 'integer',
+        'serie' => 'string',
         'pais' => 'string'
     ];
 
@@ -55,9 +55,7 @@ class Proveedor extends Model
      *
      * @var array
      */
-    public static $rules = [
-
-    ];
+    public static $rules = [];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
