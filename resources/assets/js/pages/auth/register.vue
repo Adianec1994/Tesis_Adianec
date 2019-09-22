@@ -25,9 +25,9 @@
               :v-errors="validationErrors"
               :value.sync="form.name"
               browser-autocomplete="name"
-              counter="30"
+              counter="60"
               name="name"
-              v-validate="'required|max:30'"
+              v-validate="'required|max:60'"
             ></text-input>
 
             <!-- Username -->
@@ -37,9 +37,9 @@
               :v-errors="validationErrors"
               :value.sync="form.username"
               browser-autocomplete="username"
-              counter="15"
+              counter="20"
               name="username"
-              v-validate="'required|max:15'"
+              v-validate="'required|max:20'"
             ></text-input>
 
             <!-- Email -->
