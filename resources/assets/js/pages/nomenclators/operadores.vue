@@ -163,7 +163,7 @@ export default {
         },
         {
           type: 'input',
-          inputType: 'number',
+          inputType: 'text',
           label: 'Carnet de identidad',
           model: 'cidentidad',
           validator: ['carnetid']
