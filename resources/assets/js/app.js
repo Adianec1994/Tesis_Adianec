@@ -71,7 +71,7 @@ Vue.use(VueFormGenerator, {
       const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
       if (res != null) return res
 
-      const re = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ|\s]{0,45}$/
+      const re = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ|\s]{0,60}$/
       if (!re.test(value)) {
         return [messages.invalidTextContainNumber]
       }
