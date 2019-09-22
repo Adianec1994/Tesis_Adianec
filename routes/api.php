@@ -48,7 +48,9 @@ Route::group(['middleware' => ['auth:api','trazas']], function () {
         'mantenedores_externos' => 'API\MantenedorExternoAPIController',
         'usuarios' => 'API\UserAPIController',
         'roles' => 'API\RolAPIController',
-        'trazas' => 'API\TrazaAPIController'
+        'trazas' => 'API\TrazaAPIController',
+        'mantenimientos' => 'API\MantenimientosAPIController',
+        'brigadas' => 'API\BrigadasAPIController'
     ]);
     Route::get('snapshots', 'API\SnapshotsAPIController@view');
     Route::post('snapshots/{name}', 'API\SnapshotsAPIController@restore');

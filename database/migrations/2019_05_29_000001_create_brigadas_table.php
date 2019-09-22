@@ -23,7 +23,7 @@ class CreateBrigadasTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('numero')->nullable();
+            $table->integer('numero')->unique();
             $table->integer('cantidadTrabajadores')->nullable();
             $table->softDeletes();
             $table->timestamps();

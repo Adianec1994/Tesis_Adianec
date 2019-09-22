@@ -95,6 +95,7 @@ export default {
             { title: 'Baterías', icon: 'view_list', route: { name: 'baterias' }},
             { title: 'Grupos', icon: 'view_list', route: { name: 'grupos' }},
             { title: 'Proveedores', icon: 'view_list', route: { name: 'proveedores' }},
+            { title: 'Brigadas', icon: 'view_list', route: { name: 'brigadas' }},
             { title: 'Mantenedores Externos', icon: 'view_list', route: { name: 'mantenedores_externos' }},
             { title: 'Operadores', icon: 'view_list', route: { name: 'operadores' }}
           ]
@@ -120,6 +121,7 @@ export default {
             { title: 'Eventos Diarios', icon: 'menu', route: { name: 'eventos_diarios' }},
             { title: 'Planes', icon: 'menu', route: { name: 'planes' }},
             { title: 'Disponibilidades', icon: 'menu', route: { name: 'disponibilidades' }},
+            { title: 'Mantenimientos', icon: 'menu', route: { name: 'mantenimientos' }},
             { title: 'Hechos Extraordinarios', icon: 'menu', route: { name: 'hechos_extraordinarios' }}
           ]
         },

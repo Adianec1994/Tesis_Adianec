@@ -20,6 +20,7 @@ export default ({ authGuard, guestGuard }) => [
     { path: '/baterias', name: 'baterias', component: require('~/pages/entities/baterias.vue') },
     { path: '/grupos', name: 'grupos', component: require('~/pages/entities/grupos.vue') },
     { path: '/proveedores', name: 'proveedores', component: require('~/pages/nomenclators/proveedores.vue') },
+    { path: '/brigadas', name: 'brigadas', component: require('~/pages/nomenclators/brigadas.vue') },
     { path: '/usuarios', name: 'usuarios', component: require('~/pages/nomenclators/usuarios.vue') },
     { path: '/mantenedores_externos', name: 'mantenedores_externos', component: require('~/pages/nomenclators/mantenedores_externos.vue') },
 
@@ -31,6 +32,7 @@ export default ({ authGuard, guestGuard }) => [
     // rutas de producción
     { path: '/planes', name: 'planes', component: require('~/pages/entities/planes.vue') },
     { path: '/disponibilidades', name: 'disponibilidades', component: require('~/pages/nomenclators/disponibilidades.vue') },
+    { path: '/mantenimientos', name: 'mantenimientos', component: require('~/pages/entities/mantenimientos.vue') },
     { path: '/hechos_extraordinarios', name: 'hechos_extraordinarios', component: require('~/pages/entities/hechos_extraordinarios.vue') },
 
     // rutas de administración

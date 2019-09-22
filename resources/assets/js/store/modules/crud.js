@@ -19,7 +19,9 @@ export const state = {
   generaciones: [],
   usuarios: [],
   trazas: [],
-  mantenedores_externos: []
+  mantenedores_externos: [],
+  mantenimientos: [],
+  brigadas: []
 }
 
 // mutations
