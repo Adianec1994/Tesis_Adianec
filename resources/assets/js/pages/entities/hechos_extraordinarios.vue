@@ -174,12 +174,31 @@ export default {
             value: 'id'
           }
         },
-        {
+        /*{
           type: 'input',
           inputType: 'text',
           label: 'Tipo de hecho',
           model: 'tipo',
           validator: ['nombre']
+        },*/
+        {
+          type: 'select',
+          label: 'Tipo de hecho',
+          model: 'tipo',
+          values: [
+            'Hurto',
+            'Daño',
+            'Derrame',
+            'Sabotaje',
+            'Corrupción',
+            'Robo con fuerza',
+            'Apropiación indebida',
+            'Accidentes de tránsito',
+            'No preservar los bienes del Estado'
+          ],
+          selectOptions: {
+            noneSelectedText: 'Seleccione el tipo de hecho'
+          }
         },
         {
           type: 'textArea',
