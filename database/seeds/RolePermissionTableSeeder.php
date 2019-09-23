@@ -40,26 +40,6 @@ class RolePermissionTableSeeder extends Seeder
     {
         //permisos administrador
         $adminPermissions = [
-          'create_entidad',
-          'read_entidad',
-          'update_entidad',
-          'delete_entidad',
-          'create_provincia',
-          'read_provincia',
-          'update_provincia',
-          'delete_provincia',
-          'create_usuario',
-          'read_usuario',
-          'update_usuario',
-          'delete_usuario',
-          'read_traza',
-          'importar_exportar'
-        ];
-
-        $this->assign('Administrador', $adminPermissions);
-
-    //permisos especialistaCDN
-        $especialistaCDNPermissions = [
             'create_entidad',
             'read_entidad',
             'update_entidad',
@@ -76,6 +56,22 @@ class RolePermissionTableSeeder extends Seeder
             'read_bateria',
             'update_bateria',
             'delete_bateria',
+            'create_usuario',
+             'read_usuario',
+            'update_usuario',
+             'delete_usuario',
+            'read_traza',
+            'importar_exportar'
+        ];
+
+        $this->assign('Administrador', $adminPermissions);
+
+    //permisos especialistaCDN
+        $especialistaCDNPermissions = [
+            'read_entidad',
+            'read_provincia',
+            'read_central',
+            'read_bateria',
             'create_grupo',
             'read_grupo',
             'update_grupo',
@@ -140,22 +136,10 @@ class RolePermissionTableSeeder extends Seeder
 
         //permisos especialistaUEB
         $especialistaUEBPermissions = [
-            'create_entidad',
             'read_entidad',
-            'update_entidad',
-            'delete_entidad',
-            'create_provincia',
             'read_provincia',
-            'update_provincia',
-            'delete_provincia',
-            'create_central',
             'read_central',
-            'update_central',
-            'delete_central',
-            'create_bateria',
             'read_bateria',
-            'update_bateria',
-            'delete_bateria',
             'create_grupo',
             'read_grupo',
             'update_grupo',
@@ -168,10 +152,10 @@ class RolePermissionTableSeeder extends Seeder
             'read_mantenedor_externo',
             'update_mantenedor_externo',
             'delete_mantenedor_externo',
-            /*'create_brigada',
+            'create_brigada',
             'read_brigada',
             'update_brigada',
-            'delete_brigada',*/
+            'delete_brigada',
             'create_disponibilidad',
             'read_disponibilidad',
             'update_disponibilidad',
@@ -208,10 +192,10 @@ class RolePermissionTableSeeder extends Seeder
             'read_generacion',
             'update_generacion',
             'delete_generacion',
-           /* 'create_mantenimiento',
+            'create_mantenimiento',
             'read_mantenimiento',
             'update_mantenimiento',
-            'delete_mantenimiento',*/
+            'delete_mantenimiento',
             /*'create_parte_diario_ueb',
             'exportar_parte_diario_ueb',*/
         ];
