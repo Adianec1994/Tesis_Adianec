@@ -23,9 +23,9 @@ class CreateEntidadsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('nombre', 45)->nullable();
+            $table->string('nombre', 45)->unique();
             $table->double('potInstalada')->default(0);
-            $table->string('ip', 45)->nullable();
+            $table->string('ip', 45)->unique();
             $table->unsignedInteger('provincias_id');
             $table->softDeletes();
             $table->timestamps();

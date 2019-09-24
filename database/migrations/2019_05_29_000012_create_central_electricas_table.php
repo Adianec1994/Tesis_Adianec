@@ -23,7 +23,7 @@ class CreateCentralElectricasTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('nombre', 45)->nullable();
+            $table->string('nombre', 45)->unique();
             $table->double('potInstalada')->default(0);
             $table->unsignedInteger('entidads_id');
             $table->softDeletes();

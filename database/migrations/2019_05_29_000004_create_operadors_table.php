@@ -24,7 +24,7 @@ class CreateOperadorsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('nombre', 45)->nullable();
-            $table->bigInteger('cidentidad')->nullable();
+            $table->bigInteger('cidentidad')->unique();
             $table->string('ocupacion', 45)->nullable();
             $table->softDeletes();
             $table->timestamps();
