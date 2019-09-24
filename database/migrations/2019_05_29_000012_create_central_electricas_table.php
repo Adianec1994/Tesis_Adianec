@@ -24,7 +24,7 @@ class CreateCentralElectricasTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('nombre', 45)->nullable();
-            $table->double('potInstalada')->nullable();
+            $table->double('potInstalada')->default(0);
             $table->unsignedInteger('entidads_id');
             $table->softDeletes();
             $table->timestamps();

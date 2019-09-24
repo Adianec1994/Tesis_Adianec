@@ -24,7 +24,7 @@ class CreateEntidadsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('nombre', 45)->nullable();
-            $table->double('potInstalada')->nullable();
+            $table->double('potInstalada')->default(0);
             $table->string('ip', 45)->nullable();
             $table->unsignedInteger('provincias_id');
             $table->softDeletes();

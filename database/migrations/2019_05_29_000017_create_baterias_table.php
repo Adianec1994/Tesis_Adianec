@@ -24,7 +24,7 @@ class CreateBateriasTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('numero')->nullable();
-            $table->double('potInstalada')->nullable();
+            $table->double('potInstalada')->default(0);
             $table->unsignedInteger('central_electricas_id');
             $table->softDeletes();
             $table->timestamps();
