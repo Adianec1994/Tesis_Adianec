@@ -88,7 +88,7 @@
               v-on:eye="eye = $event"
               name="password"
               ref="password"
-              v-validate="'required|min:8'"
+              v-validate="'required|min:8|max:30'"
             ></password-input>
 
             <!-- Password Confirmation -->
