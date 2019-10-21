@@ -72,6 +72,7 @@
         <td>{{ entidadName(props.item.entidads_id) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.potInstaladaReal }}</td>
         <td class="text-xs-center justify-center">{{ props.item.potDisponibleReal }}</td>
+        <td class="text-xs-center justify-center">{{ percent(props.item) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.created_at }}</td>
         <td class="text-xs-center justify-center">
           <v-tooltip bottom>
@@ -142,12 +143,13 @@ export default {
       { text: 'Entidad', value: 'entidads_id' },
       { text: 'Potencia Instalada Real', value: 'potInstaladaReal', align: 'center' },
       { text: 'Potencia Disponible Real', value: 'potDisponibleReal', align: 'center' },
+      { text: '% Potencia Disponible', value: '', align: 'center' },
       { text: 'Fecha', value: 'created_at', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     pageitems: [
-      5,10,30,
-      { text: "Todo", value: -1}
+      5, 10, 30,
+      { text: 'Todo', value: -1 }
     ],
     items: [],
     entidades: [],
@@ -301,6 +303,10 @@ export default {
     entidadName (id) {
       const entidad = this.entidades.find(e => e.id === id)
       return entidad.nombre
+    },
+
+    percent (entidad) {
+      return entidad.potDisponibleReal * 100 / entidad.potInstaladaReal + ' %'
     }
   }
 }
