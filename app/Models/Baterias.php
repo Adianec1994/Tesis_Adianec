@@ -34,7 +34,6 @@ class Baterias extends Model
 
     public $fillable = [
         'numero',
-        'potInstalada',
         'central_electricas_id'
     ];
 

@@ -37,7 +37,6 @@ class CentralElectrica extends Model
 
     public $fillable = [
         'nombre',
-        'potInstalada',
         'entidads_id'
     ];
 

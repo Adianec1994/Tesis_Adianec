@@ -40,7 +40,6 @@ class Entidad extends Model
 
     public $fillable = [
         'nombre',
-        'potInstalada',
         'ip',
         'provincias_id'
     ];
