@@ -13,7 +13,7 @@ use InfyOm\Generator\Common\BaseRepository;
  * @method CoberturaCombustible findWithoutFail($id, $columns = ['*'])
  * @method CoberturaCombustible find($id, $columns = ['*'])
  * @method CoberturaCombustible first($columns = ['*'])
-*/
+ */
 class CoberturaCombustibleRepository extends BaseRepository
 {
     /**
@@ -38,5 +38,27 @@ class CoberturaCombustibleRepository extends BaseRepository
     public function model()
     {
         return CoberturaCombustible::class;
+    }
+
+    public function deleteCalculablesFields()
+    { }
+
+    public function calculateFields($attributes)
+    {
+        $attributes['capacVacio'] = $attributes['capacTotalAlmac'] - $attributes['existTotal'];
+        $attributes['existOperativa'] = $attributes['existTotal'] - $attributes['fondaje'] - $attributes['planReserva'];
+        return $attributes;
+    }
+
+    public function create(array $attributes)
+    {
+        $attributes = $this->calculateFields($attributes);
+        return parent::create($attributes);
+    }
+
+    public function update(array $attributes, $id)
+    {
+        $attributes = $this->calculateFields($attributes);
+        return parent::update($attributes, $id);
     }
 }

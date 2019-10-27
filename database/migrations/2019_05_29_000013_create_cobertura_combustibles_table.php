@@ -23,15 +23,16 @@ class CreateCoberturaCombustiblesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->double('capacTotalAlmac');
+            $table->double('existTotalDiaAnterior');
+            $table->double('existTotal');
+            $table->double('capacVacio');
             $table->double('planReserva');
             $table->double('fondaje');
             $table->double('existOperativa');
             $table->integer('coberturaHoras');
             $table->double('consumo');
             $table->double('suminCupet');
-            $table->double('capacTotalAlmac');
-            $table->double('capacVacio');
-            $table->double('existTotalDiaAnterior');
             $table->unsignedInteger('central_electricas_id');
             $table->softDeletes();
             $table->timestamps();
@@ -51,8 +52,8 @@ class CreateCoberturaCombustiblesTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists($this->tableName);
-     }
+    public function down()
+    {
+        Schema::dropIfExists($this->tableName);
+    }
 }

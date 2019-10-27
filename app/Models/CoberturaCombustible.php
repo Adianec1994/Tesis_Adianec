@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version May 25, 2019, 3:18 am UTC
  *
  * @property \App\Models\CentralElectrica centralElectricas
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property float planReserva
  * @property float fondaje
  * @property float existOperativa
@@ -31,7 +31,7 @@ class CoberturaCombustible extends Model
     use SoftDeletes;
 
     public $table = 'cobertura_combustibles';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -40,15 +40,16 @@ class CoberturaCombustible extends Model
 
 
     public $fillable = [
+        'capacTotalAlmac',
+        'existTotalDiaAnterior',
+        'existTotal',
+        'capacVacio',
         'planReserva',
         'fondaje',
         'existOperativa',
         'coberturaHoras',
         'consumo',
         'suminCupet',
-        'capacTotalAlmac',
-        'capacVacio',
-        'existTotalDiaAnterior',
         'central_electricas_id'
     ];
 
