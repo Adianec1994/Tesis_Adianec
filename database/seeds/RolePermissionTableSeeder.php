@@ -50,6 +50,17 @@ class RolePermissionTableSeeder extends Seeder
             'read_provincia',
             'update_provincia',
             'delete_provincia',
+<<<<<<< refs/remotes/Tesis_Adianec/develop
+=======
+            'create_central',
+            'read_central',
+            'update_central',
+            'delete_central',
+            'create_bateria',
+            'read_bateria',
+            'update_bateria',
+            'delete_bateria',
+>>>>>>> arreglo de roles
             'create_usuario',
             'read_usuario',
             'update_usuario',
@@ -60,7 +71,11 @@ class RolePermissionTableSeeder extends Seeder
 
         $this->assign('Administrador', $adminPermissions);
 
+<<<<<<< refs/remotes/Tesis_Adianec/develop
         //permisos especialistaCDN
+=======
+        //permisos especialistaCDN ECIO-CDN
+>>>>>>> arreglo de roles
         $especialistaCDNPermissions = [
             'read_entidad',
             'read_provincia',
@@ -126,9 +141,9 @@ class RolePermissionTableSeeder extends Seeder
             'exportar_parte_diario_nac',
         ];
 
-        $this->assign('Especialista CDN', $especialistaCDNPermissions);
+        $this->assign('ECIO CDN', $especialistaCDNPermissions);
 
-        //permisos especialistaUEB
+        //permisos especialistaUEB ECIO-UEB
         $especialistaUEBPermissions = [
             'read_entidad',
             'read_provincia',
@@ -194,10 +209,10 @@ class RolePermissionTableSeeder extends Seeder
             'exportar_parte_diario_ueb',*/
         ];
 
-        $this->assign('Especialista UEB', $especialistaUEBPermissions);
+        $this->assign('ECIO UEB', $especialistaUEBPermissions);
 
-        //permisos directorCDN
-        $directorCDNPermissions = [
+        //permisos directorCDN Consultor
+        $consultorPermissions = [
             /* 'create_parte_diario_nac',
             'exportar_parte_diario_nac',*/
             'read_reporte',
@@ -210,21 +225,21 @@ class RolePermissionTableSeeder extends Seeder
             'read_grupo',
         ];
 
-        $this->assign('Director CDN', $directorCDNPermissions);
+        $this->assign('Consultor', $consultorPermissions);
 
-        //permisos directorUEB
-        $directorUEBPermissions = [
+        //permisos analistaUEB
+        $analistaUEBPermissions = [
             'read_reporte',
         ];
 
-        $this->assign('Director UEB', $directorUEBPermissions);
+        $this->assign('Analista UEB', $analistaUEBPermissions);
 
-        //permisos directivo
-        $directivoPermissions = [
+        //permisos usuario
+        $usuarioPermissions = [
             'read_reporte',
         ];
 
-        $this->assign('Directivo', $directivoPermissions);
+        $this->assign('Usuario', $usuarioPermissions);
 
         //permisos de desarrollo (todos los permisos)
         //eliminar este rol en producción
@@ -232,9 +247,9 @@ class RolePermissionTableSeeder extends Seeder
             $adminPermissions,
             $especialistaCDNPermissions,
             $especialistaUEBPermissions,
-            $directorCDNPermissions,
-            $directorUEBPermissions,
-            $directivoPermissions
+            $consultorPermissions,
+            $analistaUEBPermissions,
+            $usuarioPermissions
         );
         $this->assign('Desarrollo', $developerPermissions);
     }
