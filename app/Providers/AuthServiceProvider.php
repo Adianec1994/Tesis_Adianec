@@ -23,6 +23,8 @@ use App\Policies\OperadorPolicy;
 use App\Policies\PailasPolicy;
 use App\Policies\PlanesPolicy;
 use App\Policies\ProveedorPolicy;
+use App\Policies\MantenimientoPolicy;
+use App\Policies\BrigadaPolicy;
 use App\Entidad;
 use App\Provincia;
 use App\User;
@@ -41,6 +43,8 @@ use App\Operador;
 use App\Pailas;
 use App\Planes;
 use App\Proveedor;
+use App\Mantenimiento;
+use App\Brigada;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -70,6 +74,8 @@ class AuthServiceProvider extends ServiceProvider
         'App\Pailas' => 'App\Policies\PailasPolicy',
         'App\Planes' => 'App\Policies\PlanesPolicy',
         'App\Proveedor' => 'App\Policies\ProveedorPolicy',
+        'App\Mantenimiento' => 'App\Policies\MantenimientoPolicy',
+        'App\Brigada' => 'App\Policies\BrigadaPolicy',
     ];
 
     /**

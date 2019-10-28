@@ -62,34 +62,6 @@ class RolePermissionTableSeeder extends Seeder
 
         //permisos especialistaCDN
         $especialistaCDNPermissions = [
-            'create_entidad',
-            'read_entidad',
-            'update_entidad',
-            'delete_entidad',
-            'create_provincia',
-            'read_provincia',
-            'update_provincia',
-            'delete_provincia',
-            'create_central',
-            'read_central',
-            'update_central',
-            'delete_central',
-            'create_bateria',
-            'read_bateria',
-            'update_bateria',
-            'delete_bateria',
-            'create_usuario',
-             'read_usuario',
-            'update_usuario',
-             'delete_usuario',
-            'read_traza',
-            'importar_exportar'
-        ];
-
-        $this->assign('Administrador', $adminPermissions);
-
-    //permisos especialistaCDN
-        $especialistaCDNPermissions = [
             'read_entidad',
             'read_provincia',
             'read_central',
