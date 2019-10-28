@@ -23,6 +23,8 @@ class CreateCoberturaCombustiblesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->date('fechaCobertura');
+            $table->time('hora');
             $table->double('capacTotalAlmac');
             $table->double('existTotalDiaAnterior');
             $table->double('existTotal');

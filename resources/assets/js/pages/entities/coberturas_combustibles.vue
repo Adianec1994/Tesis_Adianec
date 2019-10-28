@@ -70,15 +70,21 @@
     >
       <template v-slot:items="props">
         <td>{{ centralesElectricasName(props.item.central_electricas_id) }}</td>
+        <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaCobertura) }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.hora }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.capacTotalAlmac }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.existTotalDiaAnterior }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.existTotal }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.capacVacio }}</td>
         <td class="text-xs-center justify-center">{{ props.item.planReserva }}</td>
         <td class="text-xs-center justify-center">{{ props.item.fondaje }}</td>
         <td class="text-xs-center justify-center">{{ props.item.existOperativa }}</td>
         <td class="text-xs-center justify-center">{{ props.item.coberturaHoras }}</td>
         <td class="text-xs-center justify-center">{{ props.item.consumo }}</td>
         <td class="text-xs-center justify-center">{{ props.item.suminCupet }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.capacTotalAlmac }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.capacVacio }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.existTotalDiaAnterior }}</td>
+
+
+
         <td class="text-xs-center justify-center">
           <v-tooltip bottom>
             <v-icon
@@ -146,15 +152,18 @@ export default {
     moduleName: 'Coberturas combustibles',
     headers: [
       { text: 'Central Eléctrica', value: 'central_electricas_id' },
+      { text: 'Fecha', value: 'fechaCobertura', align: 'center' },
+      { text: 'Hora', value: 'hora', align: 'center' },
+      { text: 'Cap. Total Almacenada', value: 'capacTotalAlmac', align: 'center' },
+      { text: 'Existencia día anterior', value: 'existTotalDiaAnterior', align: 'center' },
+      { text: 'Existencia Total', value: 'existTotal', align: 'center' },
+      { text: 'Capacidad vacío', value: 'capacVacio', align: 'center' },
       { text: 'Plan de reserva', value: 'planReserva', align: 'center' },
       { text: 'Fondaje', value: 'fondaje', align: 'center' },
       { text: 'Existencia operativa', value: 'existOperativa', align: 'center' },
       { text: 'Cobertura x horas', value: 'coberturaHoras', align: 'center' },
       { text: 'Consumo', value: 'consumo', align: 'center' },
       { text: 'Suministro CUPET', value: 'suminCupet', align: 'center' },
-      { text: 'Cap. Total Almacenada', value: 'capacTotalAlmac', align: 'center' },
-      { text: 'Capacidad vacío', value: 'capacVacio', align: 'center' },
-      { text: 'Existencia día anterior', value: 'existTotalDiaAnterior', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     pageitems: [
@@ -182,6 +191,47 @@ export default {
         },
         {
           type: 'input',
+          inputType: 'date',
+          label: 'Fecha',
+          model: 'fechaCobertura',
+          format: 'YYYY-MM-DD',
+          visible: function () {
+            return this.isNewModel
+          }
+        },
+        {
+          type: 'input',
+          inputType: 'time',
+          label: 'Hora',
+          model: 'hora',
+          format: 'HH:MM AM/PM'
+        },
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Cap. Total Almacenada',
+          model: 'capacTotalAlmac',
+          validator: ['double'],
+          max: 3
+        },
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Existencia día anterior',
+          model: 'existTotalDiaAnterior',
+          validator: ['double'],
+          max: 3
+        },
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Existencia Total',
+          model: 'existTotal',
+          validator: ['double'],
+          max: 3
+        },
+        {
+          type: 'input',
           inputType: 'text',
           label: 'Plan de reserva',
           model: 'planReserva',
@@ -193,14 +243,6 @@ export default {
           inputType: 'text',
           label: 'Fondaje',
           model: 'fondaje',
-          validator: ['double'],
-          max: 3
-        },
-        {
-          type: 'input',
-          inputType: 'text',
-          label: 'Existencia operativa',
-          model: 'existOperativa',
           validator: ['double'],
           max: 3
         },
@@ -225,30 +267,6 @@ export default {
           inputType: 'text',
           label: 'Suministro CUPET',
           model: 'suminCupet',
-          validator: ['double'],
-          max: 3
-        },
-        {
-          type: 'input',
-          inputType: 'text',
-          label: 'Cap. Total Almacenada',
-          model: 'capacTotalAlmac',
-          validator: ['double'],
-          max: 3
-        },
-        {
-          type: 'input',
-          inputType: 'text',
-          label: 'Capacidad vacío',
-          model: 'capacVacio',
-          validator: ['double'],
-          max: 3
-        },
-        {
-          type: 'input',
-          inputType: 'text',
-          label: 'Existencia día anterior',
-          model: 'existTotalDiaAnterior',
           validator: ['double'],
           max: 3
         }
@@ -355,6 +373,13 @@ export default {
           text: err
         })
       })
+    },
+
+    formatDate (date) {
+      if (date) {
+        return new Date(date).toLocaleDateString()
+        // return date.split(' ')[0]
+      }
     },
 
     close () {

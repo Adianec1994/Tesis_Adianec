@@ -20,6 +20,8 @@ class CoberturaCombustibleRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
+        'fechaCobertura',
+        'hora',
         'planReserva',
         'fondaje',
         'existOperativa',

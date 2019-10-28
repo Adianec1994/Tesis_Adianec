@@ -40,6 +40,8 @@ class CoberturaCombustible extends Model
 
 
     public $fillable = [
+        'fechaCobertura',
+        'hora',
         'capacTotalAlmac',
         'existTotalDiaAnterior',
         'existTotal',
@@ -60,6 +62,7 @@ class CoberturaCombustible extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'fechaCobertura' => 'date',
         'planReserva' => 'float',
         'fondaje' => 'float',
         'existOperativa' => 'float',
