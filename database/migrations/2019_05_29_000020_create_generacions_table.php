@@ -27,7 +27,7 @@ class CreateGeneracionsTable extends Migration
             $table->time('horaEntrada')->nullable();
             $table->time('horaSalida')->nullable();
             $table->text('reportadoPor')->nullable();
-            $table->integer('tiempoOperacion')->nullable();
+            $table->time('tiempoOperacion')->nullable();
             $table->unsignedInteger('grupos_id');
             $table->softDeletes();
             $table->timestamps();

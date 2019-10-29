@@ -149,7 +149,7 @@ export default {
       { text: 'Fecha', value: 'fecha', align: 'center' },
       { text: 'Hora de entrada', value: 'horaEntrada', align: 'center' },
       { text: 'Hora de salida', value: 'horaSalida', align: 'center' },
-      { text: 'Tiempo de operación', value: 'tiempoOperacion', align: 'center' },
+      { text: 'Tiempo de operación(hrs)', value: 'tiempoOperacion', align: 'center' },
       { text: 'Reportado por', value: 'reportadoPor', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
@@ -249,10 +249,10 @@ export default {
         },
         {
           type: 'input',
-          inputType: 'text',
+          inputType: 'time',
           label: 'Tiempo de operación',
           model: 'tiempoOperacion',
-          validator: ['integer']
+          format: 'HH:MM AM/PM'
         },
         {
           type: 'input',
