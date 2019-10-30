@@ -50,8 +50,6 @@ class RolePermissionTableSeeder extends Seeder
             'read_provincia',
             'update_provincia',
             'delete_provincia',
-<<<<<<< refs/remotes/Tesis_Adianec/develop
-=======
             'create_central',
             'read_central',
             'update_central',
@@ -60,7 +58,6 @@ class RolePermissionTableSeeder extends Seeder
             'read_bateria',
             'update_bateria',
             'delete_bateria',
->>>>>>> arreglo de roles
             'create_usuario',
             'read_usuario',
             'update_usuario',
@@ -71,11 +68,8 @@ class RolePermissionTableSeeder extends Seeder
 
         $this->assign('Administrador', $adminPermissions);
 
-<<<<<<< refs/remotes/Tesis_Adianec/develop
-        //permisos especialistaCDN
-=======
+
         //permisos especialistaCDN ECIO-CDN
->>>>>>> arreglo de roles
         $especialistaCDNPermissions = [
             'read_entidad',
             'read_provincia',
