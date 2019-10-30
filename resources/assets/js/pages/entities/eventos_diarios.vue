@@ -234,7 +234,7 @@ export default {
           type: 'select',
           label: 'Estado',
           model: 'estado',
-          values: ['Mantenimiento', 'Avería', 'Asimilación'],
+          values: ['Mantenimiento', 'Avería', 'Asimilación', 'Disponible'],
           selectOptions: {
             hideNoneSelectedText: true
           }
