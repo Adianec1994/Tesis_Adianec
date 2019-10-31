@@ -69,12 +69,17 @@
       class="elevation-1"
     >
       <template v-slot:items="props">
+        <td>{{ centralesElectricasName(props.item.grupos_id) }}</td>
+        <td class="text-xs-center justify-center">{{ bateriasName(props.item.grupos_id) }}</td>
+        <td class="text-xs-center justify-center">{{ gruposName(props.item.grupos_id) }}</td>
         <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaMtto) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.tipoTrabajo }}</td>
         <td class="text-xs-center justify-center">{{ props.item.horaEntrada }}</td>
         <td class="text-xs-center justify-center">{{ props.item.horaSalida }}</td>
         <td class="text-xs-center justify-center">{{ props.item.informa }}</td>
         <td class="text-xs-center justify-center">{{ props.item.resultado }}</td>
+        <td class="text-xs-center justify-center">{{ brigadasName(props.item.brigadas_id) }}</td>
+        <td class="text-xs-center justify-center">{{ mantenedoresName(props.item.mantenedores_externos_id) }}</td>
         <td class="text-xs-center justify-center">
           <v-tooltip bottom>
             <v-icon
@@ -141,9 +146,11 @@
       isNewModel: false,
       moduleName: 'Mantenimientos',
       headers: [
-       /* { text: 'Central Eléctrica', value: '' },
+        { text: 'Central Eléctrica', value: '' },
         { text: 'Batería', value: '', align: 'center' },
-        { text: 'Grupo', value: 'grupo_id', align: 'center' },*/
+        { text: 'Grupo', value: 'grupo_id', align: 'center' },
+        { text: 'Brigada', value: 'brigadas_id', align: 'center' },
+        { text: 'Mantenedor Externo', value: 'mantenedores_externos_id', align: 'center' },
         { text: 'Fecha de Mantenimiento', value: 'fechaMtto', align: 'center' },
         { text: 'Tipo de Trabajo', value: 'tipoTrabajo', align: 'center' },
         { text: 'Hora de entrada', value: 'horaEntrada', align: 'center' },
@@ -160,13 +167,15 @@
       centralesElectricas: [],
       baterias: [],
       grupos: [],
+      brigadas: [],
+      mantenedores_externos: [],
       options: {
         validateAfterChanged: true,
         validateAfterLoad: true
       },
       schema: {
         fields: [
-          /*{
+          {
             type: 'select',
             label: 'Central Eléctrica',
             model: 'central_electricas_id',
@@ -210,7 +219,37 @@
             visible: function () {
               return this.isNewModel
             }
-          },*/
+          },
+          {
+            type: 'select',
+            label: 'Brigada',
+            model: 'brigadas_id',
+            id: 'brigadas',
+            values: [],
+            selectOptions: {
+              noneSelectedText: 'Seleccione una brigada',
+              name: 'numero',
+              value: 'id'
+            },
+            visible: function () {
+              return this.isNewModel
+            }
+          },
+          {
+            type: 'select',
+            label: 'Mantenedor Externo',
+            model: 'mantenedores_externos_id',
+            id: 'mantenedores_externos',
+            values: [],
+            selectOptions: {
+              hideNoneSelectedText: true,
+              name: 'nombre',
+              value: 'id'
+            },
+            visible: function () {
+              return this.isNewModel
+            }
+          },
           {
             type: 'input',
             inputType: 'date',
@@ -321,6 +360,34 @@
         })
       )
 
+      promises.push(this.$store.dispatch('GET', 'brigadas').then((result) => {
+          this.brigadas = this.$store.getters.get('brigadas')
+          this.$store.dispatch('responseMessage', {
+            type: result.success ? 'success' : 'error',
+            text: result.message
+          })
+        }).catch((err) => {
+          this.$store.dispatch('responseMessage', {
+            type: 'error',
+            text: err
+          })
+        })
+      )
+
+      promises.push(this.$store.dispatch('GET', 'mantenedores_externos').then((result) => {
+          this.mantenedores_externos = this.$store.getters.get('mantenedores_externos')
+          this.$store.dispatch('responseMessage', {
+            type: result.success ? 'success' : 'error',
+            text: result.message
+          })
+        }).catch((err) => {
+          this.$store.dispatch('responseMessage', {
+            type: 'error',
+            text: err
+          })
+        })
+      )
+
       promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
           this.items = this.$store.getters.get(this.lowerModuleName)
           this.$store.dispatch('responseMessage', {
@@ -334,6 +401,15 @@
           })
         })
       )
+      Promise.all(promises).then(values => {
+        var field = this.$data.schema.fields.find(field => field.model === 'brigadas_id')
+        field.values = this.brigadas
+      })
+
+      Promise.all(promises).then(values => {
+        var field = this.$data.schema.fields.find(field => field.model === 'mantenedores_externos_id')
+        field.values = this.mantenedores_externos
+      })
 
       Promise.all(promises).then(values => {
         var field = this.$data.schema.fields.find(field => field.model === 'central_electricas_id')
@@ -426,6 +502,16 @@
         const bateria = this.baterias.find(b => b.id === grupos.baterias_id)
         const centralElectrica = this.centralesElectricas.find(ce => ce.id === bateria.central_electricas_id)
         return centralElectrica.nombre
+      },
+
+      brigadasName (id) {
+        const brigada = this.brigadas.find(g => g.id === id)
+        return brigada.numero
+      },
+
+      mantenedoresName (id) {
+        const mantenedor = this.mantenedores_externos.find(g => g.id === id)
+        return mantenedor.nombre
       },
 
       formatDate (date) {
