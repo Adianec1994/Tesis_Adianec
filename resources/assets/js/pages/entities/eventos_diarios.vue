@@ -11,6 +11,14 @@
         vertical
       ></v-divider>
       <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Filtrar"
+        single-line
+        hide-details
+      ></v-text-field>
+      <v-spacer></v-spacer>
       <v-dialog
         v-model="dialog"
         max-width="500px"
@@ -64,6 +72,7 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :search="search"
       :rows-per-page-text="'Filas por páginas'"
       :rows-per-page-items="pageitems"
       class="elevation-1"
@@ -137,6 +146,9 @@
       <template v-slot:no-data>
         <h4>Sin datos para mostrar</h4>
       </template>
+      <template v-slot:no-results>
+        <h4>Su búsqueda por "{{ search }}" no encontró resultados</h4>
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -145,6 +157,7 @@
 
 export default {
   data: () => ({
+    search: '',
     dialog: false,
     deleteDialog: {},
     editedItem: {},
