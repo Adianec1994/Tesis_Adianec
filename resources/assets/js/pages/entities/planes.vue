@@ -172,7 +172,7 @@ export default {
             value: 'id'
           }
         },
-        {
+        /*{
           type: 'dateTimePicker',
           label: 'Año',
           model: 'anno',
@@ -180,6 +180,14 @@ export default {
             format: 'MM/YYYY',
             viewMode(months){}
           },
+        },*/
+        {
+          type: 'input',
+          inputType: 'text',
+          label: 'Año',
+          model: 'anno',
+          validator: ['integer'],
+          max: 2100
         },
         {
           type: 'select',
