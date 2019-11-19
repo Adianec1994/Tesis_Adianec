@@ -27,7 +27,7 @@
               browser-autocomplete="name"
               counter="60"
               name="name"
-              v-validate="'required|max:60|alpha'"
+              v-validate="'required|max:60|alpha_spaces'"
             ></text-input>
 
             <!-- Username -->
