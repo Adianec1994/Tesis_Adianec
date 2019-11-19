@@ -21,7 +21,7 @@
             <!-- Name -->
             <text-input
               :form="form"
-              :label="$t('name')"
+              :label="'Nombre y Apellidos'"
               :v-errors="validationErrors"
               :value.sync="form.name"
               browser-autocomplete="name"
