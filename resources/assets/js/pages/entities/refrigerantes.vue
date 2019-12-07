@@ -1,74 +1,10 @@
-<template>
-  <v-layout row>
-    <v-flex >
-      <v-card>
-        <progress-bar :show="busy"></progress-bar>
-        <v-card-title class="grey lighten-4">
-         <!-- <h3 class="headline mb-0">{{moduleName}}</h3>-->
-        </v-card-title>
-        <v-divider></v-divider>
-
-        <v-tabs icons-and-text centered fixed>
-          <v-tabs-slider color="primary"></v-tabs-slider>
-
-          <v-tab href="#tab-combustible">
-            {{ $t('Combustible') }}
-            <v-icon>local_gas_station</v-icon>
-          </v-tab>
-          <v-tab href="#tab-lubricante">
-            {{ $t('Lubricante') }}
-            <v-icon>opacity</v-icon>
-          </v-tab>
-          <v-tab href="#tab-refrigerante">
-            {{ $t('Refrigerante') }}
-            <v-icon>ac_unit</v-icon>
-          </v-tab>
-
-          <v-tab-item :value="'tab-combustible'">
-            <combustible-view v-on:busy="busy = $event"></combustible-view>
-          </v-tab-item>
-          <v-tab-item :value="'tab-lubricante'">
-            <lubricantes-view v-on:busy="busy = $event"></lubricantes-view>
-          </v-tab-item>
-          <v-tab-item :value="'tab-refrigerante'">
-            <refrigerantes-view v-on:busy="busy = $event"></refrigerantes-view>
-          </v-tab-item>
-
-        </v-tabs>
-      </v-card>
-    </v-flex>
-  </v-layout>
-</template>
-
-<script>
-  import Combustible from '~/pages/entities/combustible'
-  import Lubricantes from '~/pages/entities/lubricantes'
-  import Refrigerantes from '~/pages/entities/refrigerantes'
-
-  export default {
-    name: 'settings-view',
-    components: {
-      'combustible-view': Combustible,
-      'lubricantes-view': Lubricantes,
-      'refrigerantes-view': Refrigerantes
-    },
-    data () {
-      return {
-        busy: false
-      }
-    }
-  }
-</script>
-
-
-
-<!--<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-toolbar
       flat
       color="white"
     >
-      <v-toolbar-title>{{moduleName}}</v-toolbar-title>
+     <!-- <v-toolbar-title>{{moduleName}}</v-toolbar-title>-->
       <v-divider
         class="mx-2"
         inset
@@ -134,7 +70,7 @@
     >
       <template v-slot:items="props">
         <td>{{ centralesElectricasName(props.item.central_electricas_id) }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.genBruta }}</td>
+        <!--<td class="text-xs-center justify-center">{{ props.item.genBruta }}</td>
         <td class="text-xs-center justify-center">{{ props.item.insumos }}</td>
         <td class="text-xs-center justify-center">{{ props.item.recibido }}</td>
         <td class="text-xs-center justify-center">{{ props.item.volumenRecibido }}</td>
@@ -152,7 +88,7 @@
         <td class="text-xs-center justify-center">{{ props.item.lubricteCsmoTotal }}</td>
         <td class="text-xs-center justify-center">{{ props.item.lubricteExistencia }}</td>
         <td class="text-xs-center justify-center">{{ props.item.lubricteCobertura }}</td>
-        <td class="text-xs-center justify-center">{{ props.item.lubricteIndiceCsmo }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.lubricteIndiceCsmo }}</td>-->
         <td class="text-xs-center justify-center">{{ props.item.refrigteRecibido }}</td>
         <td class="text-xs-center justify-center">{{ props.item.refrigteConsumo }}</td>
         <td class="text-xs-center justify-center">{{ props.item.refrigteExistencia }}</td>
@@ -223,7 +159,7 @@ export default {
     moduleName: 'Datos generales',
     headers: [
       { text: 'Central Eléctrica', value: 'central_electricas_id' },
-      { text: 'Generación bruta', value: 'genBruta', align: 'center' },
+      /*{ text: 'Generación bruta', value: 'genBruta', align: 'center' },
       { text: 'Insumos', value: 'insumos', align: 'center' },
       { text: 'Recibido', value: 'recibido', align: 'center' },
       { text: 'Volumen recibido', value: 'volumenRecibido', align: 'center' },
@@ -241,7 +177,7 @@ export default {
       { text: 'Lubricante consumo total', value: 'lubricteCsmoTotal', align: 'center' },
       { text: 'Lubricante existencia', value: 'lubricteExistencia', align: 'center' },
       { text: 'Lubricante cobertura', value: 'lubricteCobertura', align: 'center' },
-      { text: 'Lubricante índice consumo', value: 'lubricteIndiceCsmo', align: 'center' },
+      { text: 'Lubricante índice consumo', value: 'lubricteIndiceCsmo', align: 'center' },*/
       { text: 'Refrigerante recibido', value: 'refrigteRecibido', align: 'center' },
       { text: 'Refrigerante consumo', value: 'refrigteConsumo', align: 'center' },
       { text: 'Refrigerante existencia', value: 'refrigteExistencia', align: 'center' },
@@ -270,7 +206,7 @@ export default {
             value: 'id'
           }
         },
-        {
+        /*{
           type: 'input',
           inputType: 'text',
           label: 'Generación bruta',
@@ -421,7 +357,7 @@ export default {
           model: 'lubricteIndiceCsmo',
           validator: ['double'],
           max: 4
-        },
+        },*/
         {
           type: 'input',
           inputType: 'text',
@@ -566,4 +502,4 @@ export default {
     }
   }
 }
-</script>-->
+</script>

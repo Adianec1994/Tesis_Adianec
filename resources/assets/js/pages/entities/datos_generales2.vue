@@ -1,68 +1,4 @@
-<template>
-  <v-layout row>
-    <v-flex >
-      <v-card>
-        <progress-bar :show="busy"></progress-bar>
-        <v-card-title class="grey lighten-4">
-         <!-- <h3 class="headline mb-0">{{moduleName}}</h3>-->
-        </v-card-title>
-        <v-divider></v-divider>
-
-        <v-tabs icons-and-text centered fixed>
-          <v-tabs-slider color="primary"></v-tabs-slider>
-
-          <v-tab href="#tab-combustible">
-            {{ $t('Combustible') }}
-            <v-icon>local_gas_station</v-icon>
-          </v-tab>
-          <v-tab href="#tab-lubricante">
-            {{ $t('Lubricante') }}
-            <v-icon>opacity</v-icon>
-          </v-tab>
-          <v-tab href="#tab-refrigerante">
-            {{ $t('Refrigerante') }}
-            <v-icon>ac_unit</v-icon>
-          </v-tab>
-
-          <v-tab-item :value="'tab-combustible'">
-            <combustible-view v-on:busy="busy = $event"></combustible-view>
-          </v-tab-item>
-          <v-tab-item :value="'tab-lubricante'">
-            <lubricantes-view v-on:busy="busy = $event"></lubricantes-view>
-          </v-tab-item>
-          <v-tab-item :value="'tab-refrigerante'">
-            <refrigerantes-view v-on:busy="busy = $event"></refrigerantes-view>
-          </v-tab-item>
-
-        </v-tabs>
-      </v-card>
-    </v-flex>
-  </v-layout>
-</template>
-
-<script>
-  import Combustible from '~/pages/entities/combustible'
-  import Lubricantes from '~/pages/entities/lubricantes'
-  import Refrigerantes from '~/pages/entities/refrigerantes'
-
-  export default {
-    name: 'settings-view',
-    components: {
-      'combustible-view': Combustible,
-      'lubricantes-view': Lubricantes,
-      'refrigerantes-view': Refrigerantes
-    },
-    data () {
-      return {
-        busy: false
-      }
-    }
-  }
-</script>
-
-
-
-<!--<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-toolbar
       flat
@@ -566,4 +502,4 @@ export default {
     }
   }
 }
-</script>-->
+</script>
