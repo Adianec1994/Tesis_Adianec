@@ -14,9 +14,9 @@ return [
     */
 
     'password' => 'Las contraseñas deben tener por lo menos seis carácteres y deben emparejar la confirmación.',
-    'reset' => 'Su contraseña se ha restablecido!',
-    'sent' => 'Nosotros hemos mandado electrónicamente su contraseña para restablecer! ',
-    'token' => 'Este token de restablecimiento de contraseña no es válido.',
-    'user' => "Nosotros no podemos encontrar a un usuario con esa dirección del correo electrónico.",
-
+    'reset' => '¡Su contraseña ha sido restablecida!',
+    'sent' => '¡Recordatorio de contraseña enviado!',
+    'token' => 'Este token de restablecimiento de contraseña es inválido.',
+    'user' => "No se ha encontrado un usuario con esa dirección de correo.",
+    'throttled' => 'Por favor espere antes de volver a intentarlo.',
 ];
