@@ -26,7 +26,8 @@ class Mantenimiento extends Model
         'informa',
         'resultado',
         'mantenedores_externos_id',
-        'brigadas_id'
+        'brigadas_id',
+        'grupos_id'
     ];
 
     /**
@@ -36,7 +37,10 @@ class Mantenimiento extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'grupos_id' => 'integer',
         'fechaMtto' => 'date',
+        'horaEntrada' => 'time',
+        'horaSalida' => 'time',
         'tipoTrabajo' => 'string',
         'informa' => 'string',
         'resultado' => 'string',
@@ -50,17 +54,14 @@ class Mantenimiento extends Model
      * @var array
      */
     public static $rules = [
-        'mantenedores_externos_id' => 'required',
-        'brigadas_id' => 'required'
+        'grupos_id' => 'required',
+
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    /*public function grupos()
-    {
-        return $this->belongsTo(\App\Models\Grupo::class, 'grupos_id');
-    }*/
+
     public function mantenedores_externos()
     {
         return $this->belongsTo(\App\Models\MantenedorExterno::class, 'mantenedores_externos_id');
@@ -69,5 +70,11 @@ class Mantenimiento extends Model
     public function brigadas()
     {
         return $this->belongsTo(\App\Models\Brigada::class, 'brigadas_id');
+    }
+
+    public function grupos()
+    {
+        return $this->belongsToMany(\App\Models\Grupos::class, 'grupos_mantenimientos',
+            'mantenimientos_id','grupos_id')->withPivot('grupos_id');
     }
 }

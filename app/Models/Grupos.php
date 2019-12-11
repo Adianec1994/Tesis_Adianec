@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Database\Eloquent\Collection eventosDiarios
  * @property \Illuminate\Database\Eloquent\Collection generacions
  * @property \Illuminate\Database\Eloquent\Collection mantenimientos
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property integer numero
  * @property float potInstalada
  * @property integer baterias_id
@@ -26,7 +26,7 @@ class Grupos extends Model
     use SoftDeletes;
 
     public $table = 'grupos';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -101,6 +101,7 @@ class Grupos extends Model
      **/
     public function mantenimientos()
     {
-        return $this->belongsToMany(\App\Models\Mantenimiento::class, 'grupos_mantenimientos');
+        return $this->belongsToMany(\App\Models\Mantenimiento::class, 'grupos_mantenimientos','grupos_id','mantenimientos_id')
+            ->withPivot('mantenimientos_id');
     }
 }

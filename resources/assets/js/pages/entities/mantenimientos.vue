@@ -69,8 +69,8 @@
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ centralesElectricasName(props.item.grupos_id) }}</td>
-        <td class="text-xs-center justify-center">{{ bateriasName(props.item.grupos_id) }}</td>
+        <!--<td>{{ centralesElectricasName(props.item.grupos_id) }}</td>
+        <td class="text-xs-center justify-center">{{ bateriasName(props.item.grupos_id) }}</td>-->
         <td class="text-xs-center justify-center">{{ gruposName(props.item.grupos_id) }}</td>
         <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaMtto) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.tipoTrabajo }}</td>
@@ -146,9 +146,9 @@
       isNewModel: false,
       moduleName: 'Mantenimientos',
       headers: [
-        { text: 'Central Eléctrica', value: '' },
-        { text: 'Batería', value: '', align: 'center' },
-        { text: 'Grupo', value: 'grupo_id', align: 'center' },
+        /*{ text: 'Central Eléctrica', value: '' },
+        { text: 'Batería', value: '', align: 'center' },*/
+        { text: 'Grupo', value: 'grupos_id', align: 'center' },
         { text: 'Brigada', value: 'brigadas_id', align: 'center' },
         { text: 'Mantenedor Externo', value: 'mantenedores_externos_id', align: 'center' },
         { text: 'Fecha de Mantenimiento', value: 'fechaMtto', align: 'center' },
@@ -175,7 +175,7 @@
       },
       schema: {
         fields: [
-          {
+          /*{
             type: 'select',
             label: 'Central Eléctrica',
             model: 'central_electricas_id',
@@ -204,7 +204,7 @@
             visible: function () {
               return this.isNewModel
             }
-          },
+          },*/
           {
             type: 'select',
             label: 'Grupo',
