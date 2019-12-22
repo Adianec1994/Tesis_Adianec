@@ -54,8 +54,9 @@ class Mantenimiento extends Model
      * @var array
      */
     public static $rules = [
-        'grupos_id' => 'required',
-
+        'mantenedores_externos_id' => 'required',
+        'brigadas_id' => 'required',
+        'grupos_id' => 'required'
     ];
 
     /**
@@ -74,7 +75,6 @@ class Mantenimiento extends Model
 
     public function grupos()
     {
-        return $this->belongsToMany(\App\Models\Grupos::class, 'grupos_mantenimientos',
-            'mantenimientos_id','grupos_id')->withPivot('grupos_id');
+        return $this->belongsTo(\App\Models\Grupos::class, 'grupos_id');
     }
 }

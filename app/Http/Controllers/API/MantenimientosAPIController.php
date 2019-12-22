@@ -35,7 +35,7 @@ class MantenimientosAPIController extends AppBaseController
 
         $this->mantenimientoRepository->pushCriteria(new RequestCriteria($request));
         $this->mantenimientoRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $mantenimientos = $this->mantenimientoRepository->all();
+        $mantenimientos = $this->mantenimientoRepository->with(['brigadas', 'grupos.baterias.centralElectricas'])->all();
 
         return $this->sendResponse($mantenimientos->toArray(), 'Mantenimiento recuperado con éxito');
     }

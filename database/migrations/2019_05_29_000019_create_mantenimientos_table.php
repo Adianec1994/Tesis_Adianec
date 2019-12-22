@@ -31,6 +31,7 @@ class CreateMantenimientosTable extends Migration
             $table->text('resultado')->nullable();
             $table->unsignedInteger('mantenedores_externos_id');
             $table->unsignedInteger('brigadas_id');
+            $table->unsignedInteger('grupos_id');
             $table->softDeletes();
             $table->timestamps();
 
@@ -38,6 +39,7 @@ class CreateMantenimientosTable extends Migration
 
             $table->index(["brigadas_id"], 'fk_mantenimientos_brigadas1_idx');
 
+            $table->index(["grupos_id"], 'fk_mantenimientos_grupos1_idx');
 
             $table->foreign('mantenedores_externos_id', 'fk_mantenimientos_mantenedores_externos1_idx')
                 ->references('id')->on('mantenedores_externos')
@@ -48,6 +50,11 @@ class CreateMantenimientosTable extends Migration
                 ->references('id')->on('brigadas')
                 ->onDelete('no action')
                 ->onUpdate('no action');
+
+            $table->foreign('grupos_id', 'fk_mantenimientos_grupos1_idx')
+                ->references('id')->on('grupos')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
     }
 
@@ -56,8 +63,8 @@ class CreateMantenimientosTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists($this->tableName);
-     }
+    public function down()
+    {
+        Schema::dropIfExists($this->tableName);
+    }
 }

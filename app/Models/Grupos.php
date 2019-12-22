@@ -69,7 +69,7 @@ class Grupos extends Model
      **/
     public function baterias()
     {
-        return $this->belongsTo(\App\Models\Bateria::class, 'baterias_id');
+        return $this->belongsTo(\App\Models\Baterias::class, 'baterias_id');
     }
 
     /**
@@ -97,11 +97,10 @@ class Grupos extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      **/
     public function mantenimientos()
     {
-        return $this->belongsToMany(\App\Models\Mantenimiento::class, 'grupos_mantenimientos','grupos_id','mantenimientos_id')
-            ->withPivot('mantenimientos_id');
+        return $this->hasMany(\App\Models\Mantenimiento::class, 'grupos_id');
     }
 }
