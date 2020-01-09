@@ -34,7 +34,6 @@
         <td class="text-xs-center">{{ usuarioRol(props.item.users_id) }}</td>
         <td class="text-xs-center">{{ props.item.accion }}</td>
         <td class="text-xs-center">{{ props.item.ip }}</td>
-        <td class="text-xs-center">{{ props.item.url }}</td>
       </template>
       <template v-slot:no-results>
         <h4>Su búsqueda por "{{ search }}" no encontró resultados</h4>
@@ -58,7 +57,6 @@ export default {
       { text: 'Rol', align: 'center' },
       { text: 'Acción', value: 'accion', align: 'center' },
       { text: 'IP', value: 'ip', align: 'center' },
-      { text: 'URL', value: 'url', align: 'center' }
     ],
     pageitems: [
       5,10,30,
