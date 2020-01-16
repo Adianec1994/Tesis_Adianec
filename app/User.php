@@ -48,6 +48,16 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    /**
+     * check if the user is superuser
+     *
+     * @return bool
+     */
+    public function isSuperUser()
+    {
+        return $this->hasAnyPermission('superuser_');
+    }
+
 
     /**
      * The attributes that should be casted to native types.

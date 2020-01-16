@@ -21,7 +21,8 @@ export const state = {
   trazas: [],
   mantenedores_externos: [],
   mantenimientos: [],
-  brigadas: []
+  brigadas: [],
+  permissions: []
 }
 
 // mutations
@@ -60,31 +61,56 @@ export const actions = {
     commit
   }, moduleName) => {
     return axios.get(`/api/${moduleName}`).then(response => {
-      commit('FETCH', { payload: response.data.data, moduleName })
+      commit('FETCH', {
+        payload: JSON.parse(response.headers.permissions),
+        moduleName: 'permissions'
+      })
+      commit('FETCH', {
+        payload: response.data.data,
+        moduleName
+      })
       return response.data
     })
   },
   SAVE: ({
     commit
-  }, { payload, moduleName }) => {
+  }, {
+    payload,
+    moduleName
+  }) => {
     return axios.post(`/api/${moduleName}`, payload).then(response => {
-      commit('ADD', { payload: response.data.data, moduleName })
+      commit('ADD', {
+        payload: response.data.data,
+        moduleName
+      })
       return response.data
     })
   },
   EDIT: ({
     commit
-  }, { payload, moduleName }) => {
+  }, {
+    payload,
+    moduleName
+  }) => {
     return axios.put(`/api/${moduleName}/${payload.id}`, payload).then(response => {
-      commit('UPDATE', { payload: response.data.data, moduleName })
+      commit('UPDATE', {
+        payload: response.data.data,
+        moduleName
+      })
       return response.data
     })
   },
   DESTROY: ({
     commit
-  }, { payload, moduleName }) => {
+  }, {
+    payload,
+    moduleName
+  }) => {
     return axios.delete(`/api/${moduleName}/${payload.id}`).then(response => {
-      commit('DELETE', { payload: response.data.data, moduleName })
+      commit('DELETE', {
+        payload: response.data.data,
+        moduleName
+      })
       return response.data
     })
   }

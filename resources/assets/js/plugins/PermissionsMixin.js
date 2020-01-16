@@ -1,6 +1,6 @@
-import _ from 'lodash'
+import Vue from 'vue'
 
-export default {
+Vue.mixin({
   data() {
     return {
       permissions: []
@@ -15,4 +15,4 @@ export default {
       return this.permissions[model + '-' + permission]
     }
   }
-}
+})

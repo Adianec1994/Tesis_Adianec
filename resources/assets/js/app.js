@@ -13,6 +13,8 @@ import {
 import App from '~/components/App'
 import '~/components'
 
+window.axios = require('axios')
+
 Vue.use(Vuetify)
 Vue.use(VueFormGenerator, {
   validators: {
@@ -47,7 +49,7 @@ Vue.use(VueFormGenerator, {
 
       return errs
     },
-    double (value, field, model, messages = VueFormGenerator.validators.resources) {
+    double(value, field, model, messages = VueFormGenerator.validators.resources) {
       const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
       if (res != null) return res
 
@@ -67,7 +69,7 @@ Vue.use(VueFormGenerator, {
 
       return errs
     },
-    nombre (value, field, model, messages = VueFormGenerator.validators.resources) {
+    nombre(value, field, model, messages = VueFormGenerator.validators.resources) {
       const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
       if (res != null) return res
 
@@ -76,7 +78,7 @@ Vue.use(VueFormGenerator, {
         return [messages.invalidTextContainNumber]
       }
     },
-    email (value, field, model, messages = VueFormGenerator.validators.resources) {
+    email(value, field, model, messages = VueFormGenerator.validators.resources) {
       const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
       if (res != null) return res
 
@@ -86,7 +88,7 @@ Vue.use(VueFormGenerator, {
       }
     },
 
-    direccionip (value, field, model, messages = VueFormGenerator.validators.resources) {
+    direccionip(value, field, model, messages = VueFormGenerator.validators.resources) {
       const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
       if (res != null) return res
 
@@ -96,7 +98,7 @@ Vue.use(VueFormGenerator, {
       }
     },
 
-    carnetid (value, field, model, messages = VueFormGenerator.validators.resources) {
+    carnetid(value, field, model, messages = VueFormGenerator.validators.resources) {
       const res = VueFormGenerator.validators.checkEmpty(value, field.required, messages)
       if (res != null) return res
 
@@ -106,7 +108,7 @@ Vue.use(VueFormGenerator, {
       }
     },
 
-    fecha (value, field, model, messages = VueFormGenerator.validators.resources) {
+    fecha(value, field, model, messages = VueFormGenerator.validators.resources) {
       return VueFormGenerator.validators.date(value, field, model, messages)
     }
   }

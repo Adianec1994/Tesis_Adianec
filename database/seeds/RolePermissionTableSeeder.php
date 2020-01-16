@@ -58,12 +58,10 @@ class RolePermissionTableSeeder extends Seeder
             'read_bateria',
             'update_bateria',
             'delete_bateria',
-            'create_usuario',
             'read_usuario',
             'update_usuario',
             'delete_usuario',
-            'read_traza',
-            'importar_exportar'
+            'read_traza'
         ];
 
         $this->assign('Administrador', $adminPermissions);
@@ -243,7 +241,8 @@ class RolePermissionTableSeeder extends Seeder
             $especialistaUEBPermissions,
             $consultorPermissions,
             $analistaUEBPermissions,
-            $usuarioPermissions
+            $usuarioPermissions,
+            ['superuser_']
         );
         $this->assign('Desarrollo', $developerPermissions);
     }
