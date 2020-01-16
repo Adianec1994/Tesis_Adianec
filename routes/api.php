@@ -15,16 +15,14 @@ use App\Models\Entidad;
 |
 */
 
-Route::group(['middleware' => ['auth:api','trazas']], function () {
+Route::group(['middleware' => ['auth:api', 'trazas']], function () {
     Route::post('logout', 'Auth\LoginController@logout');
 
     Route::get('user', function (Request $request) {
         return $request->user();
     });
 
-    Route::get('permissions', function (Request $request) {
-        return $request->user()->getAllPermissions();
-    });
+    Route::get('nav', 'NavMenu');
 
     Route::patch('settings/profile', 'Settings\UpdateProfile');
     Route::patch('settings/password', 'Settings\UpdatePassword');
@@ -62,7 +60,7 @@ Route::group(['middleware' => ['auth:api','trazas']], function () {
 });
 
 
-Route::group(['middleware' => ['guest:api','trazas']], function () {
+Route::group(['middleware' => ['guest:api', 'trazas']], function () {
     Route::post('login', 'Auth\LoginController@login');
     Route::post('register', 'Auth\RegisterController@register');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');

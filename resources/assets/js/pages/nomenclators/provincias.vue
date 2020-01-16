@@ -1,28 +1,12 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
-    <v-toolbar
-      flat
-      color="white"
-    >
+    <v-toolbar flat color="white">
       <v-toolbar-title>{{moduleName}}</v-toolbar-title>
-      <v-divider
-        class="mx-2"
-        inset
-        vertical
-      ></v-divider>
+      <v-divider class="mx-2" inset vertical></v-divider>
       <v-spacer></v-spacer>
-      <v-dialog
-        v-model="dialog"
-        max-width="300px"
-      >
+      <v-dialog v-model="dialog" max-width="300px">
         <template v-slot:activator="{ on }">
-          <v-btn
-            color="primary"
-            dark
-            class="mb-2"
-            v-on="on"
-            v-on:click="isNewModel=true"
-          >Nuevo</v-btn>
+          <v-btn color="primary" dark class="mb-2" v-on="on" v-on:click="isNewModel=true">Nuevo</v-btn>
         </template>
         <v-card>
           <v-card-title>
@@ -39,24 +23,15 @@
                   :isNewModel="isNewModel"
                   @model-updated="updateItem"
                   @validated="formIsValid"
-                >
-                </vue-form-generator>
+                ></vue-form-generator>
               </v-layout>
             </v-container>
           </v-card-text>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              dark
-              @click="saveItem"
-            >Guardar</v-btn>
-            <v-btn
-              color="blue darken-1"
-              flat
-              @click="close"
-            >Cancelar</v-btn>
+            <v-btn color="primary" dark @click="saveItem">Guardar</v-btn>
+            <v-btn color="blue darken-1" flat @click="close">Cancelar</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -72,24 +47,11 @@
         <td>{{ props.item.nombre }}</td>
         <td class="text-xs-center justify-center">
           <v-tooltip bottom>
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(props.item)"
-              slot="activator"
-            >
-              edit
-            </v-icon>
+            <v-icon small class="mr-2" @click="editItem(props.item)" slot="activator">edit</v-icon>
             <span>Editar</span>
           </v-tooltip>
           <v-tooltip bottom>
-            <v-icon
-              small
-              @click="$set(deleteDialog,props.item.id,true)"
-              slot="activator"
-            >
-              delete
-            </v-icon>
+            <v-icon small @click="$set(deleteDialog,props.item.id,true)" slot="activator">delete</v-icon>
             <span>Eliminar</span>
           </v-tooltip>
         </td>
@@ -100,15 +62,13 @@
           max-width="290"
         >
           <v-card>
-            <v-card-title><b>Eliminar</b></v-card-title>
+            <v-card-title>
+              <b>Eliminar</b>
+            </v-card-title>
             <v-card-text>{{`¿Seguro que desea eliminar la provincia ${props.item.nombre}`}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn
-                color="primary"
-                dark
-                @click.stop="deleteItem(props.item)"
-              >Eliminar</v-btn>
+              <v-btn color="primary" dark @click.stop="deleteItem(props.item)">Eliminar</v-btn>
               <v-btn
                 color="blue darken-1"
                 flat
@@ -140,8 +100,8 @@ export default {
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     pageitems: [
-      5,10,30,
-      { text: "Todo", value: -1}
+      5, 10, 30,
+      { text: 'Todo', value: -1 }
     ],
     items: [],
     options: {

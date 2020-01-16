@@ -144,8 +144,8 @@ export default {
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
     pageitems: [
-      5,10,30,
-      { text: "Todo", value: -1}
+      5, 10, 30,
+      { text: 'Todo', value: -1 }
     ],
     items: [],
     centrales_electricas: [],
@@ -172,7 +172,7 @@ export default {
           label: 'Número de Batería',
           model: 'numero',
           validator: ['integer'],
-          max:8
+          max: 8
         }
       ]
     }

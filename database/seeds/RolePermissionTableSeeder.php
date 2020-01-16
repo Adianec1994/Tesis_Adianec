@@ -61,7 +61,12 @@ class RolePermissionTableSeeder extends Seeder
             'read_usuario',
             'update_usuario',
             'delete_usuario',
-            'read_traza'
+            'read_traza',
+            'make_salva_base_datos',
+            'create_rol',
+            'read_rol',
+            'update_rol',
+            'delete_rol',
         ];
 
         $this->assign('Administrador', $adminPermissions);
