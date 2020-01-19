@@ -66,7 +66,7 @@
                     v-on:click="restoreBackup(snapshot.filename)"
                     slot="activator"
                   >
-                    <v-icon>restore</v-icon>
+                    <v-icon color="orange dark-2">restore</v-icon>
                   </v-btn>
                     <span>Restaurar</span>
                   </v-tooltip>
@@ -76,7 +76,7 @@
                     v-on:click="deleteBackup(snapshot.filename)"
                     slot="activator"
                   >
-                    <v-icon>delete</v-icon>
+                    <v-icon color="red dark-2">delete</v-icon>
                   </v-btn>
                     <span>Eliminar</span>
                   </v-tooltip>

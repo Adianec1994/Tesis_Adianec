@@ -75,22 +75,13 @@
         <td class="text-xs-center justify-center">{{ props.item.ip }}</td>
         <td class="text-xs-center justify-center">
           <v-tooltip bottom>
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(props.item)"
-              slot="activator"
-            >
+            <v-icon small color="orange lighten-2" class="mr-2" @click="editItem(props.item)" slot="activator">
               edit
             </v-icon>
             <span>Editar</span>
           </v-tooltip>
           <v-tooltip bottom>
-            <v-icon
-              small
-              @click="$set(deleteDialog,props.item.id,true)"
-              slot="activator"
-            >
+            <v-icon small color="red lighten-2" @click="$set(deleteDialog,props.item.id,true)" slot="activator">
               delete
             </v-icon>
             <span>Eliminar</span>

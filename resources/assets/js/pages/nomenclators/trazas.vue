@@ -14,6 +14,7 @@
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
+          color="orange lighten-2"
           append-icon="search"
           label="Buscar"
           single-line

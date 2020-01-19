@@ -48,16 +48,16 @@
         <td class="text-xs-center justify-center">{{ props.item.email }}</td>
         <td class="text-xs-center justify-center">
           <v-tooltip bottom v-if="allowed('usuario','update')">
-            <v-icon small class="mr-2" @click="editItem(props.item)" slot="activator">edit</v-icon>
+            <v-icon small color="orange lighten-2" class="mr-2" @click="editItem(props.item)" slot="activator">
+              edit
+            </v-icon>
             <span>Editar</span>
           </v-tooltip>
           <v-tooltip bottom v-if="allowed('usuario','delete')">
-            <v-icon
-              v-if="props.item.id != idUserAuth"
-              small
-              @click="$set(deleteDialog,props.item.id,true)"
-              slot="activator"
-            >delete</v-icon>
+            <v-icon v-if="props.item.id != idUserAuth" small color="red lighten-2"
+                    @click="$set(deleteDialog,props.item.id,true)" slot="activator">
+              delete
+            </v-icon>
             <span>Eliminar</span>
           </v-tooltip>
         </td>

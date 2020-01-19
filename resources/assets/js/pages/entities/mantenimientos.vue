@@ -44,26 +44,28 @@
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <!--<td>{{ centralesElectricasName(props.item.grupos_id) }}</td>
-        <td class="text-xs-center justify-center">{{ bateriasName(props.item.grupos_id) }}</td>-->
+        <td>{{ centralesElectricasName(props.item.grupos_id) }}</td>
+        <td class="text-xs-center justify-center">{{ bateriasName(props.item.grupos_id) }}</td>
         <td class="text-xs-center justify-center">{{ gruposName(props.item.grupos_id) }}</td>
+        <td class="text-xs-center justify-center">{{ brigadasName(props.item.brigadas_id) }}</td>
+        <td class="text-xs-center justify-center">{{ mantenedoresName(props.item.mantenedores_externos_id) }}</td>
         <td class="text-xs-center justify-center">{{ formatDate(props.item.fechaMtto) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.tipoTrabajo }}</td>
         <td class="text-xs-center justify-center">{{ props.item.horaEntrada }}</td>
         <td class="text-xs-center justify-center">{{ props.item.horaSalida }}</td>
         <td class="text-xs-center justify-center">{{ props.item.informa }}</td>
         <td class="text-xs-center justify-center">{{ props.item.resultado }}</td>
-        <td class="text-xs-center justify-center">{{ brigadasName(props.item.brigadas_id) }}</td>
-        <td
-          class="text-xs-center justify-center"
-        >{{ mantenedoresName(props.item.mantenedores_externos_id) }}</td>
         <td class="text-xs-center justify-center">
           <v-tooltip bottom>
-            <v-icon small class="mr-2" @click="editItem(props.item)" slot="activator">edit</v-icon>
+            <v-icon small color="orange lighten-2" class="mr-2" @click="editItem(props.item)" slot="activator">
+              edit
+            </v-icon>
             <span>Editar</span>
           </v-tooltip>
           <v-tooltip bottom>
-            <v-icon small @click="$set(deleteDialog,props.item.id,true)" slot="activator">delete</v-icon>
+            <v-icon small color="red lighten-2" @click="$set(deleteDialog,props.item.id,true)" slot="activator">
+              delete
+            </v-icon>
             <span>Eliminar</span>
           </v-tooltip>
         </td>
