@@ -13,11 +13,11 @@
 
           <v-tab href="#tab-person">
             {{ $t('profile') }}
-            <v-icon>person</v-icon>
+            <v-icon color="primary dark-2">person</v-icon>
           </v-tab>
           <v-tab href="#tab-password">
             {{ $t('password') }}
-            <v-icon>lock</v-icon>
+            <v-icon color="primary dark-2">lock</v-icon>
           </v-tab>
 
           <v-tab-item :value="'tab-person'">

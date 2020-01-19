@@ -2,7 +2,7 @@
   <v-card flat>
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <v-card-title primary-title>
-        <h5 class="subheading mb-0">{{ $t('your_password') }}</h5>
+        <h5 class="title font-weight-bold">{{ $t('your_password') }}</h5>
       </v-card-title>
       <v-card-text>
 
