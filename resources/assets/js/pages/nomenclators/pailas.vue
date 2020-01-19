@@ -112,8 +112,8 @@ export default {
       { text: 'Operador', value: 'operadors_id' },
       { text: 'Chofer', value: 'chofer_id' },
       { text: 'Acompañante', value: 'acompanante_id' },
-      { text: 'Factura de combustible', value: 'combustibleFactura', align: 'center' },
-      { text: 'Medición de combustible', value: 'combustibleMedicion', align: 'center' },
+      { text: 'Factura de combustible (L)', value: 'combustibleFactura', align: 'center' },
+      { text: 'Medición de combustible (L)', value: 'combustibleMedicion', align: 'center' },
       { text: 'Acciones realizadas', value: 'acciones', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
