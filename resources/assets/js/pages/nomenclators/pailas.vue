@@ -51,6 +51,7 @@
         <td class="text-xs-center justify-center">{{ operadoresName(props.item.acompanante_id) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.combustibleFactura }}</td>
         <td class="text-xs-center justify-center">{{ props.item.combustibleMedicion }}</td>
+        <td class="text-xs-center justify-center">{{ diferencia(props.item) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.acciones }}</td>
         <td class="text-xs-center justify-center">
           <v-tooltip bottom>
@@ -114,6 +115,7 @@ export default {
       { text: 'Acompañante', value: 'acompanante_id' },
       { text: 'Factura de combustible (L)', value: 'combustibleFactura', align: 'center' },
       { text: 'Medición de combustible (L)', value: 'combustibleMedicion', align: 'center' },
+      { text: 'Diferencia (L)', value: '', align: 'center' },
       { text: 'Acciones realizadas', value: 'acciones', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
@@ -351,6 +353,9 @@ export default {
     operadoresName (id) {
       const operador = this.operadores.find(o => o.id === id)
       return operador.nombre
+    },
+    diferencia (centralElectrica) {
+      return centralElectrica.combustibleMedicion - centralElectrica.combustibleFactura
     }
   }
 }
