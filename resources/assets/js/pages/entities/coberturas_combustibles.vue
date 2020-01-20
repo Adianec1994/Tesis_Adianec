@@ -200,7 +200,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Cap. Total Almacenada',
+          label: 'Cap. Total Almacenada (Lts)',
           model: 'capacTotalAlmac',
           validator: ['double'],
           max: 3
@@ -208,7 +208,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Existencia día anterior',
+          label: 'Existencia día anterior (Lts)',
           model: 'existTotalDiaAnterior',
           validator: ['double'],
           max: 3
@@ -216,7 +216,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Existencia Total',
+          label: 'Existencia Total (Lts)',
           model: 'existTotal',
           validator: ['double'],
           max: 3
@@ -224,7 +224,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Plan de reserva',
+          label: 'Plan de reserva (Lts)',
           model: 'planReserva',
           validator: ['double'],
           max: 3
@@ -232,7 +232,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Fondaje',
+          label: 'Fondaje (Lts)',
           model: 'fondaje',
           validator: ['double'],
           max: 3
@@ -240,7 +240,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Cobertura x horas',
+          label: 'Cobertura x horas (Hrs)',
           model: 'coberturaHoras',
           validator: ['integer'],
           max: 500
@@ -248,7 +248,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Consumo',
+          label: 'Consumo (Lts)',
           model: 'consumo',
           validator: ['double'],
           max: 3
@@ -256,7 +256,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Suministro CUPET',
+          label: 'Suministro CUPET (Lts)',
           model: 'suminCupet',
           validator: ['double'],
           max: 3
