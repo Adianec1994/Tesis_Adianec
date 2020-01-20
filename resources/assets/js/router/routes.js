@@ -150,13 +150,26 @@ export default ({
     },
     {
       path: '/roles',
-      name: 'roles',
-      component: require('~/pages/nomenclators/roles/RoleLists.vue'),
+      component: require('~/pages/nomenclators/roles/Role.vue'),
       children: [{
-        path: '/roles/nuevo',
-        name: 'roles.create',
-        component: require('~/pages/nomenclators/roles/RoleFormAdd.vue')
-      }]
+          path: '',
+          name: 'roles',
+          component: require('~/pages/nomenclators/roles/RoleLists.vue')
+        },
+        {
+          path: '/roles/nuevo',
+          name: 'roles.create',
+          component: require('~/pages/nomenclators/roles/RoleFormAdd.vue')
+        },
+        {
+          path: '/roles/editar/:id',
+          name: 'roles.edit',
+          component: require('~/pages/nomenclators/roles/RoleFormEdit.vue'),
+          props: (route) => ({
+            propId: route.params.id
+          })
+        }
+      ]
     },
     // rutas de reportes
     {

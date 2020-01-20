@@ -11,6 +11,7 @@ use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use Spatie\Permission\Models\Permission;
 
 /**
  * Class RolController
@@ -38,9 +39,23 @@ class RolAPIController extends AppBaseController
     {
         $this->rolRepository->pushCriteria(new RequestCriteria($request));
         $this->rolRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $rols = $this->rolRepository->all();
+        $rols = $this->rolRepository->withCount('users')->all();
 
         return $this->sendResponse($rols->toArray(), 'Roles recuperados con éxito');
+    }
+
+    public function indexPermissions(Request $request)
+    {
+        $data['allPermissions'] = Permission::get();
+        if (!empty($request->get('inheritFromRole'))) {
+            $data['selectedPermissions'] = $this->rolRepository->find($request->get('inheritFromRole'))->permissions()->get();
+            $data['allPermissions'] = $data['allPermissions']->diff($data['selectedPermissions']);
+
+            $data['selectedPermissions'] = $this->rolRepository->nameChangedPermissions($data['selectedPermissions']);
+        }
+        $data['allPermissions'] = $this->rolRepository->nameChangedPermissions($data['allPermissions']);
+
+        return $this->sendResponse($data, "get permissions ok.");
     }
 
     /**
@@ -51,13 +66,22 @@ class RolAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateRolAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 
-        $rol = $this->rolRepository->create($input);
+        $validate = validator($input, [
+            'name' => 'required|unique:roles',
+            'permisos' => 'required|array'
+        ]);
+        if ($validate->fails()) return $this->sendError($validate->errors()->first());
 
-        return $this->sendResponse($rol->toArray(), 'Rol guardado con éxito');
+        $rol = $this->rolRepository->create([
+            'name' => $input['name']
+        ]);
+        $rol->syncPermissions(array_pluck($input['permisos'], 'id'));
+
+        return $this->sendResponse([], 'Rol guardado con éxito');
     }
 
     /**
@@ -77,7 +101,20 @@ class RolAPIController extends AppBaseController
             return $this->sendError('Rol no encontrado');
         }
 
-        return $this->sendResponse($rol->toArray(), 'Rol recuperado con éxito');
+        $data['allPermissions'] = Permission::get();
+        $data['selectedPermissions'] = $rol->permissions()->get();
+        $data['allPermissions'] = $data['allPermissions']->diff($data['selectedPermissions']);
+
+        $data['selectedPermissions'] = $this->rolRepository->nameChangedPermissions($data['selectedPermissions']);
+        $data['allPermissions'] = $this->rolRepository->nameChangedPermissions($data['allPermissions']);
+
+        $rol = [
+            'name' => $rol->name,
+            'selectedPermissions' => $data['selectedPermissions'],
+            'allPermissions' => $data['allPermissions']
+        ];
+
+        return $this->sendResponse($rol, 'Rol recuperado con éxito');
     }
 
     /**
@@ -89,9 +126,15 @@ class RolAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateRolAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
+
+        $validate = validator($input, [
+            'name' => 'required',
+            'permisos' => 'required|array'
+        ]);
+        if ($validate->fails()) return $this->sendError($validate->errors()->first());
 
         /** @var Rol $rol */
         $rol = $this->rolRepository->findWithoutFail($id);
@@ -100,9 +143,16 @@ class RolAPIController extends AppBaseController
             return $this->sendError('Rol no encontrado');
         }
 
-        $rol = $this->rolRepository->update($input, $id);
+        if (!unique('roles', $id, 'name', $input['name'])) {
+            return $this->sendError("El nombre tiene que ser único");
+        }
 
-        return $this->sendResponse($rol->toArray(), 'Rol actualizado con éxito');
+        $rol->name = $input['name'];
+        $rol->save();
+
+        $rol->syncPermissions(Permission::find(array_pluck($input['permisos'], 'id')));
+
+        return $this->sendResponse([], 'Rol actualizado con éxito');
     }
 
     /**

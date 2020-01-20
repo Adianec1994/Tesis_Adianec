@@ -9,7 +9,7 @@ Vue.mixin({
   mounted() {},
   methods: {
     allowed(model, permission) {
-      this.permissions = this.$store.getters.get('permissions')
+      this.permissions = this.$store.getters.permissions
       return this.permissions[model + '-' + permission]
     }
   }

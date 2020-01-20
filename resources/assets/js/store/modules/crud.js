@@ -22,7 +22,7 @@ export const state = {
   mantenedores_externos: [],
   mantenimientos: [],
   brigadas: [],
-  permissions: []
+  roles: []
 }
 
 // mutations
@@ -50,7 +50,7 @@ export const mutations = {
     payload,
     moduleName
   }) => {
-    const payloadIndex = state[moduleName].findIndex(pr => pr.id === payload.id)
+    const payloadIndex = state[moduleName].findIndex(pr => pr.id == payload)
     state[moduleName].splice(payloadIndex, 1)
   }
 }
@@ -61,10 +61,6 @@ export const actions = {
     commit
   }, moduleName) => {
     return axios.get(`/api/${moduleName}`).then(response => {
-      commit('FETCH', {
-        payload: JSON.parse(response.headers.permissions),
-        moduleName: 'permissions'
-      })
       commit('FETCH', {
         payload: response.data.data,
         moduleName

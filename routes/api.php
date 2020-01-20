@@ -22,10 +22,13 @@ Route::group(['middleware' => ['auth:api', 'trazas']], function () {
         return $request->user();
     });
 
+    Route::get('permissions', 'API\SendPermissions');
     Route::get('nav', 'NavMenu');
 
     Route::patch('settings/profile', 'Settings\UpdateProfile');
     Route::patch('settings/password', 'Settings\UpdatePassword');
+
+    Route::get('permisos', 'API\RolAPIController@indexPermissions');
 
     Route::apiResources([
         'proveedores' => 'API\ProveedorAPIController',
@@ -66,9 +69,9 @@ Route::group(['middleware' => ['guest:api', 'trazas']], function () {
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
     Route::get('rol', function () {
-        return Role::all();
+        return Role::select('id', 'name')->get();
     });
     Route::get('entidad', function () {
-        return Entidad::all();
+        return Entidad::select('id', 'nombre')->get();
     });
 });
