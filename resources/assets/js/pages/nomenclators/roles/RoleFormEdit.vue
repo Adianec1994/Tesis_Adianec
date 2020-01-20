@@ -8,7 +8,7 @@
         <v-container grid-list-md>
           <v-layout row wrap>
             <v-flex xs12>
-              <div class="body-2 white--text">Group Details</div>
+              <div class="body-2 white--text">Detalles del Rol</div>
             </v-flex>
             <v-flex xs3>
               <v-text-field label="Nombre del Rol*" v-model="name" :rules="nameRules"></v-text-field>
@@ -126,6 +126,7 @@
             </v-flex>
             <v-flex xs12 class="px-2 text-xs-right">
               <v-btn @click="save()" :disabled="!valid" color="blue" dark>Guardar</v-btn>
+              <v-btn color="red darken-2" flat @click="$router.back()">Cancelar</v-btn>
             </v-flex>
           </v-layout>
         </v-container>

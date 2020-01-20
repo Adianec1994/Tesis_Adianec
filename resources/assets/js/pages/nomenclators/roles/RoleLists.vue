@@ -20,7 +20,7 @@
     <!-- /search -->
 
     <!-- groups table -->
-    <v-data-table v-bind:headers="headers" :items="items" class="elevation-1">
+    <v-data-table v-bind:headers="headers" :items="items" :search="filters.nombre" class="elevation-1">
       <template slot="headerCell" slot-scope="props">
         <span v-if="props.header.value=='name'">{{ props.header.text }}</span>
         <span v-else-if="props.header.value=='users_count'">{{ props.header.text }}</span>

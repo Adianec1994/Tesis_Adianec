@@ -128,6 +128,7 @@
             </v-flex>
             <v-flex xs12 class="px-2 text-xs-right">
               <v-btn @click="save()" :disabled="!valid" color="blue" dark>Guardar</v-btn>
+              <v-btn color="red darken-2" flat @click="$router.back()">Cancelar</v-btn>
             </v-flex>
           </v-layout>
         </v-container>
