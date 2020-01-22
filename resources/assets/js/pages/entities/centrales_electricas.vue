@@ -142,7 +142,8 @@ export default {
     entidades: [],
     options: {
       validateAfterChanged: true,
-      validateAfterLoad: true
+      validateAfterLoad: false,
+      validateAsync: true
     },
     schema: {
       fields: [
@@ -162,7 +163,8 @@ export default {
           inputType: 'text',
           label: 'Nombre de la central',
           model: 'nombre',
-          validator: ['nombre']
+          validator: ['nombre'],
+          required: true
         }
       ]
     }

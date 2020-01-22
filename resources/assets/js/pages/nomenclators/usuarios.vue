@@ -116,7 +116,8 @@ export default {
     roles: [],
     options: {
       validateAfterChanged: true,
-      validateAfterLoad: true
+      validateAfterLoad: false,
+      validateAsync: true
     },
     schema: {
       fields: [
@@ -125,7 +126,8 @@ export default {
           inputType: 'text',
           label: 'Nombre completo',
           model: 'name',
-          validator: ['nombre']
+          validator: ['nombre'],
+          required: true
         },
         {
           type: 'switch',

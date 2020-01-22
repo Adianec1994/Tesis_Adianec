@@ -144,7 +144,8 @@ export default {
     provincias: [],
     options: {
       validateAfterChanged: true,
-      validateAfterLoad: true
+      validateAfterLoad: false,
+      validateAsync: true
     },
     schema: {
       fields: [
@@ -153,7 +154,8 @@ export default {
           inputType: 'text',
           label: 'Nombre de la entidad',
           model: 'nombre',
-          validator: ['nombre']
+          validator: ['nombre'],
+          required: true
         },
         {
           type: 'select',
@@ -171,7 +173,8 @@ export default {
           inputType: 'text',
           label: 'Dirección IP',
           validator: ['direccionip'],
-          model: 'ip'
+          model: 'ip',
+          required: true
         }
       ]
     }

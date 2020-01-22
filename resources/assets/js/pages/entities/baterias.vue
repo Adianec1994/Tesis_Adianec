@@ -142,7 +142,8 @@ export default {
     centrales_electricas: [],
     options: {
       validateAfterChanged: true,
-      validateAfterLoad: true
+      validateAfterLoad: false,
+      validateAsync: true
     },
     schema: {
       fields: [
@@ -163,7 +164,8 @@ export default {
           label: 'Número de Batería',
           model: 'numero',
           validator: ['integer'],
-          max: 8
+          max: 8,
+          required: true
         }
       ]
     }

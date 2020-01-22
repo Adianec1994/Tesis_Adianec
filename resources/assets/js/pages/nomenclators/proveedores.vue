@@ -141,7 +141,8 @@ export default {
     items: [],
     options: {
       validateAfterChanged: true,
-      validateAfterLoad: true
+      validateAfterLoad: false,
+      validateAsync: true
     },
     schema: {
       fields: [
@@ -150,7 +151,8 @@ export default {
           inputType: 'text',
           label: 'Marca',
           model: 'marca',
-          validator: ['nombre']
+          validator: ['nombre'],
+          required: true
         },
         {
           type: 'select',
@@ -171,7 +173,8 @@ export default {
           inputType: 'text',
           label: 'País',
           model: 'pais',
-          validator: ['nombre']
+          validator: ['nombre'],
+          required: true
         }
       ]
     }

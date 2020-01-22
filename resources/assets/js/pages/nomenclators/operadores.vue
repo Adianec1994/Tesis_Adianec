@@ -141,7 +141,9 @@ export default {
     items: [],
     options: {
       validateAfterChanged: true,
-      validateAfterLoad: true
+      validateAfterLoad: false,
+      validateAsync: true
+
     },
     schema: {
       fields: [
@@ -150,6 +152,7 @@ export default {
           inputType: 'text',
           label: 'Nombre',
           model: 'nombre',
+          required: true,
           validator: ['nombre']
         },
         {
@@ -157,6 +160,7 @@ export default {
           inputType: 'text',
           label: 'Carnet de identidad',
           model: 'cidentidad',
+          required: true,
           validator: ['carnetid']
         },
         {

@@ -110,7 +110,8 @@ export default {
     items: [],
     options: {
       validateAfterChanged: true,
-      validateAfterLoad: true
+      validateAfterLoad: false,
+      validateAsync: true
     },
     schema: {
       fields: [
@@ -119,7 +120,8 @@ export default {
           inputType: 'text',
           label: 'Nombre de la provincia',
           model: 'nombre',
-          validator: ['nombre']
+          validator: ['nombre'],
+          required: true
         }
       ]
     }

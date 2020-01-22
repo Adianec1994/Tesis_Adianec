@@ -148,7 +148,8 @@ export default {
     proveedores: [],
     options: {
       validateAfterChanged: true,
-      validateAfterLoad: true
+      validateAfterLoad: false,
+      validateAsync: true
     },
     schema: {
       fields: [
@@ -199,7 +200,8 @@ export default {
           label: 'Número de Grupo',
           model: 'numero',
           validator: ['integer'],
-          max: 16
+          max: 16,
+          required: true
         },
         {
           type: 'select',
