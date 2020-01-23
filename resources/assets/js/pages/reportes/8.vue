@@ -32,6 +32,9 @@
             <td class="text-xs-center justify-center">{{ props.item.Existencia }}</td>
             <td class="text-xs-center justify-center">{{ props.item.Horas }}</td>
           </template>
+          <template v-slot:no-data>
+            <h4>Sin datos para mostrar</h4>
+          </template>
         </v-data-table>
       </v-card>
       <report-view
@@ -55,7 +58,7 @@ export default {
     items: [],
     headers: [
       { text: 'Provincias', value: 'Provincias', align: 'center' },
-      { text: 'Existencia', value: 'Existencia', align: 'center' },
+      { text: 'Existencia (lts)', value: 'Existencia', align: 'center' },
       { text: 'Horas', value: 'Horas', align: 'center' }
     ],
     reportName: 'Existencia de Lubricantes',

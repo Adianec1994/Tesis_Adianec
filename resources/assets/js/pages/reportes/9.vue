@@ -32,6 +32,9 @@
             <td class="text-xs-center justify-center">{{ props.item.Marca }}</td>
             <td class="text-xs-center justify-center">{{ props.item.Cantidad }}</td>
           </template>
+          <template v-slot:no-data>
+            <h4>Sin datos para mostrar</h4>
+          </template>
         </v-data-table>
       </v-card>
       <report-view

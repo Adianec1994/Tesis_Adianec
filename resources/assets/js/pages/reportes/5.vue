@@ -34,6 +34,9 @@
             <td class="text-xs-center justify-center">{{ props.item['Potencia Disponible (MW)'] }}</td>
             <td class="text-xs-center justify-center">{{ props.item['Porciento Disponible'] }}</td>
           </template>
+          <template v-slot:no-data>
+            <h4>Sin datos para mostrar</h4>
+          </template>
         </v-data-table>
       </v-card>
       <report-view

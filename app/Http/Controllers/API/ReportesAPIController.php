@@ -16,7 +16,7 @@ class ReportesAPIController extends AppBaseController
         ->join('entidads','central_electricas.entidads_id','=','entidads.id')
         ->join('provincias','entidads.provincias_id','=','provincias.id')
         ->groupBy('provincias.nombre')
-        ->selectRaw('provincias.nombre as Provincias, sum(datos_generales.existencia) as Existencia, sum(datos_generales.cobertura) as Horas')
+        ->selectRaw('provincias.nombre as Provincias, sum(datos_generales.lubricteExistencia) as Existencia, sum(datos_generales.lubricteCobertura) as Horas')
         ->get();
 
         return $this->sendResponse($datos, 'Reporte cargado satisfactoriamente');
