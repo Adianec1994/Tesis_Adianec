@@ -13,11 +13,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \App\Models\Provincia provincias
  * @property \Illuminate\Database\Eloquent\Collection centralElectricas
  * @property \Illuminate\Database\Eloquent\Collection disponibilidads
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection hechosExtraordinarios
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection plans
  * @property \Illuminate\Database\Eloquent\Collection users
  * @property string nombre
@@ -30,7 +30,7 @@ class Entidad extends Model
     use SoftDeletes;
 
     public $table = 'entidads';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -79,7 +79,7 @@ class Entidad extends Model
      **/
     public function centralElectricas()
     {
-        return $this->hasMany(\App\Models\CentralElectrica::class);
+        return $this->hasMany(\App\Models\CentralElectrica::class, 'entidads_id');
     }
 
     /**

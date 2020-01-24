@@ -173,6 +173,24 @@ export default ({
     },
     // rutas de reportes
     {
+      path: '/reportes',
+      component: require('~/pages/reportes/Reportes'),
+      children: [{
+          path: '/',
+          name: 'reportes.list',
+          component: require('~/pages/reportes/components/ReportesList')
+        },
+        {
+          path: 'preview/',
+          name: 'reportes.preview',
+          component: require('~/pages/reportes/components/ReportesPreview'),
+          props: (route) => ({
+            report: route.params.report
+          })
+        }
+      ]
+    },
+    {
       path: '/reportes/5',
       name: '5',
       component: require('~/pages/reportes/5.vue')

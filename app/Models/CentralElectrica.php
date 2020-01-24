@@ -98,6 +98,6 @@ class CentralElectrica extends Model
      **/
     public function pailas()
     {
-        return $this->hasMany(\App\Models\Pailas::class);
+        return $this->hasMany(\App\Models\Pailas::class, 'central_electricas_id');
     }
 }

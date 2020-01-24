@@ -13,7 +13,14 @@ import {
 import App from '~/components/App'
 import '~/components'
 
-window.axios = require('axios')
+const axios = require('axios')
+// es necesario para poder hacer las peticiones al api desde las vistas
+window.baseURL = 'http://localhost:8000'
+const instance = axios.create({
+  baseURL: window.baseURL
+})
+window.axios = instance
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 Vue.use(Vuetify)
 Vue.use(VueFormGenerator, {

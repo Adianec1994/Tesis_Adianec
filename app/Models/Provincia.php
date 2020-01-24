@@ -49,15 +49,13 @@ class Provincia extends Model
      *
      * @var array
      */
-    public static $rules = [
-
-    ];
+    public static $rules = [];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function entidads()
     {
-        return $this->hasMany(\App\Models\Entidad::class);
+        return $this->hasMany(\App\Models\Entidad::class, 'provincias_id');
     }
 }

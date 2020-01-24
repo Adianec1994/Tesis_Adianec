@@ -246,23 +246,11 @@ class NavMenu extends Controller
                 'active' => false,
                 'items' => [
                     [
-                        'title' => 'Disponibilidad', 'icon' => 'menu', 'route' => ['name' => '5'],
+                        'title' => 'listar reportes', 'icon' => 'business_center', 'route' => ['name' => 'reportes.list'],
                         'permissions' => [
                             'read_reporte',
                         ]
                     ],
-                    [
-                        'title' => 'Existencia de Lubricantes', 'icon' => 'menu', 'route' => ['name' => '8'],
-                        'permissions' => [
-                            'read_reporte',
-                        ]
-                    ],
-                    [
-                        'title' => 'Existencia de Refrigerantes', 'icon' => 'menu', 'route' => ['name' => '9'],
-                        'permissions' => [
-                            'read_reporte',
-                        ]
-                    ]
                 ]
             ]
         ];

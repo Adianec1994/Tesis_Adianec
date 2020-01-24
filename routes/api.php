@@ -57,9 +57,15 @@ Route::group(['middleware' => ['auth:api', 'trazas']], function () {
     Route::post('snapshots/{name}', 'API\SnapshotsAPIController@restore');
     Route::post('snapshots', 'API\SnapshotsAPIController@create');
     Route::delete('snapshots/{name}', 'API\SnapshotsAPIController@destroy');
-    Route::get('reportes/5', 'API\ReportesAPIController@disponibilidad');
-    Route::get('reportes/8', 'API\ReportesAPIController@existenciaLubricante');
-    Route::get('reportes/9', 'API\ReportesAPIController@existenciaRefrigerante');
+    // Route::get('reportes/5', 'API\ReportesAPIController@disponibilidad');
+    // Route::get('reportes/8', 'API\ReportesAPIController@existenciaLubricante');
+    // Route::get('reportes/9', 'API\ReportesAPIController@existenciaRefrigerante');
+
+    Route::prefix('reportes')->group(function () {
+        Route::get('{reporte}', 'API\ReportesAPIController@render')->name('reporte.render');
+        Route::get('{reporte}/download', 'API\ReportesAPIController@exportExcel')->name('reporte.export');
+        Route::get('{reporte}/downloadPDF', 'API\ReportesAPIController@exportPDF')->name('reporte.export');
+    });
 });
 
 
