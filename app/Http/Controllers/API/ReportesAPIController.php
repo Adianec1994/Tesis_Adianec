@@ -74,20 +74,7 @@ class ReportesAPIController extends AppBaseController
     //  Generar reporte listado oficial del grupo.
     public function reporte3(Request $request)
     {
-<<<<<<< 1db301060e8e1165fac1f5761ac04698dbcfb255
-        $datos =
-        DB::table('datos_generales')
-        ->join('central_electricas','datos_generales.central_electricas_id','=','central_electricas.id')
-        ->join('entidads','central_electricas.entidads_id','=','entidads.id')
-        ->join('provincias','entidads.provincias_id','=','provincias.id')
-        ->groupBy('provincias.nombre')
-        ->selectRaw('provincias.nombre as Provincias, sum(datos_generales.lubricteExistencia) as Existencia, sum(datos_generales.lubricteCobertura) as Horas')
-        ->get();
-
-        return $this->sendResponse($datos, 'Reporte cargado satisfactoriamente');
-=======
         return view('reportes.reporte3', $this->reportesServices->reporte3());
->>>>>>> Cambio de reportes y reporte 3
     }
 
     public function exportPDF(Request $request, $reporte)
