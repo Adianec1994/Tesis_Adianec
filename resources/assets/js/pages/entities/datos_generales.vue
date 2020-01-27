@@ -201,7 +201,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Generación bruta',
+          label: 'Generación bruta (kWh)',
           model: 'genBruta',
           validator: ['double'],
           max: 4
@@ -209,7 +209,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Insumos',
+          label: 'Insumos (kWh)',
           model: 'insumos',
           validator: ['double'],
           max: 4
@@ -217,7 +217,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Recibido',
+          label: 'Recibido (lts)',
           model: 'recibido',
           validator: ['double'],
           max: 4
@@ -225,7 +225,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Volumen recibido',
+          label: 'Volumen recibido (lts)',
           model: 'volumenRecibido',
           validator: ['double'],
           max: 4
@@ -233,7 +233,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Consumo generación',
+          label: 'Consumo generación (lts)',
           model: 'consumoGeneracion',
           validator: ['double'],
           max: 4
@@ -241,7 +241,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Densidad ponderada',
+          label: 'Densidad ponderada (g/lts)',
           model: 'densidadPonderada',
           validator: ['double'],
           max: 4
@@ -249,7 +249,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Temperatura',
+          label: 'Temperatura (ºC)',
           model: 'temperatura',
           validator: ['double'],
           max: 4
@@ -257,7 +257,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Densidad corrección',
+          label: 'Densidad corrección (g/lts)',
           model: 'densidadCorreccion',
           validator: ['double'],
           max: 4
@@ -265,7 +265,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Valor calórico',
+          label: 'Valor calórico (kJ/kg)',
           model: 'valorCalorico',
           validator: ['double'],
           max: 4
@@ -273,7 +273,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Existencia',
+          label: 'Existencia (lts)',
           model: 'existencia',
           validator: ['double'],
           max: 4
@@ -281,7 +281,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Cobertura',
+          label: 'Cobertura (hrs)',
           model: 'cobertura',
           validator: ['double'],
           max: 4
@@ -289,7 +289,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Índice de consumo',
+          label: 'Índice de consumo (lts)',
           model: 'indiceConsumo',
           validator: ['double'],
           max: 4
@@ -297,7 +297,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Lubricante recibido',
+          label: 'Lubricante recibido (lts)',
           model: 'lubricteRecibido',
           validator: ['double'],
           max: 4
@@ -305,7 +305,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Lubricante consumo reposición',
+          label: 'Lubricante consumo reposición (lts)',
           model: 'lubricteCsmoReposicion',
           validator: ['double'],
           max: 4
@@ -313,7 +313,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Lubricante consumo cambio',
+          label: 'Lubricante consumo cambio (lts)',
           model: 'lubricteCsmoCambio',
           validator: ['double'],
           max: 4
@@ -321,7 +321,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Lubricante consumo total',
+          label: 'Lubricante consumo total (lts)',
           model: 'lubricteCsmoTotal',
           validator: ['double'],
           max: 4
@@ -329,7 +329,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Lubricante existencia',
+          label: 'Lubricante existencia (lts)',
           model: 'lubricteExistencia',
           validator: ['double'],
           max: 4
@@ -337,7 +337,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Lubricante cobertura',
+          label: 'Lubricante cobertura (hrs)',
           model: 'lubricteCobertura',
           validator: ['double'],
           max: 4
@@ -345,7 +345,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Lubricante índice consumo',
+          label: 'Lubricante índice consumo (lts)',
           model: 'lubricteIndiceCsmo',
           validator: ['double'],
           max: 4
@@ -353,7 +353,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Refrigerante recibido',
+          label: 'Refrigerante recibido (lts)',
           model: 'refrigteRecibido',
           validator: ['double'],
           max: 4
@@ -361,7 +361,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Refrigerante consumo',
+          label: 'Refrigerante consumo (lts)',
           model: 'refrigteConsumo',
           validator: ['double'],
           max: 4
@@ -369,7 +369,7 @@ export default {
         {
           type: 'input',
           inputType: 'text',
-          label: 'Refrigerante existencia',
+          label: 'Refrigerante existencia (lts)',
           model: 'refrigteExistencia',
           validator: ['double'],
           max: 4
