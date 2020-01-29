@@ -3,12 +3,12 @@
     <v-card class="pt-3">
       <v-layout row wrap>
         <v-flex xs12 sm4 class="px-2">
-          <a :href="url">
-            <v-btn class="blue" dark>
-              Descargar reporte
-              <v-icon right dark>archive</v-icon>
-            </v-btn>
-          </a>
+          <!-- <a :href="url"> -->
+          <v-btn class="blue" dark @click="download()">
+            Descargar reporte
+            <v-icon right dark>archive</v-icon>
+          </v-btn>
+          <!-- </a> -->
         </v-flex>
 
         <v-flex xs12 class="my-2">
@@ -165,7 +165,7 @@ export default {
   },
   computed: {
     url ()    {
-      return baseURL + this.$props.report.downloadRoute
+      return baseURL + '/' + this.$props.report.downloadRoute
     }
   },
   methods: {
@@ -173,6 +173,9 @@ export default {
       axios.get(this.report.viewRoute).then(res =>      {
         this.html = res.data
       })
+    },
+    download ()    {
+      window.location.href = this.url
     },
 
     paramsToDownloadReport ()    {
