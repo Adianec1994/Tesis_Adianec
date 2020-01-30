@@ -24,7 +24,8 @@ class NavMenu extends Controller
                     [
                         'title' => 'Base de Datos', 'icon' => 'backup', 'route' => ['name' => 'base_datos'],
                         'permissions' => [
-                            'make_salva_base_datos'
+                            'create_salva_base_datos',
+                            'delete_salva_base_datos'
                         ]
                     ],
                     [
