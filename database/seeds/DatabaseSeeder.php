@@ -15,5 +15,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ProvinciaTableSeeder::class);
         $this->call(EntidadTableSeeder::class);
         $this->call(AdminSeeder::class);
+        $this->call(CentralTableSeeder::class);
+        $this->call(BateriaTableSeeder::class);
+        $this->call(BrigadaTableSeeder::class);
+        $this->call(MantenedorTableSeeder::class);
+        $this->call(OperadorTableSeeder::class);
     }
 }
