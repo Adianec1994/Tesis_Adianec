@@ -52,9 +52,10 @@ class ReportesServices
     public function reporte4($filters)
     {
         // $filters['fecha'] = '2020-01-30';
+        $fecha = (!empty($filters['fecha'])) ? $filters['fecha'] : '';
         $coberturas['coberturas'] = $this->coberturaCombustibleRepository
             ->with(['centralElectricas.entidads.provincias'])
-            ->findWhere(['fechaCobertura' => $filters['fecha']])
+            ->findWhere(['fechaCobertura' => $fecha])
             ->sortBy('hora')
             ->toArray();
         return $coberturas;

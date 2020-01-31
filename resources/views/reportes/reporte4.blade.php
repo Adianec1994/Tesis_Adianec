@@ -11,11 +11,13 @@
       </tr>
     </thead>
     <tbody>
+      @empty(!$coberturas)
       <tr>
         <th colspan="3">
           Fecha: {{($coberturas[0]['fechaCobertura'])}}
         </th>
       </tr>
+      @endempty
       <tr>
         <th>Provincia</th>
         <th>Centrales Diesel</th>
@@ -30,6 +32,11 @@
         <th>Consumo (lts)</th>
         <th>Suministro de CUPET (Entradas) (lts)</th>
       </tr>
+      @empty($coberturas)
+      <tr style="text-align: center">
+        <td colspan="12">No hay coberturas en esta fecha</td>
+      </tr>
+      @endempty
       @foreach ($coberturas as $cobertura)
       <tr style="text-align: center">
         <td>{{$cobertura['central_electricas']['entidads']['provincias']['nombre']}}</td>
