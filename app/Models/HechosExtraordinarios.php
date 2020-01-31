@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version May 24, 2019, 5:44 pm UTC
  *
  * @property \App\Models\Entidad entidads
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property string tipo
  * @property string fecha
  * @property time hora
@@ -29,7 +29,7 @@ class HechosExtraordinarios extends Model
     use SoftDeletes;
 
     public $table = 'hechos_extraordinarios';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -56,7 +56,7 @@ class HechosExtraordinarios extends Model
     protected $casts = [
         'id' => 'integer',
         'tipo' => 'string',
-        'fecha' => 'date',
+        'fecha' => 'date:Y-m-d',
         'descripcion' => 'string',
         'medidas' => 'string',
         'nombreImplicado' => 'string',

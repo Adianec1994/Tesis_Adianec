@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version May 30, 2019, 2:53 pm UTC
  *
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection mantenimientos
  * @property string nombre
  * @property integer numeroContrato
@@ -23,7 +23,7 @@ class MantenedorExterno extends Model
     use SoftDeletes;
 
     public $table = 'mantenedores_externos';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -47,8 +47,8 @@ class MantenedorExterno extends Model
         'id' => 'integer',
         'nombre' => 'string',
         'numeroContrato' => 'integer',
-        'fechaInicio' => 'date',
-        'fechaFin' => 'date'
+        'fechaInicio' => 'date:Y-m-d',
+        'fechaFin' => 'date:Y-m-d'
     ];
 
     /**
@@ -56,9 +56,7 @@ class MantenedorExterno extends Model
      *
      * @var array
      */
-    public static $rules = [
-        
-    ];
+    public static $rules = [];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -4,15 +4,19 @@ namespace App\Http\Services;
 
 use DateInterval;
 use App\Repositories\ProvinciaRepository;
+use App\Repositories\CoberturaCombustibleRepository;
 
 class ReportesServices
 {
     private $provinciaRepository;
+    private $coberturaCombustibleRepository;
 
     public function __construct(
-        ProvinciaRepository $provinciaRepository
+        ProvinciaRepository $provinciaRepository,
+        CoberturaCombustibleRepository $coberturaCombustibleRepository
     ) {
         $this->provinciaRepository = $provinciaRepository;
+        $this->coberturaCombustibleRepository = $coberturaCombustibleRepository;
     }
 
     public function reporte3()
@@ -43,5 +47,16 @@ class ReportesServices
         }
         // dd(json_encode($provinciasResult, JSON_PRETTY_PRINT));
         return $provinciasResult;
+    }
+
+    public function reporte4($filters)
+    {
+        // $filters['fecha'] = '2020-01-30';
+        $coberturas['coberturas'] = $this->coberturaCombustibleRepository
+            ->with(['centralElectricas.entidads.provincias'])
+            ->findWhere(['fechaCobertura' => $filters['fecha']])
+            ->sortBy('hora')
+            ->toArray();
+        return $coberturas;
     }
 }

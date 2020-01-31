@@ -14,9 +14,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \App\Models\CentralElectrica centralElectricas
  * @property \App\Models\Operador chofer
  * @property \App\Models\Operador operadors
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property string fecha
  * @property time hora
  * @property float combustibleFactura
@@ -32,7 +32,7 @@ class Pailas extends Model
     use SoftDeletes;
 
     public $table = 'pailas';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -46,6 +46,7 @@ class Pailas extends Model
         'combustibleFactura',
         'combustibleMedicion',
         'acciones',
+        'causas',
         'central_electricas_id',
         'operadors_id',
         'chofer_id',
@@ -59,10 +60,11 @@ class Pailas extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'fecha' => 'date',
+        'fecha' => 'date:Y-m-d',
         'combustibleFactura' => 'float',
         'combustibleMedicion' => 'float',
         'acciones' => 'string',
+        'causas' => 'string',
         'central_electricas_id' => 'integer',
         'operadors_id' => 'integer',
         'chofer_id' => 'integer',

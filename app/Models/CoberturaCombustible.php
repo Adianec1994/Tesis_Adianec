@@ -62,7 +62,8 @@ class CoberturaCombustible extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'fechaCobertura' => 'date',
+        'hora' => 'time',
+        'fechaCobertura' => 'date:Y-m-d',
         'planReserva' => 'float',
         'fondaje' => 'float',
         'existOperativa' => 'float',

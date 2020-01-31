@@ -23,51 +23,9 @@
         </v-layout>
 
         <v-layout row wrap>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([22 , 23 , 24])">
-            <v-checkbox label="Escuela" v-model="filters.checkbox_escuela" value="1"></v-checkbox>
-          </v-flex>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([22 , 23, 24])">
-            <v-checkbox label="Departamento" v-model="filters.checkbox_departamento" value="1"></v-checkbox>
-          </v-flex>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([22])">
-            <v-checkbox label="Especialidad" v-model="filters.checkbox_especialidad" value="1"></v-checkbox>
-          </v-flex>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([22, 24])">
-            <v-checkbox label="Profesor" v-model="filters.checkbox_profesor" value="1"></v-checkbox>
-          </v-flex>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([22 , 23 , 24])">
-            <v-checkbox label="Asignatura" v-model="filters.checkbox_asignatura" value="1"></v-checkbox>
-          </v-flex>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([201 , 202 , 203 , 204,205])">
-            <v-select
-              :items="selects.cursos"
-              v-model="filters.curso"
-              label="Curso"
-              item-text="nombre"
-              item-value="id"
-            ></v-select>
-          </v-flex>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([201 , 202 , 204,205])">
-            <v-select
-              :items="selects.asignaturas"
-              v-model="filters.asignatura"
-              label="Asignatura"
-              item-text="nombre"
-              item-value="id"
-            ></v-select>
-          </v-flex>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([201 , 202 , 203 , 204, 205])">
-            <v-select
-              :items="selects.grupos"
-              v-model="filters.grupo"
-              label="Grupo"
-              item-text="nombre"
-              item-value="id"
-            ></v-select>
-          </v-flex>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([29, 28])">
+          <v-flex xs12 sm4 class="px-2" v-if="this.render([4])">
             <v-menu
-              v-model="menuFI"
+              v-model="menuF"
               :close-on-content-click="false"
               :nudge-right="40"
               lazy
@@ -78,37 +36,14 @@
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  v-model="filters.fechaInicio"
-                  label="Fecha inicio"
+                  v-model="filters.fecha"
+                  label="Fecha"
                   prepend-icon="event"
                   readonly
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="filters.fechaInicio" @input="menuFI = false" locale="es-es"></v-date-picker>
-            </v-menu>
-          </v-flex>
-          <v-flex xs12 sm4 class="px-2" v-if="this.render([29, 28])">
-            <v-menu
-              v-model="menuFF"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              lazy
-              transition="scale-transition"
-              offset-y
-              full-width
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  v-model="filters.fechaFin"
-                  label="Fecha fin"
-                  prepend-icon="event"
-                  readonly
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="filters.fechaFin" @input="menuFF = false" locale="es-es"></v-date-picker>
+              <v-date-picker v-model="filters.fecha" @input="menuF = false" locale="es-es"></v-date-picker>
             </v-menu>
           </v-flex>
         </v-layout>
@@ -134,34 +69,23 @@ export default {
   },
   data ()  {
     return {
-      menuFI: false,
-      menuFF: false,
+      menuF: false,
       preview: {
         show: false
       },
       html: '',
       filters: {
-        checkbox_escuela: '',
-        checkbox_especialidad: '',
-        checkbox_asignatura: '',
-        checkbox_profesor: '',
-        checkbox_departamento: '',
-        curso: '',
-        asignatura: '',
-        fechaInicio: '',
-        fechaFin: '',
-        grupo: '',
-        aula: ''
-      },
-      selects: {
-        cursos: [],
-        asignaturas: [],
-        grupos: []
+        fecha: ''
       }
     }
   },
   mounted ()  {
-    this.loadReport()
+    if (this.render([3])) this.loadReport()
+  },
+  watch: {
+    'filters.fecha': function ()    {
+      this.loadReport()
+    }
   },
   computed: {
     url ()    {
@@ -170,26 +94,20 @@ export default {
   },
   methods: {
     loadReport ()    {
-      axios.get(this.report.viewRoute).then(res =>      {
+      const params = {
+        fecha: this.filters.fecha
+      }
+      axios.get(this.report.viewRoute, { params: params }).then(res =>      {
         this.html = res.data
       })
     },
     download ()    {
-      window.location.href = this.url
+      window.location.href = this.url + this.paramsToDownloadReport()
     },
 
     paramsToDownloadReport ()    {
       const params =
-        '?checkbox_escuela=' + this.filters.checkbox_escuela +
-        '&checkbox_departamento=' + this.filters.checkbox_departamento +
-        '&checkbox_especialidad=' + this.filters.checkbox_especialidad +
-        '&checkbox_asignatura=' + this.filters.checkbox_asignatura +
-        '&checkbox_profesor=' + this.filters.checkbox_profesor +
-        '&fechaInicio=' + this.filters.fechaInicio +
-        '&fechaFin=' + this.filters.fechaFin +
-        '&grupo=' + this.filters.grupo +
-        '&asignatura=' + this.filters.asignatura +
-        '&curso=' + this.filters.curso
+        '?fecha=' + this.filters.fecha
       return params
     },
     render (reportes)    {

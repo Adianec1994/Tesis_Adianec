@@ -45,25 +45,33 @@
     >
       <template v-slot:items="props">
         <td>{{ centralesElectricasName(props.item.central_electricas_id) }}</td>
-        <td>{{ props.item.created_at }}</td>
+        <td>{{ props.item.fecha }}/{{props.item.hora}}</td>
         <td class="text-xs-center justify-center">{{ operadoresName(props.item.operadors_id) }}</td>
         <td class="text-xs-center justify-center">{{ operadoresName(props.item.chofer_id) }}</td>
         <td class="text-xs-center justify-center">{{ operadoresName(props.item.acompanante_id) }}</td>
         <td class="text-xs-center justify-center">{{ props.item.combustibleFactura }}</td>
         <td class="text-xs-center justify-center">{{ props.item.combustibleMedicion }}</td>
         <td class="text-xs-center justify-center">{{ diferencia(props.item) }}</td>
+        <td class="text-xs-center justify-center">{{ props.item.causas }}</td>
         <td class="text-xs-center justify-center">{{ props.item.acciones }}</td>
         <td class="text-xs-center justify-center">
           <v-tooltip bottom>
-            <v-icon small color="orange lighten-2" class="mr-2" @click="editItem(props.item)" slot="activator">
-              edit
-            </v-icon>
+            <v-icon
+              small
+              color="orange lighten-2"
+              class="mr-2"
+              @click="editItem(props.item)"
+              slot="activator"
+            >edit</v-icon>
             <span>Editar</span>
           </v-tooltip>
           <v-tooltip bottom>
-            <v-icon small color="red lighten-2" @click="$set(deleteDialog,props.item.id,true)" slot="activator">
-              delete
-            </v-icon>
+            <v-icon
+              small
+              color="red lighten-2"
+              @click="$set(deleteDialog,props.item.id,true)"
+              slot="activator"
+            >delete</v-icon>
             <span>Eliminar</span>
           </v-tooltip>
         </td>
@@ -116,6 +124,7 @@ export default {
       { text: 'Factura de combustible (L)', value: 'combustibleFactura', align: 'center' },
       { text: 'Medición de combustible (L)', value: 'combustibleMedicion', align: 'center' },
       { text: 'Diferencia (L)', value: '', align: 'center' },
+      { text: 'Causas', value: 'causas', align: 'center' },
       { text: 'Acciones realizadas', value: 'acciones', align: 'center' },
       { text: 'Acciones', sortable: false, align: 'center' }
     ],
@@ -143,6 +152,23 @@ export default {
             name: 'nombre',
             value: 'id'
           }
+        },
+        {
+          type: 'input',
+          inputType: 'date',
+          label: 'Fecha de entrada',
+          model: 'fecha',
+          format: 'YYYY-MM-DD',
+          visible: function ()          {
+            return this.isNewModel
+          }
+        },
+        {
+          type: 'input',
+          inputType: 'time',
+          label: 'Hora de entrada',
+          model: 'hora',
+          format: 'HH:MM AM/PM'
         },
         {
           type: 'select',
@@ -195,6 +221,13 @@ export default {
         },
         {
           type: 'textArea',
+          label: 'Causas',
+          model: 'causas',
+          placeholder: 'Detalle brevemente las causas del faltante...',
+          rows: 3
+        },
+        {
+          type: 'textArea',
           label: 'Acciones',
           model: 'acciones',
           placeholder: 'Detalle brevemente las acciones realizadas...',
@@ -205,40 +238,40 @@ export default {
   }),
 
   computed: {
-    formTitle () {
+    formTitle ()    {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
     },
-    lowerModuleName () {
+    lowerModuleName ()    {
       return this.moduleName.toLowerCase()
     },
-    operadors () {
+    operadors ()    {
       return this.operadores.filter(o => o.ocupacion === 'Operador')
     },
-    choferes () {
+    choferes ()    {
       return this.operadores.filter(o => o.ocupacion === 'Chofer')
     },
-    acompanantes () {
+    acompanantes ()    {
       return this.operadores.filter(o => o.ocupacion === 'Acompañante')
     }
 
   },
 
   watch: {
-    dialog (val) {
+    dialog (val)    {
       val || this.close()
     }
   },
 
-  mounted () {
+  mounted ()  {
     const promises = []
 
-    promises.push(this.$store.dispatch('GET', 'centrales_electricas').then((result) => {
+    promises.push(this.$store.dispatch('GET', 'centrales_electricas').then((result) =>    {
       this.centrales_electricas = this.$store.getters.get('centrales_electricas')
       this.$store.dispatch('responseMessage', {
         type: result.success ? 'success' : 'error',
         text: result.message
       })
-    }).catch((err) => {
+    }).catch((err) =>    {
       this.$store.dispatch('responseMessage', {
         type: 'error',
         text: err
@@ -246,13 +279,13 @@ export default {
     })
     )
 
-    promises.push(this.$store.dispatch('GET', 'operadores').then((result) => {
+    promises.push(this.$store.dispatch('GET', 'operadores').then((result) =>    {
       this.operadores = this.$store.getters.get('operadores')
       this.$store.dispatch('responseMessage', {
         type: result.success ? 'success' : 'error',
         text: result.message
       })
-    }).catch((err) => {
+    }).catch((err) =>    {
       this.$store.dispatch('responseMessage', {
         type: 'error',
         text: err
@@ -260,13 +293,13 @@ export default {
     })
     )
 
-    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+    promises.push(this.$store.dispatch('GET', this.lowerModuleName).then((result) =>    {
       this.items = this.$store.getters.get(this.lowerModuleName)
       this.$store.dispatch('responseMessage', {
         type: result.success ? 'success' : 'error',
         text: result.message
       })
-    }).catch((err) => {
+    }).catch((err) =>    {
       this.$store.dispatch('responseMessage', {
         type: 'error',
         text: err
@@ -274,7 +307,7 @@ export default {
     })
     )
 
-    Promise.all(promises).then(values => {
+    Promise.all(promises).then(values =>    {
       var field = this.$data.schema.fields.find(field => field.model === 'central_electricas_id')
       field.values = this.centrales_electricas
 
@@ -290,26 +323,26 @@ export default {
   },
 
   methods: {
-    editItem (item) {
+    editItem (item)    {
       this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
-    updateItem (newVal, property) {
+    updateItem (newVal, property)    {
       // this.formIsValid()
       this.editedItem[property] = newVal
     },
 
-    saveItem () {
+    saveItem ()    {
       let response
-      if (this.editedIndex === -1) {
+      if (this.editedIndex === -1)      {
         response = this.$store.dispatch('SAVE', { payload: this.editedItem, moduleName: this.lowerModuleName })
-      } else {
+      } else      {
         response = this.$store.dispatch('EDIT', { payload: this.editedItem, moduleName: this.lowerModuleName })
       }
 
-      response.then(result => {
+      response.then(result =>      {
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
@@ -318,18 +351,18 @@ export default {
       })
     },
 
-    formIsValid (isValid, errors) {
+    formIsValid (isValid, errors)    {
       // return isValid
       // console.log('Results ', isValid, ', Errors ', errors)
     },
 
-    deleteItem (item) {
-      this.$store.dispatch('DESTROY', { payload: item, moduleName: this.lowerModuleName }).then((result) => {
+    deleteItem (item)    {
+      this.$store.dispatch('DESTROY', { payload: item, moduleName: this.lowerModuleName }).then((result) =>      {
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
         })
-      }).catch((err) => {
+      }).catch((err) =>      {
         this.$store.dispatch('responseMessage', {
           type: 'error',
           text: err
@@ -337,25 +370,25 @@ export default {
       })
     },
 
-    close () {
+    close ()    {
       this.dialog = false
       this.isNewModel = false
-      setTimeout(() => {
+      setTimeout(() =>      {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)
     },
 
-    centralesElectricasName (id) {
+    centralesElectricasName (id)    {
       const centralElectrica = this.centrales_electricas.find(ce => ce.id === id)
       return centralElectrica.nombre
     },
 
-    operadoresName (id) {
+    operadoresName (id)    {
       const operador = this.operadores.find(o => o.id === id)
       return operador.nombre
     },
-    diferencia (centralElectrica) {
+    diferencia (centralElectrica)    {
       return centralElectrica.combustibleMedicion - centralElectrica.combustibleFactura
     }
   }

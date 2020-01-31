@@ -68,13 +68,21 @@ class ReportesAPIController extends AppBaseController
         switch ($reporte) {
             case 3:
                 return $this->reporte3($request);
+            case 4:
+                return $this->reporte4($request);
         }
     }
 
-    //  Generar reporte listado oficial del grupo.
+    //  Generar reporte PARTE DIARIO DE ACOMPAÑAMIENTO DE PAILAS DE COMBUSTIBLE DIESEL.
     public function reporte3(Request $request)
     {
         return view('reportes.reporte3', $this->reportesServices->reporte3());
+    }
+
+    //  Generar reporte listado oficial del grupo.
+    public function reporte4(Request $request)
+    {
+        return view('reportes.reporte4', $this->reportesServices->reporte4($request->all()));
     }
 
     public function exportPDF(Request $request, $reporte)
@@ -86,6 +94,10 @@ class ReportesAPIController extends AppBaseController
             case 3:
                 $data = $this->reportesServices->reporte3();
                 $nombre = 'PARTE DIARIO DE ACOMPAÑAMIENTO DE PAILAS DE COMBUSTIBLE DIESEL.pdf';
+                break;
+            case 4:
+                $data = $this->reportesServices->reporte4();
+                $nombre = 'PARTE DE COBERTURA DE COMBUSTIBLE.pdf';
                 break;
         }
 
@@ -102,6 +114,10 @@ class ReportesAPIController extends AppBaseController
             case 3:
                 $data = $this->reportesServices->reporte3();
                 $nombre = 'PARTE DIARIO DE ACOMPAÑAMIENTO DE PAILAS DE COMBUSTIBLE DIESEL.xlsx';
+                break;
+            case 4:
+                $data = $this->reportesServices->reporte4();
+                $nombre = 'PARTE DE COBERTURA DE COMBUSTIBLE.xlsx';
                 break;
         }
         // dd($data);

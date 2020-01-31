@@ -38,7 +38,7 @@ class Mantenimiento extends Model
     protected $casts = [
         'id' => 'integer',
         'grupos_id' => 'integer',
-        'fechaMtto' => 'date',
+        'fechaMtto' => 'date:Y-m-d',
         'horaEntrada' => 'time',
         'horaSalida' => 'time',
         'tipoTrabajo' => 'string',

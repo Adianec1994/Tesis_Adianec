@@ -43,10 +43,10 @@ export default {
         downloadRoute: 'api/reportes/3/download'
       },
       {
-        nombre: 'Cantidad de horas',
-        numero: 22,
-        viewRoute: 'admin/reportes/22',
-        downloadRoute: 'admin/reportes/22/downloadPDF'
+        nombre: 'PARTE DE COBERTURA DE COMBUSTIBLE',
+        numero: 4,
+        viewRoute: 'api/reportes/4',
+        downloadRoute: 'admin/reportes/4/download'
       }
     ]
   }),

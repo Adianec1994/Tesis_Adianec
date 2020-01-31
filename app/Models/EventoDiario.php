@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version May 30, 2019, 12:38 am UTC
  *
  * @property \App\Models\Grupo grupos
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property string estado
  * @property string|\Carbon\Carbon fechaEvento
  * @property string|\Carbon\Carbon fechaPosibleSolucion
@@ -36,7 +36,7 @@ class EventoDiario extends Model
     use SoftDeletes;
 
     public $table = 'eventos_diarios';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -71,11 +71,11 @@ class EventoDiario extends Model
     protected $casts = [
         'id' => 'integer',
         'estado' => 'string',
-        'fechaEvento' => 'datetime',
-        'fechaPosibleSolucion' => 'datetime',
-        'fechaReporte' => 'datetime',
-        'fechaDiagnostico' => 'datetime',
-        'fechaSolucion' => 'datetime',
+        'fechaEvento' => 'datetime:Y-m-d',
+        'fechaPosibleSolucion' => 'datetime:Y-m-d',
+        'fechaReporte' => 'datetime:Y-m-d',
+        'fechaDiagnostico' => 'datetime:Y-m-d',
+        'fechaSolucion' => 'datetime:Y-m-d',
         'horas' => 'integer',
         'sistema' => 'string',
         'subSistema' => 'string',

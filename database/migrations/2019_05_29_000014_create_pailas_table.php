@@ -23,11 +23,12 @@ class CreatePailasTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->date('fecha')->nullable();
-            $table->time('hora')->nullable();
-            $table->double('combustibleFactura')->nullable();
-            $table->double('combustibleMedicion')->nullable();
+            $table->date('fecha');
+            $table->time('hora');
+            $table->double('combustibleFactura');
+            $table->double('combustibleMedicion');
             $table->text('acciones')->nullable();
+            $table->text('causas')->nullable();
             $table->unsignedInteger('central_electricas_id');
             $table->unsignedInteger('operadors_id');
             $table->unsignedInteger('chofer_id');
@@ -71,8 +72,8 @@ class CreatePailasTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists($this->tableName);
-     }
+    public function down()
+    {
+        Schema::dropIfExists($this->tableName);
+    }
 }

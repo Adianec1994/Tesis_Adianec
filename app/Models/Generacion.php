@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version June 4, 2019, 2:21 am UTC
  *
  * @property \App\Models\Grupo grupos
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property string fecha
  * @property time horaEntrada
  * @property time horaSalida
@@ -26,7 +26,7 @@ class Generacion extends Model
     use SoftDeletes;
 
     public $table = 'generacions';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -50,7 +50,7 @@ class Generacion extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'fecha' => 'date',
+        'fecha' => 'date:Y-m-d',
         'reportadoPor' => 'string',
         'grupos_id' => 'integer'
     ];

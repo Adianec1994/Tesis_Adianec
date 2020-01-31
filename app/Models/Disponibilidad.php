@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version May 22, 2019, 3:58 am UTC
  *
  * @property \App\Models\Entidad entidads
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property string fecha
  * @property float potInstaladaReal
  * @property float potDisponibleReal
@@ -25,7 +25,7 @@ class Disponibilidad extends Model
     use SoftDeletes;
 
     public $table = 'disponibilidads';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -47,7 +47,7 @@ class Disponibilidad extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'fecha' => 'date',
+        'fecha' => 'date:Y-m-d',
         'potInstaladaReal' => 'float',
         'potDisponibleReal' => 'float',
         'entidads_id' => 'integer'
