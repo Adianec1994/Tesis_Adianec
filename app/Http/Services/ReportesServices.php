@@ -152,7 +152,96 @@ class ReportesServices
         /* Render the picture (choose the best way) */
         $image->Render("reporte_disponibilidades.png");
 
-        $Base64Data = base64_encode(Storage::get('example.png'));
+        $Base64Data = base64_encode(Storage::get('reporte_disponibilidades.png'));
+        $image = 'data:image/png;base64,' . $Base64Data;
+        // dd($image);
+
+        return $image;
+    }
+
+    public function reporte8()
+    {
+        $lubricantes['lubricantes'] =
+            DB::table('datos_generales')
+            ->join('central_electricas', 'datos_generales.central_electricas_id', '=', 'central_electricas.id')
+            ->join('entidads', 'central_electricas.entidads_id', '=', 'entidads.id')
+            ->join('provincias', 'entidads.provincias_id', '=', 'provincias.id')
+            ->groupBy('provincias.nombre')
+            ->selectRaw('provincias.nombre as provincia, sum(datos_generales.lubricteExistencia) as existencia, sum(datos_generales.lubricteCobertura) as horas')
+            ->get();
+
+        // dd($lubricantes);
+        $lubricantes['chart'] = $this->makeLubricantesChart($lubricantes['lubricantes']);
+        return $lubricantes;
+    }
+
+    private function makeLubricantesChart($lubricantes)
+    {
+        $labels = [];
+        $dataExistencia = [];
+        $dataHoras = [];
+        foreach ($lubricantes as $lubricante) {
+            $labels[] = $lubricante->provincia;
+            $dataExistencia[] = $lubricante->existencia;
+            $dataHoras[] = $lubricante->horas;
+        }
+
+        /* Create and populate the Data object */
+        $data = new Data();
+        $data->addPoints($dataHoras, "Horas");
+        $data->addPoints($dataExistencia, "Existencia");
+        $data->addPoints($labels, "Provincias");
+        $data->setSerieDescription("Horas", "Horas");
+        $data->setSerieDescription("Existencia", "Existencia");
+        $data->setAbscissa("Provincias");
+
+        /* Create the Image object */
+        $image = new Image(500, 500, $data);
+        $image->drawGradientArea(0, 0, 500, 500, DIRECTION_VERTICAL, [
+            "StartR" => 240,
+            "StartG" => 240,
+            "StartB" => 240,
+            "EndR" => 180,
+            "EndG" => 180,
+            "EndB" => 180,
+            "Alpha" => 100
+        ]);
+        $image->drawGradientArea(0, 0, 500, 500, DIRECTION_HORIZONTAL, [
+            "StartR" => 240,
+            "StartG" => 240,
+            "StartB" => 240,
+            "EndR" => 180,
+            "EndG" => 180,
+            "EndB" => 180,
+            "Alpha" => 20
+        ]);
+        $image->setFontProperties(["FontName" => "verdana.ttf", "FontSize" => 9]);
+
+        /* Draw the chart scale */
+        $image->setGraphArea(100, 80, 480, 480);
+        $image->drawScale([
+            "CycleBackground" => true,
+            "DrawSubTicks" => true,
+            "GridR" => 0,
+            "GridG" => 0,
+            "GridB" => 0,
+            "GridAlpha" => 10,
+            "Pos" => SCALE_POS_TOPBOTTOM
+        ]);
+
+        /* Turn on shadow computing */
+        $image->setShadow(true, ["X" => 1, "Y" => 1, "R" => 0, "G" => 0, "B" => 0, "Alpha" => 10]);
+
+        /* Draw the chart */
+        $image->drawBarChart(["DisplayPos" => LABEL_POS_INSIDE, "DisplayValues" => true, "Rounded" => true, "Surrounding" => 30]);
+
+        /* Write the legend */
+        $image->drawLegend(200, 20, ["Style" => LEGEND_NOBORDER, "Mode" => LEGEND_VERTICAL]);
+
+        /* Render the picture (choose the best way) */
+        $image->Render("reporte_lubricantes.png");
+
+        $Base64Data = base64_encode(Storage::get('reporte_lubricantes.png'));
         $image = 'data:image/png;base64,' . $Base64Data;
         // dd($image);
 

@@ -71,6 +71,8 @@ class ReportesAPIController extends AppBaseController
                 return $this->reporte4($request);
             case 5:
                 return $this->reporte5($request);
+            case 8:
+                return $this->reporte8($request);
         }
     }
 
@@ -92,6 +94,12 @@ class ReportesAPIController extends AppBaseController
         return view('reportes.reporte5', $this->reportesServices->reporte5());
     }
 
+    //  Generar reporte EXISTENCIA DE LUBRICANTES.
+    public function reporte8(Request $request)
+    {
+        return view('reportes.reporte8', $this->reportesServices->reporte8());
+    }
+
     public function exportPDF(Request $request, $reporte)
     {
         $data = [];
@@ -109,6 +117,10 @@ class ReportesAPIController extends AppBaseController
             case 5:
                 $data = $this->reportesServices->reporte5();
                 $nombre = 'PARTE DE DISPONIBILIDAD.pdf';
+                break;
+            case 8:
+                $data = $this->reportesServices->reporte8();
+                $nombre = 'PARTE DE EXISTENCIA DE LUBRICANTES.pdf';
                 break;
         }
 
@@ -133,6 +145,10 @@ class ReportesAPIController extends AppBaseController
             case 5:
                 $data = $this->reportesServices->reporte5();
                 $nombre = 'PARTE DE DISPONIBILIDAD.xlsx';
+                break;
+            case 8:
+                $data = $this->reportesServices->reporte8();
+                $nombre = 'PARTE DE EXISTENCIA DE LUBRICANTES.xlsx';
                 break;
         }
         // dd($data);
