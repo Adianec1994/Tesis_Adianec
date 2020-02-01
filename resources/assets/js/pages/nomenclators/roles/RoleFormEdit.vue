@@ -143,7 +143,7 @@ export default {
       required: true
     }
   },
-  data () {
+  data ()  {
     const self = this
 
     return {
@@ -164,20 +164,20 @@ export default {
     }
   },
   watch: {
-    'mustInherit': function () {
+    'mustInherit': function ()    {
       this.mustInherit ? this.loadRoles() : this.inheritFromRole = ''
     },
-    'inheritFromRole': function () {
+    'inheritFromRole': function ()    {
       this.loadPermissions()
     }
   },
-  mounted () {
+  mounted ()  {
     const self = this
 
-    self.loadRoles(() => { })
+    self.loadRol(() => { })
   },
   methods: {
-    letrasV (v) {
+    letrasV (v)    {
       return !(
         v.includes('1') ||
         v.includes('2') ||
@@ -191,7 +191,7 @@ export default {
         v.includes('0')
       )
     },
-    signosV (v) {
+    signosV (v)    {
       return !(
         v.includes(',') ||
         v.includes('.') ||
@@ -215,7 +215,7 @@ export default {
         v.includes('%')
       )
     },
-    save () {
+    save ()    {
       const self = this
 
       const payload = {
@@ -225,15 +225,15 @@ export default {
 
       axios
         .put('/api/roles/' + self.propId, payload)
-        .then(function (response) {
+        .then(function (response)        {
           self.$store.dispatch('responseMessage', {
             type: response.data.success ? 'success' : 'error',
             text: response.data.message
           })
           self.$router.push({ path: '/roles' })
         })
-        .catch(function (error) {
-          if (error.response) {
+        .catch(function (error)        {
+          if (error.response)          {
             self.$store.dispatch('responseMessage', {
               type: 'error',
               text: error.response.data.message
@@ -241,17 +241,17 @@ export default {
           }
         })
     },
-    loadRoles (cb) {
+    loadRol (cb)    {
       const self = this
 
-      axios.get('/api/roles/' + self.propId).then(function (response) {
+      axios.get('/api/roles/' + self.propId).then(function (response)      {
         const Group = response.data.data
         self.name = Group.name
         self.selectedPermissions = Group.selectedPermissions
         self.allPermissions = Group.allPermissions
       })
     },
-    loadPermissions () {
+    loadPermissions ()    {
       const self = this
 
       self.selectedPermissions = []
@@ -264,33 +264,33 @@ export default {
 
       axios
         .get('/api/permisos', { params: params })
-        .then(function (response) {
+        .then(function (response)        {
           self.selectedPermissions = response.data.data.selectedPermissions ? response.data.data.selectedPermissions : []
           self.allPermissions = response.data.data.allPermissions
         })
     },
-    loadRoles () {
+    loadRoles ()    {
       const self = this
       const params = {
         paginate: 'no'
       }
-      axios.get('/api/roles', { params: params }).then(function (response) {
+      axios.get('/api/roles', { params: params }).then(function (response)      {
         self.roles = response.data.data
       })
     },
-    SelectPermissions (from) {
+    SelectPermissions (from)    {
       const self = this
       const permissions = [...from]
-      permissions.forEach((permission) => {
+      permissions.forEach((permission) =>      {
         self.selectedPermissions.push(permission)
         self.allPermissions.splice(self.allPermissions.indexOf(permission), 1)
       })
       self.toAdd = []
     },
-    RemovePermissions (from) {
+    RemovePermissions (from)    {
       const self = this
       const permissions = [...from]
-      permissions.forEach((permission) => {
+      permissions.forEach((permission) =>      {
         self.allPermissions.push(permission)
         self.selectedPermissions.splice(self.selectedPermissions.indexOf(permission), 1)
       })

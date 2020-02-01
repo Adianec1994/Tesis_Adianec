@@ -53,6 +53,12 @@ export default {
         numero: 5,
         viewRoute: 'api/reportes/5',
         downloadRoute: 'api/reportes/5/downloadPDF'
+      },
+      {
+        nombre: 'PARTE DE EXISTENCIA DE LUBRICANTES',
+        numero: 8,
+        viewRoute: 'api/reportes/8',
+        downloadRoute: 'api/reportes/8/downloadPDF'
       }
     ]
   }),
