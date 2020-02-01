@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c7c9db6f920763bcdb25517d91f0e8c",
+    "content-hash": "5bc517d637b7fc31ae3b37f2b1d669d8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -57,49 +57,6 @@
                 "stack"
             ],
             "time": "2019-12-24T22:41:47+00:00"
-        },
-        {
-            "name": "balping/json-raw-encoder",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/balping/json-raw-encoder.git",
-                "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/balping/json-raw-encoder/zipball/c404b7fc0e04ddf5d298e53105c5fc306f523195",
-                "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Balping\\JsonRaw\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Balázs Dura-Kovács"
-                }
-            ],
-            "description": "Encode arrays to json with raw JS objects (eg. callbacks) in them",
-            "keywords": [
-                "callback",
-                "encode",
-                "json"
-            ],
-            "time": "2018-05-04T15:38:02+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -156,52 +113,6 @@
                 "pdf"
             ],
             "time": "2019-08-23T14:30:33+00:00"
-        },
-        {
-            "name": "consoletvs/charts",
-            "version": "6.5.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ConsoleTVs/Charts.git",
-                "reference": "a4a8a71c438a00b95ea74a080ce5bf8916c60918"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/a4a8a71c438a00b95ea74a080ce5bf8916c60918",
-                "reference": "a4a8a71c438a00b95ea74a080ce5bf8916c60918",
-                "shasum": ""
-            },
-            "require": {
-                "balping/json-raw-encoder": "^1.0",
-                "illuminate/console": "^5.0|^6.0",
-                "illuminate/support": "^5.0|^6.0",
-                "php": ">=7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ConsoleTVs\\Charts\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Èrik Campobadal Forés",
-                    "email": "soc@erik.cat"
-                }
-            ],
-            "description": "The laravel charting package",
-            "time": "2019-09-03T16:50:50+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -5148,6 +5059,71 @@
             "time": "2019-06-05T02:08:12+00:00"
         },
         {
+            "name": "szymach/c-pchart",
+            "version": "v3.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/szymach/c-pchart.git",
+                "reference": "9cbaa966ec536621ba50346f04ebc37ad962f4a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/szymach/c-pchart/zipball/9cbaa966ec536621ba50346f04ebc37ad962f4a5",
+                "reference": "9cbaa966ec536621ba50346f04ebc37ad962f4a5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.4",
+                "phpunit/phpunit": "^4.8|^7.1",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev",
+                    "2.0": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CpChart\\": "src/"
+                },
+                "files": [
+                    "constants.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Jean-Damien Pogolotti",
+                    "homepage": "http://www.pchart.net",
+                    "role": "Creator of the original pChart library"
+                },
+                {
+                    "name": "Piotr Szymaszek",
+                    "homepage": "https://github.com/szymach",
+                    "role": "Developer of the CpChart wrapper package"
+                }
+            ],
+            "description": "Port of \"pChart\" library into PHP 5+",
+            "homepage": "https://github.com/szymach/c-pchart",
+            "keywords": [
+                "CpChart",
+                "c-pChart",
+                "charts",
+                "pchart",
+                "statistics"
+            ],
+            "time": "2019-07-26T22:38:20+00:00"
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.1",
             "source": {
@@ -5389,6 +5365,95 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "balping/json-raw-encoder",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/balping/json-raw-encoder.git",
+                "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/balping/json-raw-encoder/zipball/c404b7fc0e04ddf5d298e53105c5fc306f523195",
+                "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Balping\\JsonRaw\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Balázs Dura-Kovács"
+                }
+            ],
+            "description": "Encode arrays to json with raw JS objects (eg. callbacks) in them",
+            "keywords": [
+                "callback",
+                "encode",
+                "json"
+            ],
+            "time": "2018-05-04T15:38:02+00:00"
+        },
+        {
+            "name": "consoletvs/charts",
+            "version": "6.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ConsoleTVs/Charts.git",
+                "reference": "a4a8a71c438a00b95ea74a080ce5bf8916c60918"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/a4a8a71c438a00b95ea74a080ce5bf8916c60918",
+                "reference": "a4a8a71c438a00b95ea74a080ce5bf8916c60918",
+                "shasum": ""
+            },
+            "require": {
+                "balping/json-raw-encoder": "^1.0",
+                "illuminate/console": "^5.0|^6.0",
+                "illuminate/support": "^5.0|^6.0",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ConsoleTVs\\Charts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Èrik Campobadal Forés",
+                    "email": "soc@erik.cat"
+                }
+            ],
+            "description": "The laravel charting package",
+            "time": "2019-09-03T16:50:50+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.2.0",

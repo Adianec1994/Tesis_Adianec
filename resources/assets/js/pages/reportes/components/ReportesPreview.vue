@@ -80,7 +80,7 @@ export default {
     }
   },
   mounted ()  {
-    if (this.render([3])) this.loadReport()
+    if (this.render([3, 5])) this.loadReport()
   },
   watch: {
     'filters.fecha': function ()    {

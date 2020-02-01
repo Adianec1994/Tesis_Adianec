@@ -46,19 +46,25 @@ export default {
         nombre: 'PARTE DE COBERTURA DE COMBUSTIBLE',
         numero: 4,
         viewRoute: 'api/reportes/4',
-        downloadRoute: 'admin/reportes/4/download'
+        downloadRoute: 'api/reportes/4/download'
+      },
+      {
+        nombre: 'PARTE DE DISPONIBILIDAD',
+        numero: 5,
+        viewRoute: 'api/reportes/5',
+        downloadRoute: 'api/reportes/5/downloadPDF'
       }
     ]
   }),
 
-  mounted ()  {
+  mounted () {
   },
 
   methods: {
-    previewReport (report)    {
-      this.$router.push({ name: 'reportes.preview', params: { report: report } })
+    previewReport (report) {
+      this.$router.push({ name: 'reportes.preview', params: { report: report }})
     },
-    canRender (permitedTo)    {
+    canRender (permitedTo) {
 
     }
 

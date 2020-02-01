@@ -4,8 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use DB;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Services\ReportesServices;
 use App\Exports\ReporteExport;
@@ -70,6 +69,8 @@ class ReportesAPIController extends AppBaseController
                 return $this->reporte3($request);
             case 4:
                 return $this->reporte4($request);
+            case 5:
+                return $this->reporte5($request);
         }
     }
 
@@ -79,10 +80,16 @@ class ReportesAPIController extends AppBaseController
         return view('reportes.reporte3', $this->reportesServices->reporte3());
     }
 
-    //  Generar reporte listado oficial del grupo.
+    //  Generar reporte COBERTURA DE COMBUSTIBLE.
     public function reporte4(Request $request)
     {
         return view('reportes.reporte4', $this->reportesServices->reporte4($request->all()));
+    }
+
+    //  Generar reporte DISPONIBILIDADES.
+    public function reporte5(Request $request)
+    {
+        return view('reportes.reporte5', $this->reportesServices->reporte5());
     }
 
     public function exportPDF(Request $request, $reporte)
@@ -96,8 +103,12 @@ class ReportesAPIController extends AppBaseController
                 $nombre = 'PARTE DIARIO DE ACOMPAÑAMIENTO DE PAILAS DE COMBUSTIBLE DIESEL.pdf';
                 break;
             case 4:
-                $data = $this->reportesServices->reporte4();
+                $data = $this->reportesServices->reporte4($request->all());
                 $nombre = 'PARTE DE COBERTURA DE COMBUSTIBLE.pdf';
+                break;
+            case 5:
+                $data = $this->reportesServices->reporte5();
+                $nombre = 'PARTE DE DISPONIBILIDAD.pdf';
                 break;
         }
 
@@ -116,8 +127,12 @@ class ReportesAPIController extends AppBaseController
                 $nombre = 'PARTE DIARIO DE ACOMPAÑAMIENTO DE PAILAS DE COMBUSTIBLE DIESEL.xlsx';
                 break;
             case 4:
-                $data = $this->reportesServices->reporte4();
+                $data = $this->reportesServices->reporte4($request->all());
                 $nombre = 'PARTE DE COBERTURA DE COMBUSTIBLE.xlsx';
+                break;
+            case 5:
+                $data = $this->reportesServices->reporte5();
+                $nombre = 'PARTE DE DISPONIBILIDAD.xlsx';
                 break;
         }
         // dd($data);
