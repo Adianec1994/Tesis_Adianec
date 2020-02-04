@@ -14,28 +14,28 @@ class CreateTriggers extends Migration
     public function up()
     {
 
-        DB::connection()->getPdo()->exec("
-        create procedure update_potencia_instalada_baterias (IN id INTEGER)
-            begin
-                declare potencia double;
-                select sum(potInstalada) into potencia from grupos where baterias_id = id;
-                update baterias set potInstalada = potencia where baterias.id = id;
-            end;
+        // DB::connection()->getPdo()->exec("
+        // create procedure update_potencia_instalada_baterias (IN id INTEGER)
+        //     begin
+        //         declare potencia double;
+        //         select sum(potInstalada) into potencia from grupos where baterias_id = id;
+        //         update baterias set potInstalada = potencia where baterias.id = id;
+        //     end;
 
-        create procedure update_potencia_instalada_ce (IN id INTEGER)
-            begin
-                declare potencia double;
-                select sum(potInstalada) into potencia from baterias where central_electricas_id = id;
-                update central_electricas set potInstalada = potencia where central_electricas.id = id;
-            end;
+        // create procedure update_potencia_instalada_ce (IN id INTEGER)
+        //     begin
+        //         declare potencia double;
+        //         select sum(potInstalada) into potencia from baterias where central_electricas_id = id;
+        //         update central_electricas set potInstalada = potencia where central_electricas.id = id;
+        //     end;
 
-        create procedure update_potencia_instalada_entidads (IN id INTEGER)
-            begin
-                declare potencia double;
-                select sum(potInstalada) into potencia from central_electricas where entidads_id = id;
-                update entidads set potInstalada = potencia where entidads.id = id;
-            end;
-        ");
+        // create procedure update_potencia_instalada_entidads (IN id INTEGER)
+        //     begin
+        //         declare potencia double;
+        //         select sum(potInstalada) into potencia from central_electricas where entidads_id = id;
+        //         update entidads set potInstalada = potencia where entidads.id = id;
+        //     end;
+        // ");
 
 
         DB::unprepared('
@@ -81,10 +81,22 @@ class CreateTriggers extends Migration
      */
     public function down()
     {
-        DB::connection()->getPdo()->exec("
-        DROP procedure update_potencia_instalada_baterias;
-        DROP procedure update_potencia_instalada_ce;
-        DROP procedure update_potencia_instalada_entidads;
-        ");
+        DB::unprepared("DROP TRIGGER update_potencia_instalada_baterias_after_insert");
+        DB::unprepared("DROP TRIGGER update_potencia_instalada_baterias_after_update");
+        DB::unprepared("DROP TRIGGER update_potencia_instalada_baterias_after_delete");
+        DB::unprepared("DROP TRIGGER update_potencia_instalada_ce_after_update");
+        DB::unprepared("DROP TRIGGER update_potencia_instalada_ce_after_delete");
+        DB::unprepared("DROP TRIGGER update_potencia_instalada_entidads_after_update");
+        DB::unprepared("DROP TRIGGER update_potencia_instalada_entidads_after_delete");
+
+        // DB::unprepared("DROP procedure update_potencia_instalada_baterias");
+        // DB::unprepared("DROP procedure update_potencia_instalada_ce");
+        // DB::unprepared("DROP procedure update_potencia_instalada_entidads");
+
+        // DB::connection()->getPdo()->exec("
+        // DROP procedure update_potencia_instalada_baterias;
+        // DROP procedure update_potencia_instalada_ce;
+        // DROP procedure update_potencia_instalada_entidads;
+        // ");
     }
 }

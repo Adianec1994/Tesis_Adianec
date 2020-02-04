@@ -6,7 +6,14 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="300px">
         <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" v-on="on" v-on:click="isNewModel=true">Nuevo</v-btn>
+          <v-btn
+            color="primary"
+            dark
+            class="mb-2"
+            v-on="on"
+            v-on:click="isNewModel=true"
+            v-if="allowed('provincia','create')"
+          >Nuevo</v-btn>
         </template>
         <v-card>
           <v-card-title>
@@ -46,16 +53,23 @@
       <template v-slot:items="props">
         <td>{{ props.item.nombre }}</td>
         <td class="text-xs-center justify-center">
-          <v-tooltip bottom>
-            <v-icon small color="orange lighten-2" class="mr-2" @click="editItem(props.item)" slot="activator">
-              edit
-            </v-icon>
+          <v-tooltip bottom v-if="allowed('provincia','update')">
+            <v-icon
+              small
+              color="orange lighten-2"
+              class="mr-2"
+              @click="editItem(props.item)"
+              slot="activator"
+            >edit</v-icon>
             <span>Editar</span>
           </v-tooltip>
-          <v-tooltip bottom>
-            <v-icon small color="red lighten-2" @click="$set(deleteDialog,props.item.id,true)" slot="activator">
-              delete
-            </v-icon>
+          <v-tooltip bottom v-if="allowed('provincia','delete')">
+            <v-icon
+              small
+              color="red lighten-2"
+              @click="$set(deleteDialog,props.item.id,true)"
+              slot="activator"
+            >delete</v-icon>
             <span>Eliminar</span>
           </v-tooltip>
         </td>
@@ -128,28 +142,28 @@ export default {
   }),
 
   computed: {
-    formTitle () {
+    formTitle ()    {
       return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
     },
-    lowerModuleName () {
+    lowerModuleName ()    {
       return this.moduleName.toLowerCase()
     }
   },
 
   watch: {
-    dialog (val) {
+    dialog (val)    {
       val || this.close()
     }
   },
 
-  mounted () {
-    this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+  mounted ()  {
+    this.$store.dispatch('GET', this.lowerModuleName).then((result) =>    {
       this.items = this.$store.getters.get(this.lowerModuleName)
       this.$store.dispatch('responseMessage', {
         type: result.success ? 'success' : 'error',
         text: result.message
       })
-    }).catch((err) => {
+    }).catch((err) =>    {
       this.$store.dispatch('responseMessage', {
         type: 'error',
         text: err
@@ -158,26 +172,26 @@ export default {
   },
 
   methods: {
-    editItem (item) {
+    editItem (item)    {
       this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
-    updateItem (newVal, property) {
+    updateItem (newVal, property)    {
       // this.formIsValid()
       this.editedItem[property] = newVal
     },
 
-    saveItem () {
+    saveItem ()    {
       let response
-      if (this.editedIndex === -1) {
+      if (this.editedIndex === -1)      {
         response = this.$store.dispatch('SAVE', { payload: this.editedItem, moduleName: this.lowerModuleName })
-      } else {
+      } else      {
         response = this.$store.dispatch('EDIT', { payload: this.editedItem, moduleName: this.lowerModuleName })
       }
 
-      response.then(result => {
+      response.then(result =>      {
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
@@ -186,18 +200,18 @@ export default {
       })
     },
 
-    formIsValid (isValid, errors) {
+    formIsValid (isValid, errors)    {
       // return isValid
       // console.log('Results ', isValid, ', Errors ', errors)
     },
 
-    deleteItem (item) {
-      this.$store.dispatch('DESTROY', { payload: item, moduleName: this.lowerModuleName }).then((result) => {
+    deleteItem (item)    {
+      this.$store.dispatch('DESTROY', { payload: item, moduleName: this.lowerModuleName }).then((result) =>      {
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
         })
-      }).catch((err) => {
+      }).catch((err) =>      {
         this.$store.dispatch('responseMessage', {
           type: 'error',
           text: err
@@ -205,10 +219,10 @@ export default {
       })
     },
 
-    close () {
+    close ()    {
       this.dialog = false
       this.isNewModel = false
-      setTimeout(() => {
+      setTimeout(() =>      {
         this.editedItem = Object.assign({}, {})
         this.editedIndex = -1
       }, 300)

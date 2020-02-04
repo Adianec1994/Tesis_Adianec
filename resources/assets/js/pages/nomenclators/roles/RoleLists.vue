@@ -5,7 +5,12 @@
       <v-card-text>
         <v-layout row wrap>
           <v-flex xs12 sm2>
-            <v-btn @click="$router.push({name:'roles.create'})" class="blue" dark>
+            <v-btn
+              @click="$router.push({name:'roles.create'})"
+              class="blue"
+              dark
+              v-if="allowed('rol','create')"
+            >
               Nuevo Rol
               <v-icon right>add</v-icon>
             </v-btn>
@@ -20,7 +25,12 @@
     <!-- /search -->
 
     <!-- groups table -->
-    <v-data-table v-bind:headers="headers" :items="items" :search="filters.nombre" class="elevation-1">
+    <v-data-table
+      v-bind:headers="headers"
+      :items="items"
+      :search="filters.nombre"
+      class="elevation-1"
+    >
       <template slot="headerCell" slot-scope="props">
         <span v-if="props.header.value=='name'">{{ props.header.text }}</span>
         <span v-else-if="props.header.value=='users_count'">{{ props.header.text }}</span>
@@ -32,7 +42,7 @@
         <td style="width: 27%;">{{ props.item.users_count }}</td>
         <td style="width: 27%;">{{ props.item.created_at }}</td>
         <td style="width: 17%;">
-          <v-tooltip bottom>
+          <v-tooltip bottom v-if="allowed('rol','update')">
             <template v-slot:activator="{ on }">
               <v-btn
                 style="margin: 0;"
@@ -46,7 +56,7 @@
             </template>
             <span>Editar</span>
           </v-tooltip>
-          <v-tooltip bottom>
+          <v-tooltip bottom v-if="allowed('rol','delete')">
             <v-btn
               style="margin: 0;"
               @click="$set(deleteDialog,props.item.id,true)"
@@ -111,36 +121,36 @@ export default {
       nombre: ''
     }
   }),
-  mounted () {
+  mounted ()  {
     this.loadGroups()
   },
   computed: {
-    lowerModuleName () {
+    lowerModuleName ()    {
       return this.moduleName.toLowerCase()
     }
   },
   methods: {
-    deleteItem (item) {
-      this.$store.dispatch('DESTROY', { payload: item, moduleName: this.lowerModuleName }).then((result) => {
+    deleteItem (item)    {
+      this.$store.dispatch('DESTROY', { payload: item, moduleName: this.lowerModuleName }).then((result) =>      {
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
         })
-      }).catch((err) => {
+      }).catch((err) =>      {
         this.$store.dispatch('responseMessage', {
           type: 'error',
           text: err
         })
       })
     },
-    loadGroups (cb) {
-      this.$store.dispatch('GET', this.lowerModuleName).then((result) => {
+    loadGroups (cb)    {
+      this.$store.dispatch('GET', this.lowerModuleName).then((result) =>      {
         this.items = this.$store.getters.get(this.lowerModuleName)
         this.$store.dispatch('responseMessage', {
           type: result.success ? 'success' : 'error',
           text: result.message
         })
-      }).catch((err) => {
+      }).catch((err) =>      {
         this.$store.dispatch('responseMessage', {
           type: 'error',
           text: err

@@ -6,7 +6,14 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" v-on="on" v-on:click="isNewModel=true">Nuevo</v-btn>
+          <v-btn
+            color="primary"
+            dark
+            class="mb-2"
+            v-on="on"
+            v-on:click="isNewModel=true"
+            v-if="allowed('paila','create')"
+          >Nuevo</v-btn>
         </template>
         <v-card>
           <v-card-title>
@@ -55,7 +62,7 @@
         <td class="text-xs-center justify-center">{{ props.item.causas }}</td>
         <td class="text-xs-center justify-center">{{ props.item.acciones }}</td>
         <td class="text-xs-center justify-center">
-          <v-tooltip bottom>
+          <v-tooltip bottom v-if="allowed('paila','update')">
             <v-icon
               small
               color="orange lighten-2"
@@ -65,7 +72,7 @@
             >edit</v-icon>
             <span>Editar</span>
           </v-tooltip>
-          <v-tooltip bottom>
+          <v-tooltip bottom v-if="allowed('paila','delete')">
             <v-icon
               small
               color="red lighten-2"
